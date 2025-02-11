@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom'; // For navigation
 import logo from '../../assets/3dcube.png';
 import { FaArrowRightLong } from "react-icons/fa6";
 import metamask from '../../assets/metamask.png';
@@ -7,10 +6,8 @@ import celo from '../../assets/celo.png';
 import wallet from '../../assets/wallet.png';
 import { Link } from 'react-router-dom';
 
-const signup = () => {
+const signin = () => {
   const [email, setEmail] = useState("");
-
-  const navigate = useNavigate(); //for page navigation
 
   const handleSubmit = (e) => {
     e.preventDefault(); //This will stop the form from submitting to itself
@@ -22,7 +19,7 @@ const signup = () => {
     }
 
     //Checking if the email address is valid
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^s@]+$/;
 
     if (!emailRegex.test(email)) {
       alert("Please put a valid email address!");
@@ -32,9 +29,6 @@ const signup = () => {
     //If email is valid, form can be sumbitted
     alert("Form submitted successfully!");
 
-
-     // Navigate to verification page and pass the email as state
-     navigate("/emailcode", { state: { email } });
 
   }
 
@@ -50,7 +44,7 @@ const signup = () => {
   <form action="#" className="w-[300px] h-[550px] lg:w-[422px] lg:h-[615px] rounded-xl bg-[#ffffff] flex flex-col items-center" onSubmit={handleSubmit}>
     <div className='w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem]'>
       <h2 className='font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]'>Sign Up</h2>
-      <p className='font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]'>Create an account with us by email or wallet</p>
+      <p className='font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]'>Welcome Back to Blockgigs!</p>
     </div>
 
     <div className='w-[260px] lg:w-[350px] h-[103px] gap-1 flex flex-col items-start mt-[1.4rem]'>
@@ -98,16 +92,15 @@ const signup = () => {
     </div>
 
     <div className='w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8'>
-      <p className='font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]'>Already have an account?</p>
-      <Link to='/signin' className='font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#2f66f6] cursor-pointer'>Sign in</Link>
+      <p className='font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]'>Don't have an account?</p>
+      <Link to='/' className='font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#2f66f6] cursor-pointer'>Sign up</Link>
     </div>
   </form>
 </div>
-
-  </div>
+</div>
   
    
   )
 }
 
-export default signup
+export default signin
