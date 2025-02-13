@@ -8,7 +8,9 @@ const Hero = () => {
         backgroundImage: 'url("/images/hero_banner.png")',
       }}
     >
-      {/* <Navigation/> */}
+     <div className="pt-6">
+     <Navigation/>
+     </div>
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
 
@@ -17,16 +19,16 @@ const Hero = () => {
         <h1 className="text-white text-md md:text-4xl lg:text-6xl xl:text-8xl font-bold">
           Tech Gigs Made Simple
         </h1>
-        <h1 className="text-white text-md md:text-4xl lg:text-6xl  font-bold md:mt-5 mt-2">
+        <h1 className="text-white text-md md:text-4xl lg:text-6xl font-bold md:mt-5 mt-10">
           Payment Made Easy
         </h1>
-        <small className="text-white font-semibold text-xs md:text-sm lg:text-xs mt-4 max-w-lg">
+        <small className="text-white font-semibold text-xs md:text-sm lg:text-xs mt-4 max-w-lg mt-10">
           Blockgigs bridges African tech talents with global clients, ensuring
           secure, bias-free hiring and transparent blockchain payment.
         </small>
 
         <div className="mt-5 md:mt-10">
-          <button className="px-8 b py-5 bg-white text-black">Join Blockgigs Now</button>
+          <button className="px-8 b py-2 bg-white text-black rounded-md">Join Blockgigs Now</button>
         </div>
       </div>
     </section>
