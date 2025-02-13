@@ -116,7 +116,7 @@ export default function Navigation() {
         >
         <div
           ref={modalRef}
-          className="bg-[#7979793D] rounded-lg shadow-lg w-full max-w-md p-6 space-y-2 relative flex flex-col justify-center h-full w-full"
+          className="bg-[#7979793D] backdrop-blur-md rounded-lg shadow-lg w-full max-w-md p-6 space-y-2 relative flex flex-col justify-center h-full w-full"
         >
           <button
             onClick={() => setIsMenuOpen(false)}
@@ -129,19 +129,19 @@ export default function Navigation() {
             {links.map((link) => (
               <li
                 key={link.name}
-                className="border-b-2 border-gray-300 py-2 w-full text-center"
+                className=" py-10 w-full text-center"
               >
                 <a
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="hover:text-gray-700 transition cursor-pointer"
+                  className="hover:text-gray-700 font-bold hover:border hover:rounded-md hover:p-4 transition text-white text-lg cursor-pointer"
                 >
                   {link.name}
                 </a>
               </li>
             ))}
             <div>
-              <button onClick={handleGetStarted} className="bg-white text-black p-2">
+              <button onClick={handleGetStarted} className="bg-white hover:font-bold text-black px-7 py-3 rounded-md">
                 Get Started
               </button>
             </div>
