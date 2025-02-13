@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/3dcube.png';
 
-const EmailCode = () => {
+const ForgotPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const email = location.state?.email || '';
@@ -23,8 +23,8 @@ const EmailCode = () => {
     if (newOtp.every((digit) => digit !== '')) {
       setLoading(true);
       setTimeout(() => {
-        navigate('/SignupTrue');
-      }, 2000); // 2 seconds delay before the user navigates to the signuptrue page
+        navigate('/ResetPassword');
+      }, 2000); // 2 seconds delay before the user navigates to the reset password page
     }
   };
 
@@ -38,9 +38,9 @@ const EmailCode = () => {
       <div className='flex justify-center items-center mt-[5rem] lg:mt-[10rem]'>
         <div className='w-[300px] h-[370px] lg:w-[436px] lg:h-[416px] rounded-[12px] bg-[#ffffff] flex flex-col items-center'>
           <div className='flex flex-col items-center gap-2 mt-9'>
-            <h3 className='font-montserrat font-medium text-[20px] lg:text-2xl leading-8 text-[#292929]'>Enter Email Code</h3>
+            <h3 className='font-montserrat font-medium text-[20px] lg:text-2xl leading-8 text-[#292929]'>Forgot Password</h3>
             <p className='font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]'>
-              Enter the OTP code we just sent to your registered <br /> email address to be able to set your password
+            Enter the OTP code we just sent to your registered <br /> email address to be able to reset your password
             </p>
           </div>
 
@@ -79,4 +79,4 @@ const EmailCode = () => {
   );
 };
 
-export default EmailCode;
+export default ForgotPassword;

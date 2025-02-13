@@ -4,6 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./components/signup/signup";
 import Signin from './components/signin/signin';
 import Emailcode from './components/emailCode/emailcode';
+import SignupTrue from './components/SignupTrue/SignupTrue';
+import SigninTrue from './components/SigninTrue/SigninTrue';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import ResetPassword from './components/ResetPassword/ResetPassword';
+import Persona from './components/Persona/Persona';
 
 const App = () => {
   return (
@@ -12,6 +17,11 @@ const App = () => {
         <Route path="/" element={<Signup />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/emailcode' element={<Emailcode />} />
+        <Route path='/SignupTrue' element={<SignupTrue />} />
+        <Route path='/SigninTrue' element={<SigninTrue />} />
+        <Route path='/ForgotPassword' element={<ForgotPassword />} />
+        <Route path='ResetPassword' element={<ResetPassword />} />
+        <Route path='Persona' element={<Persona />} />
       </Routes>
     </Router>
   )
