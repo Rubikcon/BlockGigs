@@ -9,6 +9,8 @@ import Gigs from "./components/UI/gigs";
 import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
+import LandingPage from "./components/UI/landingpage";
+
 import MainLayout from "./MainLayout";
 
 const App = () => {
@@ -16,8 +18,9 @@ const App = () => {
     <div className="flex">
       <Router>
         <Routes>
-          <Route path="/" element={<Signup />} />
+        <Route path="/" element={<LandingPage />} />
           <Route path="/" element={<MainLayout />}>
+          <Route path="signup" element={<Signup />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="chat" element={<Chat />} />
             <Route path="discover" element={<Discover />} />
