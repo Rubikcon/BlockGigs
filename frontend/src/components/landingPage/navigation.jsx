@@ -116,7 +116,7 @@ export default function Navigation() {
         >
         <div
           ref={modalRef}
-          className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 space-y-2 relative flex flex-col justify-center"
+          className="bg-[#7979793D] rounded-lg shadow-lg w-full max-w-md p-6 space-y-2 relative flex flex-col justify-center h-full w-full"
         >
           <button
             onClick={() => setIsMenuOpen(false)}
