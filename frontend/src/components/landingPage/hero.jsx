@@ -15,14 +15,14 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
 
       {/* Content */}
-      <div className="relative flex flex-col items-center justify-center w-full h-full p-4 text-center">
+      <div className="relative -mt-20 flex flex-col items-center justify-center w-full h-full p-4 text-center">
         <h1 className="text-white text-md md:text-4xl lg:text-6xl xl:text-8xl font-bold">
           Tech Gigs Made Simple
         </h1>
         <h1 className="text-white text-md md:text-4xl lg:text-6xl font-bold md:mt-5 mt-10">
           Payment Made Easy
         </h1>
-        <small className="text-white font-semibold text-xs md:text-sm lg:text-xs mt-4 max-w-lg mt-10">
+        <small className="text-white text-xs md:text-sm lg:text-xs mt-4 max-w-lg mt-10">
           Blockgigs bridges African tech talents with global clients, ensuring
           secure, bias-free hiring and transparent blockchain payment.
         </small>
