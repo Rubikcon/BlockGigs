@@ -9,7 +9,9 @@ import SigninTrue from './components/SigninTrue/SigninTrue';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import Persona from './components/Persona/Persona';
-
+import TalentForm from './components/TalentForm/TalentForm';
+import ClientForm from './components/ClientForm/ClientForm';
+import ClientDashboard from './components/ClientDashboard/ClientDashboard';
 const App = () => {
   return (
     <Router>
@@ -22,6 +24,9 @@ const App = () => {
         <Route path='/ForgotPassword' element={<ForgotPassword />} />
         <Route path='ResetPassword' element={<ResetPassword />} />
         <Route path='Persona' element={<Persona />} />
+        <Route path='/TalentForm' element={<TalentForm />} />
+        <Route path='/ClientForm' element={<ClientForm />} />
+        <Route path='/ClientDashboard' element={<ClientDashboard />} />
       </Routes>
     </Router>
   )
