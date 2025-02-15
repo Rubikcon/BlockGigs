@@ -1,18 +1,17 @@
 import Hero from "../landingPage/hero";
 
-
-import React from 'react';
-import Navigation from "../landingPage/navigation";
+import React from "react";
 import HowItWorks from "../landingPage/howItWorks";
 import WhyChooseUs from "../landingPage/whyChooseUs";
+import Testimonial from "../landingPage/testimonial";
 
 const LandingPage = () => {
   return (
     <div>
-      {/* <Navigation/> */}
-        <Hero/>
-        <HowItWorks/>
-        <WhyChooseUs/>
+      <Hero />
+      <HowItWorks />
+      <WhyChooseUs />
+      <Testimonial />
     </div>
   );
 };

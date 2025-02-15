@@ -153,7 +153,6 @@ export default function Navigation() {
                       {link.name}
                     </a>
                   </li>
-                  
                 ))}
                 <div className="mt-10">
                   <button
