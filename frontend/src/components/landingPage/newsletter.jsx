@@ -1,6 +1,27 @@
+import { useState } from "react";
+
 export default function Newsletter() {
+  const [email, setEmail] = useState(""); // State for email input
+  const [message, setMessage] = useState(""); // State for feedback message
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    if (!email) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    // Simulate an API call or further processing
+    console.log("Subscribed with email:", email);
+    setMessage("Thank you for subscribing!");
+
+    // Reset email input after submission
+    setEmail("");
+  };
+
   return (
-    <section className="relative w-[90%] sm:w-[85%] mx-auto py-10 flex flex-col justify-center items-center ">
+    <section className="relative w-[90%] sm:w-[85%] mx-auto py-10 flex flex-col justify-center items-center">
       {/* Newsletter Card */}
       <div
         className="flex flex-col items-center gap-4 px-6 py-6 w-full max-w-8xl rounded-lg sm:py-8 sm:px-8"
@@ -23,20 +44,30 @@ export default function Newsletter() {
         </div>
 
         {/* Subscription Form */}
-        <div className="w-md px-4">
-          <form className="flex bg-white rounded-full overflow-hidden shadow-md w-full">
+        <div className="w-full px-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex bg-white rounded-full  overflow-hidden shadow-md w-md mx-auto"
+          >
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="flex-grow px-4 py-3 text-gray-700 text-sm md:text-base focus:outline-none"
             />
             <button
               type="submit"
-              className="bg-white text-black px-4 sm:px-6 py-2 md:py-3 text-sm md:text-base font-medium rounded-r-full hover:bg-gray-300 hover:text-white transition"
+              className="bg-[#206BDC] text-white px-4 sm:px-6 py-2 md:py-3 text-sm md:text-base font-medium rounded-r-full hover:bg-blue-700 transition"
             >
               Subscribe
             </button>
           </form>
+
+          {/* Feedback Message */}
+          {message && (
+            <p className="text-sm text-white text-center mt-3">{message}</p>
+          )}
         </div>
       </div>
     </section>
