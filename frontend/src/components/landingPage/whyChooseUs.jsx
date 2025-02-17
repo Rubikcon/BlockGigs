@@ -1,6 +1,6 @@
 export default function WhyChooseUs() {
   return (
-    <section className="relative w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center border border-red overflow-hidden">
+    <section className="relative max-w-[95%] m-auto w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center overflow-hidden">
       {/* Header Section */}
       <div className="text-center my-3 px-6 w-full max-w-5xl">
         <h1 className="text-2xl md:text-3xl font-bold">Why Choose Us</h1>
@@ -24,8 +24,8 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Features List */}
-        <div className="w-full md:w-1/2 flex flex-col items-start gap-6">
-          <ul className="list-disc pl-5 font-bold text-gray-700 space-y-2">
+        <div className="w-full md:w-1/2 flex flex-col items-start gap-5 m:gap-10">
+          <ul className="list-disc pl-7 font-bold text-gray-700  space-y-8">
             <li>Blockchain-secured transactions</li>
             <li>Pseudonymous, bias-free hiring</li>
             <li>Milestone-based payments with smart contracts</li>

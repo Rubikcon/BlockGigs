@@ -4,15 +4,15 @@ import { FaCircleChevronLeft } from "react-icons/fa6";
 
 export default function Testimonial() {
   return (
-    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 mt-15">
       <Carousel
         pauseOnHover
         leftControl={<FaCircleChevronLeft />}
         rightControl={<FaChevronCircleRight />}
       >
-        <div className="w-md md:w-2xl lg:w-4xl  border border-[#F3F3F3]  border bg-[#F3F3F3] backdrop-blur-md border-1 px-2 rounded-md">
+        <div className="w-md md:w-2xl lg:w-4xl border border-[#F3F3F3]  border bg-[#F3F3F3] backdrop-blur-md border-1 px-2 md:py-20 rounded-md">
           <h2 className="font-bold text-center py-3 ">Client Testimonial</h2>
-          <p className="text-sm  text-center">
+          <p className="text-sm  md:text-base text-center w-[70%] mx-auto">
             "Working with Blockgigs has been a game-changer for our startup. The
             process of finding and hiring tech talent has never been this
             seamless. The blockchain-secured contracts gave us peace of mind,
@@ -26,9 +26,9 @@ export default function Testimonial() {
           </p>
         </div>
 
-        <div className="w-md md:w-2xl lg:w-4xl border backdrop-blur-md border border-[#F3F3F3]  bg-[#F3F3F3] border-1 px-2 rounded-md">
+        <div className="w-md md:w-2xl lg:w-4xl border backdrop-blur-md border border-[#F3F3F3]   bg-[#F3F3F3] border-1 px-2 md:py-20 rounded-xl">
           <h2 className="font-bold text-center py-3 ">Client Testimonial</h2>
-          <p className="text-sm text-center">
+          <p className="text-sm md:text-base text-center w-[70%] mx-auto">
             "Working with Blockgigs has been a game-changer for our startup. The
             process of finding and hiring tech talent has never been this
             seamless. The blockchain-secured contracts gave us peace of mind,
