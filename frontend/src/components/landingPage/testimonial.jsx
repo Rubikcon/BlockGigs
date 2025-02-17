@@ -10,7 +10,7 @@ export default function Testimonial() {
         leftControl={<FaCircleChevronLeft />}
         rightControl={<FaChevronCircleRight />}
       >
-        <div className="max-w-md border bg-[#F3F3F3] backdrop-blur-md border-1 px-2 rounded-md">
+        <div className="w-md md:w-2xl lg:w-4xl  border border-[#F3F3F3]  border bg-[#F3F3F3] backdrop-blur-md border-1 px-2 rounded-md">
           <h2 className="font-bold text-center py-3 ">Client Testimonial</h2>
           <p className="text-sm  text-center">
             "Working with Blockgigs has been a game-changer for our startup. The
@@ -26,7 +26,7 @@ export default function Testimonial() {
           </p>
         </div>
 
-        <div className="max-w-md border backdrop-blur-md  bg-[#F3F3F3] border-1 px-2 rounded-md">
+        <div className="w-md md:w-2xl lg:w-4xl border backdrop-blur-md border border-[#F3F3F3]  bg-[#F3F3F3] border-1 px-2 rounded-md">
           <h2 className="font-bold text-center py-3 ">Client Testimonial</h2>
           <p className="text-sm text-center">
             "Working with Blockgigs has been a game-changer for our startup. The

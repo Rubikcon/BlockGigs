@@ -108,7 +108,7 @@ export default function Navigation() {
           <div className="lg:hidden flex items-center space-x-2">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-2xl text-black p-2 cursor-pointer rounded-md"
+              className="text-2xl bg-white text-black p-2 cursor-pointer rounded-md"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <FaTimes /> : <FaBarsStaggered />}
@@ -127,7 +127,7 @@ export default function Navigation() {
             <div className="w-full h-full  max-w-md bg-[#7979793D] backdrop-blur-md rounded-lg shadow-lg p-6 flex flex-col items-center">
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-6 bg-black left-6 text-black text-2xl cursor-pointer"
+                className="absolute top-6 bg-white  left-6 text-black text-2xl cursor-pointer"
               >
                 <FaTimes />
               </button>

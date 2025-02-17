@@ -1,15 +1,10 @@
-import { FaSearchLocation, FaShieldAlt, FaGlobe } from "react-icons/fa";
-import { AiOutlineDollarCircle } from "react-icons/ai";
-import { IoBriefcase } from "react-icons/io5";
-import { WiMoonAltWaningCrescent3 } from "react-icons/wi";
-
 export default function WhyChooseUs() {
   return (
-    <section className="relative w-full py-26 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center overflow-hidden">
+    <section className="relative w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center border border-red overflow-hidden">
       {/* Header Section */}
-      <div className="text-center my-3 px-4">
+      <div className="text-center my-3 px-6 w-full max-w-5xl">
         <h1 className="text-2xl md:text-3xl font-bold">Why Choose Us</h1>
-        <p className="text-sm md:text-lg text-gray-700 pt-4 max-w-2xl mx-auto">
+        <p className="text-sm md:text-lg text-gray-700 pt-4">
           Discover why Blockgigs is the preferred choice for tech professionals
           and clients seeking secure, transparent, and efficient freelance
           solutions in the blockchain era.
@@ -17,19 +12,19 @@ export default function WhyChooseUs() {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row items-center gap-25 w-4/5 max-w-4xl mt-10 md:mt-20">
+      <div className="flex flex-col md:flex-row items-center gap-12 w-full max-w-6xl mt-10 md:mt-16 px-6">
         {/* Overlapping Cards */}
         <div className="relative w-full md:w-1/2 flex flex-col items-center">
-          <div className="relative w-full max-w-xs md:max-w-md">
+          <div className="relative w-full max-w-sm md:max-w-lg">
             {/* Blue Card (Below) */}
-            <div className="bg-[#206BDC] p-6 rounded-lg shadow-lg w-full h-90 md:h-90 transform translate-x-6 translate-y-6"></div>
+            <div className="bg-[#206BDC] p-6 rounded-lg shadow-lg w-full h-80 transform translate-x-6 translate-y-6"></div>
             {/* Gray Card (Above) */}
-            <div className="bg-[#F3F3F3] p-6 rounded-lg shadow-lg w-full h-90 md:h-90 absolute top-15 -left-5"></div>
+            <div className="bg-[#F3F3F3] p-6 rounded-lg shadow-lg w-full h-80 absolute top-10 -left-5"></div>
           </div>
         </div>
 
         {/* Features List */}
-        <div className="w-full md:w-1/2 flex flex-col items-start gap-6 text-left">
+        <div className="w-full md:w-1/2 flex flex-col items-start gap-6">
           <ul className="list-disc pl-5 font-bold text-gray-700 space-y-2">
             <li>Blockchain-secured transactions</li>
             <li>Pseudonymous, bias-free hiring</li>
