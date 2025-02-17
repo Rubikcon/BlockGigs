@@ -10,7 +10,7 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
-
+import GigsPage from "./components/gigsPage/page";
 import MainLayout from "./MainLayout";
 
 const App = () => {
@@ -29,6 +29,7 @@ const App = () => {
             <Route path="setting" element={<Setting />} />
             <Route path="wallet" element={<Wallet />} />
           </Route>
+          <Route path="/gig-page" element={<GigsPage />} />
           {/* <Route path="logout" element={<Signout />} /> */}
         </Routes>
       </Router>
