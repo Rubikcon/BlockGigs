@@ -1,4 +1,4 @@
-import Navigation from "./navigation"
+import Navigation from "../navigation";
 
 const Hero = () => {
   return (
@@ -8,9 +8,9 @@ const Hero = () => {
         backgroundImage: 'url("/images/hero_banner.png")',
       }}
     >
-     <div className="pt-6">
-     <Navigation/>
-     </div>
+      <div className="pt-6">
+        <Navigation />
+      </div>
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
 
@@ -28,7 +28,9 @@ const Hero = () => {
         </small>
 
         <div className="mt-20 md:mt-20">
-          <button className="px-8 b py-2 bg-white text-black rounded-md">Join Blockgigs Now</button>
+          <button className="px-8 b py-2 bg-white text-black rounded-md">
+            Join Blockgigs Now
+          </button>
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import HowItWorks from "../landingPage/howItWorks";
 import WhyChooseUs from "../landingPage/whyChooseUs";
 import Testimonial from "../landingPage/testimonial";
 import Newsletter from "../landingPage/newsletter";
+import Footer from "../footer";
 
 const LandingPage = () => {
   return (
@@ -14,6 +15,7 @@ const LandingPage = () => {
       <WhyChooseUs />
       <Testimonial />
       <Newsletter />
+      <Footer />
     </div>
   );
 };

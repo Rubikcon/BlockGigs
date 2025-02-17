@@ -47,7 +47,7 @@ export default function Newsletter() {
         <div className="w-full px-4">
           <form
             onSubmit={handleSubmit}
-            className="flex bg-white rounded-full  overflow-hidden shadow-md w-md mx-auto"
+            className="flex bg-white rounded-full overflow-hidden shadow-md w-sm mx-auto"
           >
             <input
               type="email"
