@@ -21,6 +21,8 @@ const signup = () => {
       return;
     }
 
+    // Take back user to the home page
+
     //Checking if the email address is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -36,11 +38,20 @@ const signup = () => {
     navigate("/emailcode", { state: { email } });
   };
 
+  const handleGotoHome = () => {
+    navigate("/");
+  };
+
   return (
     <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
       <div className="w-[103px] h-[37px] flex justify-between items-center gap-2 ml-4 ">
-        <img src={logo} alt="Blockgigs logo" className="mt-4" />
-        <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4">
+        <img
+          src={logo}
+          alt="Blockgigs logo"
+          className="mt-4  cursor-pointer"
+          onClick={handleGotoHome}
+        />
+        <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4 cursor-pointer">
           Blockgigs
         </h1>
       </div>
