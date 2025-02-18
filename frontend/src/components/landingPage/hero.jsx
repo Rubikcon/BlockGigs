@@ -1,6 +1,10 @@
 import Navigation from "../navigation";
-
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate("/signup");
+  };
   return (
     <section
       className="relative w-screen h-screen min-h-[500px] bg-cover bg-center bg-no-repeat"
@@ -28,7 +32,10 @@ const Hero = () => {
         </small>
 
         <div className="mt-20 md:mt-20">
-          <button className="px-8 b py-2 bg-white text-black rounded-md">
+          <button
+            onClick={handleButtonClick}
+            className="px-8 b py-2 bg-white text-black rounded-md cursor-pointer hover:font-bold"
+          >
             Join Blockgigs Now
           </button>
         </div>

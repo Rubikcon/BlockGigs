@@ -69,7 +69,8 @@ button:focus-visible {
   } */
 }
 
-
-/* DO NOT REMOVE */
-/* Style for the sliding carousel on the landing page */
-/* external css: flickity.css */
+theme {
+  --font-oleo: "Oleo Script Swash Caps", "sans-serif";
+  --font-montserrat: ['Montserrat', 'sans-serif'];
+  --font-onset: ['Onset', 'sans-serif'];
+}
