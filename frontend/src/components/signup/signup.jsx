@@ -7,7 +7,10 @@ import celo from "../../assets/celo.png";
 import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 
-const signup = () => {
+// import injected function
+import { injected } from "../Connector";
+
+const Signup = () => {
   const [email, setEmail] = useState("");
 
   const navigate = useNavigate(); //for page navigation
@@ -37,21 +40,19 @@ const signup = () => {
     // Navigate to verification page and pass the email as state
     navigate("/emailcode", { state: { email } });
   };
-
   const handleGotoHome = () => {
     navigate("/");
+  };
+
+  const connectMetamask = async () => {
+    alert("metamask connected");
   };
 
   return (
     <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
       <div className="w-[103px] h-[37px] flex justify-between items-center gap-2 ml-4 ">
-        <img
-          src={logo}
-          alt="Blockgigs logo"
-          className="mt-4  cursor-pointer"
-          onClick={handleGotoHome}
-        />
-        <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4 cursor-pointer">
+        <img src={logo} alt="Blockgigs logo" className="mt-4" />
+        <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4">
           Blockgigs
         </h1>
       </div>
@@ -82,6 +83,8 @@ const signup = () => {
               <input
                 type="email"
                 placeholder="Continue with email"
+                required
+                aria-required="true"
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px]  border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"
               />
@@ -102,6 +105,8 @@ const signup = () => {
                 id="checkbox"
                 className="mt-[0.3rem]"
                 defaultChecked={true}
+                required
+                aria-required="true"
               />
               <p className="font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#292929]">
                 Agree to our{" "}
@@ -125,7 +130,10 @@ const signup = () => {
           </div>
 
           <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-4">
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA]">
+            <button
+              onClick={connectMetamask}
+              className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA]"
+            >
               <img src={metamask} alt="metamask logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Metamask
@@ -162,4 +170,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
