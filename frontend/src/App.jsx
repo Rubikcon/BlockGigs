@@ -12,6 +12,7 @@ import Persona from './components/Persona/Persona';
 import TalentForm from './components/TalentForm/TalentForm';
 import ClientForm from './components/ClientForm/ClientForm';
 import ClientDashboard from './components/ClientDashboard/ClientDashboard';
+import TalentDashboard from './components/TalentDashboard/TalentDashboard';
 const App = () => {
   return (
     <Router>
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/TalentForm' element={<TalentForm />} />
         <Route path='/ClientForm' element={<ClientForm />} />
         <Route path='/ClientDashboard' element={<ClientDashboard />} />
+        <Route path='TalentDashboard' element={<TalentDashboard />} />
       </Routes>
     </Router>
   )

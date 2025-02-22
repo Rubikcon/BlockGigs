@@ -24,7 +24,7 @@ const Persona = () => {
     return (
         <div className='w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center'>
 
-            <div className='w-[103px] h-[37px] flex justify-between items-center gap-2 mt-4'>
+            <div className='w-[103px] h-[37px] flex justify-between items-center gap-2'>
                 <img src={logo} alt="Blockgigs logo" />
                 <h1 className='font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo'>Blockgigs</h1>
             </div>

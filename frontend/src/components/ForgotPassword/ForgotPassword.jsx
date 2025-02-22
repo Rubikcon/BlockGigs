@@ -40,7 +40,7 @@ const ForgotPassword = () => {
           <div className='flex flex-col items-center gap-2 mt-9'>
             <h3 className='font-montserrat font-medium text-[20px] lg:text-2xl leading-8 text-[#292929]'>Forgot Password</h3>
             <p className='font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]'>
-            Enter the OTP code we just sent to your registered <br /> email address to be able to reset your password
+              Enter the OTP code we just sent to your registered <br /> email address to be able to reset your password
             </p>
           </div>
 
@@ -52,6 +52,7 @@ const ForgotPassword = () => {
                 type="text"
                 maxLength="1"
                 value={digit}
+                required aria-required="true"
                 onChange={(e) => handleChange(e.target.value, index)}
                 className="w-[40px] h-[40px] lg:w-[51.29px] lg:h-[51.29px] rounded-[4.27px] border-[1.07px] border-[#CCDAD6] bg-[#FEFEFE] text-center text-[20px] font-bold focus:outline-none"
               />
