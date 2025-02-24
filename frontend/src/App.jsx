@@ -36,6 +36,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/*  Routes for the gigs page*/}
+        <Route path="/gigs-page" element={<GigsPage />} />
+
+        {/* Dashboard route */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/" element={<MainLayout />}>
           {/* <Route path="signup" element={<Signup />} /> */}
