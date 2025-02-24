@@ -10,7 +10,7 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
-import GigsPage from "./components/gigsPage/page";
+import GigsPage from "./components/gigsPage/GigsPage";
 import MainLayout from "./MainLayout";
 
 //
