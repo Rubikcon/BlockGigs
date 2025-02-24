@@ -11,6 +11,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
+  const [signature, setSignature] = useState("");
 
   const navigate = useNavigate(); //for page navigation
 
@@ -51,26 +52,53 @@ const Signup = () => {
       console.log("Address", account);
       setAddr(account);
 
+      //   ethereum
+      //     .request({
+      //       method: "eth_getBalance",
+      //       params: [account, "latest"],
+      //     })
+      //     .then((result) => {
+      //       console.log(result);
+      //       let wei = parseInt(result, 16);
+      //       let bal = wei / 10 ** 18;
+      //       setBalance(bal);
+
+      //       console.log("balance:", bal);
+      //       navigate("");
+      //     });
+
+      //   // Store address in localStorage (or sessionStorage)
+      //   localStorage.setItem("walletAddress", account);
+      //   // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
+      // });
+
+      // Uncomment this to sign message
+
+      // Signup and sign in message
+      const message = "Sign this message to verify your wallet.";
+
       ethereum
         .request({
-          method: "eth_getBalance",
-          params: [account, "latest"],
+          method: "personal_sign",
+          params: [message, account],
         })
-        .then((result) => {
-          console.log(result);
-          let wei = parseInt(result, 16);
-          let bal = wei / 10 ** 18;
-          setBalance(bal);
-
-          console.log("balance:", bal);
+        .then((signa) => {
+          // console.log(result);
+          // let signature;
+          // let bal = wei / 10 ** 18;
+          setSignature(signa);
+          setSignature(signa);
+          console.log("signature", signa);
+          // console.log("balance:", bal);
           navigate("");
         });
 
-      // Store address in localStorage (or sessionStorage)
-      localStorage.setItem("walletAddress", account);
-      // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
-    });
+      // console.log("Signature:", signature);
 
+      // sessionStorage.setItem("walletAddress", account);
+
+      sessionStorage.setItem("walletSignature", signature);
+    });
     const networkId = await ethereum.request({ method: "net_version" });
     console.log("Network ID:", networkId);
   };

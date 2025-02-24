@@ -30,8 +30,6 @@ import ClientForm from "./components/ClientForm/ClientForm";
 import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 
-// import the wallet module
-// import { injected } from "./wallet/Connector";
 import ButtonComponent from "../src/components/button";
 
 const App = () => {
