@@ -2,7 +2,8 @@ import Navigation from "../navigation";
 import { useNavigate } from "react-router-dom";
 const Hero = () => {
   const navigate = useNavigate();
-  const handleButtonClick = () => {
+
+  const handleGetStarted = () => {
     navigate("/signup");
   };
   return (
@@ -33,8 +34,8 @@ const Hero = () => {
 
         <div className="mt-20 md:mt-20">
           <button
-            onClick={handleButtonClick}
-            className="px-8 b py-2 bg-white text-black rounded-md cursor-pointer hover:font-bold"
+            onClick={handleGetStarted}
+            className="px-8 b py-2 bg-white text-black rounded-md cursor-pointer"
           >
             Join Blockgigs Now
           </button>
