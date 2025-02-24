@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function WhyChooseUs() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate("/signup");
+  };
+
   return (
     <section className="relative max-w-[95%] m-auto w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center overflow-hidden">
       {/* Header Section */}
@@ -32,7 +40,10 @@ export default function WhyChooseUs() {
             <li>Instant cross-border payments in USDC and other stablecoins</li>
           </ul>
 
-          <button className="bg-[#206BDC] text-white py-2 px-6 rounded-lg mt-4 hover:bg-[#1d4ed8] transition">
+          <button
+            onClick={handleGetStarted}
+            className="bg-[#206BDC] text-white py-2 px-6 rounded-lg mt-4 hover:bg-[#1d4ed8] transition"
+          >
             Get Started
           </button>
         </div>
