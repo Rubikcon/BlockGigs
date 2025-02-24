@@ -52,24 +52,24 @@ const Signup = () => {
       console.log("Address", account);
       setAddr(account);
 
-      //   ethereum
-      //     .request({
-      //       method: "eth_getBalance",
-      //       params: [account, "latest"],
-      //     })
-      //     .then((result) => {
-      //       console.log(result);
-      //       let wei = parseInt(result, 16);
-      //       let bal = wei / 10 ** 18;
-      //       setBalance(bal);
+      ethereum
+        .request({
+          method: "eth_getBalance",
+          params: [account, "latest"],
+        })
+        .then((result) => {
+          console.log(result);
+          let wei = parseInt(result, 16);
+          let bal = wei / 10 ** 18;
+          setBalance(bal);
 
-      //       console.log("balance:", bal);
-      //       navigate("");
-      //     });
+          console.log("balance:", bal);
+          navigate("");
+        });
 
-      //   // Store address in localStorage (or sessionStorage)
-      //   localStorage.setItem("walletAddress", account);
-      //   // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
+      // Store address in localStorage (or sessionStorage)
+      localStorage.setItem("walletAddress", account);
+      // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
       // });
 
       // Uncomment this to sign message
@@ -90,7 +90,7 @@ const Signup = () => {
           setSignature(signa);
           console.log("signature", signa);
           // console.log("balance:", bal);
-          navigate("");
+          navigate("/Persona");
         });
 
       // console.log("Signature:", signature);
