@@ -98,7 +98,7 @@ export default function Navigation() {
             <div className="ml-5">
               <button
                 onClick={handleGetStarted}
-                className="bg-white text-md !important text-black py-2 px-5 rounded-md"
+                className="bg-white text-md !important text-black py-2 px-5 rounded-md cursor-pointer"
               >
                 Get Started
               </button>
@@ -157,7 +157,7 @@ export default function Navigation() {
                 <div className="mt-10">
                   <button
                     onClick={handleGetStarted}
-                    className="bg-white hover:font-bold text-black px-7 py-3 rounded-md"
+                    className="bg-white hover:font-bold text-black px-7 py-3 rounded-md cursor-pointer"
                   >
                     Get Started
                   </button>

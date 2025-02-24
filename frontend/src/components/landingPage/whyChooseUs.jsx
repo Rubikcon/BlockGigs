@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
 
           <button
             onClick={handleGetStarted}
-            className="bg-[#206BDC] text-white py-2 px-6 rounded-lg mt-4 hover:bg-[#1d4ed8] transition"
+            className="bg-[#206BDC] text-white py-2 px-6 rounded-lg mt-4 hover:bg-[#1d4ed8] transition cursor-pointer"
           >
             Get Started
           </button>
