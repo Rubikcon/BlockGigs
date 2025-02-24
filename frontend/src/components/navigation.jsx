@@ -24,7 +24,7 @@ export default function Navigation() {
   };
 
   const handleGetStarted = () => {
-    navigate("*");
+    navigate("/signup");
   };
 
   const toggleDropdown = (name) => {

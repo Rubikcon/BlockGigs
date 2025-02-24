@@ -37,17 +37,6 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/" element={<MainLayout />}>
-          <Route path="signup" element={<Signup />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="discover" element={<Discover />} />
-          <Route path="gigs" element={<Gigs />} />
-          <Route path="offer" element={<Offer />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="wallet" element={<Wallet />} />
-        </Route>
-
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/emailcode" element={<Emailcode />} />
@@ -61,6 +50,18 @@ const App = () => {
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         <Route path="TalentDashboard" element={<TalentDashboard />} />
         <Route path="/button" element={<ButtonComponent />} />
+
+        {/*  Navigation on for the dashboard*/}
+        <Route path="/" element={<MainLayout />}>
+          {/* <Route path="signup" element={<Signup />} /> */}
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="chat" element={<Chat />} />
+          <Route path="discover" element={<Discover />} />
+          <Route path="gigs" element={<Gigs />} />
+          <Route path="offer" element={<Offer />} />
+          <Route path="setting" element={<Setting />} />
+          <Route path="wallet" element={<Wallet />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -6,7 +6,6 @@ export default function WhyChooseUs() {
   const handleGetStarted = () => {
     navigate("/signup");
   };
-
   return (
     <section className="relative max-w-[95%] m-auto w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center overflow-hidden">
       {/* Header Section */}
