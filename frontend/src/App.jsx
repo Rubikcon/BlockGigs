@@ -1,4 +1,5 @@
 // import React from "react";
+
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/UI/dashboard";
@@ -31,6 +32,7 @@ import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 
 // import the wallet module
 // import { injected } from "./wallet/Connector";
+import ButtonComponent from "../src/components/button";
 
 const App = () => {
   return (
@@ -48,6 +50,7 @@ const App = () => {
         <Route path="/ClientForm" element={<ClientForm />} />
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         <Route path="TalentDashboard" element={<TalentDashboard />} />
+        <Route path="/button" element={<ButtonComponent />} />
       </Routes>
     </Router>
   );
