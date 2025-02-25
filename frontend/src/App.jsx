@@ -30,7 +30,9 @@ import ClientForm from "./components/ClientForm/ClientForm";
 import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 
+// Test component
 import ButtonComponent from "../src/components/button";
+import FreelancePlatform from "./components/Freelance_UI/Freelance";
 
 const App = () => {
   return (
@@ -64,7 +66,10 @@ const App = () => {
         <Route path="/ClientForm" element={<ClientForm />} />
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         <Route path="TalentDashboard" element={<TalentDashboard />} />
+
+        {/* Test routes */}
         <Route path="/button" element={<ButtonComponent />} />
+        <Route path="/freelance" element={<FreelancePlatform />} />
       </Routes>
     </Router>
   );
