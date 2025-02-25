@@ -28,7 +28,7 @@ function Sidebar() {
         </NavLink>
       </div>
       <div className="row-span-9 space-y-4 w-[12vw]">
-        <NavLink to="/dashboard">
+        <NavLink to="/TalentDashboard">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
