@@ -32,7 +32,8 @@ import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 
 // Test component
 import ButtonComponent from "../src/components/button";
-import FreelancePlatform from "./components/Freelance_UI/Freelance";
+// import FreelancePlatform from "./components/Freelance_UI/Freelance";
+import FreelancePage from "./components/Freelance_UI/FreelancePage";
 
 const App = () => {
   return (
@@ -69,7 +70,8 @@ const App = () => {
 
         {/* Test routes */}
         <Route path="/button" element={<ButtonComponent />} />
-        <Route path="/freelance" element={<FreelancePlatform />} />
+        <Route path="/freelance" element={<FreelancePage />} />
+        {/* <Route path="/freelance" element={<FreelancePlatform />} /> */}
       </Routes>
     </Router>
   );
