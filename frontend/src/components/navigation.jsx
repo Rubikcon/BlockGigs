@@ -70,6 +70,7 @@ export default function Navigation() {
           <div className="spinner border-t-4 border-b-4 border-gray-700 w-16 h-16 border-solid rounded-full animate-spin"></div>
         </div>
       )}
+
       <nav className="bg-[#7979793D] max-w-[90%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[90%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg">
         <div className="flex justify-between items-center px-6 py-1 max-w-screen-xl mx-auto">
           <div className="cursor-pointer">
