@@ -10,7 +10,6 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
-import GigsPage from "./components/gigsPage/GigsPage";
 import MainLayout from "./MainLayout";
 
 //
@@ -29,6 +28,8 @@ import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
 import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
+import GigsPage from "./components/gigsPage/GigsPage";
+import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 
 import ButtonComponent from "../src/components/button";
 
@@ -38,6 +39,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
+        <Route path="/gig-detail" element={<GigDetailPage />} />
+
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/emailcode" element={<Emailcode />} />
