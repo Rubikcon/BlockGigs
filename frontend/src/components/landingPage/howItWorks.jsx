@@ -45,7 +45,7 @@ export default function HowItWorks() {
       {/* How it Works Section */}
       <div className="text-center my-8 px-4">
         <h1 className="text-2xl md:text-3xl font-bold">How It Works</h1>
-        <p className="text-sm md:text-lg text-gray-700 pt-4 w-md md:w-2xl mx-auto">
+        <p className="text-sm md:text-lg text-gray-700 pt-4 w-[90%] md:w-2xl mx-auto">
           Understand how Blockgigs simplifies the hiring and payment process
           through a clear, step-by-step guide designed to make your experience
           seamless.
@@ -76,7 +76,7 @@ export default function HowItWorks() {
       {/* Our Key Features */}
       <div className="text-center my-8 px-4">
         <h1 className="text-2xl md:text-3xl font-bold">Our Key Features</h1>
-        <p className="text-sm md:text-lg text-gray-700 w-md md:w-2xl pt-4 mx-auto">
+        <p className="text-sm md:text-lg text-gray-700 w-[90%] md:w-2xl pt-4 mx-auto">
           Explore the powerful features that set Blockgigs apart, ensuring
           secure transactions, transparent hiring, and seamless global
           connectivity for both freelancers and clients.
