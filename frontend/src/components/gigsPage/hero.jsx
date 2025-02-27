@@ -4,7 +4,7 @@ import JoinSection from "./JoinSection";
 
 const Hero = () => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col ">
       {/* Hero Section (80% height) */}
       <section
         className="relative w-screen h-[80%] min-h-[500px] bg-cover bg-center bg-no-repeat"
@@ -37,7 +37,7 @@ const Hero = () => {
               <IoSearch className="text-gray-400 absolute left-3 text-xl" />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Product Design"
                 className="w-full py-3 pl-10 pr-4 bg-white border rounded-lg text-black outline-none"
               />
             </div>

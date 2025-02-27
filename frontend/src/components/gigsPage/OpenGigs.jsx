@@ -26,7 +26,7 @@ const gigs = [
 const OpenGigs = () => {
   return (
     <div>
-      <div className="flex gap-8 w-[80%] mx-auto my-5 text-md md:text-xl lg:text-3xl ">
+      <div className="flex gap-8 w-[90%] mx-auto my-5 text-md md:text-xl lg:text-3xl ">
         <div>
           <h2 className="font-bold ">Open Gigs</h2>
         </div>

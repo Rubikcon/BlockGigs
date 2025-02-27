@@ -3,7 +3,7 @@ import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 const Pagination = () => {
   return (
     <div className="flex justify-center mt-6">
-      <div className="bg-white shadow-md rounded-lg p-4 flex items-center gap-20 md:gap-35">
+      <div className="bg-white shadow-md rounded-lg p-4 flex items-center w-full justify-between">
         <div className="flex gap-5">
           {/* Previous Button */}
           <button className="p-2 text-gray-600 hover:text-blue-600 flex gap-2">
