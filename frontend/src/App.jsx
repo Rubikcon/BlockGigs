@@ -10,7 +10,7 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
-import GigsPage from "./components/gigsPage/page";
+import GigsPage from "./components/gigsPage/GigsPage";
 import MainLayout from "./MainLayout";
 
 //
@@ -37,6 +37,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/gigs-page" element={<GigsPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/emailcode" element={<Emailcode />} />
