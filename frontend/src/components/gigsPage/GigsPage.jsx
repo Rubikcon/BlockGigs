@@ -3,6 +3,7 @@ import React from "react";
 import Pagination from "./Pagination";
 import OpenGigs from "./OpenGigs";
 import TopTechTalent from "./TopTechTalent";
+import Footer from "../footer";
 
 const GigsPage = () => {
   return (
@@ -10,6 +11,7 @@ const GigsPage = () => {
       <Hero />
       <OpenGigs />
       <TopTechTalent />
+      <Footer />
     </div>
   );
 };

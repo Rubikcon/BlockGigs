@@ -8,7 +8,7 @@ const talents = [
     skills: ["Web3 Development", "Smart Contract", "Project Manager"],
     rate: "5 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/profile1.png",
+    imageUrl: "./images/dp1.png",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const talents = [
     skills: ["Blockchain", "Solidity", "Smart Contracts"],
     rate: "7 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/profile2.png",
+    imageUrl: "./images/dp2.png",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const talents = [
     skills: ["Fullstack Dev", "Web3", "Ethereum"],
     rate: "6 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/profile3.png",
+    imageUrl: "./images/dp3.png",
   },
 ];
 
@@ -42,7 +42,6 @@ const TopTechTalent = () => {
           56,755 Talents on our Platform
         </small>
       </section>
-
       {/* Filter Buttons */}
       <section className="border-b-2 border-gray-300 w-full pb-3">
         <ul className="flex flex-wrap gap-4 justify-center">
@@ -58,13 +57,12 @@ const TopTechTalent = () => {
           </button>
         </ul>
       </section>
-
       {/* Talent Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {talents.map((talent) => (
           <div
             key={talent.id}
-            className="border border-gray-200 shadow-md rounded-lg p-4 bg-white transition transform hover:scale-105"
+            className="border border-gray-200 shadow-md rounded-lg p-4 bg-white transition transform hover:scale-105 flex flex-col h-full"
           >
             {/* Profile Header */}
             <div className="flex items-center gap-4">
@@ -77,7 +75,7 @@ const TopTechTalent = () => {
             </div>
 
             {/* Description */}
-            <p className="text-gray-600 mt-3">{talent.description}</p>
+            <p className="text-gray-600 mt-3 flex-grow">{talent.description}</p>
 
             {/* Skills */}
             <div className="mt-4">
@@ -94,15 +92,28 @@ const TopTechTalent = () => {
             </div>
 
             {/* Rate & Availability */}
-            <div className="flex justify-between items-center mt-4 text-sm">
+            <div className="flex justify-between items-center mt-4 mb-5 text-sm">
               <h2 className="text-blue-600 font-bold">{talent.rate}</h2>
               <span className="flex items-center gap-1 text-gray-600">
                 <CiCalendarDate />
                 {talent.availability}
               </span>
             </div>
+
+            {/* Sticky View Profile Button */}
+            <div className="mt-auto">
+              <button className="bg-[#2F66F6] text-white w-full py-2 px-4 rounded-md">
+                View Profile
+              </button>
+            </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <button className="bg-[#2F66F6] text-white py-2 px-20 rounded-md">
+          Show More
+        </button>
       </div>
     </div>
   );

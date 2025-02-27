@@ -26,7 +26,7 @@ const gigs = [
 const OpenGigs = () => {
   return (
     <div>
-      <div className="flex gap-8 w-[80%] mx-auto text-md md:text-xl lg:text-3xl ">
+      <div className="flex gap-8 w-[80%] mx-auto my-5 text-md md:text-xl lg:text-3xl ">
         <div>
           <h2 className="font-bold ">Open Gigs</h2>
         </div>
@@ -39,11 +39,11 @@ const OpenGigs = () => {
           <h2 className="text-gray-800">Completed</h2>
         </div>
       </div>
-      <div className="h-screen flex flex-col gap-6 p-4">
+      <div className="h-full flex flex-col w-full gap-6 p-4 border border-1">
         {gigs.map((gig) => (
           <div
             key={gig.id}
-            className="flex flex-row items-center border border-gray-200 p-4 rounded-lg shadow-md w-full max-w-4xl mx-auto"
+            className="flex flex-row items-center border mx-auto border-gray-200 p-4 rounded-lg shadow-md w-[90%]  mx-auto"
           >
             {/* Left - Image */}
             <div className="flex-shrink-0">
