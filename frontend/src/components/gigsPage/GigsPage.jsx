@@ -7,7 +7,6 @@ const GigsPage = () => {
   return (
     <div>
       <Hero />
-
       <OpenGigs />
       <Pagination />
     </div>

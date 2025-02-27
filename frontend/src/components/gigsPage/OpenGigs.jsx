@@ -1,5 +1,6 @@
 import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const gigs = [
   {
@@ -38,7 +39,6 @@ const OpenGigs = () => {
           <h2 className="text-gray-800">Completed</h2>
         </div>
       </div>
-
       <div className="h-screen flex flex-col gap-6 p-4">
         {gigs.map((gig) => (
           <div
@@ -81,6 +81,7 @@ const OpenGigs = () => {
             </div>
           </div>
         ))}
+        <Pagination />
       </div>
     </div>
   );
