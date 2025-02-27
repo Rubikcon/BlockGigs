@@ -39,7 +39,7 @@ const OpenGigs = () => {
           <h2 className="text-gray-800">Completed</h2>
         </div>
       </div>
-      <div className="h-full flex flex-col w-full gap-6 p-4 border border-1">
+      <div className="h-full flex flex-col w-full gap-6 p-4 ">
         {gigs.map((gig) => (
           <div
             key={gig.id}
@@ -50,12 +50,12 @@ const OpenGigs = () => {
               <img
                 src={gig.imageUrl}
                 alt="Company Logo"
-                className="rounded-full h-12 w-12 md:h-16 md:w-16 border border-gray-300"
+                className="rounded-full h-12  w-12 md:h-20 md:w-20 border border-gray-300"
               />
             </div>
 
             {/* Right - Job Details */}
-            <div className="flex flex-row justify-between w-full ml-4">
+            <div className="flex flex-row justify-between md:p-4 w-full ml-4">
               <div>
                 <h2 className="text-sm md:text-base font-bold">{gig.title}</h2>
                 <small className="text-xs md:text-sm text-gray-600 flex items-center gap-1">

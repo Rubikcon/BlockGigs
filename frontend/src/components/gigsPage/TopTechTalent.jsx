@@ -34,7 +34,9 @@ const TopTechTalent = () => {
   return (
     <div className="w-[90%] mx-auto py-6">
       {/* Header Section */}
-      <section className="text-center mb-6">
+      {/* <section className="text-center mb-6">
+       */}
+      <section className="mb-6 text-center md:text-left w-[95%] mx-auto">
         <h1 className="font-bold text-2xl md:text-3xl">
           African Top Tech Talents
         </h1>
@@ -43,9 +45,9 @@ const TopTechTalent = () => {
         </small>
       </section>
       {/* Filter Buttons */}
-      <section className="border-b-2 border-gray-300 w-full pb-3">
-        <ul className="flex flex-wrap gap-4 justify-center">
-          <button className="font-bold text-blue-600">Popular</button>
+      <section className="border-b-2 text-center md:text-left w-[9t%] mx-auto border-gray-300  pb-3">
+        <ul className="flex flex-wrap flex flex-wrap justify-between w-full ">
+          <button className="font-bold text-sm text-blue-600">Popular</button>
           <button className="text-gray-500 hover:text-blue-600">
             Blockchain
           </button>
