@@ -45,8 +45,9 @@ const TopTechTalent = () => {
         </small>
       </section>
       {/* Filter Buttons */}
-      <section className="border-b-2 text-center md:text-left w-[9t%] mx-auto border-gray-300  pb-3">
-        <ul className="flex flex-wrap flex flex-wrap justify-between w-full ">
+      <section className="border-b-2 text-center md:text-left w-full mx-auto border-gray-300 pb-3">
+        {/* Desktop View - List */}
+        <ul className="hidden md:flex flex-wrap justify-between w-full">
           <button className="font-bold text-sm text-blue-600">Popular</button>
           <button className="text-gray-500 hover:text-blue-600">
             Blockchain
@@ -58,7 +59,16 @@ const TopTechTalent = () => {
             View LeaderBoard
           </button>
         </ul>
+
+        {/* Mobile View - Select Menu */}
+        <select className="md:hidden block w-full border p-2 rounded">
+          <option>Popular</option>
+          <option>Blockchain</option>
+          <option>Smart Contract</option>
+          <option>View LeaderBoard</option>
+        </select>
       </section>
+
       {/* Talent Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {talents.map((talent) => (
