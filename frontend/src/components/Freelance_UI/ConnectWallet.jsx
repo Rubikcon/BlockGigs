@@ -12,8 +12,6 @@ const ConnectWallet = ({ setSigner }) => {
         const accounts = await provider.send("eth_requestAccounts", []);
         setAccount(accounts[0]);
         setSigner(signer);
-
-        // console.log(account);
       } catch (error) {
         console.error("Wallet connection failed:", error);
       }
