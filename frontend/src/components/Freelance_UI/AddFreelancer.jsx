@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Contract } from "ethers";
 import CONTRACT_ABI from "./contractDetails/contractABI.json";
 
-const CONTRACT_ADDRESS = "0xbC66956Dd11EFbB01296107A23AfA3635d192035";
+const CONTRACT_ADDRESS = "0x3a5b97549f62c5218b8Ac01F239ff8e86F69edE4";
 
 const AddFreelancer = ({ signer }) => {
   const [name, setName] = useState("");

@@ -6,38 +6,28 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @title FreelancerEscrow
- * @dev A smart contract for managing freelancer jobs using ERC20 tokens.
- *      Clients can post jobs, assign freelancers, and release payments after job completion.
+ * @dev A smart contract to manage freelancer jobs using ERC20 tokens.
+ *      Clients can post jobs, assign freelancers, and release payments after completion.
+ *      Enhancements: Escrow timeout, dispute resolution, client approval for job completion.
  */
 contract FreelancerEscrow is ReentrancyGuard {
     IERC20 public token; // ERC20 token used for payments
 
-    // Constructor sets the token address during deployment
     constructor(address _tokenAddress) {
         token = IERC20(_tokenAddress);
     }
 
-    /**
-     * @dev Structure to store freelancer details.
-     * @param name Name of the freelancer.
-     * @param walletAddress Wallet address of the freelancer.
-     * @param isRegistered Status to check if freelancer is registered.
-     */
+    struct Client {
+        address walletAddress;
+        bool isRegistered;
+    }
+
     struct Freelancer {
         string name;
         address walletAddress;
         bool isRegistered;
     }
 
-    /**
-     * @dev Structure to store job details.
-     * @param client Address of the client posting the job.
-     * @param description Description of the job.
-     * @param amount Payment amount locked in contract.
-     * @param assignedFreelancer Address of the freelancer assigned to the job.
-     * @param isCompleted Status to check if the job is completed.
-     * @param isPaidOut Status to check if payment has been released.
-     */
     struct Job {
         address client;
         string description;
@@ -45,18 +35,17 @@ contract FreelancerEscrow is ReentrancyGuard {
         address assignedFreelancer;
         bool isCompleted;
         bool isPaidOut;
+        uint256 deadline;
+        bool clientApproved;
     }
 
-    // Mapping to store registered freelancers
+    mapping(address => Client) public clients;
     mapping(address => Freelancer) public freelancers;
-
-    // Mapping to store jobs with job ID as the key
     mapping(uint256 => Job) public jobs;
-
-    // Counter to track the total number of jobs
     uint256 public jobCounter;
 
     /** Events for frontend tracking **/
+    event ClientRegistered(address indexed client);
     event FreelancerRegistered(address indexed freelancer, string name);
     event JobPosted(
         uint256 indexed jobId,
@@ -64,6 +53,7 @@ contract FreelancerEscrow is ReentrancyGuard {
         string description,
         uint256 amount
     );
+    event JobCancelled(uint256 indexed jobId, address indexed client);
     event FreelancerAssigned(uint256 indexed jobId, address indexed freelancer);
     event JobCompleted(uint256 indexed jobId);
     event PaymentReleased(
@@ -71,63 +61,79 @@ contract FreelancerEscrow is ReentrancyGuard {
         address indexed freelancer,
         uint256 amount
     );
+    event FundsWithdrawn(
+        uint256 indexed jobId,
+        address indexed client,
+        uint256 amount
+    );
+    event DisputeResolved(uint256 indexed jobId, bool clientWins);
 
     /**
-     * @dev Registers a freelancer with their wallet address.
-     * @param _name Name of the freelancer.
+     * @notice Registers a client
      */
-    function registerFreelancer(string memory _name) public {
-        require(!freelancers[msg.sender].isRegistered, "Already registered");
+    function registerClient() external {
+        require(!clients[msg.sender].isRegistered, "Client already registered");
+        clients[msg.sender] = Client({
+            walletAddress: msg.sender,
+            isRegistered: true
+        });
+        emit ClientRegistered(msg.sender);
+    }
 
+    /**
+     * @notice Registers a freelancer with a name
+     */
+    function registerFreelancer(string memory _name) external {
+        require(
+            !freelancers[msg.sender].isRegistered,
+            "Freelancer already registered"
+        );
         freelancers[msg.sender] = Freelancer({
             name: _name,
             walletAddress: msg.sender,
             isRegistered: true
         });
-
-        emit FreelancerRegistered(msg.sender, _name); // Emit event for frontend tracking
+        emit FreelancerRegistered(msg.sender, _name);
     }
 
     /**
-     * @dev Allows a client to post a job by locking funds in the contract.
-     * @param _description Description of the job.
-     * @param _amount Amount to be locked for payment.
+     * @notice Client posts a job with a description, amount, and deadline.
      */
     function postJob(
         string memory _description,
-        uint256 _amount
+        uint256 _amount,
+        uint256 _deadline
     ) external nonReentrant {
+        require(
+            clients[msg.sender].isRegistered,
+            "Only registered clients can post jobs"
+        );
         require(_amount > 0, "Amount must be greater than zero");
-
-        // Transfer tokens from the client to the contract (approval required)
+        require(_deadline > block.timestamp, "Invalid deadline");
         require(
             token.transferFrom(msg.sender, address(this), _amount),
             "Token transfer failed"
         );
 
-        // Store the job details
         jobs[jobCounter] = Job({
             client: msg.sender,
             description: _description,
             amount: _amount,
             assignedFreelancer: address(0),
             isCompleted: false,
-            isPaidOut: false
+            isPaidOut: false,
+            deadline: _deadline,
+            clientApproved: false
         });
-
-        emit JobPosted(jobCounter, msg.sender, _description, _amount); // Emit event
-
-        jobCounter++; // Increment job counter
+        emit JobPosted(jobCounter, msg.sender, _description, _amount);
+        jobCounter++;
     }
 
     /**
-     * @dev Allows a client to assign a freelancer to a job.
-     * @param _jobId ID of the job.
-     * @param _freelancer Address of the freelancer.
+     * @notice Client assigns a freelancer to the job.
      */
     function assignFreelancer(uint256 _jobId, address _freelancer) external {
         Job storage job = jobs[_jobId];
-
         require(msg.sender == job.client, "Only client can assign freelancer");
         require(
             freelancers[_freelancer].isRegistered,
@@ -139,51 +145,69 @@ contract FreelancerEscrow is ReentrancyGuard {
         );
 
         job.assignedFreelancer = _freelancer;
-
-        emit FreelancerAssigned(_jobId, _freelancer); // Emit event
+        emit FreelancerAssigned(_jobId, _freelancer);
     }
 
     /**
-     * @dev Allows an assigned freelancer to mark a job as completed.
-     * @param _jobId ID of the job.
+     * @notice Freelancer marks job as completed. Client must approve before payment is released.
      */
     function completeJob(uint256 _jobId) external {
         Job storage job = jobs[_jobId];
-
-        require(
-            freelancers[msg.sender].isRegistered,
-            "Only registered freelancers can complete jobs"
-        );
         require(
             msg.sender == job.assignedFreelancer,
             "Only assigned freelancer can complete job"
         );
         require(!job.isCompleted, "Job already completed");
-
         job.isCompleted = true;
-
-        emit JobCompleted(_jobId); // Emit event
+        emit JobCompleted(_jobId);
     }
 
     /**
-     * @dev Allows the client to release payment to the freelancer after job completion.
-     * @param _jobId ID of the job.
+     * @notice Client approves job completion and releases payment.
+     */
+    function approveCompletion(uint256 _jobId) external {
+        Job storage job = jobs[_jobId];
+        require(msg.sender == job.client, "Only client can approve completion");
+        require(job.isCompleted, "Job not completed yet");
+        job.clientApproved = true;
+    }
+
+    /**
+     * @notice Releases payment to freelancer after client approval.
      */
     function releasePayment(uint256 _jobId) external nonReentrant {
         Job storage job = jobs[_jobId];
-
-        require(msg.sender == job.client, "Only client can release payment");
-        require(job.isCompleted, "Job is not completed");
+        require(job.clientApproved, "Client has not approved completion");
         require(!job.isPaidOut, "Payment already released");
 
         job.isPaidOut = true;
-
-        // Transfer the locked funds to the assigned freelancer
         require(
             token.transfer(job.assignedFreelancer, job.amount),
             "Token transfer failed"
         );
+        emit PaymentReleased(_jobId, job.assignedFreelancer, job.amount);
+    }
 
-        emit PaymentReleased(_jobId, job.assignedFreelancer, job.amount); // Emit event
+    /**
+     * @notice Resolves disputes after deadline, refunding the client if freelancer failed to complete the job.
+     */
+    function resolveDispute(uint256 _jobId) external nonReentrant {
+        Job storage job = jobs[_jobId];
+        require(block.timestamp > job.deadline, "Job deadline not reached yet");
+        require(!job.isPaidOut, "Payment already released");
+
+        bool clientWins = !job.isCompleted;
+        job.isPaidOut = true;
+
+        if (clientWins) {
+            require(token.transfer(job.client, job.amount), "Refund failed");
+        } else {
+            require(
+                token.transfer(job.assignedFreelancer, job.amount),
+                "Payment failed"
+            );
+        }
+
+        emit DisputeResolved(_jobId, clientWins);
     }
 }

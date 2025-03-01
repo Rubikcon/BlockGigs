@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import contractABI from "../abi/MilestonePayment.json";
 
-const CONTRACT_ADDRESS = "0xbC66956Dd11EFbB01296107A23AfA3635d192035";
+const CONTRACT_ADDRESS = "0x3a5b97549f62c5218b8Ac01F239ff8e86F69edE4";
 
 export default function FreelancePlatform() {
   const [provider, setProvider] = useState(null);

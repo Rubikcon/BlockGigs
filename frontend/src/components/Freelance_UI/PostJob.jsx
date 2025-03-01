@@ -4,11 +4,13 @@ import { ethers } from "ethers";
 const PostJob = ({ contract }) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
+  const [title, setTitle] = useState("");
 
   const postJob = async () => {
-    if (!contract || !description || !amount) return;
+    if (!contract || !title || !description || !amount) return;
     try {
       const tx = await contract.postJob(
+        title,
         description,
         ethers.utils.parseUnits(amount, 6)
       );
@@ -21,13 +23,14 @@ const PostJob = ({ contract }) => {
 
   return (
     <div className="p-4">
-      {/* <input
+      <input
         type="text"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="border p-2 rounded w-full"
-      /> */}
+        className="border p-2 rounded w-full mt-2"
+      />
+
       <input
         type="text"
         placeholder="Description"
