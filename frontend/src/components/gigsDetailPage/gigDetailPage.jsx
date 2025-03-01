@@ -8,9 +8,7 @@ const GigDetailPage = () => {
     <div>
       <Hero />
       <Detail />
-      {/* <OpenGigs /> */}
-      {/* <TopTechTalent /> */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

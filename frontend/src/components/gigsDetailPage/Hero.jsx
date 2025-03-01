@@ -1,9 +1,8 @@
 import Navigation from "../navigation";
-import { IoSearch } from "react-icons/io5";
 
 const Hero = () => {
   return (
-    <div className="h-screen flex flex-col ">
+    <div className=" flex flex-col ">
       {/* Hero Section (80% height) */}
       <section
         className="relative w-screen h-[80%] min-h-[500px] bg-cover bg-center bg-no-repeat"
@@ -18,16 +17,14 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
 
         {/* Content */}
-        {/* <div className="relative flex flex-grid gap-3 items-center justify-center w-full h-full p-4 text-center"> */}
-        {/* <div className="relative flex flex-col md:flex-row gap-3 items-center justify-center w-full h-full p-4 text-center"> */}
-        <div className="relative flex flex-col md:flex-row gap-3 items-center justify-center w-[90%] mx-auto h-full p-4 text-center">
+        <div className="relative flex flex-col mt-10 py-10 md:flex-row gap-4 items-center justify-center w-[90%] mx-auto h-full p-4 text-center">
           {/* The left section of the hero */}
-          <div className="w-full md:w-2/3p-4">
+          <div className="w-full md:w-2/3 p-2">
             <div className="p-2 text-center md:text-left">
-              <h2 className="text-white font-bold text-lg md:text-5xl lg:text-6xl my-2">
+              <h2 className="text-white font-bold text-2xl md:text-5xl lg:text-6xl my-2">
                 Product Design Intern at CryptoKitties
               </h2>
-              <p className="text-white w-md md:w-xl">
+              <p className="text-white md:text-left text-center  w-[80%] mx-auto md:w-xl">
                 We're looking for a creative and detail-oriented Product Design
                 Intern to join the CryptoKitties team. As part of our design and
                 development teams, you'll help craft engaging user experiences
@@ -39,7 +36,7 @@ const Hero = () => {
           {/* The right section of the hero */}
           <div className="rounded-md bg-white py-5 px-4 w-full md:w-1/3">
             <div>
-              <div className="flex gap-1">
+              <div className="flex gap-2">
                 <img
                   src=""
                   alt="logo"
@@ -49,8 +46,8 @@ const Hero = () => {
               </div>
               <small>Rate: 0.05 USDT per hour</small>
             </div>
-            <div>
-              <button className="w-full px-4 py-1 bg-blue-700 text-white rounded-md">
+            <div className="py-2">
+              <button className="w-full px-4 py-1 bg-blue-700 text-white rounded-md cursor-pointer">
                 Apply
               </button>
             </div>
