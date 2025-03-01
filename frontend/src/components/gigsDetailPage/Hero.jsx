@@ -18,42 +18,34 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
 
         {/* Content */}
-        <div className="relative flex flex-col items-center justify-center w-full h-full p-4 text-center">
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-            Bringing Great
-          </h1>
-          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
-            Work to You
-          </h1>
-          <small className="text-white text-sm sm:text-base md:text-lg mt-4 max-w-xl">
-            Blockgigs bridges African tech talents with global clients, ensuring
-            secure, bias-free hiring and transparent blockchain payment.
-          </small>
-
-          {/* Search Bar */}
-          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mt-10">
-            <div className="relative flex items-center">
-              <IoSearch className="text-gray-400 absolute left-3 text-xl" />
-              <input
-                type="text"
-                placeholder="Product Design"
-                className="w-full py-3 pl-10 pr-4 bg-white border rounded-lg text-black outline-none"
-              />
+        <div className="relative flex flex-col gap-3 items-center justify-center w-full h-full p-4 text-center">
+          {/* The left section of the hero */}
+          <div>
+            <div className="p-2">
+              <h2 className="text-white font-bold text-lg md:text-2xl">
+                Product Design Intern at CryptoKitties
+              </h2>
+              <p className="text-white">
+                We're looking for a creative and detail-oriented Product Design
+                Intern to join the CryptoKitties team. As part of our design and
+                development teams, you'll help craft engaging user experiences
+                for our blockchain-based collectibles game
+              </p>
             </div>
           </div>
 
-          {/* Buttons Section (Responsive Grid) */}
-          <div className="text-white w-[90%] max-w-4xl grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4 py-4 mx-auto mt-8">
-            {["All Gigs", "Development", "Design", "Contents"].map(
-              (label, index) => (
-                <button
-                  key={index}
-                  className="p-2 px-6 text-sm sm:text-base rounded-md backdrop-blur-md bg-[#7979793D] transition duration-300 hover:bg-[#79797980]"
-                >
-                  {label}
-                </button>
-              )
-            )}
+          {/* The right section of the hero */}
+          <div className="rounded-md">
+            <div>
+              <img src="" alt="logo" className="rounded-full" />
+              <h3>Product Design Intern at CryptoKitties</h3>
+              <small>Rate: 0.05 USDT per hour</small>
+            </div>
+            <div>
+              <button className="w-full px-4 py-1 bg-blue-700 text-white">
+                Apply
+              </button>
+            </div>
           </div>
         </div>
       </section>
