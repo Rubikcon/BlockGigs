@@ -52,6 +52,7 @@ const EmailCode = () => {
                 type="text"
                 maxLength="1"
                 value={digit}
+                required aria-required="true"
                 onChange={(e) => handleChange(e.target.value, index)}
                 className="w-[40px] h-[40px] lg:w-[51.29px] lg:h-[51.29px] rounded-[4.27px] border-[1.07px] border-[#CCDAD6] bg-[#FEFEFE] text-center text-[20px] font-bold focus:outline-none"
               />

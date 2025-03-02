@@ -44,7 +44,7 @@ const signin = () => {
       <div className="flex items-center justify-center mt-[4rem]">
         <form onSubmit={handleSubmit} className="w-[300px] h-[550px] lg:w-[422px] lg:h-[615px] rounded-xl bg-[#ffffff] flex flex-col items-center">
           <div className='w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem]'>
-            <h2 className='font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]'>Sign Up</h2>
+            <h2 className='font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]'>Sign In</h2>
             <p className='font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]'>Welcome Back to Blockgigs!</p>
           </div>
 
@@ -54,6 +54,7 @@ const signin = () => {
               <input
                 type="email"
                 placeholder="Continue with email"
+                required aria-required="true"
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px] border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"
               />
@@ -63,7 +64,7 @@ const signin = () => {
             </div>
 
             <div className='flex justify-center items-center w-[320px] lg:w-[340px] h-[24px] gap-1 ml-[-2rem] lg:ml-[-1rem]'>
-              <input type="checkbox" name="checkbox" id="checkbox" className='mt-[0.3rem]' defaultChecked={true} />
+              <input type="checkbox" name="checkbox" id="checkbox" className='mt-[0.3rem]' defaultChecked={true} required aria-required="true" />
               <p className='font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#292929]'>
                 Agree to our <span className='font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#2f66f6]'>Terms and Condition</span> and <span className='font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#2f66f6]'>Privacy Policy</span>
               </p>

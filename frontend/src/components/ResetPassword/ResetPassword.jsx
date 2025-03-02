@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/3dcube.png';
 import { GoEye, GoEyeClosed } from "react-icons/go";
 
@@ -60,6 +60,7 @@ const ResetPassword = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder='Enter password'
+                                required aria-required="true"
                             />
                             {showPassword ? (
                                 <GoEyeClosed className='absolute right-2.5 top-1/2 transform -translate-y-1/2 text-[#292d32]' onClick={() => setShowPassword(!showPassword)} />
@@ -80,6 +81,7 @@ const ResetPassword = () => {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder='Retype password'
+                                required aria-required="true"
                             />
                             {showConfirmPassword ? (
                                 <GoEyeClosed className='absolute right-2.5 top-1/2 transform -translate-y-1/2 text-[#292d32]' onClick={() => setShowConfirmPassword(!showConfirmPassword)} />

@@ -16,6 +16,7 @@ export default function Navigation() {
     { name: "Home", href: "/" },
     { name: "Dashboard", href: "/dashboard" },
     { name: "Gigs", href: "/gigs" },
+    { name: "Gigs", href: "/gigs-page" },
     { name: "Browse Talents", href: "/talents" },
     { name: "Leaderboard", href: "/leaderboard" },
   ];
@@ -25,7 +26,7 @@ export default function Navigation() {
   };
 
   const handleGetStarted = () => {
-    navigate("*");
+    navigate("/signup");
   };
 
   const toggleDropdown = (name) => {
@@ -72,7 +73,7 @@ export default function Navigation() {
         </div>
       )}
 
-      <nav className="bg-[#7979793D] max-w-[90%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[90%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg">
+      <nav className="bg-[#7979793D] max-w-[90%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[90%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg ">
         <div className="flex justify-between items-center px-6 py-1 max-w-screen-xl mx-auto">
           <div className="cursor-pointer">
             <img
@@ -99,7 +100,7 @@ export default function Navigation() {
             <div className="ml-5">
               <button
                 onClick={handleGetStarted}
-                className="bg-white text-md !important text-black py-2 px-5 rounded-md"
+                className="bg-white text-md !important text-black py-2 px-5 rounded-md cursor-pointer"
               >
                 Get Started
               </button>
@@ -120,7 +121,7 @@ export default function Navigation() {
         {isMenuOpen && (
           <div
             ref={modalRef}
-            className="fixed -ml-15 inset-0 w-screen h-screen bg-opacity-80 flex justify-center items-center z-50"
+            className="fixed -ml-4 inset-0 w-screen h-screen bg-opacity-80 flex justify-center items-center z-50"
             style={{
               backgroundImage: 'url("/images/hero_banner.png")',
             }}
@@ -158,7 +159,7 @@ export default function Navigation() {
                 <div className="mt-10">
                   <button
                     onClick={handleGetStarted}
-                    className="bg-white hover:font-bold text-black px-7 py-3 rounded-md"
+                    className="bg-white hover:font-bold text-black px-7 py-3 rounded-md cursor-pointer"
                   >
                     Get Started
                   </button>
