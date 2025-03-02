@@ -12,6 +12,7 @@ import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
 import GigsPage from "./components/gigsPage/GigsPage";
 import MainLayout from "./MainLayout";
+import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 
 //
 
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         {/* <Route path="/TalentDashboard" element={<TalentDashboard />} /> */}
         <Route path="/button" element={<ButtonComponent />} />
+        <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*  Navigation on for the dashboard*/}
         <Route path="/" element={<MainLayout />}>
