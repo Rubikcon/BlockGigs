@@ -26,6 +26,9 @@ const gigs = [
 const RelatedGigs = () => {
   return (
     <div>
+      <h2 className="text-xl font-semibold mb-3 ml-15 text-center text-left">
+        Related Gigs
+      </h2>
       <div className="h-full flex flex-col w-full gap-6 p-4 ">
         {gigs.map((gig) => (
           <div

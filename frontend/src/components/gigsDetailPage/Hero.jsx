@@ -20,15 +20,15 @@ const Hero = () => {
         <div className="relative flex flex-col mt-10 py-10 md:flex-row gap-4 items-center justify-center w-[90%] mx-auto h-full p-4 text-center">
           {/* The left section of the hero */}
           <div className="w-full md:w-2/3 p-2">
-            <div className="p-2 text-center md:text-left">
+            <div className="p-2 md:text-left text-center">
               <h2 className="text-white font-bold text-2xl md:text-5xl lg:text-6xl my-2">
                 Product Design Intern at CryptoKitties
               </h2>
-              <p className="text-white md:text-left text-center  w-[80%] mx-auto md:w-xl">
+              <p className="text-white text-sm md:w-[70%] w-full">
                 We're looking for a creative and detail-oriented Product Design
                 Intern to join the CryptoKitties team. As part of our design and
                 development teams, you'll help craft engaging user experiences
-                for our blockchain-based collectibles game
+                for our blockchain-based collectibles game.
               </p>
             </div>
           </div>

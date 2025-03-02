@@ -72,11 +72,11 @@ const Detail = () => {
       </section>
 
       {/* Right Section - Related Gigs */}
-      <section className="flex-1 min-w-[300px] p-4">
-        <div className="rounded-lg shadow-lg p-6 bg-white dark:bg-gray-800">
-          <h2 className="text-xl font-semibold mb-3 text-left">Related Gigs</h2>
-          <RelatedGigs />
-        </div>
+      <section className="flex-1 min-w-[300px] items-center ">
+        {/* <div className="rounded-lg shadow-lg p-6 bg-white dark:bg-gray-800"> */}
+
+        <RelatedGigs />
+        {/* </div> */}
       </section>
     </div>
   );
