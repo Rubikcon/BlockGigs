@@ -14,6 +14,7 @@ export default function Navigation() {
 
   const links = [
     { name: "Home", href: "/" },
+    { name: "Dashboard", href: "/dashboard" },
     { name: "Gigs", href: "/gigs" },
     { name: "Browse Talents", href: "/talents" },
     { name: "Leaderboard", href: "/leaderboard" },
