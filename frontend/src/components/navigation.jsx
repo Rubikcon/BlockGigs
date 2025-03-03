@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaTimes, FaBars, FaUserCircle } from "react-icons/fa";
 import { MdPhone } from "react-icons/md";
@@ -87,14 +87,24 @@ export default function Navigation() {
 
           <ul className="hidden lg:flex items-center space-x-4 font-medium">
             {links.map((link) => (
+              // <li key={link.name} className="relative group">
+              //   <a
+              //     href={link.href}
+              //     onClick={handleLinkClick}
+              //     className="text-white hover:text-white mx-3 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
+              //   >
+              //     {link.name}
+              //   </a>
+              // </li>
+
               <li key={link.name} className="relative group">
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   onClick={handleLinkClick}
                   className="text-white hover:text-white mx-3 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
             <div className="ml-5">
@@ -147,13 +157,13 @@ export default function Navigation() {
               <ul className="flex flex-col items-center justify-center space-y-6 w-full">
                 {links.map((link) => (
                   <li key={link.name} className="py-5 w-full text-center">
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       onClick={() => setIsMenuOpen(false)}
                       className="mt-20 hover:text-gray-700 font-bold hover:border hover:rounded-md hover:p-4 transition text-white text-lg cursor-pointer"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
                 <div className="mt-10">
