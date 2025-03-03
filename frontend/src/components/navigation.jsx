@@ -40,7 +40,7 @@ export default function Navigation() {
     },
     { name: "Gigs", href: "/gigs-page" },
     { name: "Browse Talents", href: "/browse-talent" },
-    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Leaderboard", href: "/leader-board" },
   ];
 
   const handleLinkClick = () => {

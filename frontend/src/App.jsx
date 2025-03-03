@@ -12,7 +12,7 @@ import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
 import MainLayout from "./MainLayout";
 import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
-
+import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
 //
 
 import React from "react";
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
         <Route path="/gig-detail" element={<GigDetailPage />} />
-
+        <Route path="/leader-board" element={<LeaderBoardPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/emailcode" element={<Emailcode />} />
@@ -61,6 +61,7 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           {/* <Route path="signup" element={<Signup />} /> */}
           <Route path="/TalentDashboard" element={<Dashboard />} />
+
           <Route path="chat" element={<Chat />} />
           <Route path="discover" element={<Discover />} />
           <Route path="gigs" element={<Gigs />} />
