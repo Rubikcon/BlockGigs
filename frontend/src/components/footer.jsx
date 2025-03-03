@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex items-center">
               <img
-                src="/public/images/white_BlockGigs.png"
+                src="/images/white_BlockGigs.png"
                 className="h-8 me-3"
                 alt="BlockGigs Logo"
               />
