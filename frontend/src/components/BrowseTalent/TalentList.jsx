@@ -33,39 +33,42 @@ const talents = [
 const TalentList = () => {
   return (
     <div className="w-[90%] mx-auto py-6">
-      {/* Header Section */}
-      {/* <section className="text-center mb-6">
-       */}
-      <section className="mb-6 text-center md:text-left w-[95%] mx-auto">
+      {/* <section className="mb-6 text-center md:text-left w-[95%] mx-auto">
         <h1 className="font-bold text-2xl md:text-3xl">
           African Top Tech Talents
         </h1>
         <small className="text-gray-500 block mt-1">
           56,755 Talents on our Platform
         </small>
-      </section>
+      </section> */}
       {/* Filter Buttons */}
-      <section className="border-b-2 text-center md:text-left w-full mx-auto border-gray-300 pb-3">
+      <section className="border-b-2 my-10 text-center md:text-left w-full mx-auto border-gray-300 pb-3">
         {/* Desktop View - List */}
         <ul className="hidden md:flex flex-wrap justify-between w-full">
-          <button className="font-bold text-sm text-blue-600">Popular</button>
-          <button className="text-gray-500 hover:text-blue-600">
+          <button className="font-bold text-sm text-gray-600 bg-gray-200 border border-1 border-gray-200 p-2 rounded-md">
+            All Talents
+          </button>
+          <button className="text-gray-500 hover:text-blue-600 border border-1 border-gray-200 p-2 rounded-md">
+            Design
+          </button>
+          <button className="text-gray-500 hover:text-blue-600 border border-1 border-gray-200 p-2 rounded-md">
+            Development
+          </button>
+          <button className="text-gray-500 hover:text-blue-600 border border-1 border-gray-200 p-2 rounded-md">
             Blockchain
           </button>
-          <button className="text-gray-500 hover:text-blue-600">
-            Smart Contract
-          </button>
-          <button className="text-gray-500 hover:text-blue-600">
-            View LeaderBoard
+          <button className="text-gray-500 hover:text-blue-600 border border-1 border-gray-200 p-2 rounded-md">
+            Others
           </button>
         </ul>
 
         {/* Mobile View - Select Menu */}
         <select className="md:hidden block w-full border p-2 rounded">
-          <option>Popular</option>
+          <option>All Talents</option>
+          <option> Design</option>
+          <option>Development</option>
           <option>Blockchain</option>
-          <option>Smart Contract</option>
-          <option>View LeaderBoard</option>
+          <option value=""> Others</option>
         </select>
       </section>
 
