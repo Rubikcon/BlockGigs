@@ -1,12 +1,12 @@
 import Hero from "./Hero";
 import TalentList from "./TalentList";
-// import Pagination from "./Pagination";
-
+import Footer from "../footer";
 const BrowseTalentPage = () => {
   return (
     <div>
       <Hero />
       <TalentList />
+      <Footer />
     </div>
   );
 };
