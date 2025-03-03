@@ -7,7 +7,7 @@ const Hero = () => {
     <div className=" flex flex-col ">
       {/* Hero Section (80% height) */}
       <section
-        className="relative  w-screen h-[80%] min-h-[500px] bg-cover bg-center bg-no-repeat"
+        className="relative h-[80%] min-h-[500px] bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url("/images/hero_banner.png")',
         }}
