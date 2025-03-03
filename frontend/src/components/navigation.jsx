@@ -153,7 +153,7 @@ export default function Navigation() {
         {isMenuOpen && (
           <div
             ref={modalRef}
-            className="fixed -ml-4 inset-0 w-screen h-screen bg-opacity-80 flex justify-center items-center z-50"
+            className="fixed mx-auto inset-0 w-full  h-screen bg-opacity-80 flex justify-center items-center z-50"
             style={{
               backgroundImage: 'url("/images/hero_banner.png")',
             }}
