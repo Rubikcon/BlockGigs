@@ -147,7 +147,7 @@ const JobList = () => {
           </select>
         </section>
       </div>
-      <div className="w-full overflow-x-auto p-2">
+      <div className="w-full overflow-x-auto p-2 mb-10">
         <div className="w-full w-4xl md:w-[90%] mx-auto bg-gray-100 rounded-lg shadow-md p-3">
           <table className="w-full border-collapse bg-white rounded-lg shadow-md text-xs md:text-sm">
             <thead>
