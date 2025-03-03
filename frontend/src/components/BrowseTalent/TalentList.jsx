@@ -114,7 +114,7 @@ const TalentList = () => {
 
             {/* Sticky View Profile Button */}
             <div className="mt-auto">
-              <button className="bg-[#2F66F6] text-white w-full py-2 px-4 rounded-md">
+              <button className="bg-[#2F66F6] text-white w-full py-2 px-4 rounded-md cursor-pointer">
                 View Profile
               </button>
             </div>
