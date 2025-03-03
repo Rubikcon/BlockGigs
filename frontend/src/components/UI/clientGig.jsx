@@ -3,6 +3,8 @@ import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import down from "../../assets/down.png";
 import bell2 from "../../assets/bell.png";
+import vector from "../../assets/vector.png";
+import logo from "../../assets/logo.png";
 import bag from "../../assets/bag.png";
 import cancel from "../../assets/cancel.png";
 import clock from "../../assets/clock.png";
@@ -11,141 +13,117 @@ import crypto from "../../assets/crypto.png";
 
 const gigs = [
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
+    title: "dApp Web Designer for New P..",
+    client: "Gracia Alex",
+    amount: 2600,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
+    title: "NFT Marketplace Website Desi..",
+    client: "Global Venture",
+    amount: 3800,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
+    title: "Blockchain Explorer Interface",
+    client: "Andres Simon",
+    amount: 1800,
+    image: vector,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "Virtual Land Website Design M..",
+    client: "Noveau Laun",
+    amount: 2500,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
+    title: "Website redesign for Crypto E..",
+    client: "Wrenzy Corps.",
     amount: 1000,
+    image: logo,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "NFT Minting Platform User Int..",
+    client: "Celestial Dys.",
+    amount: 2000,
+    image: logo,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "Virtual Reality Gaming Experie..",
+    client: "Nova Teach Sco..",
+    amount: 5000,
+    image: vector,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "Design of Blockchain-Based S..",
+    client: "Quantum Les",
+    amount: 3200,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
+    title: "logo Design for a New NFT Col..",
+    client: "Honeygrace I..",
+    amount: 700,
+    image: vector,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "dApp Web Designer for New P..",
+    client: "Oludare Silivia",
+    amount: 1900,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
+    title: "3D Avatars for a Metaverse Co..",
+    client: "David Chen",
+    amount: 1200,
+    image: logo,
+    date: "1/11/24",
+    info: "View Job Details",
+  },
+  {
+    title: "Crypto Wallet Mobile App",
+    client: "Emily Carter",
+    amount: 3500,
     image: crypto,
     date: "1/11/24",
     info: "View Job Details",
   },
   {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
-    date: "1/11/24",
-    info: "View Job Details",
-  },
-  {
-    title: "Saas website design",
-    talent: "Glory Design",
-    amount: 1000,
-    image: crypto,
+    title: "Design for a Crypto Trading P..",
+    client: "Javiar Rodig",
+    amount: 1600,
+    image: vector,
     date: "1/11/24",
     info: "View Job Details",
   },
 ];
-function Gigs() {
+function clientGig() {
   return (
     <div>
       <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
         <div className="row-span-1 grid items-center px-2 mt-2">
           <div className="grid grid-cols-3 gap-1 w-full">
-            <span className="">My Talent Gigs</span>
+            <span className="">My Gigs</span>
             <div className="col-span-1 flex justify-between">
               <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[72%]">
                 <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
@@ -208,7 +186,7 @@ function Gigs() {
         <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
           <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2">
             <span className="text-blue-500">Title</span>
-            <span className="text-blue-500 ml-20">Talent</span>
+            <span className="text-blue-500 ml-20">Client</span>
             <span className="text-blue-500 ">Amount</span>
             <span className="text-blue-500">Date</span>
             <span className="text-blue-500">Job Information</span>
@@ -233,4 +211,4 @@ function Gigs() {
   );
 }
 
-export default Gigs;
+export default clientGig;
