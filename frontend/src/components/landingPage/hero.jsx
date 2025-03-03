@@ -8,7 +8,7 @@ const Hero = () => {
   };
   return (
     <section
-      className="relative w-screen h-screen min-h-[500px] bg-cover bg-center bg-no-repeat"
+      className="relative h-screen min-h-[500px] bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url("/images/hero_banner.png")',
       }}
