@@ -11,13 +11,35 @@ export default function Navigation() {
   const [isLoading, setIsLoading] = useState(false);
   const modalRef = useRef();
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+
+  // ===================================
+
+  const getUserRole = () => {
+    return localStorage.getItem("userRole");
+    // Retrieve role from localStorage
+  };
+
+  useEffect(() => {
+    setRole(getUserRole());
+  }, []);
+
+  // ===================================
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Dashboard", href: "/dashboard" },
-    // { name: "Gigs", href: "/gigs" },
+
+    {
+      name: "Dashboard",
+      href:
+        role === "client"
+          ? "/client-dashboard"
+          : role === "talent"
+          ? "/talent-dashboard"
+          : "/signin", // Redirect to login/signup if not signed in
+    },
     { name: "Gigs", href: "/gigs-page" },
-    { name: "Browse Talents", href: "/talents" },
+    { name: "Browse Talents", href: "/browse-talent" },
     { name: "Leaderboard", href: "/leaderboard" },
   ];
 
