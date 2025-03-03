@@ -1,4 +1,5 @@
-import { PiFacebookLogoBold } from "react-icons/pi";
+// import { PiFacebookLogoBold } from "react-icons/pi";
+import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -23,14 +24,14 @@ const Footer = () => {
               in crypto.
             </p>
             <div>
-              <ul className="text-white flex gap-5">
-                <li>
-                  <PiFacebookLogoBold onClick={() => navigate("/facebook")} />
+              <ul className="text-white flex gap-2">
+                <li className="rounded-full bg-white text-black p-2 cursor-pointer">
+                  <FaFacebookF onClick={() => navigate("/facebook")} />
                 </li>
-                <li>
+                <li className="rounded-full bg-white text-black p-2 cursor-pointer">
                   <FaInstagram onClick={() => navigate("/instagram")} />
                 </li>
-                <li>
+                <li className="rounded-full bg-white text-black p-2 cursor-pointer">
                   <FaXTwitter onClick={() => navigate("/twitter")} />
                 </li>
               </ul>
