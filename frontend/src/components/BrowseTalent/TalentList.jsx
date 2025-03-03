@@ -1,5 +1,5 @@
 import { CiCalendarDate } from "react-icons/ci";
-
+import Pagination from "./Pagination";
 const talents = [
   {
     id: 1,
@@ -27,6 +27,33 @@ const talents = [
     rate: "6 USDC / hr",
     availability: "Available",
     imageUrl: "./images/dp3.png",
+  },
+  {
+    id: 4,
+    name: "John Doe",
+    description: "Building scalable dApps and decentralized solutions.",
+    skills: ["Fullstack Dev", "Web3", "Ethereum"],
+    rate: "6 USDC / hr",
+    availability: "Available",
+    imageUrl: "./images/dp3.png",
+  },
+  {
+    id: 5,
+    name: "Amina Yusuf",
+    description: "Experienced blockchain engineer with a passion for DeFi.",
+    skills: ["Blockchain", "Solidity", "Smart Contracts"],
+    rate: "7 USDC / hr",
+    availability: "Available",
+    imageUrl: "./images/dp2.png",
+  },
+  {
+    id: 6,
+    name: "Kovac Lajos",
+    description: "I create responsive and user-friendly applications.",
+    skills: ["Web3 Development", "Smart Contract", "Project Manager"],
+    rate: "5 USDC / hr",
+    availability: "Available",
+    imageUrl: "./images/dp1.png",
   },
 ];
 
@@ -129,6 +156,10 @@ const TalentList = () => {
         <button className="bg-[#2F66F6] text-white py-2 px-20 rounded-md cursor-pointer">
           Show More
         </button>
+      </div>
+
+      <div className="w-md md:w-xl mx-auto">
+        <Pagination />
       </div>
     </div>
   );

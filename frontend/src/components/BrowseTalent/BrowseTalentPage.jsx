@@ -1,5 +1,6 @@
 import Hero from "./Hero";
 import TalentList from "./TalentList";
+// import Pagination from "./Pagination";
 
 const BrowseTalentPage = () => {
   return (
