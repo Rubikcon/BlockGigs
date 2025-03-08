@@ -112,10 +112,6 @@ const Signup = () => {
     try {
       // ✅ Request account access
 
-      // const accounts = await window.ethereum.request({
-      //   method: "eth_requestAccounts",
-      // });
-
       const accounts = await Promise.race([
         window.ethereum.request({ method: "eth_requestAccounts" }),
         new Promise((_, reject) =>
