@@ -1,4 +1,4 @@
-import { CiClock2 } from "react-icons/ci";
+// import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
@@ -7,19 +7,19 @@ const gigs = [
     id: 1,
     title: "Product Design Intern",
     postedTime: "6 hours ago",
-    imageUrl: "./images/role_img.png", // Add an image URL here
+    // imageUrl: "./images/role_img.png",
   },
   {
     id: 2,
     title: "Frontend Developer",
     postedTime: "1 day ago",
-    imageUrl: "./images/role_img.png", // Add an image URL here
+    // imageUrl: "./images/role_img.png",
   },
   {
     id: 3,
     title: "Blockchain Engineer",
     postedTime: "3 days ago",
-    imageUrl: "./images/role_img.png", // Add an image URL here
+    // imageUrl: "./images/role_img.png",
   },
 ];
 

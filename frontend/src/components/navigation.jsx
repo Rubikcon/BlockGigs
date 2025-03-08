@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { IoChevronDownSharp } from "react-icons/io5";
+// import { IoChevronDownSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { FaTimes, FaBars, FaUserCircle } from "react-icons/fa";
-import { MdPhone } from "react-icons/md";
+import {
+  FaTimes,
+  // FaBars,
+  // FaUserCircle
+} from "react-icons/fa";
+// import { MdPhone } from "react-icons/md";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +18,7 @@ export default function Navigation() {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: "/TalentDashboard" },
     { name: "Gigs", href: "/gigs" },
     { name: "Gigs", href: "/gigs-page" },
     { name: "Browse Talents", href: "/talents" },

@@ -8,7 +8,7 @@ const talents = [
     skills: ["Web3 Development", "Smart Contract", "Project Manager"],
     rate: "5 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/dp1.png",
+    // imageUrl: "./images/dp1.png",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const talents = [
     skills: ["Blockchain", "Solidity", "Smart Contracts"],
     rate: "7 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/dp2.png",
+    // imageUrl: "./images/dp2.png",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const talents = [
     skills: ["Fullstack Dev", "Web3", "Ethereum"],
     rate: "6 USDC / hr",
     availability: "Available",
-    imageUrl: "./images/dp3.png",
+    // imageUrl: "./images/dp3.png",
   },
 ];
 
