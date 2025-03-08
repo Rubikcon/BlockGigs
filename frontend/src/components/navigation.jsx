@@ -109,16 +109,6 @@ export default function Navigation() {
 
           <ul className="hidden lg:flex items-center space-x-4 font-medium">
             {links.map((link) => (
-              // <li key={link.name} className="relative group">
-              //   <a
-              //     href={link.href}
-              //     onClick={handleLinkClick}
-              //     className="text-white hover:text-white mx-3 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
-              //   >
-              //     {link.name}
-              //   </a>
-              // </li>
-
               <li key={link.name} className="relative group">
                 <Link
                   to={link.href}
