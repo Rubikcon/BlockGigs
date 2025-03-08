@@ -25,18 +25,21 @@ export default function HowItWorks() {
   const key_features = [
     {
       icons: <IoBriefcase />,
-      heading: "Find Talents",
-      description: "Search and hire skilled freelancers effortlessly.",
+      heading: "Secure Payments",
+      description:
+        "Blockchain escrow ensures funds are safe and released on milestone completion..",
     },
     {
       icons: <WiMoonAltWaningCrescent3 />,
-      heading: "Secure Contracts",
-      description: "Securely make payments and manage contracts.",
+      heading: "Transparent Hiring",
+      description:
+        "Pseudonymous profiles eliminate bias, focusing solely on verified skills and experience..",
     },
     {
       icons: <FaGlobe />,
-      heading: "Get Paid",
-      description: "Track progress and approve completed tasks.",
+      heading: "Global Connectivity",
+      description:
+        "Connect with top tech talents and clients worldwide, breaking through seamless blockchain integration.",
     },
   ];
 

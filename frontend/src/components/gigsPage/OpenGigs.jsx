@@ -64,7 +64,7 @@ const OpenGigs = () => {
                 </small>
                 <div className="mt-1">
                   <Link
-                    to={"#"}
+                    to={"/gig-detail"}
                     className="text-blue-600 text-xs md:text-sm font-semibold"
                   >
                     View Job Details

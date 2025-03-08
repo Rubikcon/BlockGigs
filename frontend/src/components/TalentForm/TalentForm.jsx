@@ -1,9 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
+import Select from "react-select";
 
 const TalentForm = () => {
   const navigate = useNavigate();
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,6 +15,17 @@ const TalentForm = () => {
 
   const handleSkip = () => {
     navigate("/TalentDashboard"); // Navigate when the user skips the form
+  };
+
+  const hangleChange = (code) => {
+    setSelectedLanguages(
+      (prev) =>
+        prev.includes(code)
+          ? prev.filter((lang) => lang !== code)
+          : // Remove if already selected
+            [...prev, code]
+      // Add if not selected
+    );
   };
 
   const timeZones = [
@@ -59,27 +73,27 @@ const TalentForm = () => {
   ];
 
   const programmingLanguages = [
-    { code: "JS", name: "JavaScript" },
-    { code: "PY", name: "Python" },
-    { code: "JAVA", name: "Java" },
-    { code: "C", name: "C" },
-    { code: "CPP", name: "C++" },
-    { code: "CS", name: "C#" },
-    { code: "RB", name: "Ruby" },
-    { code: "PHP", name: "PHP" },
-    { code: "TS", name: "TypeScript" },
-    { code: "SWIFT", name: "Swift" },
-    { code: "GO", name: "Go" },
-    { code: "R", name: "R" },
-    { code: "KOT", name: "Kotlin" },
-    { code: "DART", name: "Dart" },
-    { code: "SCALA", name: "Scala" },
-    { code: "PERL", name: "Perl" },
-    { code: "LUA", name: "Lua" },
-    { code: "HASKELL", name: "Haskell" },
-    { code: "RUST", name: "Rust" },
-    { code: "SQL", name: "SQL" },
-    { code: "SHELL", name: "Shell Scripting" },
+    { value: "JS", label: "JavaScript" },
+    { value: "PY", label: "Python" },
+    { value: "JAVA", label: "Java" },
+    { value: "C", label: "C" },
+    { value: "CPP", label: "C++" },
+    { value: "CS", label: "C#" },
+    { value: "RB", label: "Ruby" },
+    { value: "PHP", label: "PHP" },
+    { value: "TS", label: "TypeScript" },
+    { value: "SWIFT", label: "Swift" },
+    { value: "GO", label: "Go" },
+    { value: "R", label: "R" },
+    { value: "KOT", label: "Kotlin" },
+    { value: "DART", label: "Dart" },
+    { value: "SCALA", label: "Scala" },
+    { value: "PERL", label: "Perl" },
+    { value: "LUA", label: "Lua" },
+    { value: "HASKELL", label: "Haskell" },
+    { value: "RUST", label: "Rust" },
+    { value: "SQL", label: "SQL" },
+    { value: "SHELL", label: "Shell Scripting" },
   ];
 
   return (
@@ -200,7 +214,7 @@ const TalentForm = () => {
                     ))}
                   </select>
                 </div>
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
                   <label
                     className="text-sm font-medium text-gray-800"
                     htmlFor="language"
@@ -220,6 +234,18 @@ const TalentForm = () => {
                       </option>
                     ))}
                   </select>
+                </div> */}
+
+                <div className="flex flex-col">
+                  <label className="text-sm font-medium text-gray-800">
+                    Proficient Languages
+                  </label>
+
+                  <Select
+                    isMulti
+                    options={programmingLanguages}
+                    className="w-full"
+                  />
                 </div>
               </div>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-// import { IoChevronDownSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { IoChevronDownSharp } from "react-icons/io5";
+import { useNavigate, Link } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
 import {
   FaTimes,
@@ -15,14 +15,36 @@ export default function Navigation() {
   const [isLoading, setIsLoading] = useState(false);
   const modalRef = useRef();
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+
+  // ===================================
+
+  const getUserRole = () => {
+    return localStorage.getItem("userRole");
+    // Retrieve role from localStorage
+  };
+
+  useEffect(() => {
+    setRole(getUserRole());
+  }, []);
+
+  // ===================================
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Dashboard", href: "/TalentDashboard" },
-    { name: "Gigs", href: "/gigs" },
+
+    {
+      name: "Dashboard",
+      href:
+        role === "client"
+          ? "/client-dashboard"
+          : role === "talent"
+          ? "/talent-dashboard"
+          : "/signin", // Redirect to login/signup if not signed in
+    },
     { name: "Gigs", href: "/gigs-page" },
-    { name: "Browse Talents", href: "/talents" },
-    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Browse Talents", href: "/browse-talent" },
+    { name: "Leaderboard", href: "/leader-board" },
   ];
 
   const handleLinkClick = () => {
@@ -92,13 +114,13 @@ export default function Navigation() {
           <ul className="hidden lg:flex items-center space-x-4 font-medium">
             {links.map((link) => (
               <li key={link.name} className="relative group">
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   onClick={handleLinkClick}
                   className="text-white hover:text-white mx-3 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
             <div className="ml-5">
@@ -125,7 +147,7 @@ export default function Navigation() {
         {isMenuOpen && (
           <div
             ref={modalRef}
-            className="fixed -ml-4 inset-0 w-screen h-screen bg-opacity-80 flex justify-center items-center z-50"
+            className="fixed mx-auto inset-0 w-full  h-screen bg-opacity-80 flex justify-center items-center z-50"
             style={{
               backgroundImage: 'url("/images/hero_banner.png")',
             }}
@@ -151,13 +173,13 @@ export default function Navigation() {
               <ul className="flex flex-col items-center justify-center space-y-6 w-full">
                 {links.map((link) => (
                   <li key={link.name} className="py-5 w-full text-center">
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       onClick={() => setIsMenuOpen(false)}
                       className="mt-20 hover:text-gray-700 font-bold hover:border hover:rounded-md hover:p-4 transition text-white text-lg cursor-pointer"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
                 <div className="mt-10">

@@ -10,9 +10,9 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
-import GigsPage from "./components/gigsPage/GigsPage";
 import MainLayout from "./MainLayout";
-
+import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
+import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
 //
 
 import React from "react";
@@ -29,6 +29,8 @@ import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
 import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
+import GigsPage from "./components/gigsPage/GigsPage";
+import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 
 import ButtonComponent from "../src/components/button";
 
@@ -38,6 +40,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
+        <Route path="/gig-detail" element={<GigDetailPage />} />
+        <Route path="/leader-board" element={<LeaderBoardPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/emailcode" element={<Emailcode />} />
@@ -51,11 +55,13 @@ const App = () => {
         <Route path="/ClientDashboard" element={<ClientDashboard />} />
         {/* <Route path="/TalentDashboard" element={<TalentDashboard />} /> */}
         <Route path="/button" element={<ButtonComponent />} />
+        <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*  Navigation on for the dashboard*/}
         <Route path="/" element={<MainLayout />}>
           {/* <Route path="signup" element={<Signup />} /> */}
           <Route path="/TalentDashboard" element={<Dashboard />} />
+
           <Route path="chat" element={<Chat />} />
           <Route path="discover" element={<Discover />} />
           <Route path="gigs" element={<Gigs />} />

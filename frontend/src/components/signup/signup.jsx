@@ -44,63 +44,133 @@ const Signup = () => {
     navigate("/");
   };
 
+  // const connectMetamask = async () => {
+  //   let account;
+  //   // let balance;
+  //   ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
+  //     account = accounts[0];
+  //     console.log("Address", account);
+  //     setAddr(account);
+
+  //     ethereum
+  //       .request({
+  //         method: "eth_getBalance",
+  //         params: [account, "latest"],
+  //       })
+  //       .then((result) => {
+  //         console.log(result);
+  //         let wei = parseInt(result, 16);
+  //         let bal = wei / 10 ** 18;
+  //         setBalance(bal);
+
+  //         console.log("balance:", bal);
+  //         navigate("");
+  //       });
+
+  //     // Store address in localStorage (or sessionStorage)
+  //     localStorage.setItem("walletAddress", account);
+  //     // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
+  //     // });
+
+  //     // Uncomment this to sign message
+
+  //     // Signup and sign in message
+  //     const message = "Sign this message to verify your wallet.";
+
+  //     ethereum
+  //       .request({
+  //         method: "personal_sign",
+  //         params: [message, account],
+  //       })
+  //       .then((signa) => {
+  //         // console.log(result);
+  //         // let signature;
+  //         // let bal = wei / 10 ** 18;
+  //         setSignature(signa);
+  //         setSignature(signa);
+  //         console.log("signature", signa);
+  //         // console.log("balance:", bal);
+  //         navigate("/Persona");
+  //       });
+
+  //     // console.log("Signature:", signature);
+
+  //     // sessionStorage.setItem("walletAddress", account);
+
+  //     sessionStorage.setItem("walletSignature", signature);
+  //   });
+  //   const networkId = await ethereum.request({ method: "net_version" });
+  //   console.log("Network ID:", networkId);
+  // };
+
   const connectMetamask = async () => {
-    let account;
-    // let balance;
-    ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
-      account = accounts[0];
-      console.log("Address", account);
+    if (!window.ethereum) {
+      alert("MetaMask is not installed!");
+      return;
+    }
+
+    try {
+      // ✅ Request account access
+
+      const accounts = await Promise.race([
+        window.ethereum.request({ method: "eth_requestAccounts" }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timeout")), 10000)
+        ),
+      ]);
+
+      console.log("Accounts:", accounts); // Debugging
+
+      if (!accounts || accounts.length === 0) {
+        alert("No account connected. Please unlock MetaMask.");
+        return;
+      }
+
+      const account = accounts[0];
+      console.log("Address:", account);
       setAddr(account);
 
-      ethereum
-        .request({
-          method: "eth_getBalance",
-          params: [account, "latest"],
-        })
-        .then((result) => {
-          console.log(result);
-          let wei = parseInt(result, 16);
-          let bal = wei / 10 ** 18;
-          setBalance(bal);
-
-          console.log("balance:", bal);
-          navigate("");
-        });
-
-      // Store address in localStorage (or sessionStorage)
+      // ✅ Store wallet address in localStorage
       localStorage.setItem("walletAddress", account);
-      // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
-      // });
 
-      // Uncomment this to sign message
+      // ✅ Get account balance
+      const balanceHex = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [account, "latest"],
+      });
 
-      // Signup and sign in message
+      const balance = parseInt(balanceHex, 16) / 10 ** 18;
+      console.log("Balance:", balance);
+      setBalance(balance);
+
+      // ✅ Store wallet Balance in localStorage
+      localStorage.setItem("walletBalance", balance);
+
+      // ✅ Sign message for authentication
       const message = "Sign this message to verify your wallet.";
+      const signature = await window.ethereum.request({
+        method: "personal_sign",
+        params: [message, account],
+      });
 
-      ethereum
-        .request({
-          method: "personal_sign",
-          params: [message, account],
-        })
-        .then((signa) => {
-          // console.log(result);
-          // let signature;
-          // let bal = wei / 10 ** 18;
-          setSignature(signa);
-          setSignature(signa);
-          console.log("signature", signa);
-          // console.log("balance:", bal);
-          navigate("/Persona");
-        });
+      console.log("Signature:", signature);
+      setSignature(signature);
 
-      // console.log("Signature:", signature);
-
-      // sessionStorage.setItem("walletAddress", account);
-
+      // ✅ Store signature in sessionStorage
       sessionStorage.setItem("walletSignature", signature);
-    });
-    const networkId = await ethereum.request({ method: "net_version" });
-    console.log("Network ID:", networkId);
+
+      // ✅ Get network ID
+      const networkId = await window.ethereum.request({
+        method: "net_version",
+      });
+      console.log("Network ID:", networkId);
+
+      // ✅ Navigate to Persona page
+      navigate("/Persona");
+    } catch (error) {
+      console.error("Error connecting MetaMask:", error);
+      alert("Failed to connect MetaMask. Check console for details.");
+    }
   };
 
   return (
@@ -198,12 +268,12 @@ const Signup = () => {
                 Metamask
               </span>
             </button>
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={celo} alt="celo logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Celo
               </span>
-            </button>
+            </button> */}
             <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">

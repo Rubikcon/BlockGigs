@@ -123,7 +123,7 @@ const TopTechTalent = () => {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <button className="bg-[#2F66F6] text-white py-2 px-20 rounded-md">
+        <button className="bg-[#2F66F6] text-white py-2 px-20 rounded-md cursor-pointer">
           Show More
         </button>
       </div>
