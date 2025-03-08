@@ -31,6 +31,7 @@ import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
+import MainDashboard from "./Pages/MainDashboard";
 
 import ButtonComponent from "../src/components/button";
 
@@ -38,7 +39,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        {/* Navigation for the client dashboard */}
+        <Route path="/" element={<MainDashboard />} />
+
+        <Route path="/home" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
         <Route path="/gig-detail" element={<GigDetailPage />} />
         <Route path="/leader-board" element={<LeaderBoardPage />} />
@@ -57,11 +61,19 @@ const App = () => {
         <Route path="/button" element={<ButtonComponent />} />
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
-        {/*  Navigation on for the dashboard*/}
-        <Route path="/" element={<MainLayout />}>
-          {/* <Route path="signup" element={<Signup />} /> */}
+        {/*  Navigation on for the talent dashboard*/}
+        {/* <Route path="tale" element={<MainLayout />}>
           <Route path="/TalentDashboard" element={<Dashboard />} />
-
+          <Route path="chat" element={<Chat />} />
+          <Route path="discover" element={<Discover />} />
+          <Route path="gigs" element={<Gigs />} />
+          <Route path="offer" element={<Offer />} />
+          <Route path="setting" element={<Setting />} />
+          <Route path="wallet" element={<Wallet />} />
+        </Route> */}
+        <Route path="tale" element={<MainLayout />}>
+          <Route path="TalentDashboard" element={<Dashboard />} />{" "}
+          {/* ✅ Fixed */}
           <Route path="chat" element={<Chat />} />
           <Route path="discover" element={<Discover />} />
           <Route path="gigs" element={<Gigs />} />
