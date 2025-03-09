@@ -44,65 +44,6 @@ const Signup = () => {
     navigate("/");
   };
 
-  // const connectMetamask = async () => {
-  //   let account;
-  //   // let balance;
-  //   ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
-  //     account = accounts[0];
-  //     console.log("Address", account);
-  //     setAddr(account);
-
-  //     ethereum
-  //       .request({
-  //         method: "eth_getBalance",
-  //         params: [account, "latest"],
-  //       })
-  //       .then((result) => {
-  //         console.log(result);
-  //         let wei = parseInt(result, 16);
-  //         let bal = wei / 10 ** 18;
-  //         setBalance(bal);
-
-  //         console.log("balance:", bal);
-  //         navigate("");
-  //       });
-
-  //     // Store address in localStorage (or sessionStorage)
-  //     localStorage.setItem("walletAddress", account);
-  //     // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
-  //     // });
-
-  //     // Uncomment this to sign message
-
-  //     // Signup and sign in message
-  //     const message = "Sign this message to verify your wallet.";
-
-  //     ethereum
-  //       .request({
-  //         method: "personal_sign",
-  //         params: [message, account],
-  //       })
-  //       .then((signa) => {
-  //         // console.log(result);
-  //         // let signature;
-  //         // let bal = wei / 10 ** 18;
-  //         setSignature(signa);
-  //         setSignature(signa);
-  //         console.log("signature", signa);
-  //         // console.log("balance:", bal);
-  //         navigate("/Persona");
-  //       });
-
-  //     // console.log("Signature:", signature);
-
-  //     // sessionStorage.setItem("walletAddress", account);
-
-  //     sessionStorage.setItem("walletSignature", signature);
-  //   });
-  //   const networkId = await ethereum.request({ method: "net_version" });
-  //   console.log("Network ID:", networkId);
-  // };
-
   const connectMetamask = async () => {
     if (!window.ethereum) {
       alert("MetaMask is not installed!");
