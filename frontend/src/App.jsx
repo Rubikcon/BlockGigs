@@ -34,6 +34,12 @@ import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 
 import ButtonComponent from "../src/components/button";
 
+// ##############################//
+//        Testing Purpose       //
+// ##############################//
+
+import Home from "./components/SmartContractTestComponents/pages/Home";
+
 const App = () => {
   return (
     <Router>
@@ -69,6 +75,9 @@ const App = () => {
           <Route path="setting" element={<Setting />} />
           <Route path="wallet" element={<Wallet />} />
         </Route>
+
+        {/* Testing purpose for smart contract integration */}
+        <Route path="/smart" element={<Home />} />
       </Routes>
     </Router>
   );
