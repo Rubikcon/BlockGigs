@@ -1,24 +1,10 @@
-// import mongoose from "mongoose";
-
-// const userSchema = new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   password: String,
-//   wallet_address: String,
-//   // created_at: Date.now(),
-// });
-
-// const User = mongoose.model("User", userSchema);
-
-// export default User;
-
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    // password: { type: String, required: true },
     wallet_address: { type: String, unique: true },
     otp: { type: Number }, // Store OTP
     otpExpiresAt: { type: Date }, // OTP expiration time

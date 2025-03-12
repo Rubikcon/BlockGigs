@@ -65,6 +65,7 @@ const sendOTP = async (req, res) => {
 
     const otp = generateOTP();
     user.otp = otp;
+    user.otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000); //expires in 10 minutes
     await user.save();
 
     // Send OTP using the utility function
@@ -94,12 +95,18 @@ const verifyOTP = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    if (user.otp !== parseInt(otp)) {
+    if (!user.otp || user.otp !== parseInt(otp)) {
       return res.status(401).send("Invalid OTP!");
+    }
+
+    // check if OTP is expired
+    if (user.otpExpiresAt && user.otpExpiresAt < new Date()) {
+      return res.status(400).send("OTP expired. please request a new one");
     }
 
     user.isVerified = true;
     user.otp = null; // Clear OTP after verification
+    user.otpExpiresAt = null;
     await user.save();
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
