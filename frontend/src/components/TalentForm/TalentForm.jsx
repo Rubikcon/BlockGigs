@@ -10,11 +10,11 @@ const TalentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/TalentDashboard");
+    navigate("/talent/dashboard");
   };
 
   const handleSkip = () => {
-    navigate("/TalentDashboard"); // Navigate when the user skips the form
+    navigate("/talent/dashboard"); // Navigate when the user skips the form
   };
 
   const hangleChange = (code) => {

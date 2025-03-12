@@ -34,7 +34,7 @@ const Signup = () => {
   const navigate = useNavigate(); //for page navigation
 
   const handleSubmit = (e) => {
-    console.log(CONTRACT_ABI);
+    // console.log(CONTRACT_ABI);
     e.preventDefault(); //This will stop the form from submitting to itself
 
     //Checking if the email field is empty
@@ -49,12 +49,14 @@ const Signup = () => {
       alert("Please put a valid email address!");
       return;
     }
+    localStorage.setItem("email", email);
 
     //If email is valid, form can be sumbitted
     alert("Form submitted successfully!");
 
     // Navigate to verification page and pass the email as state
-    navigate("/emailcode", { state: { email } });
+    // navigate("/emailcode", { state: { email } });
+    navigate("/Persona", { state: { email } });
   };
 
   const handleGotoHome = () => {

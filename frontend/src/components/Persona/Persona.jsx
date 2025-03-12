@@ -22,7 +22,15 @@ const Persona = () => {
   // Handle navigation within pages
   const handleNext = () => {
     if (selectedPersona) {
-      navigate(`/${selectedPersona}form`); // Dynamically navigate to the selected page
+      navigate(`/${selectedPersona}form`, {
+        replace: true, // Use replace to prevent back button issues
+        state: {
+          account,
+          selectedPersona,
+          // signature,
+          // balance,
+        },
+      }); // Dynamically navigate to the selected page
     }
   };
 
