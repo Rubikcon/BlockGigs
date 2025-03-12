@@ -3,6 +3,8 @@ import DB from "./config/DB.js";
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import otpRoutes from "./routes/otpRoutes.js";
+
 import cors from "cors";
 
 const app = express();
@@ -19,6 +21,7 @@ DB();
 app.use("/api/auth", authRoutes);
 app.use("/api/job", jobRoutes);
 app.use("/api/protected", protectedRoutes);
+app.use("/api/otp", otpRoutes);
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
