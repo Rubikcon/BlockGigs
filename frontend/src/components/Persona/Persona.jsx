@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import client from "../../assets/client.png";
 import talent from "../../assets/talent.png";
@@ -8,7 +8,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 const Persona = () => {
   const navigate = useNavigate();
   const [selectedPersona, setSelectedPersona] = useState(null);
-
+  const location = useLocation();
+  const { account, signature, balance } = location.state || {};
   // Handle selection for the user
   const handleSelect = (persona) => {
     setSelectedPersona(persona);
