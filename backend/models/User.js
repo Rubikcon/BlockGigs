@@ -3,7 +3,13 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    work_name: { type: String },
+    min_pay: Number,
+    time_zone: String,
+    about: String,
+    languages: [],
+    skills: [],
+    // email: { type: String, required: true, unique: true },
     // password: { type: String, required: true },
     wallet_address: { type: String, unique: true },
     otp: { type: Number }, // Store OTP
