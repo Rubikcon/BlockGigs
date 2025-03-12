@@ -174,95 +174,50 @@ const Signup = () => {
       const account = accounts[0];
       setAddr(account);
 
-      // Create provider and signer
-      const provider = new BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      setSigner(signer);
+      // // Create provider and signer
+      // const provider = new BrowserProvider(window.ethereum);
+      // const signer = await provider.getSigner();
+      // setSigner(signer);
 
       // Get balance and sign message in parallel to save time
-      const [balanceHex, signature] = await Promise.all([
-        window.ethereum.request({
-          method: "eth_getBalance",
-          params: [account, "latest"],
-        }),
-        signer.signMessage(
-          `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`
-        ),
-      ]);
+      // const [
+      // balanceHex,
+      // signature
+      // ] = await Promise.all([
+      // window.ethereum.request({
+      // method: "eth_getBalance",
+      // params: [account, "latest"],
+      // }),
+      //   signer.signMessage(
+      //     `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`
+      //   ),
+      // ]);
 
       // Convert balance
-      const balance = parseInt(balanceHex, 16) / 10 ** 18;
+      // const balance = parseInt(balanceHex, 16) / 10 ** 18;
 
-      // Update states
-      setBalance(balance);
-      setSignature(signature);
+      // // Update states
+      // setBalance(balance);
+      // setSignature(signature);
 
-      // Store essential data only
+      // // Store essential data only
       localStorage.setItem("userAddress", account);
-      localStorage.setItem("walletSignature", signature);
+      // localStorage.setItem("walletSignature", signature);
 
       console.log("Wallet connected successfully");
 
-      // Immediate navigation
+      // // Immediate navigation
       navigate("/Persona", {
         replace: true, // Use replace to prevent back button issues
         state: {
           account,
-          signature,
-          balance,
+          // signature,
+          // balance,
         },
       });
     } catch (error) {
       console.error("MetaMask error:", error);
       setError(error.message || "Failed to connect wallet");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const registerUser = async (signer, addr) => {
-    if (!signer || !addr) {
-      setError("Missing signer or address");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError(null);
-
-      const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-
-      // Prepare user data
-      const userData = {
-        name: addr.slice(0, 6) + "...", // Use shortened address as name initially
-        role: roles, // Using the role from state
-      };
-
-      let tx;
-
-      if (roles === "client") {
-        tx = await contract.registerClient(userData.name, userData.role);
-      } else if (roles === "talent") {
-        tx = await contract.registerFreelancer(userData.name, userData.role);
-      } else {
-        throw new Error("Invalid user role selected");
-      }
-
-      // Wait for transaction confirmation
-      const receipt = await tx.wait();
-      console.log("Transaction confirmed:", receipt);
-
-      // Navigate to dashboard on success
-      navigate("/dashboard", {
-        state: {
-          address: addr,
-          role: roles,
-        },
-      });
-    } catch (error) {
-      console.error("Registration failed:", error);
-      setError(error.message); // Fixed from err to error
-      throw error; // Propagate error to connectMetamask
     } finally {
       setLoading(false);
     }

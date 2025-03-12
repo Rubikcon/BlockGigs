@@ -9,7 +9,10 @@ const Persona = () => {
   const navigate = useNavigate();
   const [selectedPersona, setSelectedPersona] = useState(null);
   const location = useLocation();
-  const { account, signature, balance } = location.state || {};
+  const {
+    account,
+    //  signature, balance
+  } = location.state || {};
   // Handle selection for the user
   const handleSelect = (persona) => {
     setSelectedPersona(persona);
