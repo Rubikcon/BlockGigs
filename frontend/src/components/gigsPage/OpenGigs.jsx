@@ -1,4 +1,4 @@
-// import { CiClock2 } from "react-icons/ci";
+import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 

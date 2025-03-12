@@ -15,7 +15,7 @@ import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
 //
 
-import React from "react";
+// import React from "react";
 // import Signup from "./components/signup/Signup";\]
 import Signup from "./components/signup/signup";
 import Signin from "./components/signin/signin";
@@ -28,11 +28,10 @@ import Persona from "./components/Persona/Persona";
 import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
 import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
-import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
-
 import ButtonComponent from "../src/components/button";
+import ClientLayout from "./ClientLayout";
 
 const App = () => {
   return (
@@ -52,16 +51,17 @@ const App = () => {
         <Route path="/Persona" element={<Persona />} />
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
-        <Route path="/ClientDashboard" element={<ClientDashboard />} />
-        {/* <Route path="/TalentDashboard" element={<TalentDashboard />} /> */}
         <Route path="/button" element={<ButtonComponent />} />
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
+        {/*************Client*****************/}
+        <Route path="/client" element={<ClientLayout />}>
+          <Route path="/client" element={<ClientDashboard />} />
+        </Route>
+
         {/*  Navigation on for the dashboard*/}
         <Route path="/" element={<MainLayout />}>
-          {/* <Route path="signup" element={<Signup />} /> */}
           <Route path="/TalentDashboard" element={<Dashboard />} />
-
           <Route path="chat" element={<Chat />} />
           <Route path="discover" element={<Discover />} />
           <Route path="gigs" element={<Gigs />} />

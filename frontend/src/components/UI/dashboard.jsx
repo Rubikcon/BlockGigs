@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import OfferModal from "../modals/OfferModal";
+import AcceptOffer from "../modals/AcceptOffer";
 import back from "../../assets/arrow-back.png";
 import bat from "../../assets/bat.png";
 
@@ -96,16 +97,58 @@ const offer = [
   {
     title: "Product Designer at Crolz",
     name: "Crolz Tech",
+    officer: "Andrea Simon",
     duration: "2 days ago",
+    date: "31st Oct 2024",
     image: dp,
     status: "Pending",
+    detail:
+      "We are seeking a creative and detail-oriented Product Designer intern to join the CryptoKittes team. In this role, you will collaborate with our design and development teams to help create engaging and.",
+    milestone: [
+      {
+        title: "Milestone 1",
+        amt: 200,
+        job: "Branding/Designing of logo for web design",
+      },
+      {
+        title: "Milestone 2",
+        amt: 300,
+        job: "First set of design with the main features",
+      },
+      {
+        title: "Milestone 3",
+        amt: 500,
+        job: "Full web design to be passed on to Developer",
+      },
+    ],
   },
   {
     title: "Dex website",
     name: "Spratz Brand",
+    officer: "Spartz Brand",
     duration: "2 days ago",
+    date: "23rd Feb, 2025",
     image: dp,
     status: "Pending",
+    detail:
+      "We are seeking a creative and detail-oriented brand ambassador intern to join the CryptoKittes team. In this role, you will collaborate with our design and development teams to help create engaging and vibrant brand.",
+    milestone: [
+      {
+        title: "Milestone 1",
+        amt: 500,
+        job: "Branding/Designing of logo for web design",
+      },
+      {
+        title: "Milestone 2",
+        amt: 320,
+        job: "First set of design with the main features",
+      },
+      {
+        title: "Milestone 3",
+        amt: 560,
+        job: "Full web design to be passed on to Developer",
+      },
+    ],
   },
 ];
 
@@ -219,17 +262,28 @@ const recommend = [
 // };
 
 function Dashboard() {
-  // const [myOffer, setMyOffer] = useState({});
+  const [OfferDetail, setMyOfferDetail] = useState({});
   const [offerModal, setOfferModal] = useState(false);
+  const [acceptOfferModal, setAcceptOfferModal] = useState(false);
   const [job, setJob] = useState("");
 
   const myOfferHandler = (value) => {
     console.log(value, "my offer");
+    setMyOfferDetail(value);
     setOfferModal(true);
   };
 
   const myOfferCloseHnadler = () => {
     setOfferModal(false);
+  };
+
+  const acceptHandler = () => {
+    setOfferModal(false);
+    setAcceptOfferModal(true);
+  };
+
+  const acceptCloseHAndler = () => {
+    setAcceptOfferModal(false);
   };
 
   const renderActivity =
@@ -306,7 +360,10 @@ function Dashboard() {
       <div className="text-[12px] mb-3 w-[70%]">{item.description}</div>
       <div className="flex justify-between">
         <div className="text-blue-600 text-[12px] mb-2">${item.price}</div>
-        <button className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[11.38px] w-[104px] h-[31px] mb-2">
+        <button
+          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[11.38px] w-[104px] h-[31px] mb-2"
+          // onClick={() => }
+        >
           See Details
         </button>
       </div>
@@ -326,7 +383,7 @@ function Dashboard() {
                       Welcome back, Let's <p className="text-green-400">Work</p>
                     </span>
                   </div>
-                  <div className="col-span-1">
+                  <div className="col-span-1 mb-2">
                     <div className="flex bg-white items-center justify-center rounded-[8px] py-1">
                       <img
                         src={search}
@@ -349,7 +406,7 @@ function Dashboard() {
                           <img src={dp} alt="" className="h-6 w-6" />
                         </div>
                         <div className="">
-                          <p className="-m-2">Glory Dseign</p>
+                          <p className="-m-2">Glory Design</p>
                           <span className="text-[10px] top-1 m-0">
                             Product Designer
                           </span>
@@ -572,7 +629,17 @@ function Dashboard() {
         )}
       </div>
 
-      <OfferModal visible={offerModal} onClose={myOfferCloseHnadler} />
+      <OfferModal
+        visible={offerModal}
+        item={OfferDetail}
+        onClose={myOfferCloseHnadler}
+        accept={acceptHandler}
+      />
+      <AcceptOffer
+        visible={acceptOfferModal}
+        item={OfferDetail}
+        onClose={acceptCloseHAndler}
+      />
     </div>
   );
 }

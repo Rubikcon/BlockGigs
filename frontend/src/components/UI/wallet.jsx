@@ -1,4 +1,4 @@
-// import React from 'react'
+import React, { useState } from "react";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import down from "../../assets/down.png";
@@ -9,11 +9,22 @@ import crypto2 from "../../assets/crypto2.png";
 import arm from "../../assets/arm.png";
 import logo from "../../assets/logo.png";
 import filter from "../../assets/filter.png";
+import WalletModal from "../modals/WalletModal";
+import WalletInvoice from "../modals/WalletInvoice";
+import WalletConnect from "../modals/WalletConnect";
 
 const wallet = [
   {
     amount: "1000 USDc",
     client: "Samuel Arinze",
+    clientID: "0xcfg3tf...E5e",
+    talent: "Glory Design | Product Designer",
+    talentId: "0xfr45effr...E45",
+    job: "Website for DEFI brand",
+    milestone: 1,
+    totalMilestone: 3,
+    transactionID: "0x345reft78wasE32DCfhgyt78000ew0210fhgnt0rty098ry7hww78",
+    time: "Jan 11th, 2025 | 15:12:34",
     date: "2 mins ago",
     invoice: "view invoice",
     info: "View Job Details",
@@ -23,6 +34,14 @@ const wallet = [
   {
     amount: "500 XLM",
     client: "Jason Snow",
+    clientID: "0xbgfr78u...E5e",
+    talent: "Product Branding",
+    talentId: "0xfr45effr...E45",
+    job: "Product branding",
+    milestone: 2,
+    totalMilestone: 3,
+    transactionID: "0x345reft78wasE32DCfhgyt78000ew0210fhgnt0rty098ry7hww78",
+    time: "Feb 16th, 2025 | 12:10:34",
     date: "20 hrs ago",
     invoice: "view invoice",
     info: "View Job Details",
@@ -32,6 +51,14 @@ const wallet = [
   {
     amount: "2000 USDt",
     client: "Andrea Stiles",
+    clientID: "0xcfg3tf...E5e",
+    talent: "Web developer | Product Designer",
+    talentId: "0xth45rdes89...E45",
+    job: "Website for NFT brand",
+    milestone: 2,
+    totalMilestone: 4,
+    transactionID: "0x345rfhryt87756ti9fhgyt78000ew0210fhgnt0rty098ry7hww78",
+    time: "Mar 11th, 2025 | 14:45:34",
     date: "20 hrs ago",
     invoice: "view invoice",
     info: "View Job Details",
@@ -41,6 +68,14 @@ const wallet = [
   {
     amount: "1000 USDt",
     client: "Apex Tech",
+    clientID: "0xduyr58uyt7...E5e",
+    talent: "Apex Design | Product Designer",
+    talentId: "0xfr45effr...E45",
+    job: "Website for DEFI brand",
+    milestone: 3,
+    totalMilestone: 3,
+    transactionID: "0x345reft78wasDOMRectReadOnlyH00ew0210fhgnt0rty098ry7hww78",
+    time: "Apr 2nd, 2025 | 02:12:34",
     date: "22nd Feb 2025",
     invoice: "view invoice",
     info: "View Job Details",
@@ -50,6 +85,14 @@ const wallet = [
   {
     amount: "3500 XLM",
     client: "Horizon",
+    clientID: "0xryhe78f...E5e",
+    talent: "Product Brand Designer",
+    talentId: "0xfr45effr...E45",
+    job: "Product Branding",
+    milestone: 2,
+    totalMilestone: 4,
+    transactionID: "0x345reft78wasE32DCfhgyt78000ew0210fhgnt0rty098ry7hww78",
+    time: "Dec 13th, 2024 | 1:12:34",
     date: "22nd Feb 2025",
     invoice: "view invoice",
     info: "View Job Details",
@@ -59,6 +102,14 @@ const wallet = [
   {
     amount: "1000 USDc",
     client: "Nenye Gold",
+    clientID: "0x0yiut09jkgjhf...E5e",
+    talent: "Product Designer",
+    talentId: "0xfr45effr...E45",
+    job: "Website for DEFI brand",
+    milestone: 3,
+    totalMilestone: 3,
+    transactionID: "0x345reft758uty76rht67hf857000ew0210fhgnt0rty098ry7hww78",
+    time: "Jan 21st, 2025 | 15:12:34",
     date: "22nd Feb 2025",
     invoice: "view invoice",
     info: "View Job Details",
@@ -68,6 +119,14 @@ const wallet = [
   {
     amount: "600 USDc",
     client: "Alex Global",
+    clientID: "0xcfg3tf...E5e",
+    talent: "Glory Design | Product Designer",
+    talentId: "0xfr45effr...E45",
+    job: "Website for DEFI brand",
+    milestone: 1,
+    totalMilestone: 3,
+    transactionID: "0x345reft78wasE32DCfhgyt78000ew0210fhgnt0rty098ry7hww78",
+    time: "Jan 11th, 2025 | 15:12:34",
     date: "22nd Feb 2025",
     invoice: "view invoice",
     info: "View Job Details",
@@ -77,6 +136,23 @@ const wallet = [
 ];
 
 function Wallet() {
+  const [openWallet, setOpenWallet] = useState(false);
+  const [openWalletInvoice, setOpenWalletInvoice] = useState(false);
+  const [openConnect, setOpenConnect] = useState(false);
+  const [connect, setConnect] = useState(null);
+  const [walletDetail, setWalletDetail] = useState({});
+
+  const WalletInvoiceHandler = (value) => {
+    setWalletDetail(value);
+    setOpenWalletInvoice(true);
+  };
+
+  const selectedConnectHandler = (item) => {
+    setOpenWallet(false);
+    setOpenConnect(true);
+    setConnect(item);
+  };
+
   return (
     <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-14 px-6 pb-4 gap-2">
       <div className="row-span-1 grid items-center px-2 mt-2">
@@ -118,7 +194,12 @@ function Wallet() {
             <div className="bg-white rounded flex gap-2 py-1 px-1 items-center">
               <img src={meta} alt="Meta Icon" className="w-4 h-4" />
               <p className="text-[12.5px]">0xfg55ytosis...E15</p>
-              <img src={down} alt="Dropdown Icon" className="w-6 h-6 -mt-1" />
+              <img
+                src={down}
+                alt="Dropdown Icon"
+                className="w-6 h-6 -mt-1 cursor-pointer"
+                onClick={() => setOpenWallet(true)}
+              />
             </div>
             <p>Usd Balance</p>
           </div>
@@ -187,7 +268,7 @@ function Wallet() {
           <span className="text-purple-800">Invoice</span>
           <span className="text-purple-800">Job Information</span>
         </div>
-        <div className="overflow-auto mt-3">
+        <div className="overflow-auto mt-3 px-4">
           {wallet.map((item, index) => (
             <div
               key={index}
@@ -208,7 +289,12 @@ function Wallet() {
               </div>
               <span className="text-[15px]">{item.client}</span>
               <span className="text-[15px]">{item.date}</span>
-              <span className="text-[15px] text-blue-500">{item.invoice}</span>
+              <span
+                className="text-[15px] text-blue-500 cursor-pointer"
+                onClick={() => WalletInvoiceHandler(item)}
+              >
+                {item.invoice}
+              </span>
               <span className="text-[15px] text-blue-500 underline">
                 {item.info}
               </span>
@@ -216,6 +302,21 @@ function Wallet() {
           ))}
         </div>
       </div>
+      <WalletModal
+        visible={openWallet}
+        onClose={() => setOpenWallet(false)}
+        onItemsClick={selectedConnectHandler}
+      />
+      <WalletConnect
+        visible={openConnect}
+        onClose={() => setOpenConnect(false)}
+        item={connect}
+      />
+      <WalletInvoice
+        item={walletDetail}
+        visible={openWalletInvoice}
+        onClose={() => setOpenWalletInvoice(false)}
+      />
     </div>
   );
 }

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ClientDashboard = () => {
-    return (
-        <div>ClientDashboard</div>
-    )
-}
+  return <div>ClientDashboardgthtgrh</div>;
+};
 
-export default ClientDashboard
+export default ClientDashboard;

@@ -10,12 +10,11 @@ import setting from "../assets/setting-2.png";
 import logout from "../assets/logout.png";
 import { NavLink } from "react-router-dom";
 
-function Sidebar() {
-  // const navigate = useNavigate();
+function ClientSidebar() {
   return (
     <div className="bg-[#0A0f29] h-[100vh] w-[15vw] grid grid-row-12 text-white justify-center">
       <div className="row-span-2 grid items-center">
-        <NavLink to={"/"}>
+        <NavLink to={"/client"}>
           <div className="flex space-x-4 items-center">
             <img src={logo} alt="" />
             <span
@@ -28,7 +27,7 @@ function Sidebar() {
         </NavLink>
       </div>
       <div className="row-span-9 space-y-4 w-[12vw]">
-        <NavLink to="/TalentDashboard">
+        <NavLink to="/client">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -56,7 +55,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"gigs"} className="cursor-pointer">
+        <NavLink to={"clientGigs"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -127,7 +126,7 @@ function Sidebar() {
           )}
         </NavLink>
       </div>
-      <NavLink to={""} className="cursor-pointer">
+      <NavLink to={"/signin"} className="cursor-pointer">
         <div className="flex space-x-2 items-center">
           <img
             src={logout}
@@ -141,4 +140,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default ClientSidebar;
