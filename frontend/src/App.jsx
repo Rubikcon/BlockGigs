@@ -27,11 +27,11 @@ import ResetPassword from "./components/ResetPassword/ResetPassword";
 import Persona from "./components/Persona/Persona";
 import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
-import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
+// import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import TalentDashboard from "./components/TalentDashboard/TalentDashboard";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
-import MainDashboard from "./Pages/MainDashboard";
+import ClientDashboard from "./Pages/ClientDashboard";
 
 import ButtonComponent from "../src/components/button";
 
@@ -40,9 +40,9 @@ const App = () => {
     <Router>
       <Routes>
         {/* Navigation for the client dashboard */}
-        <Route path="/" element={<MainDashboard />} />
+        <Route path="/client" element={<ClientDashboard />} />
 
-        <Route path="/home" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
         <Route path="/gig-detail" element={<GigDetailPage />} />
         <Route path="/leader-board" element={<LeaderBoardPage />} />
@@ -71,15 +71,15 @@ const App = () => {
           <Route path="setting" element={<Setting />} />
           <Route path="wallet" element={<Wallet />} />
         </Route> */}
-        <Route path="tale" element={<MainLayout />}>
-          <Route path="TalentDashboard" element={<Dashboard />} />{" "}
+        <Route path="talent" element={<MainLayout />}>
+          <Route path="/talent/dashboard" element={<Dashboard />} />{" "}
           {/* ✅ Fixed */}
-          <Route path="chat" element={<Chat />} />
-          <Route path="discover" element={<Discover />} />
-          <Route path="gigs" element={<Gigs />} />
-          <Route path="offer" element={<Offer />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="wallet" element={<Wallet />} />
+          <Route path="/talent/chat" element={<Chat />} />
+          <Route path="/talent/discover" element={<Discover />} />
+          <Route path="/talent/gigs" element={<Gigs />} />
+          <Route path="/talent/offer" element={<Offer />} />
+          <Route path="/talent/setting" element={<Setting />} />
+          <Route path="/talent/wallet" element={<Wallet />} />
         </Route>
       </Routes>
     </Router>
