@@ -238,7 +238,8 @@ const Signup = () => {
       </div>
       <div className="flex flex-col items-center justify-center min-h-screen w-full">
         <div className="w-[320px] h-[550px] lg:w-[422px] lg:h-[615px] rounded-xl bg-[#ffffff] flex flex-col items-center">
-          <form
+          {/* -------------------- EMAIL FORM -------------------------- */}
+          {/* <form
             action="#"
             onSubmit={handleSubmit}
             className="flex flex-col items-center "
@@ -300,17 +301,17 @@ const Signup = () => {
                 </p>
               </div>
             </div>
-          </form>
+          </form> */}
 
-          <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+          {/* <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
             <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
               OR
             </p>
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
-          </div>
+          </div> */}
 
-          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-4">
+          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-50">
             <button
               onClick={connectMetamask}
               disabled={loading}
