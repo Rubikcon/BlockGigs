@@ -28,7 +28,7 @@ function Sidebar() {
         </NavLink>
       </div>
       <div className="row-span-9 space-y-4 w-[12vw]">
-        <NavLink to="/TalentDashboard">
+        <NavLink to="/talent/dashboard">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -42,7 +42,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"discover"} className="cursor-pointer">
+        <NavLink to={"/talent/discover"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -56,7 +56,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"gigs"} className="cursor-pointer">
+        <NavLink to={"/talent/gigs"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -70,7 +70,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"offer"} className="cursor-pointer">
+        <NavLink to={"/talent/offer"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -84,7 +84,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"chat"} className="cursor-pointer">
+        <NavLink to={"/talent/chat"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -98,7 +98,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"wallet"} className="cursor-pointer">
+        <NavLink to={"/talent/wallet"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
@@ -112,7 +112,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"setting"} className="cursor-pointer">
+        <NavLink to={"/talent/setting"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${

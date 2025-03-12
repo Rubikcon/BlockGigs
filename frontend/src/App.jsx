@@ -13,10 +13,6 @@ import LandingPage from "./components/UI/landingpage";
 import MainLayout from "./MainLayout";
 import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
-//
-
-// import React from "react";
-// import Signup from "./components/signup/Signup";\]
 import Signup from "./components/signup/signup";
 import Signin from "./components/signin/signin";
 import Emailcode from "./components/emailCode/emailcode";
@@ -27,10 +23,10 @@ import ResetPassword from "./components/ResetPassword/ResetPassword";
 import Persona from "./components/Persona/Persona";
 import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
-import ClientDashboard from "./components/ClientDashboard/ClientDashboard";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
-import ButtonComponent from "../src/components/button";
+import ClientDashboard from "./Pages/ClientDashboard";
+
 import ClientLayout from "./ClientLayout";
 
 // ##############################//
@@ -38,11 +34,15 @@ import ClientLayout from "./ClientLayout";
 // ##############################//
 
 import Home from "./components/SmartContractTestComponents/pages/Home";
+import ButtonComponent from "../src/components/button";
 
 const App = () => {
   return (
     <Router>
       <Routes>
+        {/* Navigation for the client dashboard */}
+        <Route path="/client" element={<ClientDashboard />} />
+
         <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
         <Route path="/gig-detail" element={<GigDetailPage />} />
@@ -57,27 +57,29 @@ const App = () => {
         <Route path="/Persona" element={<Persona />} />
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
-        <Route path="/button" element={<ButtonComponent />} />
+
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
+        {/* Routes for Client Dashboard */}
         <Route path="/client" element={<ClientLayout />}>
           <Route path="/client" element={<ClientDashboard />} />
         </Route>
 
-        {/*  Navigation on for the dashboard*/}
-        <Route path="/" element={<MainLayout />}>
-          <Route path="/TalentDashboard" element={<Dashboard />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="discover" element={<Discover />} />
-          <Route path="gigs" element={<Gigs />} />
-          <Route path="offer" element={<Offer />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="wallet" element={<Wallet />} />
+        {/* Routes for Talents dashboard */}
+        <Route path="talent" element={<MainLayout />}>
+          <Route path="/talent/dashboard" element={<Dashboard />} />
+          <Route path="/talent/chat" element={<Chat />} />
+          <Route path="/talent/discover" element={<Discover />} />
+          <Route path="/talent/gigs" element={<Gigs />} />
+          <Route path="/talent/offer" element={<Offer />} />
+          <Route path="/talent/setting" element={<Setting />} />
+          <Route path="/talent/wallet" element={<Wallet />} />
         </Route>
 
         {/* Testing purpose for smart contract integration */}
         <Route path="/smart" element={<Home />} />
+        <Route path="/button" element={<ButtonComponent />} />
       </Routes>
     </Router>
   );
