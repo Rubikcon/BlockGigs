@@ -21,7 +21,21 @@ const Signup = () => {
   const [signer, setSigner] = useState(null);
   const [roles, setRoles] = useState("talent");
   const [loading, setLoading] = useState(false);
+  const [walletAccount, setWalletAccount] = useState(null);
   const [walletError, setWalletError] = useState(null);
+  // const [walletError, setWalletError] = useState(null);
+
+  const handleSuccess = (account) => {
+    setWalletAccount(account);
+
+    console.log("Wallet connected:", account);
+  };
+
+  const handleError = (error) => {
+    setWalletError(error);
+
+    console.log("Wallet connection failed:", error);
+  };
 
   // Add loading state to UI
   useEffect(() => {
@@ -349,13 +363,17 @@ const Signup = () => {
             </button> */}
 
             <div>
-              <ConnectWallet />
+              <ConnectWallet onSuccess={handleSuccess} onError={handleError} />
             </div>
           </div>
-
-          {error && (
-            <div className="text-red-500 text-sm mt-2 text-center">{error}</div>
+          {/* Fix this */}
+          {walletError && (
+            <div className="text-red-500 text-sm mt-2 text-center">
+              {walletError}
+            </div>
           )}
+
+          {/* {walletError && <p className="text-red-800">Error: {walletError}</p>} */}
 
           <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">
             <p className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]">
