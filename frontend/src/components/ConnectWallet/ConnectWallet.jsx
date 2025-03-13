@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const wallet_icon = wallet;
 
-const WalletConnect = (onSuccess, onError) => {
+const WalletConnect = ({ onSuccess, onError }) => {
   const navigate = useNavigate();
   const [wallet, setWallet] = useState(null);
   const [account, setAccount] = useState(null);
@@ -63,6 +63,12 @@ const WalletConnect = (onSuccess, onError) => {
           localStorage.setItem("account", userAccount);
           console.log("Account Registered successfully");
 
+          // ✅ Ensure onSuccess is a function before calling it
+
+          if (typeof onSuccess === "function") {
+            onSuccess(userAccount);
+          }
+
           // Call onSuccess prop with account details
 
           onSuccess && onSuccess(userAccount);
@@ -100,8 +106,8 @@ const WalletConnect = (onSuccess, onError) => {
       </button>
 
       <div>
-        <div>
-          <button onClick={connectWallet}>Connect Wallet</button>
+        <div className="my-4">
+          {/* <button onClick={connectWallet}>Connect Wallet</button> */}
           {error && <p className="text-red-800">{error}</p>}
         </div>
       </div>
