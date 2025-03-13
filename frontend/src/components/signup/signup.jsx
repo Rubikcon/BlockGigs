@@ -8,6 +8,8 @@ import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 
+import ConnectWallet from "../ConnectWallet/ConnectWallet";
+
 import CONTRACT_ABI from "../../config/contractABI.json";
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
@@ -337,6 +339,11 @@ const Signup = () => {
                 Wallet connect
               </span>
             </button>
+
+            <div>
+              Hey
+              <ConnectWallet />
+            </div>
           </div>
 
           <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">

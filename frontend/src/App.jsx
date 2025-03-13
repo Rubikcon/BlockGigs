@@ -26,8 +26,8 @@ import ClientForm from "./components/ClientForm/ClientForm";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 import ClientDashboard from "./Pages/ClientDashboard";
-
 import ClientLayout from "./ClientLayout";
+// import WalletConnect from "./components/ConnectWallet/ConnectWallet";
 
 // ##############################//
 //        Testing Purpose       //
@@ -54,6 +54,9 @@ const App = () => {
         <Route path="/Persona" element={<Persona />} />
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
+
+        {/* --------------- ConnectWallet integration ------------------- */}
+        {/* <Route path="/ClientForm" element={<ClientForm />} /> */}
 
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
