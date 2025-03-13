@@ -9,17 +9,71 @@ const WalletConnect = () => {
   const navigate = useNavigate();
   const [wallet, setWallet] = useState(null);
   const [account, setAccount] = useState(null);
+  const [error, setError] = useState("");
+
+  // const connectWallet = async () => {
+  //   const wallets = await onboard.connectWallet();
+  //   if (wallets.length > 0) {
+  //     setWallet(wallets[0]);
+  //     setAccount(wallets[0].accounts[0].address);
+  //   }
+
+  //   if (!account) {
+  //     console.log("Please connect wallet to continue");
+  //   }
+
+  //   localStorage.setItem("account", account);
+  //   navigate("/Persona", { state: { account } });
+
+  //   console.log("Account Registered successfully");
+  // };
+
+  // const connectWallet = async () => {
+  //   const wallets = await onboard.connectWallet();
+
+  //   if (wallets.length > 0) {
+  //     const connectedWallet = wallets[0];
+  //     const userAccount = connectedWallet.accounts[0]?.address;
+
+  //     if (userAccount) {
+  //       setWallet(connectedWallet);
+  //       setAccount(userAccount);
+  //       localStorage.setItem("account", userAccount);
+  //       console.log("Account Registered successfully");
+  //       console.log(userAccount);
+
+  //       // Navigate only when an account is available
+  //       navigate("/Persona", { state: { account: userAccount } });
+  //     }
+  //   } else {
+  //     console.log("Please connect wallet to continue");
+  //   }
+  // };
 
   const connectWallet = async () => {
-    const wallets = await onboard.connectWallet();
-    if (wallets.length > 0) {
-      setWallet(wallets[0]);
-      setAccount(wallets[0].accounts[0].address);
-    }
-    localStorage.setItem("account", account);
-    navigate("/Persona", { state: { account } });
+    try {
+      const wallets = await onboard.connectWallet();
+      if (wallets.length > 0) {
+        const connectedWallet = wallets[0];
+        const userAccount = connectedWallet.accounts[0]?.address;
 
-    console.log("Account Registered successfully");
+        if (userAccount) {
+          setWallet(connectedWallet);
+          setAccount(userAccount);
+          localStorage.setItem("account", userAccount);
+          console.log("Account Registered successfully");
+
+          // Navigate only when an account is available
+
+          navigate("/Persona", { state: { account: userAccount } });
+          return { success: true, account: userAccount };
+        }
+      }
+      throw new Error("Please connect wallet to continue");
+    } catch (err) {
+      setError(err.message);
+      return { success: false, error: err.message };
+    }
   };
 
   const disconnectWallet = async () => {

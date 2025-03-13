@@ -21,7 +21,7 @@ const Signup = () => {
   const [signer, setSigner] = useState(null);
   const [roles, setRoles] = useState("talent");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [walletError, setWalletError] = useState(null);
 
   // Add loading state to UI
   useEffect(() => {
@@ -352,6 +352,10 @@ const Signup = () => {
               <ConnectWallet />
             </div>
           </div>
+
+          {error && (
+            <div className="text-red-500 text-sm mt-2 text-center">{error}</div>
+          )}
 
           <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">
             <p className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]">
