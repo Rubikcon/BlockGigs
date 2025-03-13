@@ -333,15 +333,22 @@ const Signup = () => {
               </div>
             )}
 
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+              <span className="flex-grow border-t text-[#e6e6e6]"></span>
+              <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
+                OR
+              </p>
+              <span className="flex-grow border-t text-[#e6e6e6]"></span>
+            </div>
+
+            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Wallet connect
               </span>
-            </button>
+            </button> */}
 
             <div>
-              Hey
               <ConnectWallet />
             </div>
           </div>
