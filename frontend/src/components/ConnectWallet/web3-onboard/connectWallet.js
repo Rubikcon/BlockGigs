@@ -1,6 +1,6 @@
 import Onboard from "@web3-onboard/core";
 import injectedModule from "@web3-onboard/injected-wallets";
-import walletConnectModule from "@web3-onboard/walletconnect";
+// import walletConnectModule from "@web3-onboard/walletconnect";
 import bitgetWalletModule from "@web3-onboard/bitget";
 import phantomModule from "@web3-onboard/phantom";
 import arcanaAuthModule from "@web3-onboard/arcana-auth";
@@ -15,10 +15,10 @@ const injected = injectedModule();
 const bitgetWallet = bitgetWalletModule(); // bitget wallet
 const phantom = phantomModule(); // phantom
 const coinbaseWalletSdk = coinbaseWalletModule(); // coinbase
-const walletConnect = walletConnectModule({
-  projectId: "4cddeeb9b65133a5ae588d70b0b87b43", // Get this from WalletConnect
-  dappUrl: "https://blockgigs.xyz/",
-});
+// const walletConnect = walletConnectModule({
+//   projectId: "4cddeeb9b65133a5ae588d70b0b87b43", // Get this from WalletConnect
+//   dappUrl: "https://blockgigs.xyz/",
+// });
 
 const MAINNET_RPC_URL =
   "https://mainnet.infura.io/v3/69fff3735253474c97978866a460dab8";
@@ -28,7 +28,7 @@ const onboard = Onboard({
   theme: "dark",
   wallets: [
     injected,
-    walletConnect,
+    // walletConnect,
     bitgetWallet,
     phantom,
     arcanaAuth,

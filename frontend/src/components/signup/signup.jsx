@@ -8,7 +8,7 @@ import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 
-import ConnectWallet from "../ConnectWallet/ConnectWallet";
+// import ConnectWallet from "../ConnectWallet/ConnectWallet";
 
 import CONTRACT_ABI from "../../config/contractABI.json";
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
@@ -255,11 +255,11 @@ const Signup = () => {
               </span>
             </button>
             {/* Error display */}
-            {walletError && (
+            {/* {walletError && (
               <div className="text-red-500 text-sm mt-2 text-center">
                 {walletError}
               </div>
-            )}
+            )} */}
 
             <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
               <span className="flex-grow border-t text-[#e6e6e6]"></span>
@@ -269,15 +269,15 @@ const Signup = () => {
               <span className="flex-grow border-t text-[#e6e6e6]"></span>
             </div>
 
-            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Wallet connect
               </span>
-            </button> */}
+            </button>
 
             <div>
-              <ConnectWallet onSuccess={handleSuccess} onError={handleError} />
+              {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
             </div>
           </div>
           {/* Fix this */}

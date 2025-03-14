@@ -33,8 +33,11 @@ import ClientLayout from "./ClientLayout";
 //        Testing Purpose       //
 // ##############################//
 
-import Home from "./components/SmartContractTestComponents/pages/Home";
+// import Home from "./components/SmartContractTestComponents/pages/Home";
 import ButtonComponent from "../src/components/button";
+import { Buffer } from "buffer";
+
+window.Buffer = Buffer;
 
 const App = () => {
   return (
@@ -76,7 +79,7 @@ const App = () => {
         </Route>
 
         {/* Testing purpose for smart contract integration */}
-        <Route path="/smart" element={<Home />} />
+        {/* <Route path="/smart" element={<Home />} /> */}
         <Route path="/button" element={<ButtonComponent />} />
       </Routes>
     </Router>
