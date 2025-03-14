@@ -1,0 +1,37 @@
+// {
+//   "compilerOptions": {
+//     "allowJs": true, // Allow JavaScript files
+//     "checkJs": false, // Prevent TypeScript from reporting errors in JS files
+//     "jsx": "react-jsx", // Supports JSX syntax in both .tsx and .jsx files
+//     "noEmit": true, // Prevent TypeScript from emitting compiled files
+//     "module": "ESNext",
+//     "moduleResolution": "Node",
+//     "strict": true, // Enforce strict type checking (optional)
+//     "resolveJsonModule": true,
+//     "isolatedModules": true
+//   },
+//   "include": ["src"], // Ensure it processes your source files
+//   "exclude": ["node_modules"]
+// }
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true, // Allows JavaScript (.jsx) files
+    "checkJs": false, // Prevent TypeScript from reporting errors in JS files
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx" // Enables JSX for both .tsx and .jsx
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

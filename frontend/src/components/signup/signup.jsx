@@ -10,6 +10,9 @@ import { BrowserProvider, Contract } from "ethers";
 
 // import ConnectWallet from "../ConnectWallet/ConnectWallet";
 
+// Import the connectButton from the tsconfiguration
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 import CONTRACT_ABI from "../../config/contractABI.json";
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
@@ -269,14 +272,16 @@ const Signup = () => {
               <span className="flex-grow border-t text-[#e6e6e6]"></span>
             </div>
 
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Wallet connect
               </span>
-            </button>
+            </button> */}
 
             <div>
+              <ConnectButton label="Wallet Connect" />
+
               {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
             </div>
           </div>
