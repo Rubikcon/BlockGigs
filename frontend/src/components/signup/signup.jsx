@@ -164,7 +164,7 @@ const Signup = () => {
       <div className="flex flex-col items-center justify-center min-h-screen w-full">
         <div className="w-[320px] h-[550px] lg:w-[422px] lg:h-[615px] rounded-xl bg-[#ffffff] flex flex-col items-center">
           {/* -------------------- EMAIL FORM -------------------------- */}
-          {/* <form
+          <form
             action="#"
             onSubmit={handleSubmit}
             className="flex flex-col items-center "
@@ -227,24 +227,22 @@ const Signup = () => {
               </div>
             </div>
           </form>{" "}
-          */}
-          {/* <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+          <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
             <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
               OR
             </p>
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
-          </div> */}
-
-          <div className="w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem] ">
+          </div>
+          {/* <div className="w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem] ">
             <h2 className="font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]">
               Sign Up
             </h2>
             <p className="font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]">
               Create an account with us by connecting your wallet
             </p>
-          </div>
-          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-20">
+          </div> */}
+          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] ">
             <button
               onClick={connectMetamask}
               disabled={loading}
@@ -264,13 +262,13 @@ const Signup = () => {
               </div>
             )} */}
 
-            <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+            {/* <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
               <span className="flex-grow border-t text-[#e6e6e6]"></span>
               <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
                 OR
               </p>
               <span className="flex-grow border-t text-[#e6e6e6]"></span>
-            </div>
+            </div> */}
 
             {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
@@ -279,7 +277,7 @@ const Signup = () => {
               </span>
             </button> */}
 
-            <div>
+            <div className="mt-10">
               <ConnectButton label="Wallet Connect" />
 
               {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
