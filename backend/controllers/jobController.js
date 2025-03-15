@@ -1,17 +1,123 @@
-import express from "express";
 import Job from "../models/Job.js";
 
-const createJob = async (req, res) => {
-  const { title, description } = req.body;
-  const job = new Job({ title, description });
+// export const createJob = async (req, res) => {
+//   try {
+//     // Ensure only clients can create jobs
+//     if (req.user.role !== "client") {
+//       return res.status(403).json({ message: "Only clients can create jobs" });
+//     }
 
-  await job.save();
-  res.send("Job created successfully");
+//     const { title, description, totalPrice, milestones } = req.body;
+
+//     const job = new Job({
+//       title,
+//       description,
+//       totalPrice,
+//       milestones,
+//       client: req.user._id, // Assign the job to the authenticated client
+//     });
+
+//     await job.save();
+//     res.status(201).json(job);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
+export const createJob = async (req, res) => {
+  try {
+    console.log("User Data from Middleware:", req.user);
+
+    // Ensure only clients can create jobs
+    if (req.user.role !== "client") {
+      return res.status(403).json({ message: "Only clients can create jobs" });
+    }
+
+    const { title, description, totalPrice, milestones } = req.body;
+
+    if (!title || !description || !totalPrice) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const job = new Job({
+      title,
+      description,
+      totalPrice,
+      milestones,
+      client: req.user.id, // Attach logged-in client ID
+    });
+
+    await job.save();
+    res.status(201).json({ message: "Job created successfully", job });
+  } catch (error) {
+    console.error("Error Creating Job:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
-const getJobs = async (req, res) => {
-  const jobs = await Job.find();
-  return res.status(200).send(jobs);
+export const assignFreelancer = async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.jobId);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+    job.freelancer = req.body.freelancer;
+    await job.save();
+    res.json(job);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-export { createJob, getJobs };
+export const getJob = async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.jobId).populate(
+      "client",
+      "name email"
+    );
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    res.json(job);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getAllJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ status: { $ne: "completed" } }) // Exclude completed jobs
+      .populate("client", "fullname email") // Populate client details
+      .populate("talent", "fullname email"); // Populate talent details if assigned
+
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const completeJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const { user } = req; // User from authentication middleware
+
+    // Find job
+    const job = await Job.findById(jobId);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    // Ensure only the assigned talent can complete the job
+    if (!job.talent || job.talent.toString() !== user.id) {
+      return res
+        .status(403)
+        .json({ message: "You are not assigned to this job" });
+    }
+
+    // Update job status
+    job.status = "completed";
+    await job.save();
+
+    res.status(200).json({ message: "Job marked as completed", job });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
