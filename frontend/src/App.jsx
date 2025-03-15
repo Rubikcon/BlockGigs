@@ -10,6 +10,7 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
+import Profile from "./Util/Profile";
 import MainLayout from "./MainLayout";
 import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
@@ -38,6 +39,7 @@ import ClientLayout from "./ClientLayout";
 // ##############################//
 
 import Home from "./components/SmartContractTestComponents/pages/Home";
+import Job from "./Util/job";
 
 const App = () => {
   return (
@@ -69,6 +71,8 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route path="/TalentDashboard" element={<Dashboard />} />
           <Route path="chat" element={<Chat />} />
+          <Route path="job" element={<Job />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="discover" element={<Discover />} />
           <Route path="gigs" element={<Gigs />} />
           <Route path="offer" element={<Offer />} />

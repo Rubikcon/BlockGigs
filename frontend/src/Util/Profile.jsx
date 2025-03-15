@@ -1,0 +1,333 @@
+// import React from "react";
+import dp from "../assets/Ellipse.png";
+import search from "../assets/search.svg";
+import bell2 from "../assets/bell.png";
+import down from "../assets/down.png";
+import arrow from "../assets/arrow-back.png";
+import pen from "../assets/pen.png";
+import toggle from "../assets/toggle.png";
+import pix from "../assets/pix.png";
+import page from "../assets/page.png";
+import locate from "../assets/locate.png";
+import x from "../assets/x.png";
+import github from "../assets/github.png";
+import global from "../assets/global.png";
+import pow from "../assets/pow.png";
+import pow1 from "../assets/pow1.png";
+import pow2 from "../assets/pow2.png";
+import pow3 from "../assets/pow3.png";
+import bulb from "../assets/bulb.png";
+import icon2 from "../assets/icon2.png";
+import amico from "../assets/amico.png";
+import off from "../assets/off.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const experience = [
+  {
+    title: "Senior UI/UX Designer",
+    gig: "Blockgigs",
+    from: "1/11/24",
+    to: "15/10/25",
+    time: "2 months",
+    detail: [
+      "Contribute to the development of our sleek and use-friendly web and mobile app scalable interface",
+      "Collaborate with our talented engineering team to implement new features and optimize existing project to achieve your desired objective",
+    ],
+    image: [pow, pow1, pow2, pow3],
+  },
+  {
+    title: "Junior UI/UX Designer",
+    gig: "Rubicon",
+    from: "1/11/23",
+    to: "15/09/24",
+    time: "11 months",
+    detail: [
+      "Assisted the design team to improve products user experience thereby contributing to 20% increase in online sales",
+      "Collaborate with our talented engineering team to implement new features and optimize existing project to achieve your desired objective",
+    ],
+    image: [pow, pow1, pow2, pow3],
+  },
+];
+
+function Profile() {
+  const navigate = useNavigate();
+  const [available, setAvailable] = useState(true);
+
+  return (
+    <div className="bg-gray-100 w-[100%] h-[100%] grid grid-rows-12 px-4 gap-2">
+      <div className="row-span-1 grid items-center px-2 mt-2">
+        <div className="grid grid-cols-3 gap-1 w-full">
+          <div className="flex gap-2">
+            <img
+              src={arrow}
+              alt=""
+              className="w-7 h-5 mt-1 cursor-pointer"
+              onClick={() => navigate("/TalentDashboard")}
+            />
+            <span className="">Profile Information</span>
+          </div>
+          <div className="col-span-1 flex justify-between">
+            <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[100%]">
+              <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
+              <input
+                placeholder="Search for jobs, talents or clients"
+                className="w-full flex"
+              />
+            </div>
+          </div>
+          <div className="col-span-1 grid justify-center">
+            <div className="flex gap-2">
+              <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+                <img src={bell2} alt="" className="h-4 w-4" />
+              </div>
+              <div className="flex gap-4">
+                <div>
+                  <img src={dp} alt="" className="h-6 w-6" />
+                </div>
+                <div className="">
+                  <p className="-m-2">Glory Dseign</p>
+                  <span className="text-[10px] top-1 m-0">
+                    Product Designer
+                  </span>
+                </div>
+                <img src={down} alt="" className="w-8 h-8" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row-span-13 grid grid-cols-3 gap-4">
+        <div className="col-span-2 grid grid-row-15 gap-3 px-4">
+          <div className="row-span-1 bg-white rounded grid grid-rows-8 pb-2">
+            <div className="row-span-3 border-b-[1px] border-gray-300 flex items-center justify-between px-4 py-2">
+              <div className="flex  items-center gap-4 ">
+                <img src={dp} alt="" className="w-22 h-22" />
+                <div className="grid gap-3">
+                  <span className="text-[16px]">Glory Design</span>
+                  <div className="flex gap-2">
+                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                      UI/UX Design
+                    </span>
+                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                      Graphic Design
+                    </span>
+                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                      Web Design
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="grid gap-6">
+                <img
+                  src={pen}
+                  alt=""
+                  className="grid justify-self-end w-8 h-8"
+                />
+                <div className="flex gap-2">
+                  <span className="text-[14px] text-gray-400">
+                    {available ? "Available for gigs" : "Unavailable for gigs"}
+                  </span>
+                  {available ? (
+                    <img
+                      src={toggle}
+                      alt=""
+                      className="w-7 h-7 cursor-pointer"
+                      onClick={() => setAvailable(!available)}
+                    />
+                  ) : (
+                    <img
+                      src={off}
+                      alt=""
+                      className="w-7 h-7 cursor-pointer"
+                      onClick={() => setAvailable(!available)}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="row-span-5 grid grid-cols-2">
+              <div className="col-span-1 grid ml-4 mt-4">
+                <div className="flex items-center justify-start gap-2">
+                  <img
+                    src={pix}
+                    alt=""
+                    className="bg-[#dcf8e2] rounded-[8px]"
+                  />
+                  <p className="text-gray-600">About</p>
+                </div>
+                <span className="text-gray-600 text-[16px] ">
+                  Product Designer passionate about crafting intuitive and
+                  user-centered experiences. I thrive on solving complex design
+                  challenges and creating impactful solution that meet both user
+                  needs and business goals. Proficient in Figma, user research.
+                </span>
+              </div>
+              <div className="bg-white col-span-1">
+                <div className="flex gap-2 mt-6 ml-15">
+                  <img
+                    src={page}
+                    alt=""
+                    className="bg-[#dcf8e2] rounded-[8px] h-5 w-5"
+                  />
+                  <p className="text-gray-600">Other Information</p>
+                </div>
+                <div className="flex gap-6 ml-15 mt-5 text-[14px]">
+                  <div>
+                    <p>Time Zone</p>
+                    <div className="flex gap-1 mt-2">
+                      <img src={locate} alt="" className="w-4 h-4 mt-1" />
+                      <p>UTC+1</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p>Portfolio Links</p>
+                    <div className="flex gap-2 mt-3">
+                      <img src={github} alt="" className="w-4 h-4" />
+                      <img src={x} alt="" className="w-3 h-3" />
+                      <img src={global} alt="" className="w-4 h-4" />
+                    </div>
+                  </div>
+                  <div>
+                    <p>Pay/Range</p>
+                    <span className="mt-2 flex">$10/hr</span>
+                  </div>
+                </div>
+                <div className="flex ml-16 mt-4 gap-6 text-[14px]">
+                  <p>Language</p>
+                  <div className="flex gap-2">
+                    <p>English</p>
+                    <p>German</p>
+                    <p>Spanish</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row-span-14 bg-white grid grid-rows-14">
+            <div className="w-full border-b-2 border-gray-400 row-span-1 grid grid-flow-col justify-center items-center gap-4 text-[14px]">
+              <span>Works/Exprience</span>
+              <span>Review (5)</span>
+            </div>
+            <div className="row-span-13 mt-2">
+              {experience.map((item, i) => (
+                <div key={i} className="grid grid-cols-8">
+                  <div className="col-span-1 grid justify-center">
+                    <img src={dp} alt="" className="w-12 h-12" />
+                  </div>
+                  <div className="col-span-7 ">
+                    <div className="font-bold text-[15px]">{item.title}</div>
+                    <div className="flex text-[12px] text-gray-400 gap-2">
+                      <span>{item.gig} •</span>
+                      <span>
+                        {item.from}–{item.to} ({item.time})
+                      </span>
+                    </div>
+                    <div className="mt-2 text-[12px] gap-1 grid pr-4">
+                      {item.detail.map((t, i) => (
+                        <div key={i} className="truncate">
+                          •{t}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex py-4 gap-2">
+                      {item.image.map((f, i) => (
+                        <div key={i} className="w-20 h-20">
+                          <img src={f} alt="" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-rows-15 cols-span-1 gap-4">
+          <div className="row-span-8 bg-[#e3f1ff] p-2 py-4 rounded-[10px]">
+            <div className="flex w-[100%]">
+              Constructive tips to{" "}
+              <div className="px-1">
+                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] w-[58.58px] h-[32.28px] -ml-[0.7rem] rotate-x-210 rotate-z-45"></div>
+                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] w-[58.58px] h-[32.28px] -ml-[0.7rem] rotate-x-190 rotate-z-45"></div>
+                <span className="text-[#fbbf24] relative">Boost</span>
+              </div>{" "}
+              your profile for hiring chances
+            </div>
+            <div className="mt-4 grid gap-2">
+              <div className="flex">
+                <img src={bulb} alt="" className="w-5 h-5" />
+                <span className="text-[14px] w-10">Tip 1:</span>
+                <p className="text-[14px]">
+                  Highlight specific skills that set you apart in your industry.
+                </p>
+              </div>
+              <div className="flex">
+                <img src={bulb} alt="" className="w-5 h-5" />
+                <span className="text-[14px] w-12">Tip 2:</span>
+                <p className="text-[14px]">
+                  Use measurable achievements to showcase your impact on past
+                  projects..
+                </p>
+              </div>
+              <div className="flex">
+                <img src={bulb} alt="" className="w-5 h-5" />
+                <span className="text-[14px] w-12">Tip 3:</span>
+                <p className="text-[14px]">
+                  Tailor your profile summary to address client pain points and
+                  solutions.
+                </p>
+              </div>
+              <div className="flex">
+                <img src={bulb} alt="" className="w-5 h-5" />
+                <span className="text-[14px] w-12">Tip 4:</span>
+                <p className="text-[14px]">
+                  Regularly update with recent projects and client testimonials.
+                </p>
+              </div>
+              <div className="flex">
+                <img src={bulb} alt="" className="w-5 h-5" />
+                <span className="text-[14px] w-12">Tip 5:</span>
+                <p className="text-[14px]">
+                  Include keywords relevant to your niche for better platform
+                  visibility.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="row-span-7 bg-white rounded-[10px] grid justify-center py-4">
+            <div>
+              <img src={amico} alt="" className=" grid justify-self-center" />
+              <div className="grid justify-center text-center mb-2">
+                <p className="text-[#84b7c8] text-[18px]">Congratulations!!</p>
+                <span className="text-[14px]">
+                  Your Blockgigs Profile is !00% complete
+                </span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 justify-between">
+              <div className="flex gap-2 mr-4">
+                <img src={icon2} alt="" className="w-4 h-4 mt-1" />
+                <p className="">About (expertise)</p>
+              </div>
+              <div className="flex gap-2">
+                <img src={icon2} alt="" className="w-4 h-4 mt-1" />
+                <p>Skillset</p>
+              </div>
+              <div className="flex gap-2">
+                <img src={icon2} alt="" className="w-4 h-4 mt-1" />
+                <p>Work/Experience</p>
+              </div>
+              <div className="flex gap-2">
+                <img src={icon2} alt="" className="w-4 h-4 mt-1" />
+                <p>Reviews</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Profile;

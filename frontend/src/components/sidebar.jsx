@@ -8,12 +8,14 @@ import message from "../assets/message-text.png";
 import wallet from "../assets/wallet.png";
 import setting from "../assets/setting-2.png";
 import logout from "../assets/logout.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useMatch } from "react-router-dom";
 
 function Sidebar() {
   // const navigate = useNavigate();
+  const profile = useMatch("/profile");
+  const job = useMatch("/job");
   return (
-    <div className="bg-[#0A0f29] h-[100vh] w-[15vw] grid grid-row-12 text-white justify-center">
+    <div className="bg-[#0A0f29] min-h-screen h-auto w-[15vw] grid grid-row-12 text-white justify-center">
       <div className="row-span-2 grid items-center">
         <NavLink to={"/"}>
           <div className="flex space-x-4 items-center">
@@ -32,7 +34,7 @@ function Sidebar() {
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 pl-2 items-center h-12 w-full cursor-pointer ${
-                isActive
+                isActive || profile || job
                   ? "text-[#242d44] font-bold bg-[#a7d3ec] rounded-2xl"
                   : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
               }`}

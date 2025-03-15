@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import icon from "../../assets/icon.png";
@@ -15,6 +16,7 @@ import OfferModal from "../modals/OfferModal";
 import AcceptOffer from "../modals/AcceptOffer";
 import back from "../../assets/arrow-back.png";
 import bat from "../../assets/bat.png";
+import MilestoneModal from "../modals/MilestoneModal";
 
 const jobs = [
   {
@@ -202,6 +204,31 @@ const recommend = [
       "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms...",
     price: "1000/3 milestones",
     image2: frame,
+    amt: 1000,
+    detail:
+      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
+    milestone: [
+      {
+        title: "Milestone 1",
+        amt: 200,
+        job: "Branding/Designing of logo for web design",
+      },
+      {
+        title: "Milestone 2",
+        amt: 300,
+        job: "First set of design with the main features",
+      },
+      {
+        title: "Milestone 3",
+        amt: 500,
+        job: "Full web design to be passed on to the Developer",
+      },
+      {
+        title: "Milestone 4",
+        amt: 1000,
+        job: "Saas website design gig completed",
+      },
+    ],
   },
   {
     title: "Wed3 Content Creator for a Decentrilized Exchange",
@@ -213,6 +240,31 @@ const recommend = [
       "Create engaging and informative content about Web3, blockchain technology, NFTs, DAOs, and the metaverse. This can include blog post, articles...",
     price: "700/1 milestones",
     image2: frame,
+    amt: 3400,
+    detail:
+      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
+    milestone: [
+      {
+        title: "Milestone 1",
+        amt: 200,
+        job: "Branding/Designing of logo for web design",
+      },
+      {
+        title: "Milestone 2",
+        amt: 300,
+        job: "First set of design with the main features",
+      },
+      {
+        title: "Milestone 3",
+        amt: 500,
+        job: "Full web design to be passed on to the Developer",
+      },
+      {
+        title: "Milestone 4",
+        amt: 1000,
+        job: "Saas website design gig completed",
+      },
+    ],
   },
   {
     title: "Technical Writer for an E-commerce Brand",
@@ -224,6 +276,31 @@ const recommend = [
       "Explain complex technical concept in a clear and concise way Create documentation tutorials and blog posts, making them accessible...",
     price: "1000/3 milestones",
     image2: frame,
+    amt: 2000,
+    detail:
+      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
+    milestone: [
+      {
+        title: "Milestone 1",
+        amt: 200,
+        job: "Branding/Designing of logo for web design",
+      },
+      {
+        title: "Milestone 2",
+        amt: 300,
+        job: "First set of design with the main features",
+      },
+      {
+        title: "Milestone 3",
+        amt: 500,
+        job: "Full web design to be passed on to the Developer",
+      },
+      {
+        title: "Milestone 4",
+        amt: 1000,
+        job: "Saas website design gig completed",
+      },
+    ],
   },
 ];
 
@@ -265,10 +342,12 @@ function Dashboard() {
   const [OfferDetail, setMyOfferDetail] = useState({});
   const [offerModal, setOfferModal] = useState(false);
   const [acceptOfferModal, setAcceptOfferModal] = useState(false);
+  const [openMilestone, setOpenMilestone] = useState(false);
+  const [detail, setDetail] = useState(null);
   const [job, setJob] = useState("");
+  const navigate = useNavigate();
 
   const myOfferHandler = (value) => {
-    console.log(value, "my offer");
     setMyOfferDetail(value);
     setOfferModal(true);
   };
@@ -314,11 +393,21 @@ function Dashboard() {
     setJob(value);
   };
 
+  const jobDetail = (item) => {
+    navigate("/job", { state: item });
+  };
+
+  const milestoneHandler = (item) => {
+    console.log(item, "KKKKKKKKK");
+    setOpenMilestone(true);
+    setDetail(item);
+  };
+
   const RenderJob = jobs
     .map((item, index) => (
       <div
         key={index}
-        className="w-full border-[0.5px] border-blue-300 rounded-[10px] h-[40%] flex items-center justify-between px-4 my-2"
+        className="w-full border-[0.5px] border-blue-300 rounded-[10px] h-[40%] flex items-center justify-between px-4 my-2 cursor-pointer"
         onClick={() => displayJob(item)}
       >
         <div>
@@ -361,8 +450,8 @@ function Dashboard() {
       <div className="flex justify-between">
         <div className="text-blue-600 text-[12px] mb-2">${item.price}</div>
         <button
-          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[11.38px] w-[104px] h-[31px] mb-2"
-          // onClick={() => }
+          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[11.38px] w-[104px] h-[31px] mb-2 cursor-pointer"
+          onClick={() => jobDetail(item)}
         >
           See Details
         </button>
@@ -370,6 +459,9 @@ function Dashboard() {
     </div>
   ));
 
+  const openProfile = () => {
+    navigate("/profile");
+  };
   return (
     <div>
       <div className="bg-gray-100 w-[83.85vw] h-[100vh] grid grid-rows-12 px-4 gap-2">
@@ -398,7 +490,7 @@ function Dashboard() {
                   </div>
                   <div className="col-span-1 grid justify-center">
                     <div className="flex gap-2">
-                      <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+                      <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center cursor-pointer">
                         <img src={bell2} alt="" className="h-4 w-4" />
                       </div>
                       <div className="flex gap-4">
@@ -411,7 +503,12 @@ function Dashboard() {
                             Product Designer
                           </span>
                         </div>
-                        <img src={down} alt="" className="w-8 h-8" />
+                        <img
+                          src={down}
+                          alt=""
+                          className="w-8 h-8 cursor-pointer"
+                          onClick={openProfile}
+                        />
                       </div>
                     </div>
                   </div>
@@ -603,7 +700,8 @@ function Dashboard() {
                 {job.milestone.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-white h-auto mb-2 p-4 w-[80%] rounded-[5px] space-y-2"
+                    className="bg-white h-auto mb-2 p-4 w-[80%] rounded-[5px] space-y-2 cursor-pointer"
+                    onClick={() => milestoneHandler(item)}
                   >
                     <h2 className="font-bold text-[16px]">
                       {item.title[0].toUpperCase() + item.title.slice(1)}
@@ -639,6 +737,11 @@ function Dashboard() {
         visible={acceptOfferModal}
         item={OfferDetail}
         onClose={acceptCloseHAndler}
+      />
+      <MilestoneModal
+        visible={openMilestone}
+        onClose={() => setOpenMilestone(false)}
+        item={detail}
       />
     </div>
   );
