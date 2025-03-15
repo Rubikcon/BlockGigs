@@ -1,30 +1,209 @@
-import bcrypt from "bcrypt";
+import Client from "../models/Client.js";
+import Talent from "../models/Talent.js";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import dotenv from "dotenv";
+import nodemailer from "nodemailer"; // For sending OTP emails
 
-const register = async (req, res) => {
-  const { name, email, password, wallet_address } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ name, email, password, wallet_address });
+dotenv.config();
 
-  await user.save();
-  res.send("User registered successfully");
+// Generate JWT Token
+const generateToken = (id, role) => {
+  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-const login = async (req, res) => {
-  const { email, password, wallet_address } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(401).send("Invalid email or password");
-  }
-
-  const isValidPassword = await bcrypt.compare(password, user.password);
-  if (!isValidPassword) {
-    return res.status(401).send("Invalid password");
-  }
-
-  const token = jwt.sign({ userId: user._id }, "secretkey");
-  res.send({ token });
+// Determine user type dynamically
+const getUserModel = (role) => {
+  if (role === "client") return Client;
+  if (role === "talent") return Talent;
+  throw new Error("Invalid user role");
 };
 
-export { register, login };
+// Register user without sending OTP
+export const registerUser = async (req, res) => {
+  const { role, wallet_address, email, password, fullname, name, about } =
+    req.body;
+
+  try {
+    const Model = getUserModel(role);
+
+    let existingUser = await Model.findOne({
+      $or: [{ email }, { wallet_address }],
+    });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
+
+    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+    const otp = crypto.randomInt(100000, 999999); // Generate OTP
+
+    const newUser = await Model.create({
+      wallet_address,
+      email,
+      password: hashedPassword,
+      fullname: fullname || name,
+      about,
+      otp,
+      otpExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
+      isVerified: false, // Initially unverified
+    });
+
+    // Generate JWT token
+
+    const token = generateToken(newUser._id, role);
+
+    res.status(201).json({
+      message: "User registered successfully",
+      token,
+
+      user: {
+        id: newUser._id,
+        email: newUser.email,
+        isVerified: newUser.isVerified,
+      },
+    });
+
+    // res
+    //   .status(201)
+    //   .json({ message: "User registered successfully", id: newUser._id });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Request OTP (send OTP email)
+// export const requestOTP = async (req, res) => {
+//   return res.send("OTP endpoint hit");
+// };
+
+export const requestOTP = async (req, res) => {
+  const { role, email } = req.body;
+
+  try {
+    const Model = getUserModel(role);
+    const user = await Model.findOne({ email });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "User not found. Please register first." });
+    }
+
+    // Generate a new OTP for existing user
+    user.otp = crypto.randomInt(100000, 999999);
+    user.otpExpiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 min expiry
+    await user.save();
+
+    // Send OTP email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Your OTP for Verification",
+      text: `Your OTP code is: ${user.otp}. It will expire in 15 minutes.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ message: "OTP sent to your email" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// export const verifyOTP = async (req, res) => {
+//   const { role, email, otp } = req.body;
+
+//   try {
+//     const Model = getUserModel(role);
+//     const user = await Model.findOne({ email });
+
+//     if (!user) return res.status(400).json({ message: "User not found" });
+
+//     if (!user.otp || user.otpExpiresAt < new Date()) {
+//       return res.status(400).json({ message: "OTP has expired" });
+//     }
+
+//     if (user.otp !== Number(otp)) {
+//       return res.status(400).json({ message: "Invalid OTP" });
+//     }
+
+//     user.isVerified = true;
+//     user.otp = null;
+//     user.otpExpiresAt = null;
+//     await user.save();
+
+//     return res.status(200).json({ message: "OTP verified successfully" });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+export const verifyOTP = async (req, res) => {
+  const { role, email, otp } = req.body;
+
+  try {
+    const Model = getUserModel(role);
+    const user = await Model.findOne({ email });
+
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    if (!user.otp || user.otpExpiresAt < new Date()) {
+      return res
+        .status(400)
+        .json({ message: "OTP has expired. Request a new one." });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User is already verified." });
+    }
+
+    if (user.otp !== Number(otp)) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Mark user as verified
+    user.isVerified = true;
+    user.otp = null;
+    user.otpExpiresAt = null;
+    await user.save();
+
+    return res.status(200).json({
+      message: "OTP verified successfully. Your account is now active.",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Login user (without OTP verification requirement)
+export const loginUser = async (req, res) => {
+  const { role, email, wallet_address, password } = req.body;
+
+  try {
+    const Model = getUserModel(role);
+    const user = await Model.findOne({ $or: [{ email }, { wallet_address }] });
+
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    if (password && !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    const token = generateToken(user._id, role);
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: { id: user._id, email: user.email, isVerified: user.isVerified },
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
