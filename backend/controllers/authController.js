@@ -21,9 +21,73 @@ const getUserModel = (role) => {
 };
 
 // Register user without sending OTP
+// export const registerUser = async (req, res) => {
+//   const { role, wallet_address, email, password, fullname, name, about } =
+//     req.body;
+
+//   try {
+//     const Model = getUserModel(role);
+
+//     let existingUser = await Model.findOne({
+//       $or: [{ email }, { wallet_address }],
+//     });
+//     if (existingUser)
+//       return res.status(400).json({ message: "User already exists" });
+
+//     const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+//     const otp = crypto.randomInt(100000, 999999); // Generate OTP
+
+//     const newUser = await Model.create({
+//       wallet_address,
+//       email,
+//       password: hashedPassword,
+//       fullname: fullname || name,
+//       about,
+//       otp,
+//       otpExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
+//       isVerified: false, // Initially unverified
+//     });
+
+//     // Generate JWT token
+
+//     const token = generateToken(newUser._id, role);
+
+//     res.status(201).json({
+//       message: "User registered successfully",
+//       token,
+
+//       user: {
+//         id: newUser._id,
+//         email: newUser.email,
+//         isVerified: newUser.isVerified,
+//       },
+//     });
+
+//     // res
+//     //   .status(201)
+//     //   .json({ message: "User registered successfully", id: newUser._id });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// Register user dynamically
 export const registerUser = async (req, res) => {
-  const { role, wallet_address, email, password, fullname, name, about } =
-    req.body;
+  const {
+    role,
+    wallet_address,
+    email,
+    password,
+    fullname,
+    name,
+    about,
+    pseudonym,
+    profession,
+    min_pay,
+    timezone,
+    languages,
+    skills,
+  } = req.body;
 
   try {
     const Model = getUserModel(role);
@@ -34,10 +98,15 @@ export const registerUser = async (req, res) => {
     if (existingUser)
       return res.status(400).json({ message: "User already exists" });
 
+    // Validate registration method
+    if (!wallet_address && (!email || !password)) {
+      return res.status(400).json({ message: "Invalid registration method" });
+    }
+
     const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
     const otp = crypto.randomInt(100000, 999999); // Generate OTP
 
-    const newUser = await Model.create({
+    const newUserData = {
       wallet_address,
       email,
       password: hashedPassword,
@@ -45,27 +114,34 @@ export const registerUser = async (req, res) => {
       about,
       otp,
       otpExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
-      isVerified: false, // Initially unverified
-    });
+      isVerified: false,
+    };
+
+    // Add talent-specific fields
+    if (role === "talent") {
+      newUserData.pseudonym = pseudonym;
+      newUserData.profession = profession;
+      newUserData.min_pay = min_pay;
+      newUserData.timezone = timezone;
+      newUserData.languages = languages;
+      newUserData.skills = skills;
+    }
+
+    const newUser = await Model.create(newUserData);
 
     // Generate JWT token
-
     const token = generateToken(newUser._id, role);
 
     res.status(201).json({
       message: "User registered successfully",
       token,
-
       user: {
         id: newUser._id,
         email: newUser.email,
+        wallet_address: newUser.wallet_address,
         isVerified: newUser.isVerified,
       },
     });
-
-    // res
-    //   .status(201)
-    //   .json({ message: "User registered successfully", id: newUser._id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -184,24 +260,69 @@ export const verifyOTP = async (req, res) => {
 };
 
 // Login user (without OTP verification requirement)
+// export const loginUser = async (req, res) => {
+//   const { role, email, wallet_address, password } = req.body;
+
+//   try {
+//     const Model = getUserModel(role);
+//     const user = await Model.findOne({ $or: [{ email }, { wallet_address }] });
+
+//     if (!user) return res.status(400).json({ message: "User not found" });
+
+//     if (password && !(await bcrypt.compare(password, user.password))) {
+//       return res.status(400).json({ message: "Invalid password" });
+//     }
+
+//     const token = generateToken(user._id, role);
+//     res.status(200).json({
+//       message: "Login successful",
+//       token,
+//       user: { id: user._id, email: user.email, isVerified: user.isVerified },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const loginUser = async (req, res) => {
   const { role, email, wallet_address, password } = req.body;
 
   try {
     const Model = getUserModel(role);
-    const user = await Model.findOne({ $or: [{ email }, { wallet_address }] });
 
-    if (!user) return res.status(400).json({ message: "User not found" });
+    // Determine login method
+    const query = email ? { email } : { wallet_address };
+    const user = await Model.findOne(query);
 
-    if (password && !(await bcrypt.compare(password, user.password))) {
-      return res.status(400).json({ message: "Invalid password" });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
     }
 
+    // If logging in with email & password, validate password
+    if (email && password) {
+      if (!user.password) {
+        return res
+          .status(400)
+          .json({ message: "Password not set for this account" });
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid password" });
+      }
+    }
+
+    // Generate JWT token
     const token = generateToken(user._id, role);
+
     res.status(200).json({
       message: "Login successful",
       token,
-      user: { id: user._id, email: user.email, isVerified: user.isVerified },
+      user: {
+        id: user._id,
+        email: user.email || null,
+        wallet_address: user.wallet_address || null,
+        isVerified: user.isVerified,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
