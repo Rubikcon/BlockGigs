@@ -67,22 +67,12 @@ const App = () => {
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
-        <Route path="/client" element={<ClientLayout />}>
+        {/* <Route path="/client" element={<ClientLayout />}>
           <Route path="/client" element={<ClientDashboard />} />
-        </Route>
+        </Route> */}
 
         {/*  Navigation on for the dashboard*/}
-        {/* <Route path="/" element={<MainLayout />}>
-          <Route path="/TalentDashboard" element={<Dashboard />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="job" element={<Job />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="discover" element={<Discover />} />
-          <Route path="gigs" element={<Gigs />} />
-          <Route path="offer" element={<Offer />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="wallet" element={<Wallet />} /> */}
-        {/* Navigation for the client dashboard */}
+
         <Route path="/client" element={<ClientDashboard />} />
 
         {/* Routes for Talents dashboard */}
