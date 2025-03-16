@@ -56,24 +56,19 @@ const Password = () => {
     e.preventDefault(); //This will stop the form from submitting to itself
 
     //Checking if the email field is empty
-    if (!email) {
-      alert("Enter email address to continue!");
+    if (!password) {
+      alert("Enter password to continue!");
       return;
     }
-    //Checking if the email address is valid
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(email)) {
-      alert("Please put a valid email address!");
-      return;
-    }
     localStorage.setItem("password", password);
+    // email = localStorage.getItem("email");
 
     //If email is valid, form can be sumbitted
     alert("Form submitted successfully!");
 
     // Navigate to verification page and pass the email as state
-    navigate("/Persona", { state: { email, password } });
+    navigate("/Persona", { state: { password } });
   };
 
   const handleGotoHome = () => {
