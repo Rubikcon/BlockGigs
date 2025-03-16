@@ -29,6 +29,8 @@ import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 import ClientDashboard from "./Pages/ClientDashboard";
 import ClientLayout from "./ClientLayout";
 import Job from "./Util/job";
+import Password from "./components/Password/password";
+
 // import WalletConnect from "./components/ConnectWallet/ConnectWallet";
 
 // ##############################//
@@ -58,6 +60,7 @@ const App = () => {
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/Persona" element={<Persona />} />
+        <Route path="/password" element={<Password />} />
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
 

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"; // For navigation
 import logo from "../../assets/3dcube.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import metamask from "../../assets/metamask.png";
-import celo from "../../assets/celo.png";
-import wallet from "../../assets/wallet.png";
+// import celo from "../../assets/celo.png";
+// import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 
@@ -16,16 +16,16 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CONTRACT_ABI from "../../config/contractABI.json";
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
-const Signup = () => {
-  const [email, setEmail] = useState("");
+const Password = () => {
+  const [password, setPassword] = useState("");
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
   const [signature, setSignature] = useState("");
   const [signer, setSigner] = useState(null);
   const [roles, setRoles] = useState("talent");
   const [loading, setLoading] = useState(false);
-  const [walletAccount, setWalletAccount] = useState(null);
-  const [walletError, setWalletError] = useState(null);
+  //   const [walletAccount, setWalletAccount] = useState(null);
+  //   const [walletError, setWalletError] = useState(null);
 
   const handleSuccess = (account) => {
     setWalletAccount(account);
@@ -67,91 +67,21 @@ const Signup = () => {
       alert("Please put a valid email address!");
       return;
     }
-    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
 
     //If email is valid, form can be sumbitted
     alert("Form submitted successfully!");
 
     // Navigate to verification page and pass the email as state
-    navigate("/password", { state: { email } });
+    navigate("/Persona", { state: { email, password } });
   };
 
   const handleGotoHome = () => {
     navigate("/");
   };
 
-  const connectMetamask = async () => {
-    if (!window.ethereum) {
-      setWalletError("MetaMask is not installed!");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      // Request accounts first - this is the most important step
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (!accounts || accounts.length === 0) {
-        throw new Error("Please connect your MetaMask wallet");
-      }
-
-      const account = accounts[0];
-      setAddr(account);
-
-      // // Create provider and signer
-      // const provider = new BrowserProvider(window.ethereum);
-      // const signer = await provider.getSigner();
-      // setSigner(signer);
-
-      // Get balance and sign message in parallel to save time
-      // const [
-      // balanceHex,
-      // signature
-      // ] = await Promise.all([
-      // window.ethereum.request({
-      // method: "eth_getBalance",
-      // params: [account, "latest"],
-      // }),
-      //   signer.signMessage(
-      //     `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`
-      //   ),
-      // ]);
-
-      // Convert balance
-      // const balance = parseInt(balanceHex, 16) / 10 ** 18;
-
-      // // Update states
-      // setBalance(balance);
-      // setSignature(signature);
-
-      // // Store essential data only
-      localStorage.setItem("userAddress", account);
-      // localStorage.setItem("walletSignature", signature);
-
-      console.log("Wallet connected successfully");
-
-      // // Immediate navigation
-      navigate("/Persona", {
-        replace: true, // Use replace to prevent back button issues
-        state: {
-          account,
-          // signature,
-          // balance,
-        },
-      });
-    } catch (error) {
-      console.error("MetaMask error:", error);
-      setWalletError(error.message || "Failed to connect wallet");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
+    <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center ">
       <div
         onClick={handleGotoHome}
         className="w-[103px] h-[37px] cursor-pointer flex justify-between items-center gap-2 ml-4 "
@@ -169,29 +99,29 @@ const Signup = () => {
             onSubmit={handleSubmit}
             className="flex flex-col items-center "
           >
-            <div className="w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem] ">
+            <div className="w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[7rem] lg:mt-[8rem] ">
               <h2 className="font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]">
-                Sign Up
+                Continue Sign Up
               </h2>
               <p className="font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]">
-                Create an account with us by email or wallet
+                Please enter you password to complete signup``
               </p>
             </div>
 
             <div className="w-[260px] lg:w-[350px] h-[103px] gap-1 flex flex-col items-start mt-[1.4rem]">
               <label
-                htmlFor="email"
+                htmlFor="password"
                 className="font-montserrat font-medium text-[14px] leading-6 text-[#292929]"
               >
-                Email Address
+                Password
               </label>
               <div className="relative flex items-center mt-[-1.8rem]">
                 <input
-                  type="email"
-                  placeholder="Continue with email"
+                  type="password"
+                  placeholder="Enter Password"
                   // required
                   aria-required="true"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px]  border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"
                 />
 
@@ -204,7 +134,7 @@ const Signup = () => {
                 </button>
               </div>
 
-              <div className="flex justify-center items-center w-[320px] lg:w-[340px] h-[24px] gap-1 ml-[-2rem] lg:ml-[-1rem]">
+              {/* <div className="flex justify-center items-center w-[320px] lg:w-[340px] h-[24px] gap-1 ml-[-2rem] lg:ml-[-1rem]">
                 <input
                   type="checkbox"
                   name="checkbox"
@@ -224,7 +154,7 @@ const Signup = () => {
                     Privacy Policy
                   </span>
                 </p>
-              </div>
+              </div> */}
             </div>
           </form>{" "}
           <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
@@ -242,53 +172,12 @@ const Signup = () => {
               Create an account with us by connecting your wallet
             </p>
           </div> */}
-          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] ">
-            <button
-              onClick={connectMetamask}
-              disabled={loading}
-              className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
-                loading ? "opacity-50" : ""
-              }`}
-            >
-              <img src={metamask} alt="metamask logo" />
-              <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
-                {loading ? "Connecting..." : "Connect Metamask"}
-              </span>
-            </button>
-            {/* Error display */}
-            {/* {walletError && (
-              <div className="text-red-500 text-sm mt-2 text-center">
-                {walletError}
-              </div>
-            )} */}
-
-            {/* <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
-              <span className="flex-grow border-t text-[#e6e6e6]"></span>
-              <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
-                OR
-              </p>
-              <span className="flex-grow border-t text-[#e6e6e6]"></span>
-            </div> */}
-
-            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
-              <img src={wallet} alt="wallet logo" />
-              <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
-                Wallet connect
-              </span>
-            </button> */}
-
-            <div className="mt-10">
-              <ConnectButton label="Wallet Connect" />
-
-              {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
-            </div>
-          </div>
           {/* Fix this */}
-          {walletError && (
+          {/* {walletError && (
             <div className="text-red-500 text-sm mt-2 text-center">
               {walletError}
             </div>
-          )}
+          )} */}
           {/* {walletError && <p className="text-red-800">Error: {walletError}</p>} */}
           <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">
             <p className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]">
@@ -307,4 +196,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Password;
