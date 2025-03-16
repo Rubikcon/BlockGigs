@@ -4,9 +4,9 @@ import Sidebar from "./components/sidebar";
 
 function MainLayout() {
   return (
-    <div className="flex">
+    <div className="grid grid-flow-row md:flex">
       <Sidebar />
-      <div className="flex-1">
+      <div className="grid grid-flow-row md:flex-1">
         <Outlet />
       </div>
     </div>

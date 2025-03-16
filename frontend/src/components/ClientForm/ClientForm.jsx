@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+=======
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+>>>>>>> talent
 import logo from "../../assets/3dcube.png";
 
 const ClientForm = () => {

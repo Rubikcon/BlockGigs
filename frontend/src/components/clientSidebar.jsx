@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 
 function ClientSidebar() {
   return (
-    <div className="bg-[#0A0f29] h-[100vh] w-[15vw] grid grid-row-12 text-white justify-center">
+    <div className="bg-[#0A0f29] min-h-screen h-auto w-[15vw] grid grid-row-12 text-white justify-center">
       <div className="row-span-2 grid items-center">
         <NavLink to={"/client"}>
           <div className="flex space-x-4 items-center">

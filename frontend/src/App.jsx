@@ -10,6 +10,7 @@ import Offer from "./components/UI/offer";
 import Setting from "./components/UI/setting";
 import Wallet from "./components/UI/wallet";
 import LandingPage from "./components/UI/landingpage";
+import Profile from "./Util/Profile";
 import MainLayout from "./MainLayout";
 import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
@@ -33,6 +34,8 @@ import ClientLayout from "./ClientLayout";
 //        Testing Purpose       //
 // ##############################//
 
+import Home from "./components/SmartContractTestComponents/pages/Home";
+import Job from "./Util/job";
 // import Home from "./components/SmartContractTestComponents/pages/Home";
 import ButtonComponent from "../src/components/button";
 import { Buffer } from "buffer";
@@ -64,6 +67,21 @@ const App = () => {
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
+        <Route path="/client" element={<ClientLayout />}>
+          <Route path="/client" element={<ClientDashboard />} />
+        </Route>
+
+        {/*  Navigation on for the dashboard*/}
+        {/* <Route path="/" element={<MainLayout />}>
+          <Route path="/TalentDashboard" element={<Dashboard />} />
+          <Route path="chat" element={<Chat />} />
+          <Route path="job" element={<Job />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="discover" element={<Discover />} />
+          <Route path="gigs" element={<Gigs />} />
+          <Route path="offer" element={<Offer />} />
+          <Route path="setting" element={<Setting />} />
+          <Route path="wallet" element={<Wallet />} /> */}
         {/* Navigation for the client dashboard */}
         <Route path="/client" element={<ClientDashboard />} />
 
@@ -73,6 +91,8 @@ const App = () => {
           <Route path="/talent/chat" element={<Chat />} />
           <Route path="/talent/discover" element={<Discover />} />
           <Route path="/talent/gigs" element={<Gigs />} />
+          <Route path="/talent/job" element={<Job />} />
+          <Route path="/talent/profile" element={<Profile />} />
           <Route path="/talent/offer" element={<Offer />} />
           <Route path="/talent/setting" element={<Setting />} />
           <Route path="/talent/wallet" element={<Wallet />} />
