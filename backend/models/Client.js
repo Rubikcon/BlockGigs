@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const clientSchema = new mongoose.Schema(
   {
-    wallet_address: { type: String, required: true, unique: true },
+    wallet_address: { type: String, unique: true, sparse: true },
     fullname: { type: String, required: true },
     about: { type: String, required: true },
     email: { type: String, unique: true, sparse: true }, // Sparse prevents errors when null
