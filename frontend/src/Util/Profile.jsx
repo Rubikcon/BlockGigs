@@ -65,54 +65,68 @@ function Profile() {
               className="w-7 h-5 mt-1 cursor-pointer"
               onClick={() => navigate("/TalentDashboard")}
             />
-            <span className="">Profile Information</span>
+            <span className="text-[12px] md:text-[16px]">
+              Profile Information
+            </span>
           </div>
           <div className="col-span-1 flex justify-between">
-            <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[100%]">
-              <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
+            <div className="flex bg-white items-center justify-center rounded-[8px] md:py-1 w-[100%]">
+              <img
+                src={search}
+                alt=""
+                className="h-3 w-3 md:h-6 md:w-6 md:mr-4 md:my-1 md:ml-4"
+              />
               <input
-                placeholder="Search for jobs, talents or clients"
-                className="w-full flex"
+                placeholder={
+                  window.innerWidth >= 786
+                    ? "Search for jobs, talents or clients"
+                    : ""
+                }
+                className="w-[50%] md:w-full flex"
               />
             </div>
           </div>
           <div className="col-span-1 grid justify-center">
             <div className="flex gap-2">
-              <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+              <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center hidden">
                 <img src={bell2} alt="" className="h-4 w-4" />
               </div>
               <div className="flex gap-4">
                 <div>
-                  <img src={dp} alt="" className="h-6 w-6" />
+                  <img src={dp} alt="" className="h-6 w-6  hidden md:block" />
                 </div>
                 <div className="">
-                  <p className="-m-2">Glory Dseign</p>
-                  <span className="text-[10px] top-1 m-0">
+                  <p className="-m-2 text-[12px] md:text-[16px]">
+                    Glory Dseign
+                  </p>
+                  <span className="text-[8px] md:text-[10px] top-1 m-0">
                     Product Designer
                   </span>
                 </div>
-                <img src={down} alt="" className="w-8 h-8" />
+                <img src={down} alt="" className="w-8 h-8 hidden md:block" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="row-span-13 grid grid-cols-3 gap-4">
+      <div className="row-span-13 md:grid md:grid-cols-3 gap-4">
         <div className="col-span-2 grid grid-row-15 gap-3 px-4">
           <div className="row-span-1 bg-white rounded grid grid-rows-8 pb-2">
             <div className="row-span-3 border-b-[1px] border-gray-300 flex items-center justify-between px-4 py-2">
               <div className="flex  items-center gap-4 ">
-                <img src={dp} alt="" className="w-22 h-22" />
-                <div className="grid gap-3">
-                  <span className="text-[16px]">Glory Design</span>
-                  <div className="flex gap-2">
-                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                <img src={dp} alt="" className="md:w-22 md:h-22 w-10 h-10" />
+                <div className="md:grid md:gap-3">
+                  <span className="text-[12px] md:text-[16px]">
+                    Glory Design
+                  </span>
+                  <div className="flex md:gap-2">
+                    <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
                       UI/UX Design
                     </span>
-                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                    <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
                       Graphic Design
                     </span>
-                    <span className="text-[#1d4ed8] text-[12px] bg-[#e7eef1] px-1 rounded-[10px]">
+                    <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
                       Web Design
                     </span>
                   </div>
@@ -124,39 +138,41 @@ function Profile() {
                   alt=""
                   className="grid justify-self-end w-8 h-8"
                 />
-                <div className="flex gap-2">
-                  <span className="text-[14px] text-gray-400">
+                <div className="md:flex gap-2 -mt-4 md:mt-0">
+                  <span className="text-[8px] md:text-[14px] text-gray-400">
                     {available ? "Available for gigs" : "Unavailable for gigs"}
                   </span>
                   {available ? (
                     <img
                       src={toggle}
                       alt=""
-                      className="w-7 h-7 cursor-pointer"
+                      className="w-5 h-5 md:w-7 md:h-7 cursor-pointer"
                       onClick={() => setAvailable(!available)}
                     />
                   ) : (
                     <img
                       src={off}
                       alt=""
-                      className="w-7 h-7 cursor-pointer"
+                      className="w-5 h-5 md:w-7 md:h-7 cursor-pointer"
                       onClick={() => setAvailable(!available)}
                     />
                   )}
                 </div>
               </div>
             </div>
-            <div className="row-span-5 grid grid-cols-2">
+            <div className="row-span-5 md:grid md:grid-cols-2">
               <div className="col-span-1 grid ml-4 mt-4">
                 <div className="flex items-center justify-start gap-2">
                   <img
                     src={pix}
                     alt=""
-                    className="bg-[#dcf8e2] rounded-[8px]"
+                    className="bg-[#dcf8e2] rounded-[8px] w-4 h-4 md:w-6 md:h-6"
                   />
-                  <p className="text-gray-600">About</p>
+                  <p className="text-gray-600 text-[12px] md:text-[16px]">
+                    About
+                  </p>
                 </div>
-                <span className="text-gray-600 text-[16px] ">
+                <span className="text-gray-600 text-[12px] md:text-[16px] ">
                   Product Designer passionate about crafting intuitive and
                   user-centered experiences. I thrive on solving complex design
                   challenges and creating impactful solution that meet both user
@@ -168,24 +184,38 @@ function Profile() {
                   <img
                     src={page}
                     alt=""
-                    className="bg-[#dcf8e2] rounded-[8px] h-5 w-5"
+                    className="bg-[#dcf8e2] rounded-[8px] md:h-5 md:w-5 w-3 h-3 mt-1 md:mt-0"
                   />
-                  <p className="text-gray-600">Other Information</p>
+                  <p className="text-gray-600 text-[12px] md:text-[16px]">
+                    Other Information
+                  </p>
                 </div>
-                <div className="flex gap-6 ml-15 mt-5 text-[14px]">
+                <div className="flex gap-6 ml-15 mt-5 text-[10px] md:text-[14px]">
                   <div>
                     <p>Time Zone</p>
                     <div className="flex gap-1 mt-2">
-                      <img src={locate} alt="" className="w-4 h-4 mt-1" />
+                      <img
+                        src={locate}
+                        alt=""
+                        className="w-3 h-3 md:w-4 md:h-4 md:mt-1"
+                      />
                       <p>UTC+1</p>
                     </div>
                   </div>
                   <div>
                     <p>Portfolio Links</p>
                     <div className="flex gap-2 mt-3">
-                      <img src={github} alt="" className="w-4 h-4" />
-                      <img src={x} alt="" className="w-3 h-3" />
-                      <img src={global} alt="" className="w-4 h-4" />
+                      <img
+                        src={github}
+                        alt=""
+                        className="w-3 h-3 md:w-4 md:h-4"
+                      />
+                      <img src={x} alt="" className="w-2 h-2 md:w-3 md:h-3" />
+                      <img
+                        src={global}
+                        alt=""
+                        className="w-3 h-3 md:w-4 md:h-4"
+                      />
                     </div>
                   </div>
                   <div>
@@ -193,7 +223,7 @@ function Profile() {
                     <span className="mt-2 flex">$10/hr</span>
                   </div>
                 </div>
-                <div className="flex ml-16 mt-4 gap-6 text-[14px]">
+                <div className="flex ml-16 mt-4 gap-6 text-[10px] md:text-[14px]">
                   <p>Language</p>
                   <div className="flex gap-2">
                     <p>English</p>
@@ -205,18 +235,20 @@ function Profile() {
             </div>
           </div>
           <div className="row-span-14 bg-white grid grid-rows-14">
-            <div className="w-full border-b-2 border-gray-400 row-span-1 grid grid-flow-col justify-center items-center gap-4 text-[14px]">
+            <div className="w-full border-b-2 border-gray-400 row-span-1 grid grid-flow-col justify-center items-center gap-4 text-[12px] md:text-[14px]">
               <span>Works/Exprience</span>
               <span>Review (5)</span>
             </div>
             <div className="row-span-13 mt-2">
               {experience.map((item, i) => (
-                <div key={i} className="grid grid-cols-8">
+                <div key={i} className="grid grid-cols-8 px-2 md:px-0">
                   <div className="col-span-1 grid justify-center">
-                    <img src={dp} alt="" className="w-12 h-12" />
+                    <img src={dp} alt="" className="w-8 md:w-12 h-8 md:h-12" />
                   </div>
                   <div className="col-span-7 ">
-                    <div className="font-bold text-[15px]">{item.title}</div>
+                    <div className="font-bold text-[12px] md:text-[15px]">
+                      {item.title}
+                    </div>
                     <div className="flex text-[12px] text-gray-400 gap-2">
                       <span>{item.gig} •</span>
                       <span>
@@ -232,7 +264,7 @@ function Profile() {
                     </div>
                     <div className="flex py-4 gap-2">
                       {item.image.map((f, i) => (
-                        <div key={i} className="w-20 h-20">
+                        <div key={i} className="md:w-20 md:h-20 w-10 h-10">
                           <img src={f} alt="" />
                         </div>
                       ))}
@@ -244,12 +276,12 @@ function Profile() {
           </div>
         </div>
         <div className="grid grid-rows-15 cols-span-1 gap-4">
-          <div className="row-span-8 bg-[#e3f1ff] p-2 py-4 rounded-[10px]">
-            <div className="flex w-[100%]">
+          <div className="row-span-8 bg-[#e3f1ff] md:p-2 md:py-4 rounded-[10px]">
+            <div className="flex w-[100%] text-[12px] md:text-[16px]">
               Constructive tips to{" "}
               <div className="px-1">
-                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] w-[58.58px] h-[32.28px] -ml-[0.7rem] rotate-x-210 rotate-z-45"></div>
-                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] w-[58.58px] h-[32.28px] -ml-[0.7rem] rotate-x-190 rotate-z-45"></div>
+                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-210 rotate-z-45"></div>
+                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-190 rotate-z-45"></div>
                 <span className="text-[#fbbf24] relative">Boost</span>
               </div>{" "}
               your profile for hiring chances

@@ -17,9 +17,9 @@ function JobModal({ visible, onClose, item }) {
   };
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-      <div className="grid grid-rows-7 shadow-xs bg-white w-[30%] h-[50%] rounded-[5px] p-4">
+      <div className="md:grid md:grid-rows-7 shadow-xs bg-white w-full md:w-[30%] h-[50%] rounded-[5px] p-4">
         {!apply ? (
-          <div className="grid gap-4">
+          <div className="md:grid md:gap-4">
             <img
               src={man}
               alt=""

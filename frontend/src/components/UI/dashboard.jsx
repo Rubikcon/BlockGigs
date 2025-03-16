@@ -398,7 +398,6 @@ function Dashboard() {
   };
 
   const milestoneHandler = (item) => {
-    console.log(item, "KKKKKKKKK");
     setOpenMilestone(true);
     setDetail(item);
   };
@@ -411,15 +410,15 @@ function Dashboard() {
         onClick={() => displayJob(item)}
       >
         <div>
-          <h3>{item.title}</h3>
+          <h3 className="text-[12px] md:text-[16px]">{item.title}</h3>
           <div className="flex gap-2">
-            <img src={item.image} alt="" className="h-4 w-4 " />
-            <p className="text-[12px]">
+            <img src={item.image} alt="" className="h-3 w-3 md:h-4 md:w-4 " />
+            <p className="text-[8px] md:text-[12px]">
               {item.name} | {item.duration}
             </p>
           </div>
         </div>
-        <div className="w-8 h-8 font-bold">
+        <div className="w-5 h-5 md:w-8 md:h-8 font-bold">
           <CircularProgressbar value={item.range} text={`${item.range}%`} />
         </div>
       </div>
@@ -433,7 +432,9 @@ function Dashboard() {
     >
       <div className="flex justify-between">
         <div>
-          <div className="font-bold">{item.title}</div>
+          <div className="font-bold text-[12px] md:text-[16px]">
+            {item.title}
+          </div>
           <div className="flex">
             <div className="text-[12px] text-gray-400">{item.duration} | </div>
             <div className="flex ml-2">
@@ -444,13 +445,13 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <img src={item.image2} alt="" />
+        <img src={item.image2} alt="" className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div className="text-[12px] mb-3 w-[70%]">{item.description}</div>
       <div className="flex justify-between">
         <div className="text-blue-600 text-[12px] mb-2">${item.price}</div>
         <button
-          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[11.38px] w-[104px] h-[31px] mb-2 cursor-pointer"
+          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[10px] md:text-[11.38px] w-[70px] md:w-[104px] h-[31px] mb-2 cursor-pointer"
           onClick={() => jobDetail(item)}
         >
           See Details
@@ -463,50 +464,61 @@ function Dashboard() {
     navigate("/profile");
   };
   return (
-    <div>
-      <div className="bg-gray-100 w-[83.85vw] h-[100vh] grid grid-rows-12 px-4 gap-2">
+    <div className=" mb-4">
+      <div className="bg-gray-100 w-screen md:w-[83.85vw] h-[20vh] md:h-[100vh] grid grid-rows-12 px-4 gap-2 ">
         {job === "" ? (
           <div>
             <div className="row-span-1 grid items-center px-2 mt-2">
               <div className="grid w-full">
                 <div className="grid grid-cols-3 gap-1 w-full">
                   <div className="col-span-1">
-                    <span className="flex gap-1">
-                      Welcome back, Let's <p className="text-green-400">Work</p>
+                    <span className="flex gap-1 text-[12px] sm:text-[12px] md:text-[15px]">
+                      Welcome <p className=" hidden md:block">back, Let's </p>
+                      <p className="text-green-400  hidden md:block">Work</p>
                     </span>
                   </div>
                   <div className="col-span-1 mb-2">
-                    <div className="flex bg-white items-center justify-center rounded-[8px] py-1">
+                    <div className="flex bg-white items-center justify-center rounded-[8px] md:py-1">
                       <img
                         src={search}
                         alt=""
-                        className="h-6 w-6 mr-4 my-1 ml-4"
+                        className="w-3 h-3 md:h-6 md:w-6 mr-4 md:my-1 ml-4"
                       />
                       <input
-                        placeholder="Search for jobs, talents or clients"
-                        className="w-full flex"
+                        placeholder={
+                          window.innerWidth >= 768
+                            ? "Search for jobs, talents or clients"
+                            : ""
+                        }
+                        className="w-[10%] md:w-full flex"
                       />
                     </div>
                   </div>
                   <div className="col-span-1 grid justify-center">
                     <div className="flex gap-2">
-                      <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center cursor-pointer">
+                      <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">
                         <img src={bell2} alt="" className="h-4 w-4" />
                       </div>
                       <div className="flex gap-4">
                         <div>
-                          <img src={dp} alt="" className="h-6 w-6" />
+                          <img
+                            src={dp}
+                            alt=""
+                            className="h-6 w-6 hidden md:block"
+                          />
                         </div>
                         <div className="">
-                          <p className="-m-2">Glory Design</p>
-                          <span className="text-[10px] top-1 m-0">
+                          <p className="-m-2 text-[12px] md:text-[15px]">
+                            Glory Design
+                          </p>
+                          <span className="text-[6px] md:text-[10px] top-1 m-0">
                             Product Designer
                           </span>
                         </div>
                         <img
                           src={down}
                           alt=""
-                          className="w-8 h-8 cursor-pointer"
+                          className=" md:block w-[14px] h-[14px] md:w-8 md:h-8 cursor-pointer"
                           onClick={openProfile}
                         />
                       </div>
@@ -515,26 +527,32 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="row-span-3 grid grid-cols-5 gap-4">
-              <div className="bg-white shadow-2xl shadow-gray-400 col-span-3 rounded-[0.6rem] grid">
+            <div className="row-span-3 md:grid md:grid-cols-5 gap-4">
+              <div className="bg-white shadow-2xl shadow-gray-400 col-span-3 rounded-[0.6rem] grid mb-1 md:my-0">
                 <div className="flex items-center w-full p-4">
-                  <p className="">Ongoing Jobs</p>
-                  <Link className="ml-auto">View All</Link>
+                  <p className="text-[12px] md:text-[16px]">Ongoing Jobs</p>
+                  <Link className="text-[12px] md:text-[16px] ml-auto">
+                    View All
+                  </Link>
                 </div>
                 <div className="px-4 py-2">{RenderJob}</div>
               </div>
               <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
                   <div className="flex mb-8">
-                    <p className="">My Offers</p>
-                    <Link className="ml-auto">View All</Link>
+                    <p className="text-[12px] md:text-[16px]">My Offers</p>
+                    <Link className="text-[12px] md:text-[16px] ml-auto">
+                      View All
+                    </Link>
                   </div>
                   {offer.length === 0 ? (
                     <div className="grid justify-center mt-4">
                       <img src={empty} alt="" className="h-18 w-18" />
                       <div className="grid justify-center ">
-                        <p className="text-black text-sm mt-4">No Offers yet</p>
-                        <p className="text-[10px] -ml-8">
+                        <p className="text-black text-[12px] md:text-sm mt-4">
+                          No Offers yet
+                        </p>
+                        <p className=" text-[8px] md:text-[10px] -ml-8">
                           Keep on applying You got THIS!
                         </p>
                       </div>
@@ -547,15 +565,23 @@ function Dashboard() {
                         onClick={() => myOfferHandler(item)}
                       >
                         <div>
-                          <div>{item.title}</div>
+                          <div className="text-[12px] md:text-[16px]">
+                            {item.title}
+                          </div>
                           <div className="flex gap-2">
-                            <img src={dp} alt="" className="h-4 w-4" />
-                            <span className="text-[12px]">
+                            <img
+                              src={dp}
+                              alt=""
+                              className="h-3 w-3 md:h-4 md:w-4"
+                            />
+                            <span className="text-[8px] md:text-[12px]">
                               {item.name} | {item.duration}
                             </span>
                           </div>
                         </div>
-                        <div className="text-sm">{item.status}</div>
+                        <div className="text-[10px] md:text-sm">
+                          {item.status}
+                        </div>
                       </div>
                     ))
                   )}
@@ -564,12 +590,12 @@ function Dashboard() {
             </div>
             <div className="w-[66.56%] row-span-1 mt-2">
               <div className="flex w-full justify-between gap-4 pr-6">
-                <p className="">Recommended Jobs</p>
-                <Link className="">View All</Link>
+                <p className="text-[12px] md:text-[16px]">Recommended Jobs</p>
+                <Link className="text-[12px] md:text-[16px]">View All</Link>
               </div>
             </div>
             <div className="grid row-span-7 pr-4 pb-4">
-              <div className="grid grid-cols-3 row-span-5 gap-4">
+              <div className="md:grid md:grid-cols-3 row-span-5 gap-4">
                 <div className="col-span-2">{renderRecommend}</div>
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">
                   <div className="flex justify-between">
@@ -582,7 +608,7 @@ function Dashboard() {
             </div>{" "}
           </div>
         ) : (
-          <div>
+          <div className="">
             <div className="row-span-1 grid items-center px-2 h-18">
               <div className="grid w-full">
                 <div className="grid grid-cols-3 gap-1 w-full">
@@ -590,12 +616,14 @@ function Dashboard() {
                     <img
                       src={back}
                       alt=""
-                      className="w-12 h-6 mr-2 cursor-pointer"
+                      className="w-10 h-6 mr-2 cursor-pointer"
                       onClick={() => setJob("")}
                     />
-                    <span className="text-xl">Ongoing Gig/Saas Webs..</span>
+                    <span className="text-xl hidden md:block">
+                      Ongoing Gig/Saas Webs..
+                    </span>
                   </div>
-                  <div className="col-span-1">
+                  {/* <div className="col-span-1">
                     <div className="flex bg-white items-center justify-center rounded-[8px] py-1">
                       <img
                         src={search}
@@ -603,12 +631,33 @@ function Dashboard() {
                         className="h-6 w-6 mr-4 my-1 ml-4"
                       />
                       <input
-                        placeholder="Search for jobs, talents or clients"
+                        placeholder={
+                          window.innerWidth >= 768
+                            ? "Search for jobs, talents or clients"
+                            : ""
+                        }
                         className="w-full flex"
                       />
                     </div>
+                  </div> */}
+                  <div className="col-span-1 mb-2">
+                    <div className="flex bg-white items-center justify-center rounded-[8px] md:py-1">
+                      <img
+                        src={search}
+                        alt=""
+                        className="w-3 h-3 md:h-6 md:w-6 mr-4 md:my-1 ml-4"
+                      />
+                      <input
+                        placeholder={
+                          window.innerWidth >= 768
+                            ? "Search for jobs, talents or clients"
+                            : ""
+                        }
+                        className="w-[10%] md:w-full flex"
+                      />
+                    </div>
                   </div>
-                  <div className="col-span-1 grid justify-center">
+                  {/* <div className="col-span-1 grid justify-center">
                     <div className="flex gap-2">
                       <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
                         <img src={bell2} alt="" className="h-4 w-4" />
@@ -626,25 +675,59 @@ function Dashboard() {
                         <img src={down} alt="" className="w-8 h-8" />
                       </div>
                     </div>
+                  </div> */}
+                  <div className="col-span-1 grid justify-center">
+                    <div className="flex gap-2">
+                      <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">
+                        <img src={bell2} alt="" className="h-4 w-4" />
+                      </div>
+                      <div className="flex gap-4">
+                        <div>
+                          <img
+                            src={dp}
+                            alt=""
+                            className="h-6 w-6 hidden md:block"
+                          />
+                        </div>
+                        <div className="">
+                          <p className="-m-2 text-[12px] md:text-[15px]">
+                            Glory Design
+                          </p>
+                          <span className="text-[6px] md:text-[10px] top-1 m-0">
+                            Product Designer
+                          </span>
+                        </div>
+                        <img
+                          src={down}
+                          alt=""
+                          className="hidden md:block w-8 h-8 cursor-pointer"
+                          onClick={openProfile}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-10">
+            <div className="md:grid md:grid-cols-3 md:gap-10">
               <div className="col-span-2 px-4 py-2">
                 <div className="flex justify-between bg-[#e3f1ff] w-full rounded-[5px] py-4 px-6">
                   <div>
-                    <span>{job.title}</span>
-                    <div className="flex gap-2">
+                    <span className="text-[12px] md:text-[15px]">
+                      {job.title}
+                    </span>
+                    <div className="flex gap-0.5 md:gap-2">
                       <img src={job.image} alt="" className="h-6 w-6" />
-                      <div>{job.name}</div>
-                      <p className="">•</p>
-                      <span className="text-gray-400 text-[14px] mt-1">
+                      <div className="text-[10px] md:text-[15px]">
+                        {job.name}
+                      </div>
+                      <p className="-mt-1">•</p>
+                      <span className="text-gray-400 text-[10px] md:text-[15px] mt-1">
                         {job.started}
                       </span>
                     </div>
                   </div>
-                  <div className="w-14 h-14 font-bold">
+                  <div className="w-10 h-10 md:w-14 md:h-14 font-bold">
                     <CircularProgressbar
                       value={job.range}
                       text={`${job.range}%`}
@@ -658,52 +741,65 @@ function Dashboard() {
                       alt=""
                       className="h-4 w-3 mt-1 bg-green-400"
                     />
-                    <span className="text-[14px] mb-2">Gig Details</span>
+                    <span className="text-[12px] md:text-[14px] mb-2">
+                      Gig Details
+                    </span>
                   </div>
-                  <span className="text-[14px]">{job.detail}</span>
+                  <span className="text-[9px] md:text-[14px]">
+                    {job.detail}
+                  </span>
                 </div>
-                <div className="bg-white w-full h-auto max-h-[100%] mt-4 py-4 px-6 rounded-[5px]">
+                <div className="bg-white w-full h-auto max-h-[100%] mt-0 md:mt-4 py-4 px-6 rounded-[5px]">
                   <div className="flex gap-2">
                     <img
                       src={bat}
                       alt=""
-                      className="h-4 w-3 mt-1 bg-blue-400"
+                      className="h-3 w-3 md:h-4 md:w-3 mt-1 bg-blue-400"
                     />
-                    <span className="text-[14px] mb-2 text-black font-bold">
+                    <span className="text-[10px] md:text-[14px] mb-2 text-black font-bold">
                       Milestone Payments
                     </span>
                   </div>
                   {job.milestone.map((d, index) => (
-                    <div key={index} className="flex gap-2 space-y-2">
-                      <div className="text-[12px]">{d.title}</div>
-                      <span className="text-[12px]">–</span>
+                    <div
+                      key={index}
+                      className="flex gap-2 space-y-1 md:space-y-2"
+                    >
+                      <div className="text-[8px] md:text-[12px]">{d.title}</div>
+                      <span className="text-[8px] md:text-[12px]">–</span>
                       <img src={d.image} alt="" className="w-3 h-3 mt-1" />
-                      <span className="text-[12px]">{d.prize}$</span>
+                      <span className="text-[8px] md:text-[12px]">
+                        {d.prize}$
+                      </span>
                       <span className="-mt-1">•</span>
-                      <p className="text-[12px] text-gray-600">{d.detail}</p>
+                      <p className="text-[8px] md:text-[12px] text-gray-600">
+                        {d.detail}
+                      </p>
                     </div>
                   ))}
-                  <div className="flex gap-2">
-                    <p className="text-[12px]">Total Job Pay –</p>
+                  <div className="flex gap-1 md:gap-2">
+                    <p className="text-[8px] md:text-[12px]">Total Job Pay –</p>
                     <img src={crypto} alt="" className="w-3 h-3 mt-1" />
-                    <span className="text-[14px]">
+                    <span className="text-[10px] md:text-[14px]">
                       {job.milestone
                         .map((item) => item.prize)
                         .reduce((acc, p) => acc + p, 0)}
                     </span>
                     <span className="-mt-1">•</span>
-                    <p className="text-[12px]">{job.title} gig completed</p>
+                    <p className="text-[9px] md:text-[12px]">
+                      {job.title} gig completed
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="col-span-1">
+              <div className="col-span-1 justify-self-center mb-4">
                 {job.milestone.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-white h-auto mb-2 p-4 w-[80%] rounded-[5px] space-y-2 cursor-pointer"
+                    className="bg-white h-auto md:mb-2 md:px-4 w-[80%] rounded-[5px] space-y-1 md:space-y-2 cursor-pointer"
                     onClick={() => milestoneHandler(item)}
                   >
-                    <h2 className="font-bold text-[16px]">
+                    <h2 className="font-bold text-[10px] md:text-[16px]">
                       {item.title[0].toUpperCase() + item.title.slice(1)}
                     </h2>
                     <div className="text-[12px] font-bold">

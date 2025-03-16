@@ -26,7 +26,7 @@ function OfferModal({ visible, onClose, item, accept }) {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-      <div className="grid grid-rows-12 shadow-xs bg-white w-[30%] h-[50%] rounded-[5px] p-4">
+      <div className="md:grid md:grid-rows-12 shadow-xs bg-white w-full md:w-[30%] md:h-[50%] rounded-[5px] p-4">
         <div className="row-span-1 flex justify-between w-full">
           <span className="text-black">Offer for Gig</span>
           <img
@@ -77,23 +77,23 @@ function OfferModal({ visible, onClose, item, accept }) {
                 className="grid grid-flow-col text-gray-400 gap-1"
               >
                 <span className="-mt-1">•</span>
-                <div className="text-[12px]">{item.title}</div>
+                <div className="text-[10px] md:text-[12px]">{item.title}</div>
                 <span className="-mt-1">–</span>
                 <img src={crypto} alt="" className="w-3 h-3 mt-1" />
-                <div className="text-[12px]">{item.amt}$</div>
+                <div className="text-[10px] md:text-[12px]">{item.amt}$</div>
                 <span className="-mt-1">•</span>
-                <span className="text-[12px]">{item.job}</span>
+                <span className="text-[10px] md:text-[12px]">{item.job}</span>
               </div>
             ))}
             <div className="flex text-gray-400 gap-1">
               <span className="-mt-0.5">•</span>
-              <span className="text-[14px]">Total Job pay</span>
+              <span className="text-[10px] md:text-[14px]">Total Job pay</span>
               <span className="-mt-0.5">–</span>
-              <div className="text-[13px]">
+              <div className="text-[10px] md:text-[13px] mt-1 md:mt-0">
                 {item.milestone.reduce((curr, acc) => acc.amt + curr, 0)}$
               </div>
               <span className="-mt-0.5">•</span>
-              <span className="text-[13px]">
+              <span className="text-[10px] md:text-[13px] mt-1 md:mt-0">
                 Saas website design gig completed
               </span>
             </div>

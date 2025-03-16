@@ -26,7 +26,7 @@ function MilestoneModal({ visible, onClose, item }) {
 
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-      <div className="grid grid-rows-8 shadow-xs bg-white w-[30%] h-[70%] rounded-[5px] p-4">
+      <div className="grid grid-rows-8 shadow-xs bg-white w-full md:w-[30%] md:h-[70%] rounded-[5px] p-4">
         <div className="flex justify-between row-span-1">
           <p>{item.title[0].toUpperCase() + item.title.slice(1)}</p>
           <span className="bg-[#ffefc7] text-[#eead06] px-3 rounded-[10px] h-6 ">
@@ -79,7 +79,7 @@ function MilestoneModal({ visible, onClose, item }) {
         </div>
         <div className="row-span-3  overflow-auto">
           <p>Older Comments</p>
-          {todo === "" ? (
+          {todo.length === 0 ? (
             <div className="grid justify-center items-center mt-4">
               <img src={empty} alt="" />
               <p className="text-gray-400 text-[12px]">No comment yet</p>

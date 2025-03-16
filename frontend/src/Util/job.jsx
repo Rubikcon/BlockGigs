@@ -75,12 +75,14 @@ function Job() {
             <img
               src={arrow}
               alt=""
-              className="w-7 h-5 mt-1 cursor-pointer"
+              className="w-4 h-4 md:w-7 md:h-5 mt-1 cursor-pointer"
               onClick={() => navigate("/TalentDashboard")}
             />
-            <span className="">Profile Information</span>
+            <span className="text-[10px] md:text-[16px]">
+              Profile Information
+            </span>
           </div>
-          <div className="col-span-1 flex justify-between">
+          {/* <div className="col-span-1 flex justify-between">
             <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[100%]">
               <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
               <input
@@ -88,31 +90,48 @@ function Job() {
                 className="w-full flex"
               />
             </div>
+          </div> */}
+          <div className="col-span-1 mb-2">
+            <div className="flex bg-white items-center justify-center rounded-[8px] md:py-1">
+              <img
+                src={search}
+                alt=""
+                className="w-3 h-3 md:h-6 md:w-6 mr-4 md:my-1 ml-4"
+              />
+              <input
+                placeholder={
+                  window.innerWidth >= 768
+                    ? "Search for jobs, talents or clients"
+                    : ""
+                }
+                className="w-[10%] md:w-full flex"
+              />
+            </div>
           </div>
           <div className="col-span-1 grid justify-center">
             <div className="flex gap-2">
-              <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+              <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center hidden">
                 <img src={bell2} alt="" className="h-4 w-4" />
               </div>
               <div className="flex gap-4">
                 <div>
-                  <img src={dp} alt="" className="h-6 w-6" />
+                  <img src={dp} alt="" className="h-6 w-6 hidden md:block" />
                 </div>
                 <div className="">
-                  <p className="-m-2">Glory Dseign</p>
-                  <span className="text-[10px] top-1 m-0">
+                  <p className="-m-2 text-[9px] md:-[16px]">Glory Dseign</p>
+                  <span className="text-[7px] md:text-[10px] top-1 m-0">
                     Product Designer
                   </span>
                 </div>
-                <img src={down} alt="" className="w-8 h-8" />
+                <img src={down} alt="" className="w-8 h-8 hidden md:block" />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="row-span-11">
-        <div className="grid grid-cols-3 h-full">
-          <div className="col-span-2 grid grid-rows-7 gap-4">
+        <div className=" md:grid md:grid-cols-3 h-full">
+          <div className="col-span-2 md:grid md:grid-rows-7 gap-4">
             <div className="row-span-1 bg-[#e3f1ff] rounded-[8px] p-4">
               <div className="flex justify-between">
                 <p>{state.title}</p>
@@ -167,7 +186,7 @@ function Job() {
               </div>
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="md:col-span-1">
             <div className="flex justify-between px-8">
               <p>Similar Jobs</p>
               <p className="text-[#2f66f6]">View All</p>
