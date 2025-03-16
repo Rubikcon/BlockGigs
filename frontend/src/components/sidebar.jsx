@@ -28,13 +28,8 @@ function Sidebar() {
           </div>
         </NavLink>
       </div>
-<<<<<<< HEAD
       <div className="row-span-9 space-y-4 w-[12vw]">
         <NavLink to="/talent/dashboard">
-=======
-      <div className="flex md:flex-col md:row-span-9 md:col-span-2 col-span-7 space-y-4 justify-between">
-        <NavLink to="/TalentDashboard">
->>>>>>> talent
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${

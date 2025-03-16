@@ -28,6 +28,7 @@ import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 import ClientDashboard from "./Pages/ClientDashboard";
 import ClientLayout from "./ClientLayout";
+import Job from "./Util/job";
 // import WalletConnect from "./components/ConnectWallet/ConnectWallet";
 
 // ##############################//
@@ -35,7 +36,6 @@ import ClientLayout from "./ClientLayout";
 // ##############################//
 
 import Home from "./components/SmartContractTestComponents/pages/Home";
-import Job from "./Util/job";
 // import Home from "./components/SmartContractTestComponents/pages/Home";
 import ButtonComponent from "../src/components/button";
 import { Buffer } from "buffer";
