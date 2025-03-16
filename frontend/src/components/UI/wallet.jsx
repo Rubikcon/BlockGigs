@@ -49,7 +49,7 @@ const wallet = [
     currency: crypto2,
   },
   {
-    amount: "2000 USDt",
+    amount: "2000 ETH ",
     client: "Andrea Stiles",
     clientID: "0xcfg3tf...E5e",
     talent: "Web developer | Product Designer",
@@ -66,7 +66,7 @@ const wallet = [
     currency: logo,
   },
   {
-    amount: "1000 USDt",
+    amount: "1000 ETH",
     client: "Apex Tech",
     clientID: "0xduyr58uyt7...E5e",
     talent: "Apex Design | Product Designer",
@@ -237,7 +237,7 @@ function Wallet() {
             </div>
             <div className="bg-white rounded-[8px] pl-2 md:pl-4 py-2 md:py-4 border-b border-gray-400 md:border-none">
               <span className="text-[#009393] text-[14px] md:text-[25px]">
-                USDT
+                ETH
               </span>
               <div className="flex md:items-center  md:justify-center md:gap-4 md:mt-8">
                 <img
