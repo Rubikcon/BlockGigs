@@ -5,7 +5,7 @@ This API allows users to register, login, create jobs, and retrieve available jo
 ## Base URL
 
 ```
-http://localhost:4000/api
+https://blockgigs-bt8d.onrender.com/api
 ```
 
 ## Authentication
@@ -20,7 +20,7 @@ Authorization: Bearer <token>
 
 ## **Endpoints**
 
-### **1. Register User**
+<!-- ### **1. Register User**
 
 - **URL:** `/auth/register`
 - **Method:** `POST`
@@ -62,6 +62,103 @@ Authorization: Bearer <token>
   "role": "client",
   "email": "client@example.com",
   "password": "securepassword"
+}
+```
+
+- **Response:**
+
+```json
+{
+  "message": "Login successful",
+  "token": "<JWT_TOKEN>",
+  "user": {
+    "id": "<user_id>",
+    "email": "client@example.com",
+    "isVerified": true
+  }
+}
+```
+
+---
+
+
+ -->
+
+---
+
+## **Endpoints**
+
+### **1. Register User**
+
+- **URL:** `/auth/register`
+- **Method:** `POST`
+- **Payload:**
+
+```json
+{
+  "role": "client",
+  "wallet_address": "0x1234567890abcdef",
+  "email": "client@example.com",
+  "password": "securepassword",
+  "fullname": "John Doe",
+  "about": "I am a client looking for talented developers."
+}
+```
+
+- **Response:**
+
+```json
+{
+  "message": "User registered successfully",
+  "user": {
+    "id": "<user_id>",
+    "email": "client@example.com"
+  }
+}
+```
+
+---
+
+### **2. Login User with Email & Password**
+
+- **URL:** `/auth/login`
+- **Method:** `POST`
+- **Payload:**
+
+```json
+{
+  "role": "client",
+  "email": "client@example.com",
+  "password": "securepassword"
+}
+```
+
+- **Response:**
+
+```json
+{
+  "message": "Login successful",
+  "token": "<JWT_TOKEN>",
+  "user": {
+    "id": "<user_id>",
+    "email": "client@example.com",
+    "isVerified": true
+  }
+}
+```
+
+---
+
+### **3. Login User with Wallet Address**
+
+- **URL:** `/auth/login`
+- **Method:** `POST`
+- **Payload:**
+
+```json
+{
+  "role": "client",
+  "wallet_address": "0x1234567890abcdef"
 }
 ```
 
