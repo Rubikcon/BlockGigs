@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import client from "../../assets/client.png";
 import talent from "../../assets/talent.png";
@@ -8,7 +8,11 @@ import { FaArrowRightLong } from "react-icons/fa6";
 const Persona = () => {
   const navigate = useNavigate();
   const [selectedPersona, setSelectedPersona] = useState(null);
-
+  const location = useLocation();
+  const {
+    account,
+    //  signature, balance
+  } = location.state || {};
   // Handle selection for the user
   const handleSelect = (persona) => {
     setSelectedPersona(persona);
@@ -18,17 +22,31 @@ const Persona = () => {
   // Handle navigation within pages
   const handleNext = () => {
     if (selectedPersona) {
-      navigate(`/${selectedPersona}form`); // Dynamically navigate to the selected page
+      navigate(`/${selectedPersona}form`, {
+        replace: true, // Use replace to prevent back button issues
+        state: {
+          account,
+          selectedPersona,
+          // signature,
+          // balance,
+        },
+      }); // Dynamically navigate to the selected page
     }
+  };
+
+  const handleGotoHome = () => {
+    navigate("/");
   };
 
   return (
     <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
       <div className="w-[103px] h-[37px] flex justify-between items-center gap-2">
-        <img src={logo} alt="Blockgigs logo" />
-        <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo">
-          Blockgigs
-        </h1>
+        <Link to={"/"} className="mt-15 ml-5">
+          <img src={logo} alt="Blockgigs logo" />
+          <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo">
+            Blockgigs
+          </h1>
+        </Link>
       </div>
 
       <div className="flex items-center justify-center mt-[6rem]">

@@ -13,7 +13,17 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.4",
     "@tailwindcss/vite": "^4.0.3",
+    "@tanstack/react-query": "^5.67.3",
+    "@web3-onboard/arcana-auth": "^2.1.1",
+    "@web3-onboard/bitget": "^2.1.1",
+    "@web3-onboard/coinbase": "^2.4.2",
+    "@web3-onboard/core": "^2.24.0",
+    "@web3-onboard/metamask": "^2.2.1",
+    "@web3-onboard/phantom": "^2.1.1",
+    "buffer": "^6.0.3",
+    "esbuild": "^0.25.1",
     "ethers": "^6.13.5",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.10.2",
@@ -24,10 +34,12 @@
     "react-router-dom": "^7.1.5",
     "react-select": "^5.10.1",
     "tailwindcss": "^4.0.3",
+    "wagmi": "^2.14.13",
     "web3": "^4.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/node": "^22.13.10",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
@@ -36,6 +48,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "typescript": "^5.8.2",
     "vite": "^6.2.1"
   }
 }

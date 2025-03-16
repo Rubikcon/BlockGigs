@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 
 const ClientForm = () => {
@@ -7,6 +7,9 @@ const ClientForm = () => {
   const [name, setName] = useState("");
   const [work, setWork] = useState("");
   const [errors, setErrors] = useState({});
+  const location = useLocation();
+
+  const { account, selectedPersona } = location.state || {};
 
   const handleSubmit = (e) => {
     e.preventDefault();

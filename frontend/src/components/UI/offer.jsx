@@ -5,7 +5,7 @@ import down from "../../assets/down.png";
 import bell2 from "../../assets/bell.png";
 import bag3 from "../../assets/bag3.png";
 import bag2 from "../../assets/bag2.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { NavLink, useNavigate } from "react-router-dom";
 // import cancel from "../../assets/cancel.png";
 // import clock from "../../assets/clock.png";
 // import file from "../../assets/file.png";
@@ -212,7 +212,7 @@ const application = [
 
 function Offer() {
   const [active, setActive] = useState(1);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div>
       <div className="md:bg-gray-100 w-screen md:w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">

@@ -8,6 +8,11 @@ import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 
+// import ConnectWallet from "../ConnectWallet/ConnectWallet";
+
+// Import the connectButton from the tsconfiguration
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 import CONTRACT_ABI from "../../config/contractABI.json";
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
@@ -19,11 +24,20 @@ const Signup = () => {
   const [signer, setSigner] = useState(null);
   const [roles, setRoles] = useState("talent");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // const [userData, setUserData] = useState({
-  //   name: "",
-  //   role: "talent",
-  // });
+  const [walletAccount, setWalletAccount] = useState(null);
+  const [walletError, setWalletError] = useState(null);
+
+  const handleSuccess = (account) => {
+    setWalletAccount(account);
+
+    console.log("Wallet connected:", account);
+  };
+
+  const handleError = (error) => {
+    setWalletError(error);
+
+    console.log("Wallet connection failed:", error);
+  };
 
   // Add loading state to UI
   useEffect(() => {
@@ -35,27 +49,10 @@ const Signup = () => {
     }
   }, [loading]);
 
-  // Add network check
-  // useEffect(() => {
-  //   const checkNetwork = async () => {
-  //     if (window.ethereum) {
-  //       const chainId = await window.ethereum.request({
-  //         method: "eth_chainId",
-  //       });
-  //       // Add your required chain ID here
-  //       if (chainId !== "534351") {
-  //         // Example for Ethereum mainnet
-  //         setError("Please connect to the correct network");
-  //       }
-  //     }
-  //   };
-  //   checkNetwork();
-  // }, []);
-
   const navigate = useNavigate(); //for page navigation
 
   const handleSubmit = (e) => {
-    console.log(CONTRACT_ABI);
+    // console.log(CONTRACT_ABI);
     e.preventDefault(); //This will stop the form from submitting to itself
 
     //Checking if the email field is empty
@@ -63,9 +60,6 @@ const Signup = () => {
       alert("Enter email address to continue!");
       return;
     }
-
-    // Take back user to the home page
-
     //Checking if the email address is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -73,363 +67,84 @@ const Signup = () => {
       alert("Please put a valid email address!");
       return;
     }
+    localStorage.setItem("email", email);
 
     //If email is valid, form can be sumbitted
     alert("Form submitted successfully!");
 
     // Navigate to verification page and pass the email as state
-    navigate("/emailcode", { state: { email } });
+    navigate("/password", { state: { email } });
   };
+
   const handleGotoHome = () => {
     navigate("/");
   };
 
-  // const connectMetamask = async () => {
-  //   if (!window.ethereum) {
-  //     alert("MetaMask is not installed!");
-  //     return;
-  //   }
-
-  //   try {
-  //     // Create an Ethereum provider and get the signer
-  //     const provider = new BrowserProvider(window.ethereum);
-  //     const signer = await provider.getSigner();
-
-  //     // const account = accounts[0];
-
-  //     // ✅ Request account access
-
-  //     const accounts = await Promise.race([
-  //       window.ethereum.request({ method: "eth_requestAccounts" }),
-  //       new Promise((_, reject) =>
-  //         setTimeout(() => reject(new Error("Request timeout")), 10000)
-  //       ),
-  //     ]);
-
-  //     // console.log("Accounts:", accounts); // Debugging
-
-  //     if (!accounts || accounts.length === 0) {
-  //       alert("No account connected. Please unlock MetaMask.");
-  //       return;
-  //     }
-
-  //     const account = accounts[0];
-  //     console.log("Address:", account);
-  //     setAddr(account);
-
-  //     // ✅ Store wallet address in localStorage
-  //     localStorage.setItem("walletAddress", account);
-
-  //     // ✅ Get account balance
-  //     const balanceHex = await window.ethereum.request({
-  //       method: "eth_getBalance",
-  //       params: [account, "latest"],
-  //     });
-
-  //     const balance = parseInt(balanceHex, 16) / 10 ** 18;
-  //     console.log("Balance:", balance);
-  //     setBalance(balance);
-
-  //     // ✅ Store wallet Balance in localStorage
-  //     localStorage.setItem("walletBalance", balance);
-
-  //     // ✅ Sign message for authentication
-  //     // Message to sign
-  //     const message = `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`;
-
-  //     // Request signature
-  //     const signature = await signer.signMessage(message);
-
-  //     console.log("Signature:", signature);
-
-  //     sessionStorage.setItem("walletSignature", signature);
-  //     // setSignature(signature);
-
-  //     // ✅ Store signature in localStorage
-  //     // localStorage.setItem("walletSignature", signature);
-
-  //     // // ✅ Get network ID
-  //     // const networkId = await window.ethereum.request({
-  //     //   method: "net_version",
-  //     // });
-  //     // console.log("Network ID:", networkId);
-
-  //     // Store in localStorage
-  //     localStorage.setItem("userAddress", account || addr);
-  //     localStorage.setItem("walletSignature", signature);
-  //     localStorage.setItem("signedMessage", message);
-  //     localStorage.setItem("lastSignedAt", Date.now().toString());
-
-  //     try {
-  //       // Register User on smart contract
-  //       await registerUser(signer, account);
-
-  //       // ✅ Navigate to Persona page
-  //       navigate("/select-role", {
-  //         state: {
-  //           account,
-  //           signature,
-  //         },
-  //       });
-  //     } catch (error) {
-  //       console.error("Error Registering user", error);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error connecting MetaMask:", error);
-  //     alert("Failed to connect MetaMask. Check console for details.");
-  //   }
-  // };
-
-  // const connectMetamask = async () => {
-  //   if (!window.ethereum) {
-  //     setError("MetaMask is not installed!");
-  //     return;
-  //   }
-
-  //   try {
-  //     setLoading(true); // Add loading state at the start
-
-  //     // Create provider and signer
-  //     const provider = new BrowserProvider(window.ethereum);
-  //     const signer = await provider.getSigner();
-  //     setSigner(signer); // Save signer to state - this was missing
-
-  //     // Request accounts with timeout
-  //     const accounts = await Promise.race([
-  //       window.ethereum.request({ method: "eth_requestAccounts" }),
-  //       new Promise((_, reject) =>
-  //         setTimeout(() => reject(new Error("Connection timeout")), 10000)
-  //       ),
-  //     ]);
-
-  //     if (!accounts || accounts.length === 0) {
-  //       throw new Error("No account connected. Please unlock MetaMask.");
-  //     }
-
-  //     const account = accounts[0];
-  //     setAddr(account);
-
-  //     // Get balance
-  //     const balanceHex = await window.ethereum.request({
-  //       method: "eth_getBalance",
-  //       params: [account, "latest"],
-  //     });
-  //     const balance = parseInt(balanceHex, 16) / 10 ** 18;
-  //     setBalance(balance);
-
-  //     // Sign message
-  //     const message = `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`;
-  //     const signature = await signer.signMessage(message);
-  //     setSignature(signature);
-
-  //     // Store all data in localStorage
-  //     const userData = {
-  //       userAddress: account,
-  //       walletBalance: balance.toString(),
-  //       walletSignature: signature,
-  //       signedMessage: message,
-  //       lastSignedAt: Date.now().toString(),
-  //     };
-
-  //     Object.entries(userData).forEach(([key, value]) => {
-  //       localStorage.setItem(key, value);
-  //     });
-
-  //     console.log("successfully connected metamask");
-
-  //     // Register user
-  //     // await registerUser(signer, account);
-  //     navigate("/Persona");
-  //   } catch (error) {
-  //     console.error("MetaMask connection error:", error);
-  //     setError(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const connectMetamask = async () => {
     if (!window.ethereum) {
-      setError("MetaMask is not installed!");
-      return;
-    }
-
-    try {
-      setLoading(true); // Start loading state
-
-      // Create provider
-      const provider = new BrowserProvider(window.ethereum);
-
-      // Request accounts first
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log("account gotten");
-
-      if (!accounts || accounts.length === 0) {
-        throw new Error("No account connected. Please unlock MetaMask.");
-      }
-
-      const account = accounts[0];
-      setAddr(account);
-      console.log("address store to state");
-
-      // Create signer after requesting account
-      const signer = await provider.getSigner();
-      setSigner(signer);
-
-      // Get balance
-      const balanceHex = await window.ethereum.request({
-        method: "eth_getBalance",
-        params: [account, "latest"],
-      });
-      // const balance = ethers.formatEther(balanceHex); // Proper balance conversion
-      setBalance(balance);
-
-      // Sign message for authentication
-      const message = `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`;
-
-      let signature;
-      try {
-        signature = await signer.signMessage(message);
-      } catch (signError) {
-        throw new Error("Message signing failed. Please try again.");
-      }
-
-      setSignature(signature);
-
-      console.log("signature saved");
-      // Store all data in localStorage
-      const userData = {
-        userAddress: account,
-        walletBalance: balance,
-        walletSignature: signature,
-        signedMessage: message,
-        lastSignedAt: Date.now().toString(),
-      };
-
-      Object.entries(userData).forEach(([key, value]) => {
-        localStorage.setItem(key, value);
-      });
-
-      console.log("Successfully connected to MetaMask");
-
-      // Navigate after successful connection
-      navigate("/Persona");
-    } catch (error) {
-      console.error("MetaMask connection error:", error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // const registerUser = async (signer, addr) => {
-  //   // #############################################//
-  //   // IMPORT ABI AND CONTRACT ADDRESS TO USE THIS LINE
-  //   // ############################################//
-
-  //   // get the account details ready
-  //   if (!signer) {
-  //     console.log("No Signer Found");
-  //     return;
-  //   }
-
-  //   // const provider = new BrowserProvider(window.ethereum);
-
-  //   const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-
-  //   try {
-  //     console.log("Registering user");
-  //     setLoading(true);
-  //     setError(null);
-
-  //     // Get the connected wallet address
-
-  //     // Get the connected wallet address
-  //     const address = addr || (await signer.getAddress());
-  //     let tx;
-  //     // Call the smart contract's registration function
-  //     // Adjust the parameters based on your contract's requirements
-  //     if (roles === "client") {
-  //       // registerClient
-
-  //       tx = await contract.registerClient(name, role);
-  //     } else if (roles === "talent") {
-  //       const name = "Moses";
-  //       const role = "client";
-
-  //       const tx = await contract.registerFreelancer(
-  //         // userData.skills, // if required
-  //         // Add other registration data as needed
-  //         // Specify the transaction sender)
-  //         name,
-  //         role
-  //       );
-  //     } else {
-  //       alert("Invalid user role");
-  //       return;
-  //     }
-
-  //     // Wait for the transaction to be mined
-  //     await tx.wait();
-
-  //     console.log("User registered successfully!");
-  //     // You can add navigation or success message here
-
-  //     // Navigate after success
-  //     navigate("/dashboard");
-  //   } catch (error) {
-  //     console.error("Registration failed:", error);
-  //     setError(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  const registerUser = async (signer, addr) => {
-    if (!signer || !addr) {
-      setError("Missing signer or address");
+      setWalletError("MetaMask is not installed!");
       return;
     }
 
     try {
       setLoading(true);
-      setError(null);
 
-      const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+      // Request accounts first - this is the most important step
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
 
-      // Prepare user data
-      const userData = {
-        name: addr.slice(0, 6) + "...", // Use shortened address as name initially
-        role: roles, // Using the role from state
-      };
-
-      let tx;
-
-      if (roles === "client") {
-        tx = await contract.registerClient(userData.name, userData.role);
-      } else if (roles === "talent") {
-        tx = await contract.registerFreelancer(userData.name, userData.role);
-      } else {
-        throw new Error("Invalid user role selected");
+      if (!accounts || accounts.length === 0) {
+        throw new Error("Please connect your MetaMask wallet");
       }
 
-      // Wait for transaction confirmation
-      const receipt = await tx.wait();
-      console.log("Transaction confirmed:", receipt);
+      const account = accounts[0];
+      setAddr(account);
 
-      // Navigate to dashboard on success
-      navigate("/dashboard", {
+      // // Create provider and signer
+      // const provider = new BrowserProvider(window.ethereum);
+      // const signer = await provider.getSigner();
+      // setSigner(signer);
+
+      // Get balance and sign message in parallel to save time
+      // const [
+      // balanceHex,
+      // signature
+      // ] = await Promise.all([
+      // window.ethereum.request({
+      // method: "eth_getBalance",
+      // params: [account, "latest"],
+      // }),
+      //   signer.signMessage(
+      //     `Welcome to our platform! Please sign this message to verify your wallet ownership.\n\nWallet: ${account}\nTimestamp: ${Date.now()}`
+      //   ),
+      // ]);
+
+      // Convert balance
+      // const balance = parseInt(balanceHex, 16) / 10 ** 18;
+
+      // // Update states
+      // setBalance(balance);
+      // setSignature(signature);
+
+      // // Store essential data only
+      localStorage.setItem("userAddress", account);
+      // localStorage.setItem("walletSignature", signature);
+
+      console.log("Wallet connected successfully");
+
+      // // Immediate navigation
+      navigate("/Persona", {
+        replace: true, // Use replace to prevent back button issues
         state: {
-          address: addr,
-          role: roles,
+          account,
+          // signature,
+          // balance,
         },
       });
     } catch (error) {
-      console.error("Registration failed:", error);
-      setError(error.message); // Fixed from err to error
-      throw error; // Propagate error to connectMetamask
+      console.error("MetaMask error:", error);
+      setWalletError(error.message || "Failed to connect wallet");
     } finally {
       setLoading(false);
     }
@@ -448,6 +163,7 @@ const Signup = () => {
       </div>
       <div className="flex flex-col items-center justify-center min-h-screen w-full">
         <div className="w-[320px] h-[550px] lg:w-[422px] lg:h-[615px] rounded-xl bg-[#ffffff] flex flex-col items-center">
+          {/* -------------------- EMAIL FORM -------------------------- */}
           <form
             action="#"
             onSubmit={handleSubmit}
@@ -510,8 +226,7 @@ const Signup = () => {
                 </p>
               </div>
             </div>
-          </form>
-
+          </form>{" "}
           <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
             <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
@@ -519,8 +234,15 @@ const Signup = () => {
             </p>
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
           </div>
-
-          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-4">
+          {/* <div className="w-[350px] h-[64px] gap-2 flex flex-col items-center mt-[1rem] lg:mt-[3rem] ">
+            <h2 className="font-montserrat font-semibold text-[20px] lg:text-2xl leading-8 text-[#292929]">
+              Sign Up
+            </h2>
+            <p className="font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]">
+              Create an account with us by connecting your wallet
+            </p>
+          </div> */}
+          <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] ">
             <button
               onClick={connectMetamask}
               disabled={loading}
@@ -533,22 +255,41 @@ const Signup = () => {
                 {loading ? "Connecting..." : "Connect Metamask"}
               </span>
             </button>
-
-            {/* Add error display */}
-            {error && (
+            {/* Error display */}
+            {/* {walletError && (
               <div className="text-red-500 text-sm mt-2 text-center">
-                {error}
+                {walletError}
               </div>
-            )}
+            )} */}
 
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            {/* <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+              <span className="flex-grow border-t text-[#e6e6e6]"></span>
+              <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
+                OR
+              </p>
+              <span className="flex-grow border-t text-[#e6e6e6]"></span>
+            </div> */}
+
+            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Wallet connect
               </span>
-            </button>
-          </div>
+            </button> */}
 
+            <div className="mt-10">
+              <ConnectButton label="Wallet Connect" />
+
+              {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
+            </div>
+          </div>
+          {/* Fix this */}
+          {walletError && (
+            <div className="text-red-500 text-sm mt-2 text-center">
+              {walletError}
+            </div>
+          )}
+          {/* {walletError && <p className="text-red-800">Error: {walletError}</p>} */}
           <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">
             <p className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]">
               Already have an account?

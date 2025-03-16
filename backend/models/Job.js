@@ -1,11 +1,27 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
-const jobSchema = new mongoose.Schema({
+const MilestoneSchema = new mongoose.Schema({
   title: String,
+  amount: Number,
   description: String,
-  // created_at: Date.now(),
 });
 
-const Job = mongoose.model("Job", jobSchema);
+const JobSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  totalPrice: { type: Number, required: true },
+  milestones: [MilestoneSchema],
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client",
+    required: true,
+  },
+  talent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Talent",
+    required: true,
+  },
+});
+
+const Job = mongoose.model("Job", JobSchema);
 export default Job;
-  

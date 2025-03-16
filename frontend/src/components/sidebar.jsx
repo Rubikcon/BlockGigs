@@ -13,7 +13,6 @@ import { NavLink, useMatch } from "react-router-dom";
 function Sidebar() {
   const profile = useMatch("/profile");
   const job = useMatch("/job");
-  const offer = useMatch("offer/gigs");
   return (
     <div className="grid md:grid-rows-12 md:grid-cols-1 grid-cols-8 bg-[#0A0f29] h-[20vh] md:min-h-screen md:h-auto min-w-screen md:min-w-[15vw] text-white items-center md:justify-center px-4">
       <div className="md:row-span-2 col-span-2 md:items-center">
@@ -29,8 +28,8 @@ function Sidebar() {
           </div>
         </NavLink>
       </div>
-      <div className="flex md:flex-col md:row-span-9 md:col-span-2 col-span-7 space-y-4 justify-between">
-        <NavLink to="/TalentDashboard">
+      <div className="row-span-9 space-y-4 w-[12vw]">
+        <NavLink to="/talent/dashboard">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -44,7 +43,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"discover"} className="cursor-pointer">
+        <NavLink to={"/talent/discover"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full  text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -58,7 +57,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"gigs"} className="cursor-pointer">
+        <NavLink to={"/talent/gigs"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -72,7 +71,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"offer"} className="cursor-pointer">
+        <NavLink to={"/talent/offer"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -86,7 +85,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"chat"} className="cursor-pointer">
+        <NavLink to={"/talent/chat"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -100,7 +99,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"wallet"} className="cursor-pointer">
+        <NavLink to={"/talent/wallet"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${
@@ -114,7 +113,7 @@ function Sidebar() {
             </div>
           )}
         </NavLink>
-        <NavLink to={"setting"} className="cursor-pointer">
+        <NavLink to={"/talent/setting"} className="cursor-pointer">
           {({ isActive }) => (
             <div
               className={`flex space-x-2 my-2 px-2 items-center h-12 w-full text-[8px] sm:text-[12px] md:text-[15px] cursor-pointer ${

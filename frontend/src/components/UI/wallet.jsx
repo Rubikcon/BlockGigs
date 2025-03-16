@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import down from "../../assets/down.png";
@@ -365,6 +365,7 @@ function Wallet() {
         visible={openConnect}
         onClose={() => setOpenConnect(false)}
         item={connect}
+        onConnectAnother={() => setOpenWallet(true)}
       />
       <WalletInvoice
         item={walletDetail}
