@@ -13,6 +13,7 @@ import { NavLink, useMatch } from "react-router-dom";
 function Sidebar() {
   const profile = useMatch("/profile");
   const job = useMatch("/job");
+  const offer = useMatch("offer/gigs");
   return (
     <div className="grid md:grid-rows-12 md:grid-cols-1 grid-cols-8 bg-[#0A0f29] h-[20vh] md:min-h-screen md:h-auto min-w-screen md:min-w-[15vw] text-white items-center md:justify-center px-4">
       <div className="md:row-span-2 col-span-2 md:items-center">

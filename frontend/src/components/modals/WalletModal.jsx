@@ -23,7 +23,7 @@ function WalletModal({ visible, onClose, onItemsClick }) {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-      <div className="grid grid-rows-8 w-[23%] h-[45%] bg-white shadow-xl shadow-gray-300 px-4 py-6 rounded-[5px]">
+      <div className="grid grid-rows-8 w-full md:w-[23%] h-[45%] bg-white shadow-xl shadow-gray-300 px-4 py-6 rounded-[5px]">
         <div className="row-span-1 justify-between flex">
           <span className="font-bold text-[14px]">Wallet Connection</span>
           <img

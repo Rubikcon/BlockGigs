@@ -1,11 +1,26 @@
-import React from "react";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import close from "../../assets/close.png";
+import WalletModal from "./WalletModal";
 
 function WalletConnect({ visible, onClose, item }) {
+  const [openConnect, setOpenConnect] = useState(false);
+  const [openWallet, setOpenWallet] = useState(false);
+  const [connect, setConnect] = useState(null);
+  // const [setItem] = useState();
+  // const navigate = useNavigate();
   if (!visible) return null;
+
+  const selectedConnectHandler = (item) => {
+    console.log(item, "connwct");
+    setOpenWallet(false);
+    setOpenConnect(true);
+    setConnect(item);
+    // setItem(item);
+  };
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
-      <div className="grid grid-rows-8 w-[23%] h-[45%] bg-white shadow-xl shadow-gray-300 px-4 py-6 rounded-[5px]">
+      <div className="grid grid-rows-8 md:w-[23%] h-[45%] bg-white shadow-xl shadow-gray-300 px-4 py-6 rounded-[5px]">
         <div className="row-span-1 justify-between flex">
           <span className="font-bold text-[14px]">Wallet Connection</span>
           <img
@@ -25,7 +40,10 @@ function WalletConnect({ visible, onClose, item }) {
           </div>
         </div>
         <div className="grid grid-cols-3 row-span-1 gap-1.5">
-          <button className="col-span-2 bg-[#2f66f6] rounded text-white text-[14px] py-2 cursor-pointer hover:scale-105 duration-150">
+          <button
+            className="col-span-2 bg-[#2f66f6] rounded text-white text-[14px] py-2 cursor-pointer hover:scale-105 duration-150"
+            onClick={() => setOpenWallet(true)}
+          >
             Connect Another Wallet
           </button>
           <button
@@ -36,6 +54,16 @@ function WalletConnect({ visible, onClose, item }) {
           </button>
         </div>
       </div>
+      <WalletModal
+        visible={openWallet}
+        onClose={() => setOpenWallet(false)}
+        onItemsClick={selectedConnectHandler}
+      />
+      {/* <WalletConnect
+        visible={openConnect}
+        onClose={() => setOpenConnect(false)}
+        item={connect}
+      /> */}
     </div>
   );
 }

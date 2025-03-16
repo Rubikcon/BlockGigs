@@ -289,38 +289,38 @@ function Profile() {
             <div className="mt-4 grid gap-2">
               <div className="flex">
                 <img src={bulb} alt="" className="w-5 h-5" />
-                <span className="text-[14px] w-10">Tip 1:</span>
-                <p className="text-[14px]">
+                <span className="text-[12px] md:text-[14px] w-10">Tip 1:</span>
+                <p className="text-[12px] md:text-[14px]">
                   Highlight specific skills that set you apart in your industry.
                 </p>
               </div>
               <div className="flex">
                 <img src={bulb} alt="" className="w-5 h-5" />
-                <span className="text-[14px] w-12">Tip 2:</span>
-                <p className="text-[14px]">
+                <span className="text-[12px] md:text-[14px] w-12">Tip 2:</span>
+                <p className="text-[12px] md:text-[14px]">
                   Use measurable achievements to showcase your impact on past
                   projects..
                 </p>
               </div>
               <div className="flex">
                 <img src={bulb} alt="" className="w-5 h-5" />
-                <span className="text-[14px] w-12">Tip 3:</span>
-                <p className="text-[14px]">
+                <span className="text-[12px] md:text-[14px] w-12">Tip 3:</span>
+                <p className="text-[12px] md:text-[14px]">
                   Tailor your profile summary to address client pain points and
                   solutions.
                 </p>
               </div>
               <div className="flex">
                 <img src={bulb} alt="" className="w-5 h-5" />
-                <span className="text-[14px] w-12">Tip 4:</span>
-                <p className="text-[14px]">
+                <span className="text-[12px] md:text-[14px] w-12">Tip 4:</span>
+                <p className="text-[12px] md:text-[14px]">
                   Regularly update with recent projects and client testimonials.
                 </p>
               </div>
               <div className="flex">
                 <img src={bulb} alt="" className="w-5 h-5" />
-                <span className="text-[14px] w-12">Tip 5:</span>
-                <p className="text-[14px]">
+                <span className="text-[12px] md:text-[14px] w-12">Tip 5:</span>
+                <p className="text-[12px] md:text-[14px]">
                   Include keywords relevant to your niche for better platform
                   visibility.
                 </p>
@@ -331,8 +331,10 @@ function Profile() {
             <div>
               <img src={amico} alt="" className=" grid justify-self-center" />
               <div className="grid justify-center text-center mb-2">
-                <p className="text-[#84b7c8] text-[18px]">Congratulations!!</p>
-                <span className="text-[14px]">
+                <p className="text-[#84b7c8] text-[14px] md:text-[18px]">
+                  Congratulations!!
+                </p>
+                <span className="text-[12px] md:text-[14px]">
                   Your Blockgigs Profile is !00% complete
                 </span>
               </div>
@@ -340,19 +342,19 @@ function Profile() {
             <div className="grid grid-cols-2 justify-between">
               <div className="flex gap-2 mr-4">
                 <img src={icon2} alt="" className="w-4 h-4 mt-1" />
-                <p className="">About (expertise)</p>
+                <p className="text-[12px] md:text-[14px]">About (expertise)</p>
               </div>
               <div className="flex gap-2">
                 <img src={icon2} alt="" className="w-4 h-4 mt-1" />
-                <p>Skillset</p>
+                <p className="text-[12px] md:text-[14px]">Skillset</p>
               </div>
               <div className="flex gap-2">
                 <img src={icon2} alt="" className="w-4 h-4 mt-1" />
-                <p>Work/Experience</p>
+                <p className="text-[12px] md:text-[14px]">Work/Experience</p>
               </div>
               <div className="flex gap-2">
                 <img src={icon2} alt="" className="w-4 h-4 mt-1" />
-                <p>Reviews</p>
+                <p className="text-[12px] md:text-[14px]">Reviews</p>
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import down from "../../assets/down.png";
 import bell2 from "../../assets/bell.png";
 import bag3 from "../../assets/bag3.png";
 import bag2 from "../../assets/bag2.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import cancel from "../../assets/cancel.png";
 // import clock from "../../assets/clock.png";
 // import file from "../../assets/file.png";
@@ -212,33 +212,46 @@ const application = [
 
 function Offer() {
   const [active, setActive] = useState(1);
+  const navigate = useNavigate();
   return (
     <div>
-      <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
+      <div className="md:bg-gray-100 w-screen md:w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
         <div className="row-span-1 grid items-center px-2 mt-2">
           <div className="grid grid-cols-3 gap-1 w-full">
-            <span className="">Offers & Applications</span>
+            <span className="text-[12px] md:text-[16px]">
+              Offers & Applications
+            </span>
             <div className="col-span-1 flex justify-between">
               <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[100%]">
-                <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
+                <img
+                  src={search}
+                  alt=""
+                  className="h-4 w-4 md:h-6 md:w-6 mr-4 my-1 ml-4"
+                />
                 <input
-                  placeholder="Search for jobs, talents or clients"
-                  className="w-full flex"
+                  placeholder={
+                    window.innerWidth >= 768
+                      ? "Search for jobs, talents or clients"
+                      : ""
+                  }
+                  className="w-full"
                 />
               </div>
             </div>
             <div className="col-span-1 grid justify-center">
               <div className="flex gap-2">
-                <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+                <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center hidden">
                   <img src={bell2} alt="" className="h-4 w-4" />
                 </div>
-                <div className="flex gap-4">
-                  <div>
+                <div className="flex md:gap-4">
+                  <div className="hidden md:block">
                     <img src={dp} alt="" className="h-6 w-6" />
                   </div>
                   <div className="">
-                    <p className="-m-2">Glory Dseign</p>
-                    <span className="text-[10px] top-1 m-0">
+                    <p className="-m-2 text-[12px] md:text-[16px]">
+                      Glory Dseign
+                    </p>
+                    <span className="text-[8px] md:text-[10px] top-1 m-0">
                       Product Designer
                     </span>
                   </div>
@@ -256,15 +269,19 @@ function Offer() {
               }`}
               onClick={() => setActive(1)}
             >
-              <img src={bag2} alt="" className="w-4 h-4 text-[#2f66f6]" />
+              <img
+                src={bag2}
+                alt=""
+                className="w-3 h-3 md:w-4 md:h-4 text-[#2f66f6]"
+              />
               <span
-                className={`text-[14px] -mt-1 ${
+                className={`text-[10px] md:text-[14px] -mt-1 ${
                   active === 1 ? "text-[#2f66f6]" : "text-black"
                 }`}
               >
                 Offers
               </span>
-              <span className="w-4 h-4 rounded-[50%] bg-red-500 text-white flex items-center justify-center text-[12px]">
+              <span className="w-3 h-3 md:w-4 md:h-4 rounded-[50%] bg-red-500 text-white flex items-center justify-center text-[12px]">
                 2
               </span>
             </button>
@@ -276,7 +293,7 @@ function Offer() {
             >
               <img src={bag3} alt="" className="w-4 h-4" />
               <span
-                className={`text-[14px] -mt-1 ${
+                className={`text-[10px] md:text-[14px]  -mt-1 ${
                   active === 2 ? "text-[#2f66f6]" : "text-black"
                 }`}
               >
@@ -284,33 +301,44 @@ function Offer() {
               </span>
             </button>
           </div>
-          <NavLink to={"gigs"} replace>
-            <button className="flex items-center row-span-1 justify-center gap-2 text-[14px] border-2 border-[#177f9f] w-36 px-2 py-1 rounded-[5px] h-10">
-              All Gigs
-              <img src={down} alt="" className="w-8 h-8" />
-            </button>
-          </NavLink>
+          {/* <NavLink to={"gigs"}> */}
+          <button
+            className="flex items-center row-span-1 justify-center gap-2 text-[14px] border-2 border-[#177f9f] md:w-36 w-24 px-2 py-1 rounded-[5px] md:h-10 h-8"
+            // onClick={() => navigate("gigs")}
+          >
+            All Gigs
+            <img src={down} alt="" className="w-8 h-8 hidden md:block" />
+          </button>
+          {/* </NavLink> */}
         </div>
 
         {active === 1 ? (
           <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
-            <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2">
+            <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2 text-[12px] md:text-[16px]">
               <span className="text-gray-400">Title</span>
-              <span className="text-gray-400 ml-20">Client</span>
+              <span className="text-gray-400 md:ml-20">Client</span>
               <span className="text-gray-400 ">Status</span>
               <span className="text-gray-400">Time Sent</span>
               <span className="text-gray-400">Offer Information</span>
             </div>
             <div>
               {offer.map((item, index) => (
-                <div key={index} className="flex justify-between px-4 pt-4">
-                  <div className="font-bold text-[14px]">{item.title}</div>
-                  <div className="text-[14px]">{item.client}</div>
-                  <div className={`flex text-[14px] -ml-10 ${item.color}`}>
+                <div key={index} className="flex justify-between md:px-4 pt-4">
+                  <div className="font-bold text-[10px] md:text-[14px] truncate">
+                    {window.innerWidth >= 640
+                      ? item.title
+                      : item.title.slice(0)}
+                  </div>
+                  <div className="text-[8px] md:text-[14px]">{item.client}</div>
+                  <div
+                    className={`flex text-[8px] md:text-[14px] md:-ml-10 ${item.color}`}
+                  >
                     {item.status}
                   </div>
-                  <div className="text-[14px]">{item.time}</div>
-                  <span className="text-blue-500 text-[14px]">{item.link}</span>
+                  <div className="text-[8px] md:text-[14px]">{item.time}</div>
+                  <span className="text-blue-500 text-[8px] md:text-[14px]">
+                    {item.link}
+                  </span>
                 </div>
               ))}
             </div>
