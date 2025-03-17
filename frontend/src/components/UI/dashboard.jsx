@@ -304,40 +304,6 @@ const recommend = [
   },
 ];
 
-// const CircularRange = ({ progress = 50 }) => {
-//   let radius = 50;
-//   let strokeWidth = 50;
-//   const normalizeRadius = radius - strokeWidth * 2;
-//   const circumference = normalizeRadius * 2 * Math.PI;
-//   const strokeDashoffset = circumference - (progress / 100) * circumference;
-//   return (
-//     <div style={{ textAlign: "center" }}>
-//       <svg height={radius * 2} width={radius * 2}>
-//         <circle
-//           stroke="#e0e0e0"
-//           fill="transparent"
-//           strokeWidth={strokeWidth}
-//           r={normalizeRadius}
-//           cx={radius}
-//           cy={radius}
-//         />
-//         <circle
-//           stroke="#007bff"
-//           fill="transparent"
-//           strokeWidth={strokeWidth}
-//           strokeDasharray={circumference + " " + circumference}
-//           style={{ strokeDashoffset }}
-//           r={normalizeRadius}
-//           cx={radius}
-//           cy={radius}
-//           transform={`rotate(-90${radius}${radius})`}
-//         />
-//       </svg>
-//       <div className="absolute ">{progress}%</div>
-//     </div>
-//   );
-// };
-
 function Dashboard() {
   const [OfferDetail, setMyOfferDetail] = useState({});
   const [offerModal, setOfferModal] = useState(false);
