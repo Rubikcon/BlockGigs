@@ -26,12 +26,12 @@ import Job from "../models/Job.js";
 
 export const createJob = async (req, res) => {
   try {
-    console.log("User Data from Middleware:", req.user);
+    // console.log("User Data from Middleware:", req.user);
 
     // Ensure only clients can create jobs
-    if (req.user.role !== "client") {
-      return res.status(403).json({ message: "Only clients can create jobs" });
-    }
+    // if (req.user.role !== "client") {
+    //   return res.status(403).json({ message: "Only clients can create jobs" });
+    // }
 
     const { title, description, totalPrice, milestones } = req.body;
 
@@ -44,7 +44,7 @@ export const createJob = async (req, res) => {
       description,
       totalPrice,
       milestones,
-      client: req.user.id, // Attach logged-in client ID
+      // client: req.user.id, // Attach logged-in client ID
     });
 
     await job.save();

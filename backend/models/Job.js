@@ -14,12 +14,12 @@ const JobSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
-    required: true,
+    // required: true,
   },
   talent: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Talent",
-    required: true,
+    // required: true,
   },
 });
 
