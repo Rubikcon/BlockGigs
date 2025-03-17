@@ -87,9 +87,10 @@ const TalentForm = () => {
       );
 
       alert(response.data.message);
+      console.log("login to continue");
       console.log(response.data.message);
 
-      navigate("/talent/dashboard"); // Redirect after successful registration
+      navigate("/signin"); // Redirect after successful registration
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
     }
