@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/blockgigs";
+  process.env.MONGO_URI || "mongodb://localhost:27017/blokgigs";
 
 const DB = () => {
   // Connect to MongoDB

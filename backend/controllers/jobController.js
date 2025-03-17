@@ -33,20 +33,22 @@ export const createJob = async (req, res) => {
     //   return res.status(403).json({ message: "Only clients can create jobs" });
     // }
 
-    const { title, description, totalPrice, milestones } = req.body;
-    console.log(req, "controller")
-    if (!title || !description || !totalPrice) {
+    const { title, detail, totalPrice, milestones, milestone } = req.body;
+    console.log(req.body, "controller")
+    if (!title || !detail || !totalPrice) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const job = new Job({
-      title,
-      description,
-      totalPrice,
-      milestones,
-      // client: req.user.id, // Attach logged-in client ID
-    });
+    // const job = new Job({
+    //   // title,
+    //   // detail,
+    //   // totalPrice,
+    //   // milestone,
+    //   // milestones,
+    //   // client: req.user.id, // Attach logged-in client ID
+    // });
 
+    const job = new Job(req.body)
     await job.save();
     res.status(201).json({ message: "Job created successfully", job });
   } catch (error) {
