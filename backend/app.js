@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(express.json());
 app.use(cors());
+// Allow requests from your frontend (React)
 
 // import the and use the database configuration
 DB();

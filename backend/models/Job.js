@@ -15,15 +15,19 @@ const JobSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
-    required: true,
+    // required: true,
   },
-  talent: { type: String, required: false, default: null },
-  // talent: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Talent",
-  //   required: true,
-  // },
-  accepted: { type: Boolean, required: false }
+  talent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Talent",
+    // required: true,
+  },
+  applicants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Talent",
+    },
+  ],
 });
 
 const Job = mongoose.model("Job", JobSchema);

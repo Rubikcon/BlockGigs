@@ -4,6 +4,7 @@ import {
   getJob,
   getAllJobs,
   completeJob,
+  applyForJob,
 } from "../controllers/jobController.js";
 import { authenticate } from "../middleware/authMiddleware.js";
 
@@ -14,5 +15,7 @@ router.post("/create", createJob)
 router.get("/available", getAllJobs); // public: Get all avialble jobs
 router.get("/:jobId", getJob); // Anyone can retrieve job details
 router.put("/:jobId/complete", authenticate, completeJob);
+router.post("/jobs/:jobId/apply", applyForJob);
+
 // Talent completes a job
 export default router;

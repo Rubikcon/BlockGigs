@@ -26,7 +26,7 @@ import Job from "../models/Job.js";
 
 export const createJob = async (req, res) => {
   try {
-    console.log("User Data from Middleware:", req.user);
+    // console.log("User Data from Middleware:", req.user);
 
     // Ensure only clients can create jobs
     // if (req.user.role !== "client") {
@@ -44,7 +44,7 @@ export const createJob = async (req, res) => {
       description,
       totalPrice,
       milestones,
-      client: req.user.id, // Attach logged-in client ID
+      // client: req.user.id, // Attach logged-in client ID
     });
 
     await job.save();
@@ -119,5 +119,45 @@ export const completeJob = async (req, res) => {
     res.status(200).json({ message: "Job marked as completed", job });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const applyForJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const { applicantId } = req.body; // Applicant ID from request body
+
+    if (!applicantId) {
+      return res.status(400).json({ message: "Applicant ID is required" });
+    }
+
+    // Find the job
+    const job = await Job.findById(jobId);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    // Check if the job is already assigned
+    if (job.talent) {
+      return res
+        .status(400)
+        .json({ message: "This job has already been assigned" });
+    }
+
+    // Check if the applicant has already applied
+    if (job.applicants.includes(applicantId)) {
+      return res
+        .status(400)
+        .json({ message: "You have already applied for this job" });
+    }
+
+    // Add the applicant's ID to the job's applicants list
+    job.applicants.push(applicantId);
+    await job.save();
+
+    res
+      .status(200)
+      .json({ message: "Application submitted successfully", job });
+  } catch (error) {
+    console.error("Error Applying for Job:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

@@ -3,18 +3,97 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import Select from "react-select";
+import axios from "axios";
 
 const TalentForm = () => {
   const navigate = useNavigate();
   const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [fullname, setFullname] = useState("");
+  const [workname, setWorkname] = useState("");
+  const [profession, setProfession] = useState("");
+  const [min_pay, setMin_pay] = useState("");
+  const [timezone, setTimezone] = useState("");
+  const [languages, setlanguages] = useState([]);
+  const [about, setAbout] = useState("");
+  const [skills, setSkills] = useState([]);
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   navigate("/talent/dashboard");
+  // };
+  const userData = [];
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:4000/api/auth/register",
+  //       formData
+  //     );
+
+  //     alert(response.data.message);
+
+  //     navigate("/talent/dashboard");
+  //     // Redirect after successful registration
+  //   } catch (error) {
+  //     alert(error.response?.data?.message || "Registration failed");
+  //   }
+  // };
+
+  // const handleSkip = () => {
+  //   navigate("/talent/dashboard"); // Navigate when the user skips the form
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/talent/dashboard");
-  };
 
-  const handleSkip = () => {
-    navigate("/talent/dashboard"); // Navigate when the user skips the form
+    try {
+      // Retrieve stored data from localStorage
+      const userRole = localStorage.getItem("Persona");
+      const userWallet_address = localStorage.getItem("account");
+      const userPassword = localStorage.getItem("password");
+      const userEmail = localStorage.getItem("email");
+
+      // Merge localStorage data with form data
+      const payload = {
+        role: userRole, // Assuming the role is always 'talent'
+        // email: userEmail,
+        password: userPassword,
+        fullname: fullname,
+        work_name: workname,
+        about: about,
+        min_pay: min_pay,
+        time_zone: timezone,
+        languages: languages || [],
+        skills: skills || [],
+        wallet_address: userWallet_address,
+        ...(userWallet_address
+          ? {
+              email: "",
+              password: "",
+            }
+          : {
+              email: userEmail,
+              password: userPassword,
+            }),
+        // wallet_address: userWallet_address,
+      };
+
+      // Send POST request
+      const response = await axios.post(
+        "https://blockgigs-bt8d.onrender.com/api/auth/register",
+        payload
+      );
+
+      alert(response.data.message);
+      console.log("login to continue");
+      console.log(response.data.message);
+
+      navigate("/signin"); // Redirect after successful registration
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
+    }
   };
 
   const hangleChange = (code) => {
@@ -137,6 +216,7 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="name"
+                    onChange={(e) => setFullname(e.target.value)}
                     placeholder="Anita Baker"
                     required
                     aria-required="true"
@@ -155,6 +235,7 @@ const TalentForm = () => {
                     id="work"
                     placeholder="Designhandz"
                     required
+                    onChange={(e) => setWorkname(e.target.value)}
                     aria-required="true"
                   />
                 </div>
@@ -189,6 +270,7 @@ const TalentForm = () => {
                     type="text"
                     id="pay"
                     placeholder="$10/hr"
+                    onChange={(e) => setMin_pay(e.target.value)}
                     required
                     aria-required="true"
                   />
@@ -262,6 +344,7 @@ const TalentForm = () => {
                     id="work-profile"
                     placeholder="A well profession..."
                     required
+                    onChange={(e) => setProfession(e.target.value)}
                     aria-required="true"
                   ></textarea>
                 </div>
@@ -284,6 +367,7 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 2"
                       required
+                      onChange={(e) => setSkills(e.target.value)}
                       aria-required="true"
                     />
                     <input
@@ -291,6 +375,7 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 3"
                       required
+                      onChange={(e) => setSkills(e.target.value)}
                       aria-required="true"
                     />
                   </div>
@@ -298,15 +383,15 @@ const TalentForm = () => {
               </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-3">
-                <button className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
                   Profile Done!
                 </button>
-                <button
+                {/* <button
                   onClick={handleSkip}
                   className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg border border-blue-600 text-blue-600 font-medium text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Skip, I will fill later
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

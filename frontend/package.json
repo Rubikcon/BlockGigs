@@ -22,6 +22,7 @@
     "@web3-onboard/core": "^2.24.0",
     "@web3-onboard/metamask": "^2.2.1",
     "@web3-onboard/phantom": "^2.1.1",
+    "axios": "^1.8.3",
     "buffer": "^6.0.3",
     "esbuild": "^0.25.1",
     "ethers": "^6.13.5",
@@ -33,6 +34,7 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
     "react-select": "^5.10.1",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.0.3",
     "wagmi": "^2.14.13",
     "web3": "^4.16.0"
