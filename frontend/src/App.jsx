@@ -74,7 +74,7 @@ const App = () => {
 
         {/*  Navigation on for the dashboard*/}
 
-        {/* <Route path="/client" element={<ClientDashboard />} /> */}
+        <Route path="/client/dashboard" element={<ClientDashboard />} />
 
         {/* Routes for Talents dashboard */}
         <Route path="talent" element={<MainLayout />}>
