@@ -46,9 +46,9 @@ const TalentForm = () => {
     }
   };
 
-  const handleSkip = () => {
-    navigate("/talent/dashboard"); // Navigate when the user skips the form
-  };
+  // const handleSkip = () => {
+  //   navigate("/talent/dashboard"); // Navigate when the user skips the form
+  // };
 
   const hangleChange = (code) => {
     setSelectedLanguages(
@@ -331,15 +331,15 @@ const TalentForm = () => {
               </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-3">
-                <button className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
                   Profile Done!
                 </button>
-                <button
+                {/* <button
                   onClick={handleSkip}
                   className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg border border-blue-600 text-blue-600 font-medium text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Skip, I will fill later
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
