@@ -57,7 +57,7 @@ const ClientForm = () => {
 
       // Send POST request
       const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
+        "https://blockgigs-bt8d.onrender.com/api/auth/register",
         payload
       );
 
