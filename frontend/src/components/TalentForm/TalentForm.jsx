@@ -8,47 +8,92 @@ import axios from "axios";
 const TalentForm = () => {
   const navigate = useNavigate();
   const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [fullname, setFullname] = useState("");
+  const [workname, setWorkname] = useState("");
+  const [profession, setProfession] = useState("");
+  const [min_pay, setMin_pay] = useState("");
+  const [timezone, setTimezone] = useState("");
+  const [languages, setlanguages] = useState([]);
+  const [about, setAbout] = useState("");
+  const [skills, setSkills] = useState([]);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   navigate("/talent/dashboard");
   // };
+  const userData = [];
 
-  const userData = {
-    persona: localStorage.getItem("Persona"),
-    wcmVersion: localStorage.getItem("WCM_VERSION"),
-    account: localStorage.getItem("account"),
-    email: localStorage.getItem("email"),
-    onboardAgreement: JSON.parse(
-      localStorage.getItem("onboard.js:agreement") || "{}"
-    ),
-    password: localStorage.getItem("password"), // ⚠️ Storing passwords in localStorage is not secure!
-    recentWallet: JSON.parse(localStorage.getItem("rk-recent") || "[]"),
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-  console.log(userData);
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:4000/api/auth/register",
+  //       formData
+  //     );
+
+  //     alert(response.data.message);
+
+  //     navigate("/talent/dashboard");
+  //     // Redirect after successful registration
+  //   } catch (error) {
+  //     alert(error.response?.data?.message || "Registration failed");
+  //   }
+  // };
+
+  // const handleSkip = () => {
+  //   navigate("/talent/dashboard"); // Navigate when the user skips the form
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Retrieve stored data from localStorage
+      const userRole = localStorage.getItem("Persona");
+      const userWallet_address = localStorage.getItem("account");
+      const userPassword = localStorage.getItem("password");
+      const userEmail = localStorage.getItem("email");
+
+      // Merge localStorage data with form data
+      const payload = {
+        role: userRole, // Assuming the role is always 'talent'
+        // email: userEmail,
+        password: userPassword,
+        fullname: fullname,
+        work_name: workname,
+        about: about,
+        min_pay: min_pay,
+        time_zone: timezone,
+        languages: languages || [],
+        skills: skills || [],
+        wallet_address: userWallet_address,
+        ...(userWallet_address
+          ? {
+              email: "",
+              password: "",
+            }
+          : {
+              email: userEmail,
+              password: userPassword,
+            }),
+        // wallet_address: userWallet_address,
+      };
+
+      // Send POST request
       const response = await axios.post(
         "http://localhost:4000/api/auth/register",
-        formData
+        payload
       );
 
       alert(response.data.message);
+      console.log(response.data.message);
 
-      navigate("/talent/dashboard");
-      // Redirect after successful registration
+      navigate("/talent/dashboard"); // Redirect after successful registration
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
     }
   };
-
-  // const handleSkip = () => {
-  //   navigate("/talent/dashboard"); // Navigate when the user skips the form
-  // };
 
   const hangleChange = (code) => {
     setSelectedLanguages(
@@ -170,6 +215,7 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="name"
+                    onChange={(e) => setFullname(e.target.value)}
                     placeholder="Anita Baker"
                     required
                     aria-required="true"
@@ -188,6 +234,7 @@ const TalentForm = () => {
                     id="work"
                     placeholder="Designhandz"
                     required
+                    onChange={(e) => setWorkname(e.target.value)}
                     aria-required="true"
                   />
                 </div>
@@ -222,6 +269,7 @@ const TalentForm = () => {
                     type="text"
                     id="pay"
                     placeholder="$10/hr"
+                    onChange={(e) => setMin_pay(e.target.value)}
                     required
                     aria-required="true"
                   />
@@ -295,6 +343,7 @@ const TalentForm = () => {
                     id="work-profile"
                     placeholder="A well profession..."
                     required
+                    onChange={(e) => setProfession(e.target.value)}
                     aria-required="true"
                   ></textarea>
                 </div>
@@ -317,6 +366,7 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 2"
                       required
+                      onChange={(e) => setSkills(e.target.value)}
                       aria-required="true"
                     />
                     <input
@@ -324,6 +374,7 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 3"
                       required
+                      onChange={(e) => setSkills(e.target.value)}
                       aria-required="true"
                     />
                   </div>
