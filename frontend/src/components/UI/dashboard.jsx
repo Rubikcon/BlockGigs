@@ -623,25 +623,6 @@ function Dashboard() {
                       />
                     </div>
                   </div>
-                  {/* <div className="col-span-1 grid justify-center">
-                    <div className="flex gap-2">
-                      <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
-                        <img src={bell2} alt="" className="h-4 w-4" />
-                      </div>
-                      <div className="flex gap-4">
-                        <div>
-                          <img src={dp} alt="" className="h-6 w-6" />
-                        </div>
-                        <div className="">
-                          <p className="-m-2">Glory Dseign</p>
-                          <span className="text-[10px] top-1 m-0">
-                            Product Designer
-                          </span>
-                        </div>
-                        <img src={down} alt="" className="w-8 h-8" />
-                      </div>
-                    </div>
-                  </div> */}
                   <div className="col-span-1 grid justify-center">
                     <div className="flex gap-2">
                       <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">

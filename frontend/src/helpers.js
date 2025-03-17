@@ -1,10 +1,10 @@
-export const baseUrl = "http://localhost:4000"
+export const baseUrl = "http://localhost:4000/api/"
 
-export const postApi = (URL, data = {}, success = (f) => f, error = (f) => f) => {
+export const postApi = (URL, data, success = (f) => f, error = (f) => f) => {
     const url = baseUrl + URL
     fetch(url, {
         method: 'POST',
-        header: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
     }).then((raw) => raw.json())
         .then((response) => {
