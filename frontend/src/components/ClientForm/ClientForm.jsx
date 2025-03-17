@@ -1,27 +1,73 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
+import axios from "axios";
 
 const ClientForm = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [work, setWork] = useState("");
+  const [fullname_, setFullname_] = useState("");
+  const [about_, setAbout_] = useState("");
   const [errors, setErrors] = useState({});
   const location = useLocation();
 
   const { account, selectedPersona } = location.state || {};
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   let newErrors = {};
+  //   if (!name.trim()) newErrors.name = "Full Name is required.";
+  //   if (!work.trim()) newErrors.work = "Please describe what you do.";
+
+  //   setErrors(newErrors);
+
+  //   // if (Object.keys(newErrors).length === 0) {
+  //   //   navigate("/client");
+  //   // }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let newErrors = {};
-    if (!name.trim()) newErrors.name = "Full Name is required.";
-    if (!work.trim()) newErrors.work = "Please describe what you do.";
+    try {
+      // Retrieve stored data from localStorage
+      const userRole = localStorage.getItem("Persona" || "client");
+      const userWallet_address = localStorage.getItem("walletAddress" || "");
+      const userPassword = localStorage.getItem("password" || "");
+      const userEmail = localStorage.getItem("email" || "");
 
-    setErrors(newErrors);
+      // Merge localStorage data with form data
+      const payload = {
+        role: userRole, // Assuming the role is always 'client'
+        password: userPassword,
+        fullname: fullname_,
+        about: about_,
+        wallet_address: userWallet_address,
+        ...(userWallet_address
+          ? {
+              email: "",
+              password: "",
+            }
+          : {
+              email: userEmail,
+              password: userPassword,
+            }),
+        // wallet_address: userWallet_address,
+      };
 
-    if (Object.keys(newErrors).length === 0) {
-      navigate("/client");
+      // Send POST request
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/register",
+        payload
+      );
+
+      alert(response.data.message);
+      console.log("login to continue");
+      console.log(response.data.message);
+
+      navigate("/signin"); // Redirect after successful registration
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 
@@ -62,7 +108,7 @@ const ClientForm = () => {
             {/* Full Name Input */}
             <div className="w-[260px] lg:w-[350px] h-[70px] flex flex-col items-start">
               <label
-                htmlFor="name"
+                htmlFor="fullname"
                 className="font-montserrat font-medium text-[14px] leading-6 text-[#292929]"
               >
                 Full name <span className="text-red-600">*</span>
@@ -72,10 +118,10 @@ const ClientForm = () => {
                   errors.name ? "border-red-500" : "border-[#dbdbdb]"
                 }`}
                 type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="fullname"
+                name="fullname"
+                value={fullname_}
+                onChange={(e) => setFullname_(e.target.value)}
                 required
                 aria-required="true"
                 aria-describedby="name-error"
@@ -94,17 +140,17 @@ const ClientForm = () => {
             {/* Work/Business Description */}
             <div className="w-[260px] lg:w-[350px] h-auto flex flex-col items-start">
               <label
-                htmlFor="work"
+                htmlFor="about"
                 className="font-montserrat font-medium text-[14px] leading-6 text-[#292929]"
               >
                 About you & what you do <span className="text-red-600">*</span>
               </label>
 
               <textarea
-                id="work"
-                name="work"
-                value={work}
-                onChange={(e) => setWork(e.target.value)}
+                id="about"
+                name="about"
+                value={about_}
+                onChange={(e) => setAbout_(e.target.value)}
                 placeholder="Business or individual looking to hire..."
                 className={`w-full h-[100px] rounded-[8px] border px-3 py-2 outline-none resize-none font-montserrat text-[14px] leading-6 text-[#000] ${
                   errors.work ? "border-red-500" : "border-[#dbdbdb]"
@@ -114,7 +160,7 @@ const ClientForm = () => {
               />
               {errors.work && (
                 <p
-                  id="work-error"
+                  id="about-error"
                   className="text-red-600 text-sm mt-1"
                   role="alert"
                 >
@@ -133,14 +179,14 @@ const ClientForm = () => {
           </button>
 
           {/* Skip Button */}
-          <button
+          {/* <button
             type="button"
             className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#2f66f6] cursor-pointer mt-[1rem] underline focus:ring-2 focus:ring-blue-400"
             onClick={handleSkip}
             aria-label="Skip this form and fill later"
           >
             Skip Profile, I will fill later
-          </button>
+          </button> */}
         </form>
       </div>
     </div>
