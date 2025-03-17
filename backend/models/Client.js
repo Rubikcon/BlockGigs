@@ -4,6 +4,7 @@ const clientSchema = new mongoose.Schema(
   {
     wallet_address: { type: String, unique: true, sparse: true },
     fullname: { type: String, required: true },
+    role: { type: String, default: "client" },
     about: { type: String, required: true },
     email: { type: String, sparse: true }, // Sparse prevents errors when null
     password: { type: String },

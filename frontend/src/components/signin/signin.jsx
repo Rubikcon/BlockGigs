@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
   const [wallet, setWallet] = useState("");
@@ -39,7 +40,7 @@ const Signin = () => {
     alert("Form submitted successfully!");
 
     // Navigate to verification page and pass the email as state
-    navigate("/emailcode", { state: { email } });
+    navigate("/talent/dashboard", { state: { email } });
   };
   const handleGotoHome = () => {
     navigate("/");
@@ -91,7 +92,7 @@ const Signin = () => {
           setSignature(signa);
           console.log("signature", signa);
           // console.log("balance:", bal);
-          navigate("/Persona");
+          navigate(`{/talent/dashboard}`);
         });
 
       // console.log("Signature:", signature);
@@ -127,7 +128,7 @@ const Signin = () => {
                 Sign In
               </h2>
               <p className="font-montserrat font-medium text-[12px] lg:text-[14px] leading-6 text-[#676767]">
-                Create an account with us by email or wallet
+                Log in to your account with your email
               </p>
             </div>
 
@@ -148,6 +149,31 @@ const Signin = () => {
                   className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px]  border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"
                 />
 
+                {/* <button
+                  type="submit"
+                  className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer"
+                >
+                  {" "}
+                  <FaArrowRightLong className="text-[#fafafa] pointer-events-none " />{" "}
+                </button> */}
+              </div>
+
+              <label
+                htmlFor="password"
+                className="font-montserrat font-medium text-[14px] leading-6 text-[#292929]"
+              >
+                Password
+              </label>
+              <div className="relative flex items-center mt-[-1.8rem]">
+                <input
+                  type="password"
+                  placeholder="Enter password"
+                  required
+                  aria-required="true"
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px]  border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"
+                />
+
                 <button
                   type="submit"
                   className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer"
@@ -158,7 +184,7 @@ const Signin = () => {
               </div>
 
               <div className="flex justify-center items-center w-[320px] lg:w-[340px] h-[24px] gap-1 ml-[-2rem] lg:ml-[-1rem]">
-                <input
+                {/* <input
                   type="checkbox"
                   name="checkbox"
                   id="checkbox"
@@ -166,8 +192,8 @@ const Signin = () => {
                   defaultChecked={true}
                   required
                   aria-required="true"
-                />
-                <p className="font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#292929]">
+                /> */}
+                {/* <p className="font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#292929]">
                   Agree to our{" "}
                   <span className="font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#2f66f6]">
                     Terms and Condition
@@ -176,12 +202,12 @@ const Signin = () => {
                   <span className="font-montserrat font-medium text-[10px] lg:text-[12px] leading-6 text-[#2f66f6]">
                     Privacy Policy
                   </span>
-                </p>
+                </p> */}
               </div>
             </div>
           </form>
 
-          <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-3 mt-[1.5rem]">
+          <div className="flex justify-center items-center w-[260px] lg:w-[350px] h-[24px] gap-2 mt-[5rem]">
             <span className="flex-grow border-t text-[#e6e6e6]"></span>
             <p className="mx-4 font-onset text-[#888888] font-normal text-[14px] leading-6">
               OR
@@ -205,15 +231,15 @@ const Signin = () => {
                 Celo
               </span>
             </button> */}
-            <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
+            {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={wallet} alt="wallet logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
                 Wallet connect
               </span>
-            </button>
+            </button> */}
           </div>
 
-          <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center mt-8">
+          <div className="w-[273px] h-[24px] gap-1 flex justify-center items-center -mt-12">
             <p className="font-montserrat font-medium text-[14px] lg:text-base leading-6 text-[#292929]">
               You don't have an account?
             </p>
