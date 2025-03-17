@@ -114,7 +114,7 @@ const Password = () => {
                 <input
                   type="password"
                   placeholder="Enter Password"
-                  // required
+                  required
                   aria-required="true"
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-[260px] lg:w-[350px] h-[47px] mt-[28px] px-[16px] py-[12px] gap-[16px] rounded-[6px] border-[1px]  border-[#DBDBDB] text-[14px] font-montserrat font-normal leading-[23px] text-[#a9a9a9]"

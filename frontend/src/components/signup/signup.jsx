@@ -277,11 +277,11 @@ const Signup = () => {
               </span>
             </button> */}
 
-            <div className="mt-10">
+            {/* UNCOMMENT HERE TO USE THE WALLET CONNECT BUTTON */}
+            {/* <div className="mt-10">
               <ConnectButton label="Wallet Connect" />
 
-              {/* <ConnectWallet onSuccess={handleSuccess} onError={handleError} /> */}
-            </div>
+            </div> */}
           </div>
           {/* Fix this */}
           {walletError && (

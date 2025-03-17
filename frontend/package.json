@@ -22,6 +22,7 @@
     "@web3-onboard/core": "^2.24.0",
     "@web3-onboard/metamask": "^2.2.1",
     "@web3-onboard/phantom": "^2.1.1",
+    "axios": "^1.8.3",
     "buffer": "^6.0.3",
     "esbuild": "^0.25.1",
     "ethers": "^6.13.5",

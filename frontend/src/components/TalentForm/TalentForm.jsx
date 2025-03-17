@@ -3,14 +3,47 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import Select from "react-select";
+import axios from "axios";
 
 const TalentForm = () => {
   const navigate = useNavigate();
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   navigate("/talent/dashboard");
+  // };
+
+  const userData = {
+    persona: localStorage.getItem("Persona"),
+    wcmVersion: localStorage.getItem("WCM_VERSION"),
+    account: localStorage.getItem("account"),
+    email: localStorage.getItem("email"),
+    onboardAgreement: JSON.parse(
+      localStorage.getItem("onboard.js:agreement") || "{}"
+    ),
+    password: localStorage.getItem("password"), // ⚠️ Storing passwords in localStorage is not secure!
+    recentWallet: JSON.parse(localStorage.getItem("rk-recent") || "[]"),
+  };
+
+  console.log(userData);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/talent/dashboard");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/register",
+        formData
+      );
+
+      alert(response.data.message);
+
+      navigate("/talent/dashboard");
+      // Redirect after successful registration
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
+    }
   };
 
   const handleSkip = () => {
