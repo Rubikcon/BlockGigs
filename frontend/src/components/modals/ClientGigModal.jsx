@@ -10,7 +10,7 @@ function ClientGigModal({ visible, onClose, item }) {
     totalPrice: 0,
     detail: "",
     milestone: 1,
-    milestones: [{ details: "", deadline: "", totalPrice: 0 }],
+    milestones: [{ description: "", deadline: "", amount: 0 }],
     talent: null,
     accepted: false,
   });
@@ -22,9 +22,9 @@ function ClientGigModal({ visible, onClose, item }) {
     if (name === "milestone") {
       const milestoneCount = Math.max(1, parseInt(value, 10) || 1);
       const milestones = Array.from({ length: milestoneCount }, (_, index) => ({
-        details: gig.milestones[index]?.details || "",
+        description: gig.milestones[index]?.description || "",
         deadline: gig.milestones[index]?.deadline || "",
-        totalPrice: gig.milestones[index]?.totalPrice || 0,
+        amount: gig.milestones[index]?.amount || 0,
       }));
       setGig({
         ...gig,
@@ -65,7 +65,7 @@ function ClientGigModal({ visible, onClose, item }) {
       totalPrice: 0,
       detail: "",
       milestone: 1,
-      milestones: [{ details: "", deadline: "", totalPrice: 0 }],
+      milestones: [{ description: "", deadline: "", amount: 0 }],
       talent: null,
       accepted: false,
     });
@@ -78,14 +78,14 @@ function ClientGigModal({ visible, onClose, item }) {
         <div key={i} className="grid grid-cols-4 gap-2 mb-4">
           <p className="col-span-1 text-[14px]">#{i + 1} Milestone</p>
           <div className="col-span-3">
-            <p className="text-[14px]">Details</p>
+            <p className="text-[14px]">description</p>
             <input
               placeholder={`Milestones ${i + 1} involves...`}
               className="w-full border border-gray-400 focus:outline-none rounded text-[14px] py-2 pl-2"
               type="text"
-              value={gig.milestones[i]?.details || ""}
+              value={gig.milestones[i]?.description || ""}
               onChange={(e) =>
-                onMilestoneChangeHandler(i, "details", e.target.value)
+                onMilestoneChangeHandler(i, "description", e.target.value)
               }
             />
           </div>
@@ -114,9 +114,9 @@ function ClientGigModal({ visible, onClose, item }) {
                   placeholder="0.00"
                   type="number"
                   className="col-span-2 focus:outline-none pl-2 text-[12px]"
-                  value={gig.milestones[i]?.totalPrice || ""}
+                  value={gig.milestones[i]?.amount || ""}
                   onChange={(e) =>
-                    onMilestoneChangeHandler(i, "totalPrice", e.target.value)
+                    onMilestoneChangeHandler(i, "amount", e.target.value)
                   }
                 />
               </div>
@@ -131,14 +131,14 @@ function ClientGigModal({ visible, onClose, item }) {
     //   <div key={i} className="grid grid-cols-4 gap-2 mb-4">
     //     <p className="col-span-1 text-[14px]">#{i + 1} Milestone</p>
     //     <div className="col-span-3">
-    //       <p className="text-[14px]">Details</p>
+    //       <p className="text-[14px]">description</p>
     //       <input
     //         placeholder={`Milestone ${i + 1} involves...`}
     //         className="w-full border border-gray-400 focus:outline-none rounded text-[14px] py-2 pl-2"
     //         type="text"
-    //         value={milestone.details}
+    //         value={milestone.description}
     //         onChange={(e) =>
-    //           onMilestoneChangeHandler(i, "details", e.target.value)
+    //           onMilestoneChangeHandler(i, "description", e.target.value)
     //         }
     //       />
     //     </div>
@@ -226,7 +226,7 @@ function ClientGigModal({ visible, onClose, item }) {
         </div>
         {/* <div className="row-span-3 grid mt-2"> */}
         <div>
-          <p className="text-[12px] md:text-[14px]">Gig Details</p>
+          <p className="text-[12px] md:text-[14px]">Gig Detail</p>
           <textarea
             placeholder="Changly brand needs a web designer for cutting edge..."
             className="border border-gray-400 rounded w-full min-h-[120px] focus:outline-none p-2 text-[12px]"
