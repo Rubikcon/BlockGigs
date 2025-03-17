@@ -21,6 +21,12 @@ const JobSchema = new mongoose.Schema({
     ref: "Talent",
     // required: true,
   },
+  applicants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Talent",
+    },
+  ],
 });
 
 const Job = mongoose.model("Job", JobSchema);

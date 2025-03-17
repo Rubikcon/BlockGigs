@@ -121,3 +121,46 @@ export const completeJob = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const applyForJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const { user } = req; // User from authentication middleware
+
+    // Ensure only talents can apply
+    if (user.role !== "talent") {
+      return res
+        .status(403)
+        .json({ message: "Only talents can apply for jobs" });
+    }
+
+    // Find the job
+    const job = await Job.findById(jobId);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    // Check if the job is already assigned
+    if (job.talent) {
+      return res
+        .status(400)
+        .json({ message: "This job has already been assigned" });
+    }
+
+    // Check if the user has already applied
+    if (job.applicants && job.applicants.includes(user.id)) {
+      return res
+        .status(400)
+        .json({ message: "You have already applied for this job" });
+    }
+
+    // Add the talent's ID to the applicants list
+    job.applicants.push(user.id);
+    await job.save();
+
+    res
+      .status(200)
+      .json({ message: "Application submitted successfully", job });
+  } catch (error) {
+    console.error("Error Applying for Job:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
