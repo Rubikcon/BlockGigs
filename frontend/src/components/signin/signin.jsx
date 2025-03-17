@@ -83,171 +83,43 @@ const Signin = () => {
   };
 
   // const connectMetamask = async () => {
-  //   let account;
-  //   // let balance;
-  //   ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
-  //     account = accounts[0];
-  //     console.log("Address", account);
-  //     setAddr(account);
-
-  //     ethereum
-  //       .request({
-  //         method: "eth_getBalance",
-  //         params: [account, "latest"],
-  //       })
-  //       .then((result) => {
-  //         console.log(result);
-  //         let wei = parseInt(result, 16);
-  //         let bal = wei / 10 ** 18;
-  //         setBalance(bal);
-
-  //         console.log("balance:", bal);
-  //         navigate("");
-  //       });
-
-  //     // Store address in localStorage (or sessionStorage)
-  //     localStorage.setItem("walletAddress", account);
-  //     // sessionStorage.setItem("walletAddress", account); // Use sessionStorage if you prefer
-  //     // });
-
-  //     // Uncomment this to sign message
-
-  //     // Signin and sign in message
-  //     const message = "Sign this message to verify your wallet.";
-
-  //     ethereum
-  //       .request({
-  //         method: "personal_sign",
-  //         params: [message, account],
-  //       })
-  //       .then((signa) => {
-  //         // console.log(result);
-  //         // let signature;
-  //         // let bal = wei / 10 ** 18;
-  //         setSignature(signa);
-  //         setSignature(signa);
-  //         console.log("signature", signa);
-  //         // console.log("balance:", bal);
-  //         navigate(`{/talent/dashboard}`);
-  //       });
-
-  //     // console.log("Signature:", signature);
-
-  //     // sessionStorage.setItem("walletAddress", account);
-
-  //     sessionStorage.setItem("walletSignature", signature);
-  //   });
-  //   const networkId = await ethereum.request({ method: "net_version" });
-  //   console.log("Network ID:", networkId);
-  // };
-
-  // const connectMetamask = async () => {
-  //   let account;
-
-  //   ethereum
-  //     .request({ method: "eth_requestAccounts" })
-  //     .then(async (accounts) => {
-  //       account = accounts[0];
-  //       console.log("Address", account);
-  //       setAddr(account);
-
-  //       ethereum
-  //         .request({
-  //           method: "eth_getBalance",
-  //           params: [account, "latest"],
-  //         })
-  //         .then((result) => {
-  //           let wei = parseInt(result, 16);
-  //           let bal = wei / 10 ** 18;
-  //           setBalance(bal);
-  //           console.log("balance:", bal);
-  //         });
-
-  //       // Store wallet address
-  //       localStorage.setItem("walletAddress", account);
-
-  //       // Sign message
-  //       const message = "Sign this message to verify your wallet.";
-  //       ethereum
-  //         .request({
-  //           method: "personal_sign",
-  //           params: [message, account],
-  //         })
-  //         .then(async (signa) => {
-  //           setSignature(signa);
-  //           console.log("signature", signa);
-
-  //           try {
-  //             const response = await axios.post(
-  //               "http://localhost:4000/api/auth/wallet-login",
-  //               { wallet_address: account }
-  //             );
-
-  //             console.log("Response Data:", response.data);
-
-  //             const { token, user } = response.data;
-  //             if (!user || !user.role) {
-  //               setError("Role not found. Please contact support.");
-  //               return;
-  //             }
-
-  //             // Store token & role
-  //             localStorage.setItem("token", token);
-  //             localStorage.setItem("userRole", user.role);
-
-  //             // Redirect based on role
-  //             const roleRoutes = {
-  //               client: "/client/dashboard",
-  //               talent: "/talent/dashboard",
-  //               admin: "/admin/dashboard",
-  //             };
-
-  //             navigate(roleRoutes[user.role] || "/");
-  //           } catch (err) {
-  //             setError(err.response?.data?.message || "Wallet login failed");
-  //           }
-  //         });
-
-  //       sessionStorage.setItem("walletSignature", signature);
-  //     });
-
-  //   const networkId = await ethereum.request({ method: "net_version" });
-  //   console.log("Network ID:", networkId);
-  // };
-
-  // const connectMetamask = async () => {
   //   try {
+  //     if (!window.ethereum) {
+  //       alert("Metamask not detected. Please install Metamask.");
+  //       return;
+  //     }
+
   //     // Request wallet connection
-  //     const accounts = await ethereum.request({
+  //     const accounts = await window.ethereum.request({
   //       method: "eth_requestAccounts",
   //     });
+
   //     const walletAddress = accounts[0]; // Get wallet address
   //     console.log("Wallet Address:", walletAddress);
 
-  //     setAddr(walletAddress);
   //     localStorage.setItem("walletAddress", walletAddress); // Store wallet address
 
-  //     // Sign message for authentication (optional, depending on API requirements)
-  //     const message = "Sign this message to verify your wallet.";
-  //     const signature = await ethereum.request({
-  //       method: "personal_sign",
-  //       params: [message, walletAddress],
-  //     });
+  //     // Create the correct payload format
+  //     // const payload = { wallet_address: walletAddress };
+  //     const payload = { wallet_address: walletAddress.trim() };
 
-  //     setSignature(signature);
-  //     console.log("Signature:", signature);
+  //     console.log("Payload Sent:", payload);
 
   //     // API Call to login using wallet address
   //     const response = await axios.post(
   //       "http://localhost:4000/api/auth/login",
-  //       { wallet_address: walletAddress }
+  //       // JSON.stringify(payload),
+  //       "0x03a33E8A69f1A5b61178f70BC5c8E674aB571334",
+  //       // Convert to a raw JSON string
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //       }
   //     );
 
   //     console.log("Response Data:", response.data);
 
   //     const { token, user } = response.data;
 
-  //     // Ensure role exists
   //     if (!user || !user.role) {
   //       setError("Role not found. Please contact support.");
   //       return;
@@ -266,6 +138,7 @@ const Signin = () => {
 
   //     navigate(roleRoutes[user.role] || "/");
   //   } catch (err) {
+  //     console.error("Wallet login error:", err);
   //     setError(err.response?.data?.message || "Wallet login failed");
   //   }
   // };
@@ -282,45 +155,48 @@ const Signin = () => {
         method: "eth_requestAccounts",
       });
 
-      const walletAddress = accounts[0]; // Get wallet address
+      const walletAddress = accounts[0]?.trim(); // Ensure we get a valid address
       console.log("Wallet Address:", walletAddress);
-      const stringified_address = `"${walletAddress}"`;
-      console.log(stringified_address);
 
-      localStorage.setItem("walletAddress", walletAddress); // Store wallet address
+      if (!walletAddress) {
+        console.error("Failed to retrieve wallet address.");
+        return;
+      }
 
-      // Sign message for authentication (optional)
-      // const message = "Sign this message to verify your wallet.";
-      // const signature = await window.ethereum.request({
-      //   method: "personal_sign",
-      //   params: [message, walletAddress],
-      // });
+      localStorage.setItem("walletAddress", walletAddress); // Store wallet
 
-      // console.log("Signature:", signature);
+      // Call the testWalletLogin function with the retrieved wallet address
+      testWalletLogin(walletAddress);
+    } catch (err) {
+      console.error("MetaMask Connection Error:", err);
+    }
+  };
 
-      // API Call to login using wallet address
+  const testWalletLogin = async (walletAddress) => {
+    try {
+      // Ensure the payload is correct
+      const payload = { wallet_address: walletAddress };
 
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
-        {
-          wallet_address: stringified_address,
-        },
-        // Send wallet address as payload
+      console.log("Payload Sent:", JSON.stringify(payload));
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      console.log("Response Data:", response.data);
+      const data = await response.json();
 
-      const { token, user } = response.data;
+      console.log("Response Data:", data);
 
-      // Ensure role exists
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      const { token, user } = data;
+
       if (!user || !user.role) {
-        setError("Role not found. Please contact support.");
+        console.error("Role not found. Please contact support.");
         return;
       }
 
@@ -335,10 +211,9 @@ const Signin = () => {
         admin: "/admin/dashboard",
       };
 
-      navigate(roleRoutes[user.role] || "/");
+      window.location.href = roleRoutes[user.role] || "/";
     } catch (err) {
-      console.error("Wallet login error:", err);
-      setError(err.response?.data?.message || "Wallet login failed");
+      console.error("API Login Error:", err);
     }
   };
 
@@ -462,6 +337,7 @@ const Signin = () => {
                 Metamask
               </span>
             </button>
+
             <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
 
             {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
