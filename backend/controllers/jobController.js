@@ -29,12 +29,12 @@ export const createJob = async (req, res) => {
     console.log("User Data from Middleware:", req.user);
 
     // Ensure only clients can create jobs
-    if (req.user.role !== "client") {
-      return res.status(403).json({ message: "Only clients can create jobs" });
-    }
+    // if (req.user.role !== "client") {
+    //   return res.status(403).json({ message: "Only clients can create jobs" });
+    // }
 
     const { title, description, totalPrice, milestones } = req.body;
-
+    console.log(req, "controller")
     if (!title || !description || !totalPrice) {
       return res.status(400).json({ message: "All fields are required" });
     }
