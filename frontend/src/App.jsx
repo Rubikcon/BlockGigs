@@ -26,8 +26,7 @@ import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
-// import ClientDashboard from "./Pages/ClientDashboard";
-import ClientDashboard from "./components/UI/ClientDashboard";
+import ClientDashboard from "./Pages/ClientDashboard";
 import ClientLayout from "./ClientLayout";
 import Job from "./Util/job";
 import Password from "./components/Password/password";
@@ -71,9 +70,7 @@ const App = () => {
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
-        <Route path="/client" element={<ClientLayout />}>
-          <Route path="/client" element={<ClientDashboard />} />
-        </Route>
+        <Route path="/client/dashboard" element={<ClientDashboard />} />
 
         {/*  Navigation on for the dashboard*/}
 

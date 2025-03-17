@@ -137,6 +137,7 @@ export const registerUser = async (req, res) => {
       token,
       user: {
         id: newUser._id,
+        role: newUser.role,
         email: newUser.email,
         wallet_address: newUser.wallet_address,
         isVerified: newUser.isVerified,

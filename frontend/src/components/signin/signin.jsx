@@ -6,6 +6,7 @@ import metamask from "../../assets/metamask.png";
 import celo from "../../assets/celo.png";
 import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -13,35 +14,124 @@ const Signin = () => {
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
   const [wallet, setWallet] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [signature, setSignature] = useState("");
 
   const navigate = useNavigate(); //for page navigation
+  ``;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault(); //This will stop the form from submitting to itself
+  //   setError("");
+  //   //Checking if the email field is empty
+  //   if (!email) {
+  //     alert("Enter email address to continue!");
+  //     return;
+  //   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); //This will stop the form from submitting to itself
+  //   // Take back user to the home page
 
-    //Checking if the email field is empty
+  //   //Checking if the email address is valid
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  //   if (!emailRegex.test(email)) {
+  //     alert("Please put a valid email address!");
+  //     return;
+  //   }
+
+  //   setError(""); // Clear previous errors
+
+  //   const loginData = walletAddress
+  //     ? { wallet_address: walletAddress }
+  //     : { email, password };
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:4000/api/auth/login",
+  //       loginData
+  //     );
+
+  //     const { token, user } = response.data;
+  //   // Store token and role in localStorage
+  //   localStorage.setItem("token", token);
+  //   localStorage.setItem("userRole", user.role);
+
+  //   // Redirect based on role
+  //   switch (user.role) {
+  //     case "client":
+  //       navigate("/client/dashboard");
+  //       break;
+  //     case "talent":
+  //       navigate("/talent/dashboard");
+  //       break;
+  //     case "admin":
+  //       navigate("/admin/dashboard");
+  //       break;
+  //     default:
+  //       navigate("/");
+  //   }
+  // } catch (err) {
+  //   setError(err.response?.data?.message || "Login failed");
+  // }
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setError("");
+
     if (!email) {
       alert("Enter email address to continue!");
       return;
     }
 
-    // Take back user to the home page
-
-    //Checking if the email address is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!emailRegex.test(email)) {
-      alert("Please put a valid email address!");
+      alert("Please enter a valid email address!");
       return;
     }
 
-    //If email is valid, form can be sumbitted
-    alert("Form submitted successfully!");
+    setError(""); // Clear previous errors
 
-    // Navigate to verification page and pass the email as state
-    navigate("/talent/dashboard", { state: { email } });
+    const loginData = { email, password };
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login",
+        loginData
+      );
+      console.log("Response Data:", response.data);
+      // Debugging
+      const { token, user } = response.data;
+      if (!user || !user.role) {
+        setError("Role not found. Please contact support.");
+
+        return;
+      }
+
+      // Store token & role
+
+      localStorage.setItem("token", token);
+
+      localStorage.setItem("userRole", user.role);
+
+      // Redirect based on role
+
+      const roleRoutes = {
+        client: "/client/dashboard",
+        talent: "/talent/dashboard",
+        admin: "/admin/dashboard",
+      };
+
+      navigate(roleRoutes[user.role] || "/");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handleGotoHome = () => {
     navigate("/");
   };
@@ -225,6 +315,8 @@ const Signin = () => {
                 Metamask
               </span>
             </button>
+            <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
+
             {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={celo} alt="celo logo" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
