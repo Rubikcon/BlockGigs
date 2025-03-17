@@ -226,7 +226,7 @@ export const verifyOTP = async (req, res) => {
   const { role, email, otp } = req.body;
 
   try {
-    const Model = getUserModel(role);
+    // const Model = getUserModel(role);
     const user = await Model.findOne({ email });
 
     if (!user) return res.status(400).json({ message: "User not found" });
@@ -284,35 +284,91 @@ export const verifyOTP = async (req, res) => {
 //   }
 // };
 
+// export const loginUser = async (req, res) => {
+//   const { role, email, wallet_address, password } = req.body;
+
+//   try {
+//     const Model = getUserModel(role);
+
+//     // Determine login method
+//     const query = email ? { email } : { wallet_address };
+//     const user = await Model.findOne(query);
+
+//     if (!user) {
+//       return res.status(400).json({ message: "User not found" });
+//     }
+
+//     // If logging in with email & password, validate password
+//     if (email && password) {
+//       if (!user.password) {
+//         return res
+//           .status(400)
+//           .json({ message: "Password not set for this account" });
+//       }
+//       const isMatch = await bcrypt.compare(password, user.password);
+//       if (!isMatch) {
+//         return res.status(400).json({ message: "Invalid password" });
+//       }
+//     }
+
+//     // Generate JWT token
+//     const token = generateToken(user._id, role);
+
+//     res.status(200).json({
+//       message: "Login successful",
+//       token,
+//       user: {
+//         id: user._id,
+//         email: user.email || null,
+//         wallet_address: user.wallet_address || null,
+//         isVerified: user.isVerified,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const loginUser = async (req, res) => {
-  const { role, email, wallet_address, password } = req.body;
+  const { email, wallet_address, password } = req.body;
 
   try {
-    const Model = getUserModel(role);
+    let user;
 
-    // Determine login method
-    const query = email ? { email } : { wallet_address };
-    const user = await Model.findOne(query);
+    if (wallet_address) {
+      // Login using only the wallet address
+      user =
+        (await Talent.findOne({ wallet_address })) ||
+        (await Client.findOne({ wallet_address }));
 
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+    } else if (email && password) {
+      // Login using email & password
+      user =
+        (await Talent.findOne({ email })) || (await Client.findOne({ email }));
 
-    // If logging in with email & password, validate password
-    if (email && password) {
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+
       if (!user.password) {
         return res
           .status(400)
           .json({ message: "Password not set for this account" });
       }
+
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid password" });
       }
+    } else {
+      return res.status(400).json({ message: "Invalid login credentials" });
     }
 
     // Generate JWT token
-    const token = generateToken(user._id, role);
+    const token = generateToken(user._id, user.role);
 
     res.status(200).json({
       message: "Login successful",
@@ -321,6 +377,7 @@ export const loginUser = async (req, res) => {
         id: user._id,
         email: user.email || null,
         wallet_address: user.wallet_address || null,
+        role: user.role,
         isVerified: user.isVerified,
       },
     });

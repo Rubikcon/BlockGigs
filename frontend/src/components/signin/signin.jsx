@@ -11,6 +11,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
+  const [wallet, setWallet] = useState("");
   const [signature, setSignature] = useState("");
 
   const navigate = useNavigate(); //for page navigation
