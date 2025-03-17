@@ -125,13 +125,10 @@ export const completeJob = async (req, res) => {
 export const applyForJob = async (req, res) => {
   try {
     const { jobId } = req.params;
-    const { user } = req; // User from authentication middleware
+    const { applicantId } = req.body; // Applicant ID from request body
 
-    // Ensure only talents can apply
-    if (user.role !== "talent") {
-      return res
-        .status(403)
-        .json({ message: "Only talents can apply for jobs" });
+    if (!applicantId) {
+      return res.status(400).json({ message: "Applicant ID is required" });
     }
 
     // Find the job
@@ -145,15 +142,15 @@ export const applyForJob = async (req, res) => {
         .json({ message: "This job has already been assigned" });
     }
 
-    // Check if the user has already applied
-    if (job.applicants && job.applicants.includes(user.id)) {
+    // Check if the applicant has already applied
+    if (job.applicants.includes(applicantId)) {
       return res
         .status(400)
         .json({ message: "You have already applied for this job" });
     }
 
-    // Add the talent's ID to the applicants list
-    job.applicants.push(user.id);
+    // Add the applicant's ID to the job's applicants list
+    job.applicants.push(applicantId);
     await job.save();
 
     res
