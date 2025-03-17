@@ -34,6 +34,7 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
     "react-select": "^5.10.1",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.0.3",
     "wagmi": "^2.14.13",
     "web3": "^4.16.0"
