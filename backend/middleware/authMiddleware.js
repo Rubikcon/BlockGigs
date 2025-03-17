@@ -30,48 +30,26 @@ export const protect = async (req, res, next) => {
 import Client from "../models/Client.js"; // Ensure the correct path
 // dotenv.config();
 
-// export const authenticate = async (req, res, next) => {
-//   const token = req.header("Authorization")?.replace("Bearer ", "");
-
-//   if (!token) {
-//     return res.status(401).json({ message: "No token provided, Unauthorized" });
-//   }
-
-//   try {
-//     console.log("Received Token:", token); // Debugging
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     console.log("Decoded Token:", decoded); // Debugging
-
-//     req.user = await Client.findById(decoded.id).select("-password"); // Fetch user
-//     if (!req.user) {
-//       return res.status(401).json({ message: "User not found, Unauthorized" });
-//     }
-
-//     next();
-//   } catch (error) {
-//     console.error("JWT Verification Error:", error.message);
-//     res.status(401).json({ message: "Invalid token, Unauthorized" });
-//   }
-// };
-
 export const authenticate = async (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+  // const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  if (!token) {
-    return res.status(401).json({ message: "No token provided, Unauthorized" });
-  }
+  // if (!token) {
+  //   return res.status(401).json({ message: "No token provided, Unauthorized" });
+  // }
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  // try {
+  //   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log("Decoded Token:", decoded); // Debugging
+  //   console.log("Decoded Token:", decoded); // Debugging
 
-    req.user = { id: decoded.id, role: decoded.role }; // Ensure req.user is set
+  //   req.user = { id: decoded.id, role: decoded.role }; // Ensure req.user is set
 
-    console.log("User in Request:", req.user); // Debugging
+  //   console.log("User in Request:", req.user); // Debugging
 
-    next();
-  } catch (error) {
-    res.status(401).json({ message: "Invalid token, Unauthorized" });
-  }
+  //   next();
+  // } catch (error) {
+  //   res.status(401).json({ message: "Invalid token, Unauthorized" });
+  // }
+  console.log("createjob called");
+  next();
 };

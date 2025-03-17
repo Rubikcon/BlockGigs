@@ -70,7 +70,7 @@ const App = () => {
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
-        <Route path="/client/dashboard" element={<ClientDashboard />} />
+        <Route path="job" element={<ClientDashboard />} />
 
         {/*  Navigation on for the dashboard*/}
 
