@@ -44,7 +44,7 @@ const Hero = () => {
                 />
                 <h3>Product Design Intern at CryptoKitties</h3>
               </div>
-              <small>Rate: 0.05 USDT per hour</small>
+              <small>Rate: 0.05 ETH per hour</small>
             </div>
             <div className="py-2">
               <button className="w-full px-4 py-1 bg-blue-700 text-white rounded-md cursor-pointer">

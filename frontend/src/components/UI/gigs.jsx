@@ -142,28 +142,32 @@ const gigs = [
 function Gigs() {
   return (
     <div>
-      <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
+      <div className="md:bg-gray-100 w-[84.85vw] h-[100vh] grid md:grid-rows-12 px-6 pb-4 gap-2 overflow-auto">
         <div className="row-span-1 grid items-center px-2 mt-2">
-          <div className="grid grid-cols-3 gap-1 w-full">
-            <span className="">My Talent Gigs</span>
-            <div className="col-span-1 flex justify-between">
-              <div className="flex bg-white items-center justify-center rounded-[8px] py-1 w-[72%]">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-1 w-full">
+            <span className="text-[16px]">My Talent Gigs</span>
+            <div className="col-span-1 md:flex justify-between">
+              <div className="flex bg-white items-center justify-center rounded-[8px] py-1 md:w-[72%]">
                 <img src={search} alt="" className="h-6 w-6 mr-4 my-1 ml-4" />
                 <input
-                  placeholder="Search for jobs, talents or clients"
+                  placeholder={
+                    window.innerWidth >= 768
+                      ? "Search for jobs, talents or clients"
+                      : ""
+                  }
                   className="w-full flex"
                 />
               </div>
-              <button className="bg-[#2f66f6] px-2 text-white rounded-[8px]">
+              {/* <button className="bg-[#2f66f6] px-2 text-white rounded-[8px]">
                 Post New gig
-              </button>
+              </button> */}
             </div>
             <div className="col-span-1 grid justify-center">
               <div className="flex gap-2">
-                <div className="h-6 w-6 rounded-[50%] bg-white grid items-center justify-center">
+                <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center hidden">
                   <img src={bell2} alt="" className="h-4 w-4" />
                 </div>
-                <div className="flex bg-gray-400 hover:bg-white hover:border-2 hover:border-gray-300 -mt-1 mb-3 rounded-[20px] pl-1">
+                <div className="md:flex bg-gray-400 hover:bg-white hover:border-2 hover:border-gray-300 -mt-1 mb-3 rounded-[20px] pl-1 hidden">
                   <img src={dp} alt="" className="h-8 w-8" />
                   <img src={down} alt="" className="w-8 h-8" />
                 </div>
@@ -176,28 +180,36 @@ function Gigs() {
             <span className="bg-[#bff1c9] p-1 rounded-[5px] w-6">
               <img src={bag} alt="" />
             </span>
-            <p className="text-[#3c8e3c]">Completed gigs</p>
+            <p className="text-[#3c8e3c] text-[12px] md:text-[16px]">
+              Completed gigs
+            </p>
             <span className=" text-[14px]">15</span>
           </div>
           <div className="flex bg-white rounded-[8px] px-4  py-[12px] gap-4">
             <span className="bg-[#ffd3ab] rounded-[5px] w-6">
               <img src={clock} alt="" />
             </span>
-            <p className="text-[#eb7e1c]">Ongoing gigs</p>
+            <p className="text-[#eb7e1c] text-[12px] md:text-[16px]">
+              Ongoing gigs
+            </p>
             <span className=" text-[14px]">3</span>
           </div>
           <div className="flex bg-white rounded-[8px] px-4  py-[12px] gap-4">
             <span className="bg-[#b2c8ff] rounded-[5px] w-6">
               <img src={file} alt="" />
             </span>
-            <p className="text-[#3d4e79]">No status gigs</p>
+            <p className="text-[#3d4e79] text-[10px] md:text-[16px]">
+              No status gigs
+            </p>
             <span className=" text-[14px]">2</span>
           </div>
           <div className="flex bg-white rounded-[8px] px-4  py-[12px] gap-4">
             <span className="bg-[#ffc1c1] rounded-[5px] w-6">
               <img src={cancel} alt="" />
             </span>
-            <p className="text-[#d83131]">Cancelled gigs</p>
+            <p className="text-[#d83131] text-[12px] md:text-[16px]">
+              Cancelled gigs
+            </p>
             <span className=" text-[14px]">1</span>
           </div>
         </div>
