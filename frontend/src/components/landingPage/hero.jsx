@@ -4,7 +4,9 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate("/signup");
+    // navigate("/signup");
+    // for the waitlist for now
+    window.location.href = "https://blockgigs.netlify.app/";
   };
   return (
     <section

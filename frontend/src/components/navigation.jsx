@@ -52,7 +52,9 @@ export default function Navigation() {
   };
 
   const handleGetStarted = () => {
-    navigate("/signup");
+    // navigate("/signup");
+    // navigate to an external link
+    window.location.href = "https://blockgigs.netlify.app/";
   };
 
   const toggleDropdown = (name) => {
