@@ -4,7 +4,9 @@ export default function WhyChooseUs() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate("/signup");
+    // navigate("/signup");
+    // for the waitlist for now
+    window.location.href = "https://blockgigs.netlify.app/";
   };
   return (
     <section className="relative max-w-[95%] m-auto w-full py-16 bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center overflow-hidden">
