@@ -133,7 +133,8 @@ export const registerUser = async (req, res) => {
     const token = generateToken(newUser._id, role);
 
     res.status(201).json({
-      message: "User registered successfully",
+      message:
+        "User registered successfully, visit the login and login with your registered details",
       token,
       user: {
         id: newUser._id,
@@ -261,29 +262,6 @@ export const verifyOTP = async (req, res) => {
 };
 
 // Login user (without OTP verification requirement)
-// export const loginUser = async (req, res) => {
-//   const { role, email, wallet_address, password } = req.body;
-
-//   try {
-//     const Model = getUserModel(role);
-//     const user = await Model.findOne({ $or: [{ email }, { wallet_address }] });
-
-//     if (!user) return res.status(400).json({ message: "User not found" });
-
-//     if (password && !(await bcrypt.compare(password, user.password))) {
-//       return res.status(400).json({ message: "Invalid password" });
-//     }
-
-//     const token = generateToken(user._id, role);
-//     res.status(200).json({
-//       message: "Login successful",
-//       token,
-//       user: { id: user._id, email: user.email, isVerified: user.isVerified },
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 // export const loginUser = async (req, res) => {
 //   const { role, email, wallet_address, password } = req.body;
@@ -291,25 +269,32 @@ export const verifyOTP = async (req, res) => {
 //   try {
 //     const Model = getUserModel(role);
 
-//     // Determine login method
-//     const query = email ? { email } : { wallet_address };
-//     const user = await Model.findOne(query);
+//     let user = null;
 
-//     if (!user) {
-//       return res.status(400).json({ message: "User not found" });
-//     }
-
-//     // If logging in with email & password, validate password
+//     // Determine login method (either email & password or wallet_address)
 //     if (email && password) {
+//       user = await Model.findOne({ email });
+//       if (!user) {
+//         return res.status(400).json({ message: "User not found" });
+//       }
+
 //       if (!user.password) {
 //         return res
 //           .status(400)
 //           .json({ message: "Password not set for this account" });
 //       }
+
 //       const isMatch = await bcrypt.compare(password, user.password);
 //       if (!isMatch) {
 //         return res.status(400).json({ message: "Invalid password" });
 //       }
+//     } else if (wallet_address) {
+//       user = await Model.findOne({ wallet_address });
+//       if (!user) {
+//         return res.status(400).json({ message: "User not found" });
+//       }
+//     } else {
+//       return res.status(400).json({ message: "Invalid login credentials" });
 //     }
 
 //     // Generate JWT token
@@ -322,6 +307,60 @@ export const verifyOTP = async (req, res) => {
 //         id: user._id,
 //         email: user.email || null,
 //         wallet_address: user.wallet_address || null,
+//         isVerified: user.isVerified,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// export const loginUser = async (req, res) => {
+//   const { email, wallet_address, password } = req.body;
+
+//   try {
+//     let user;
+
+//     if (wallet_address) {
+//       // Login using only the wallet address
+//       user = await User.findOne({ wallet_address });
+
+//       if (!user) {
+//         return res.status(400).json({ message: "User not found" });
+//       }
+//     } else if (email && password) {
+//       // Login using email & password
+//       user = await User.findOne({ email });
+
+//       if (!user) {
+//         return res.status(400).json({ message: "User not found" });
+//       }
+
+//       if (!user.password) {
+//         return res
+//           .status(400)
+//           .json({ message: "Password not set for this account" });
+//       }
+
+//       const isMatch = await bcrypt.compare(password, user.password);
+//       if (!isMatch) {
+//         return res.status(400).json({ message: "Invalid password" });
+//       }
+//     } else {
+//       return res.status(400).json({ message: "Invalid login credentials" });
+//     }
+
+//     // Generate JWT token
+//     const token = generateToken(user._id, user.role);
+
+//     res.status(200).json({
+//       message: "Login successful",
+//       token,
+//       user: {
+//         id: user._id,
+//         email: user.email || null,
+//         wallet_address: user.wallet_address || null,
+//         role: user.role,
 //         isVerified: user.isVerified,
 //       },
 //     });
