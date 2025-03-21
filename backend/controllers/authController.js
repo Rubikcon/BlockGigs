@@ -134,7 +134,7 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json({
       message:
-        "User registered successfully, go and login with your registered details",
+        "User registered successfully, visit the login and login with your registered details",
       token,
       user: {
         id: newUser._id,
