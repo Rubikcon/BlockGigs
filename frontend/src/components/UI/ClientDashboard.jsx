@@ -439,66 +439,64 @@ const ClientDashboard = () => {
         {job === "" ? (
           <div>
             <div className="row-span-1 grid items-center px-2 mt-2">
-              <div className="grid w-full">
-                <div className="grid grid-cols-3 gap-1 w-full">
-                  <div className="col-span-1">
-                    <span className="flex gap-1 text-[12px] sm:text-[12px] md:text-[15px]">
-                      Welcome <p className=" hidden md:block">back, Let's </p>
-                      <p className="text-green-400  hidden md:block">Work</p>
-                    </span>
+              <div className="grid grid-cols-3 gap-1 w-full">
+                <div className="col-span-1">
+                  <span className="flex gap-1 text-[12px] sm:text-[12px] md:text-[15px]">
+                    Welcome <p className=" hidden md:block">back, Let's</p>
+                    <p className="text-green-400  hidden md:block">Work</p>
+                  </span>
+                </div>
+                <div className=" flex col-span-1 mb-2 gap-2">
+                  <div className="flex flex-1 bg-white items-center justify-center rounded-[8px] md:py-1">
+                    <img
+                      src={search}
+                      alt=""
+                      className="w-3 h-3 md:h-6 md:w-6 mr-4 md:my-1 ml-4"
+                    />
+                    <input
+                      placeholder={
+                        window.innerWidth >= 768
+                          ? "Search for jobs, talents or clients"
+                          : ""
+                      }
+                      className="w-[10%] md:w-full flex"
+                    />
                   </div>
-                  <div className=" flex col-span-1 mb-2 gap-2">
-                    <div className="flex bg-white items-center justify-center rounded-[8px] md:py-1">
-                      <img
-                        src={search}
-                        alt=""
-                        className="w-3 h-3 md:h-6 md:w-6 mr-4 md:my-1 ml-4"
-                      />
-                      <input
-                        placeholder={
-                          window.innerWidth >= 768
-                            ? "Search for jobs, talents or clients"
-                            : ""
-                        }
-                        className="w-[10%] md:w-full flex"
-                      />
+                  <button
+                    className="flex text-[8px] md:text-[15px] bg-[#2f66f6] px-2 text-white rounded-[8px] justify-between items-center gap-1 cursor-pointer"
+                    onClick={() => setOpenGig(true)}
+                  >
+                    <img src={send} alt="" className="w-3 h-3 md:w-6 md:h-6" />
+                    Post New gig
+                  </button>
+                </div>
+                <div className="flex-1 col-span-1 grid justify-center">
+                  <div className="flex gap-2">
+                    <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">
+                      <img src={bell2} alt="" className="h-4 w-4" />
                     </div>
-                    <button
-                      className="flex bg-[#2f66f6] px-2 text-white rounded-[8px] justify-between items-center gap-1 cursor-pointer"
-                      onClick={() => setOpenGig(true)}
-                    >
-                      <img src={send} alt="" className="w-6 h-6" />
-                      Post New gig
-                    </button>
-                  </div>
-                  <div className="col-span-1 grid justify-center">
-                    <div className="flex gap-2">
-                      <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">
-                        <img src={bell2} alt="" className="h-4 w-4" />
-                      </div>
-                      <div className="flex gap-4">
-                        <div>
-                          <img
-                            src={dp}
-                            alt=""
-                            className="h-6 w-6 hidden md:block"
-                          />
-                        </div>
-                        <div className="">
-                          <p className="-m-2 text-[12px] md:text-[15px]">
-                            Glory Design
-                          </p>
-                          <span className="text-[6px] md:text-[10px] top-1 m-0">
-                            Product Designer
-                          </span>
-                        </div>
+                    <div className="flex gap-4">
+                      <div>
                         <img
-                          src={down}
+                          src={dp}
                           alt=""
-                          className=" md:block w-[14px] h-[14px] md:w-8 md:h-8 cursor-pointer"
-                          onClick={openProfile}
+                          className="h-6 w-6 hidden md:block"
                         />
                       </div>
+                      <div className="">
+                        <p className="-m-2 text-[12px] md:text-[15px]">
+                          Glory Design
+                        </p>
+                        <span className="text-[6px] md:text-[10px] top-1 m-0">
+                          Product Designer
+                        </span>
+                      </div>
+                      <img
+                        src={down}
+                        alt=""
+                        className=" md:block w-[14px] h-[14px] md:w-8 md:h-8 cursor-pointer"
+                        onClick={openProfile}
+                      />
                     </div>
                   </div>
                 </div>

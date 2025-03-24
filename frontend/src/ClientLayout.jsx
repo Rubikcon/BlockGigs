@@ -3,9 +3,9 @@ import ClientSidebar from "./components/clientSidebar";
 
 function ClientLayout() {
   return (
-    <div className="flex">
+    <div className="grid grid-flow-row md:flex">
       <ClientSidebar />
-      <div className="flex">
+      <div className="grid grid-flow-row md:flex-1">
         <Outlet />
       </div>
     </div>
