@@ -17,6 +17,8 @@ const TalentForm = () => {
   const [about, setAbout] = useState("");
   const [skills, setSkills] = useState([]);
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   navigate("/talent/dashboard");
@@ -82,7 +84,8 @@ const TalentForm = () => {
 
       // Send POST request
       const response = await axios.post(
-        "https://blockgigs-bt8d.onrender.com/api/auth/register",
+        `${apiUrl}/api/auth/register`,
+        // "https://blockgigs-bt8d.onrender.com/api/auth/register",
         payload
       );
 

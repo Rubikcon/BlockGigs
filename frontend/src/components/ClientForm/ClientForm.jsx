@@ -10,6 +10,8 @@ const ClientForm = () => {
   const [errors, setErrors] = useState({});
   const location = useLocation();
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const { account, selectedPersona } = location.state || {};
 
   const handleGotoHome = () => {
@@ -61,7 +63,9 @@ const ClientForm = () => {
       // Send POST request
       const response = await axios.post(
         // "http://localhost:4000/api/auth/register",
-        "https://blockgigs-bt8d.onrender.com/api/auth/register",
+        `${apiUrl}/api/auth/register`,
+
+        // "https://blockgigs-bt8d.onrender.com/api/auth/register",
         payload
       );
 
