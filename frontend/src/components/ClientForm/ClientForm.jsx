@@ -12,6 +12,9 @@ const ClientForm = () => {
 
   const { account, selectedPersona } = location.state || {};
 
+  const handleGotoHome = () => {
+    navigate("/");
+  };
   // const handleSubmit = (e) => {
   //   e.preventDefault();
 
@@ -57,6 +60,7 @@ const ClientForm = () => {
 
       // Send POST request
       const response = await axios.post(
+        // "http://localhost:4000/api/auth/register",
         "https://blockgigs-bt8d.onrender.com/api/auth/register",
         payload
       );
@@ -78,7 +82,10 @@ const ClientForm = () => {
   return (
     <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat flex flex-col items-center">
       {/* Logo Section */}
-      <div className="w-[103px] h-[37px] flex justify-between items-center gap-2 mt-4 ml-4">
+      <div
+        onClick={handleGotoHome}
+        className="w-[103px] h-[37px] flex justify-between items-center gap-2 mt-4 ml-4 cursor-pointer"
+      >
         <img src={logo} alt="Blockgigs logo" className="mt-4" />
         <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4">
           Blockgigs

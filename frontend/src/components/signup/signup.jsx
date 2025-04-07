@@ -70,7 +70,7 @@ const Signup = () => {
     localStorage.setItem("email", email);
 
     //If email is valid, form can be sumbitted
-    alert("Form submitted successfully!");
+    // alert("Continue to enter password!");
 
     // Navigate to verification page and pass the email as state
     navigate("/password", { state: { email } });

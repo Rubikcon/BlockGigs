@@ -18,8 +18,9 @@ const Signin = () => {
   const [loading, setLoading] = useState(false);
   const [signature, setSignature] = useState("");
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate(); //for page navigation
-  ``;
 
   const handleGotoHome = () => {
     navigate("/");
@@ -48,9 +49,11 @@ const Signin = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        //   // "https://blockgigs-bt8d.onrender.com/api/auth/register",
+        `${apiUrl}/api/auth/login`,
         loginData
       );
+      console.log(apiUrl);
       console.log("Response Data:", response.data);
       // Debugging
       const { token, user } = response.data;
@@ -180,7 +183,8 @@ const Signin = () => {
       console.log("Payload Sent:", JSON.stringify(payload));
 
       const response = await fetch(
-        "https://blockgigs-bt8d.onrender.com/api/auth/login",
+        // "https://blockgigs-bt8d.onrender.com/api/auth/login",
+        `${apiUrl}/api/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

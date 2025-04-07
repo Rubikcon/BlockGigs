@@ -65,7 +65,7 @@ const Password = () => {
     // email = localStorage.getItem("email");
 
     //If email is valid, form can be sumbitted
-    alert("Form submitted successfully!");
+    alert("Continue to select Persona");
 
     // Navigate to verification page and pass the email as state
     navigate("/Persona", { state: { password } });
