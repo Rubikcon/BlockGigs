@@ -9,6 +9,7 @@ const ClientForm = () => {
   const [about_, setAbout_] = useState("");
   const [errors, setErrors] = useState({});
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -182,11 +183,27 @@ const ClientForm = () => {
           </div>
 
           {/* Submit Button */}
-          <button
+          {/* <button
             type="submit"
             className="w-[260px] lg:w-[350px] h-[48px] cursor-pointer mt-[2rem] lg:mt-[3rem] rounded-[8px] bg-[#2F66F6] text-white font-montserrat text-[14px] lg:text-base leading-6 focus:ring-2 focus:ring-blue-400"
           >
             Profile Done!
+          </button> */}
+
+          <button
+            type="submit"
+            disabled={loading}
+            onClick={() => setLoading(true)}
+            className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
+                Loading...
+              </>
+            ) : (
+              "Profile Done!"
+            )}
           </button>
 
           {/* Skip Button */}

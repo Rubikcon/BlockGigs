@@ -16,7 +16,7 @@ const TalentForm = () => {
   const [languages, setlanguages] = useState([]);
   const [about, setAbout] = useState("");
   const [skills, setSkills] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // const handleSubmit = (e) => {
@@ -49,7 +49,7 @@ const TalentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       // Retrieve stored data from localStorage
       const userRole = localStorage.getItem("Persona");
@@ -386,9 +386,25 @@ const TalentForm = () => {
               </div>
 
               <div className="flex flex-col md:flex-row gap-4 mt-3">
-                <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+                {/* <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
                   Profile Done!
+                </button> */}
+
+                <button
+                  disabled={loading}
+                  onClick={() => setLoading(true)}
+                  className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <>
+                      <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
+                      Loading...
+                    </>
+                  ) : (
+                    "Profile Done!"
+                  )}
                 </button>
+
                 {/* <button
                   onClick={handleSkip}
                   className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg border border-blue-600 text-blue-600 font-medium text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
