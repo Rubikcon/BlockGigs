@@ -26,6 +26,10 @@ const TalentForm = () => {
   // };
   const userData = [];
 
+  const handleGotoHome = () => {
+    navigate("/");
+  };
+
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
 
@@ -48,55 +52,104 @@ const TalentForm = () => {
   //   navigate("/talent/dashboard"); // Navigate when the user skips the form
   // };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     setLoading(true);
+  //     // Retrieve stored data from localStorage
+  //     const userRole = localStorage.getItem("Persona");
+  //     const userWallet_address = localStorage.getItem("account");
+  //     const userPassword = localStorage.getItem("password");
+  //     const userEmail = localStorage.getItem("email");
+
+  //     // Merge localStorage data with form data
+  //     const payload = {
+  //       role: userRole, // Assuming the role is always 'talent'
+  //       // email: userEmail,
+  //       password: userPassword,
+  //       fullname: fullname,
+  //       work_name: workname,
+  //       about: about,
+  //       min_pay: min_pay,
+  //       time_zone: timezone,
+  //       languages: languages || [],
+  //       skills: skills || [],
+  //       wallet_address: userWallet_address,
+  //       ...(userWallet_address
+  //         ? {
+  //             email: "",
+  //             password: "",
+  //           }
+  //         : {
+  //             email: userEmail,
+  //             password: userPassword,
+  //           }),
+  //       // wallet_address: userWallet_address,
+  //     };
+
+  //     // Send POST request
+  //     const response = await axios.post(
+  //       `${apiUrl}/api/auth/register`,
+  //       // "https://blockgigs-bt8d.onrender.com/api/auth/register",
+  //       payload
+  //     );
+
+  //     alert(response.data.message);
+  //     console.log("login to continue");
+  //     console.log(response.data.message);
+
+  //     navigate("/signin"); // Redirect after successful registration
+  //   } catch (error) {
+  //     alert(error.response?.data?.message || "Registration failed");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
+    console.log("Submitting...");
     e.preventDefault();
 
     try {
       setLoading(true);
-      // Retrieve stored data from localStorage
+
       const userRole = localStorage.getItem("Persona");
-      const userWallet_address = localStorage.getItem("account");
+      const userWalletAddress = localStorage.getItem("userAddress");
       const userPassword = localStorage.getItem("password");
       const userEmail = localStorage.getItem("email");
 
-      // Merge localStorage data with form data
+      // Prepare final payload
       const payload = {
-        role: userRole, // Assuming the role is always 'talent'
-        // email: userEmail,
-        password: userPassword,
-        fullname: fullname,
+        role: userRole || "talent",
+        fullname,
         work_name: workname,
-        about: about,
-        min_pay: min_pay,
+        about: profession,
+        min_pay,
         time_zone: timezone,
-        languages: languages || [],
-        skills: skills || [],
-        wallet_address: userWallet_address,
-        ...(userWallet_address
+        languages: selectedLanguages.map((lang) => lang.label), // if using Select from react-select
+        skills: Array.isArray(skills) ? skills : [skills],
+        ...(userWalletAddress
           ? {
-              email: "",
+              wallet_address: userWalletAddress,
+              email: "", // omit email & password if wallet is present
               password: "",
             }
           : {
+              wallet_address: "",
               email: userEmail,
               password: userPassword,
             }),
-        // wallet_address: userWallet_address,
       };
 
-      // Send POST request
-      const response = await axios.post(
-        `${apiUrl}/api/auth/register`,
-        // "https://blockgigs-bt8d.onrender.com/api/auth/register",
-        payload
-      );
+      console.log("Submitting payload", payload);
+
+      const response = await axios.post(`${apiUrl}/api/auth/register`, payload);
 
       alert(response.data.message);
-      console.log("login to continue");
-      console.log(response.data.message);
-
-      navigate("/signin"); // Redirect after successful registration
+      navigate("/signin");
     } catch (error) {
+      console.error(error);
       alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
@@ -184,7 +237,10 @@ const TalentForm = () => {
 
   return (
     <div className="w-full  min-h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
-      <div className="w-[103px] h-[37px] flex justify-between items-center gap-2 ml-4">
+      <div
+        onClick={handleGotoHome}
+        className="w-[103px] h-[37px] flex justify-between items-center gap-2 ml-4 cursor-pointer"
+      >
         <img src={logo} alt="Blockgigs logo" className="mt-4" />
         <h1 className="font-normal text-[26.84px] leading-[37.12px] text-[#f3f3f3] font-oleo mt-4">
           Blockgigs
@@ -291,6 +347,8 @@ const TalentForm = () => {
                   </label>
                   <select
                     id="timezone"
+                    value={timezone}
+                    onChange={(e) => setTimezone(e.target.value)}
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="" disabled>
@@ -351,7 +409,9 @@ const TalentForm = () => {
                     id="work-profile"
                     placeholder="A well profession..."
                     required
-                    onChange={(e) => setProfession(e.target.value)}
+                    onChange={(e) =>
+                      setSkills([e.target.value, skills[1], skills[2]])
+                    }
                     aria-required="true"
                   ></textarea>
                 </div>
@@ -374,7 +434,9 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 2"
                       required
-                      onChange={(e) => setSkills(e.target.value)}
+                      onChange={(e) =>
+                        setSkills([skills[0], e.target.value, skills[2]])
+                      }
                       aria-required="true"
                     />
                     <input
@@ -382,7 +444,9 @@ const TalentForm = () => {
                       type="text"
                       placeholder="Skill No 3"
                       required
-                      onChange={(e) => setSkills(e.target.value)}
+                      onChange={(e) =>
+                        setSkills([skills[0], skills[1], e.target.value])
+                      }
                       aria-required="true"
                     />
                   </div>
@@ -396,7 +460,8 @@ const TalentForm = () => {
 
                 <button
                   disabled={loading}
-                  onClick={() => setLoading(true)}
+                  type="submit"
+                  // onClick={() => setLoading(true)}
                   className="w-full md:w-full my-5 h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
