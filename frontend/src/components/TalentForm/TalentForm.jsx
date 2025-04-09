@@ -17,6 +17,7 @@ const TalentForm = () => {
   const [about, setAbout] = useState("");
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // const handleSubmit = (e) => {
@@ -49,8 +50,9 @@ const TalentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
     try {
+      setLoading(true);
       // Retrieve stored data from localStorage
       const userRole = localStorage.getItem("Persona");
       const userWallet_address = localStorage.getItem("account");
@@ -96,6 +98,8 @@ const TalentForm = () => {
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
