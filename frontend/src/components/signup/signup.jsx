@@ -26,6 +26,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [walletAccount, setWalletAccount] = useState(null);
   const [walletError, setWalletError] = useState(null);
+  const [error, setError] = useState({});
 
   const handleSuccess = (account) => {
     setWalletAccount(account);
@@ -197,10 +198,20 @@ const Signup = () => {
 
                 <button
                   type="submit"
-                  className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer"
+                  disabled={loading}
+                  className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {" "}
-                  <FaArrowRightLong className="text-[#fafafa] pointer-events-none " />{" "}
+                  {loading ? (
+                    <>
+                      <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
+                      Loading...
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <FaArrowRightLong className="text-[#fafafa] pointer-events-none " />{" "}
+                    </>
+                  )}
                 </button>
               </div>
 

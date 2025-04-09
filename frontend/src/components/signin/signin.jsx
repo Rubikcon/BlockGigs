@@ -171,6 +171,7 @@ const Signin = () => {
       // Call the testWalletLogin function with the retrieved wallet address
       testWalletLogin(walletAddress);
     } catch (err) {
+      setError(err);
       console.error("MetaMask Connection Error:", err);
     }
   };
@@ -220,6 +221,7 @@ const Signin = () => {
 
       window.location.href = roleRoutes[user.role] || "/";
     } catch (err) {
+      setError(err);
       console.error("API Login Error:", err);
     }
   };
@@ -295,10 +297,19 @@ const Signin = () => {
 
                 <button
                   type="submit"
-                  className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer"
+                  disabled={loading}
+                  className="absolute right-0 lg:right-3  w-[36px] h-[33.33px] top-[35px] left-[220px] lg:left-[306px] rounded-[6.67px] p-[10px] gap-2.5 bg-[#2f66f6] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {" "}
-                  <FaArrowRightLong className="text-[#fafafa] pointer-events-none " />{" "}
+                  {loading ? (
+                    <>
+                      <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-2 w-2"></span>
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <FaArrowRightLong className="text-[#fafafa] pointer-events-none " />{" "}
+                    </>
+                  )}
                 </button>
               </div>
 
@@ -337,12 +348,22 @@ const Signin = () => {
           <div className="flex flex-col items-center gap-3 w-[300px] lg:w-[350px] h-[192px] mt-4">
             <button
               onClick={connectMetamask}
-              className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA]"
+              disabled={loading}
+              className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <img src={metamask} alt="metamask logo" />
-              <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
-                Metamask
-              </span>
+              {loading ? (
+                <>
+                  <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
+                  Loading...
+                </>
+              ) : (
+                <>
+                  <img src={metamask} alt="metamask logo" />
+                  <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
+                    Metamask
+                  </span>
+                </>
+              )}
             </button>
 
             <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>

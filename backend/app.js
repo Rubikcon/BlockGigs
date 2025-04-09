@@ -5,11 +5,13 @@ import protectedRoutes from "./routes/protectedRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 // import otpRoutes from "./routes/otpRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
-
+import dotenv from "dotenv";
 import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+dotenv.config();
 
 // Middleware
 app.use(express.json());
