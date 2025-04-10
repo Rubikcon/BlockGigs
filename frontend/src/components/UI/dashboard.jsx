@@ -17,6 +17,7 @@ import AcceptOffer from "../modals/AcceptOffer";
 import back from "../../assets/arrow-back.png";
 import bat from "../../assets/bat.png";
 import MilestoneModal from "../modals/MilestoneModal";
+import EmptyStateCard from "../emptyStateCard";
 
 const jobs = [
   {
@@ -494,14 +495,25 @@ function Dashboard() {
               </div>
             </div>
             <div className="row-span-3 md:grid md:grid-cols-5 gap-4">
+              {/* // comment from here */}
+
               <div className="bg-white shadow-2xl shadow-gray-400 col-span-3 rounded-[0.6rem] grid mb-1 md:my-0">
                 <div className="flex items-center w-full p-4">
                   <p className="text-[12px] md:text-[16px]">Ongoing Jobs</p>
+
                   <Link className="text-[12px] md:text-[16px] ml-auto">
                     View All
                   </Link>
                 </div>
-                <div className="px-4 py-2">{RenderJob}</div>
+                {job ? (
+                  <>
+                    <div className="px-4 py-2">{RenderJob}</div>
+                  </>
+                ) : (
+                  <>
+                    <EmptyStateCard />
+                  </>
+                )}
               </div>
               <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
@@ -511,19 +523,8 @@ function Dashboard() {
                       View All
                     </Link>
                   </div>
-                  {offer.length === 0 ? (
-                    <div className="grid justify-center mt-4">
-                      <img src={empty} alt="" className="h-18 w-18" />
-                      <div className="grid justify-center ">
-                        <p className="text-black text-[12px] md:text-sm mt-4">
-                          No Offers yet
-                        </p>
-                        <p className=" text-[8px] md:text-[10px] -ml-8">
-                          Keep on applying You got THIS!
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
+
+                  {job ? (
                     offer.slice(0, 2).map((item, index) => (
                       <div
                         key={index}
@@ -550,28 +551,57 @@ function Dashboard() {
                         </div>
                       </div>
                     ))
+                  ) : (
+                    <>
+                      <EmptyStateCard />
+                    </>
                   )}
                 </div>
               </div>
             </div>
+
             <div className="w-[66.56%] row-span-1 mt-2">
-              <div className="flex w-full justify-between gap-4 pr-6">
+              {/* <div className="flex w-full justify-between gap-4 pr-6">
                 <p className="text-[12px] md:text-[16px]">Recommended Jobs</p>
                 <Link className="text-[12px] md:text-[16px]">View All</Link>
-              </div>
+              </div> */}
             </div>
             <div className="grid row-span-7 pr-4 pb-4">
               <div className="md:grid md:grid-cols-3 row-span-5 gap-4">
-                <div className="col-span-2">{renderRecommend}</div>
+                <div className="col-span-2 bg-white rounded-[10px] border-">
+                  <div className="flex w-full justify-between gap-4 pt-4 px-4">
+                    <p className="text-[12px] md:text-[16px]">
+                      Recommended Jobs
+                    </p>
+                    <Link className="text-[12px] md:text-[16px]">View All</Link>
+                  </div>
+
+                  {job ? (
+                    { renderRecommend }
+                  ) : (
+                    <>
+                      <EmptyStateCard />
+                    </>
+                  )}
+                </div>
+
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">
                   <div className="flex justify-between">
                     <p>Activity</p>
+
                     <Link className="text-[12px] text-[#2f66f6]">View All</Link>
                   </div>
-                  {renderActivity}
+
+                  {job ? (
+                    { renderActivity }
+                  ) : (
+                    <>
+                      <EmptyStateCard />
+                    </>
+                  )}
                 </div>
               </div>
-            </div>{" "}
+            </div>
           </div>
         ) : (
           <div className="">
@@ -656,6 +686,7 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+
             <div className="md:grid md:grid-cols-3 md:gap-10">
               <div className="col-span-2 px-4 py-2">
                 <div className="flex justify-between bg-[#e3f1ff] w-full rounded-[5px] py-4 px-6">
