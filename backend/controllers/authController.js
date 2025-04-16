@@ -90,13 +90,35 @@ export const registerUser = async (req, res) => {
   } = req.body;
 
   try {
+    if (!role)
+      return res.status(400).json({ message: "User role is required." });
     const Model = getUserModel(role);
 
-    let existingUser = await Model.findOne({
-      $or: [{ email }, { wallet_address }],
-    });
-    if (existingUser)
+    // let existingUser = await Model.findOne({
+    //   $or: [{ email }, { wallet_address }],
+    // });
+    // if (existingUser)
+    //   return res.status(400).json({ message: "User already exists" });
+
+    let existingUser;
+
+    if (wallet_address) {
+      existingUser = await Model.findOne({ wallet_address });
+    }
+
+    if (!existingUser && email) {
+      existingUser = await Model.findOne({ email });
+    }
+
+    if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
+    }
+
+    if (wallet_address && (email || password)) {
+      return res
+        .status(400)
+        .json({ message: "Use either email/password or wallet, not both." });
+    }
 
     // Validate registration method
     if (!wallet_address && (!email || !password)) {
