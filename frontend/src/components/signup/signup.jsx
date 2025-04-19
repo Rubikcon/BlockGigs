@@ -28,6 +28,8 @@ const Signup = () => {
   const [walletError, setWalletError] = useState(null);
   const [error, setError] = useState({});
 
+  const [detectWallet, setDetectWallet] = useState(false);
+
   const handleSuccess = (account) => {
     setWalletAccount(account);
 
@@ -69,7 +71,11 @@ const Signup = () => {
       return;
     }
     localStorage.setItem("email", email);
+    localStorage.removeItem("detectWallet");
 
+    // or
+    localStorage.setItem("walletClicked", "false");
+    localStorage.setItem("detectWallet", "false");
     //If email is valid, form can be sumbitted
     // alert("Continue to enter password!");
 
@@ -86,6 +92,13 @@ const Signup = () => {
       setWalletError("MetaMask is not installed!");
       return;
     }
+
+    // set the walletClicked to track the submission using wallet registration
+    // localStorage.setItem("walletClicked");
+    localStorage.setItem("walletClicked", "true");
+    localStorage.setItem("detectWallet", "true");
+
+    setDetectWallet(true);
 
     try {
       setLoading(true);
@@ -139,6 +152,7 @@ const Signup = () => {
         replace: true, // Use replace to prevent back button issues
         state: {
           account,
+          detectWallet,
           // signature,
           // balance,
         },

@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate, useLocation } from "react-router-dom"; // For navigation
 import logo from "../../assets/3dcube.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import metamask from "../../assets/metamask.png";
@@ -24,8 +24,10 @@ const Password = () => {
   const [signer, setSigner] = useState(null);
   const [roles, setRoles] = useState("talent");
   const [loading, setLoading] = useState(false);
-  //   const [walletAccount, setWalletAccount] = useState(null);
-  //   const [walletError, setWalletError] = useState(null);
+  const location = useLocation();
+
+  // Destructure the state from location
+  const { detectWallet, account } = location.state || {};
 
   const handleSuccess = (account) => {
     setWalletAccount(account);
@@ -68,7 +70,7 @@ const Password = () => {
     alert("Continue to select Persona");
 
     // Navigate to verification page and pass the email as state
-    navigate("/Persona", { state: { password } });
+    navigate("/Persona", { state: { password, detectWallet } });
   };
 
   const handleGotoHome = () => {

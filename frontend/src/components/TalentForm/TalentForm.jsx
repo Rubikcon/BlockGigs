@@ -8,14 +8,23 @@ import axios from "axios";
 const TalentForm = () => {
   const navigate = useNavigate();
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [fullname, setFullname] = useState("");
-  const [workname, setWorkname] = useState("");
-  const [profession, setProfession] = useState("");
-  const [min_pay, setMin_pay] = useState("");
+  // const [fullname, setFullname] = useState("");
+  // const [workname, setWorkname] = useState("");
+  // const [profession, setProfession] = useState("");
+  // const [min_pay, setMin_pay] = useState("");
   const [timezone, setTimezone] = useState("");
-  const [languages, setlanguages] = useState([]);
-  const [about, setAbout] = useState("");
-  const [skills, setSkills] = useState([]);
+  // const [languages, setlanguages] = useState([]);
+  // const [about, setAbout] = useState("");
+  // const [skills, setSkills] = useState([]);
+  const [formData, setFormData] = useState({
+    fullname: "",
+    workname: "",
+    profession: "",
+    min_pay: "",
+    timezone: "",
+    about: "",
+    skills: [],
+  });
   const [loading, setLoading] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -25,6 +34,23 @@ const TalentForm = () => {
   //   navigate("/talent/dashboard");
   // };
   const userData = [];
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSkillsChange = (index, value) => {
+    const newSkills = [...formData.skills];
+    newSkills[index] = value;
+    setFormData((prev) => ({
+      ...prev,
+      skills: newSkills,
+    }));
+  };
 
   const handleGotoHome = () => {
     navigate("/");
@@ -114,37 +140,88 @@ const TalentForm = () => {
     try {
       setLoading(true);
 
-      const userRole = localStorage.getItem("Persona");
+      const userRole = localStorage.getItem("Persona") || "talent";
       const userWalletAddress = localStorage.getItem("userAddress");
       const userPassword = localStorage.getItem("password");
       const userEmail = localStorage.getItem("email");
 
-      // Prepare final payload
-      const payload = {
-        role: userRole || "talent",
-        fullname,
-        work_name: workname,
-        about: profession,
-        min_pay,
-        time_zone: timezone,
-        languages: selectedLanguages.map((lang) => lang.label), // if using Select from react-select
-        skills: Array.isArray(skills) ? skills : [skills],
-        ...(userWalletAddress
-          ? {
-              wallet_address: userWalletAddress,
-              email: "", // omit email & password if wallet is present
-              password: "",
-            }
-          : {
-              wallet_address: "",
-              email: userEmail,
-              password: userPassword,
-            }),
+      // determine registration type
+      // const isWalletUser = userWalletAddress && userWalletAddress !== "";
+
+      // Determine registration type
+      const isWalletUser = !!userWalletAddress;
+      const isEmailUser = !!userEmail && !!userPassword;
+
+      if (!isWalletUser && !isEmailUser) {
+        throw new Error("Please connect wallet or provide email/password");
+      }
+
+      // Common payload for both registration types
+      const commonPayload = {
+        role: userRole,
+        fullname: formData.fullname,
+        name: formData.workname,
+        about: formData.profession,
+        min_pay: formData.min_pay,
+        timezone: formData.timezone,
+        languages: selectedLanguages.map((lang) => lang.label),
+        skills: formData.skills.filter((skill) => skill), // Remove empty skills
       };
+
+      let response;
+
+      if (isWalletUser) {
+        // Wallet registration
+        response = await axios.post(`${apiUrl}/api/auth/register/wallet`, {
+          ...commonPayload,
+          wallet_address: userWalletAddress,
+        });
+      } else {
+        // Email registration
+        response = await axios.post(`${apiUrl}/api/auth/register/email`, {
+          ...commonPayload,
+          email: userEmail,
+          password: userPassword,
+        });
+      }
+
+      // Clear sensitive data
+      localStorage.removeItem("password");
+      localStorage.removeItem("email");
+
+      // Prepare final payload
+      // if (isWalletUser) {
+      //   localStorage.removeItem("email");
+      //   localStorage.setItem("password", ""); // Reset stored password to empty
+      // }
+
+      // const payload = {
+      //   role: userRole || "talent",
+      //   fullname,
+      //   work_name: workname,
+      //   about: profession,
+      //   min_pay,
+      //   time_zone: timezone,
+      //   languages: selectedLanguages.map((lang) => lang.label), // if using Select from react-select
+      //   skills: Array.isArray(skills) ? skills : [skills],
+      //   ...(userWalletAddress
+      //     ? {
+      //         wallet_address: userWalletAddress,
+      //         // email: "", // omit email & password if wallet is present
+      //         // password: "",
+      //       }
+      //     : {
+      //         wallet_address: "",
+      //         email: userEmail,
+      //         password: userPassword,
+      //       }),
+      // };
+
+      alert(response.data.message);
 
       console.log("Submitting payload", payload);
 
-      const response = await axios.post(`${apiUrl}/api/auth/register`, payload);
+      // const response = await axios.post(`${apiUrl}/api/auth/register`, payload);
 
       alert(response.data.message);
       navigate("/signin");
@@ -279,7 +356,10 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="name"
-                    onChange={(e) => setFullname(e.target.value)}
+                    name="fullname"
+                    value={formData.fullname}
+                    onChange={handleInputChange}
+                    // onChange={(e) => setFullname(e.target.value)}
                     placeholder="Anita Baker"
                     required
                     aria-required="true"
@@ -295,10 +375,13 @@ const TalentForm = () => {
                   <input
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
+                    name="workname"
                     id="work"
                     placeholder="Designhandz"
                     required
-                    onChange={(e) => setWorkname(e.target.value)}
+                    value={formData.workname}
+                    onChange={handleInputChange}
+                    // onChange={(e) => setWorkname(e.target.value)}
                     aria-required="true"
                   />
                 </div>
@@ -422,66 +505,52 @@ const TalentForm = () => {
                   >
                     Main skills you possess
                   </label>
-                  <input
-                    className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
-                    type="text"
-                    id="skills"
-                    placeholder="Skill No 1"
-                  />
-                  <div className="flex flex-col md:flex-row gap-4 mt-2">
+                  {[0, 1, 2].map((index) => (
                     <input
-                      className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
+                      key={index}
+                      className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400 mb-2"
                       type="text"
-                      placeholder="Skill No 2"
-                      required
+                      placeholder={`Skill No ${index + 1}`}
+                      value={formData.skills[index] || ""}
                       onChange={(e) =>
-                        setSkills([skills[0], e.target.value, skills[2]])
+                        handleSkillsChange(index, e.target.value)
                       }
-                      aria-required="true"
+                      required={index === 0}
                     />
-                    <input
-                      className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
-                      type="text"
-                      placeholder="Skill No 3"
-                      required
-                      onChange={(e) =>
-                        setSkills([skills[0], skills[1], e.target.value])
-                      }
-                      aria-required="true"
-                    />
-                  </div>
+                  ))}
                 </div>
               </div>
+            </div>
 
-              <div className="flex flex-col md:flex-row gap-4 mt-3">
-                {/* <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div className="flex flex-col md:flex-row gap-4 mt-3">
+              {/* <button className="w-full md:w-full h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
                   Profile Done!
                 </button> */}
 
-                <button
-                  disabled={loading}
-                  type="submit"
-                  // onClick={() => setLoading(true)}
-                  className="w-full md:w-full my-5 h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {loading ? (
-                    <>
-                      <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
-                      Loading...
-                    </>
-                  ) : (
-                    "Profile Done!"
-                  )}
-                </button>
+              <button
+                disabled={loading}
+                type="submit"
+                // onClick={() => setLoading(true)}
+                className="w-full md:w-full my-5 h-12 cursor-pointer rounded-lg bg-blue-600 text-white font-medium text-base focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
+                    Loading...
+                  </>
+                ) : (
+                  "Profile Done!"
+                )}
+              </button>
 
-                {/* <button
+              {/* <button
                   onClick={handleSkip}
                   className="w-full md:w-1/2 h-12 cursor-pointer rounded-lg border border-blue-600 text-blue-600 font-medium text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Skip, I will fill later
                 </button> */}
-              </div>
             </div>
+            {/* </div> */}
           </div>
         </form>
       </div>

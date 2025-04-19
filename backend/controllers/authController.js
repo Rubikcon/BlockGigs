@@ -72,10 +72,103 @@ const getUserModel = (role) => {
 // };
 
 // Register user dynamically
-export const registerUser = async (req, res) => {
+// export const registerUser = async (req, res) => {
+//   const {
+//     role,
+//     wallet_address,
+//     email,
+//     password,
+//     fullname,
+//     name,
+//     about,
+//     pseudonym,
+//     profession,
+//     min_pay,
+//     timezone,
+//     languages,
+//     skills,
+//   } = req.body;
+
+//   try {
+//     if (!role)
+//       return res.status(400).json({ message: "User role is required." });
+//     const Model = getUserModel(role);
+
+//     let existingUser;
+
+//     if (wallet_address) {
+//       existingUser = await Model.findOne({ wallet_address });
+//     }
+
+//     if (!existingUser && email) {
+//       existingUser = await Model.findOne({ email });
+//     }
+
+//     if (existingUser) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
+
+//     if (wallet_address && (email || password)) {
+//       return res
+//         .status(400)
+//         .json({ message: "Use either email/password or wallet, not both." });
+//     }
+
+//     // Validate registration method
+//     if (!wallet_address && (!email || !password)) {
+//       return res.status(400).json({ message: "Invalid registration method" });
+//     }
+
+//     const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+//     const otp = crypto.randomInt(100000, 999999); // Generate OTP
+
+//     const newUserData = {
+//       wallet_address,
+//       email,
+//       password: hashedPassword,
+//       fullname: fullname || name,
+//       about,
+//       otp,
+//       otpExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
+//       isVerified: false,
+//     };
+
+//     // Add talent-specific fields
+//     if (role === "talent") {
+//       newUserData.pseudonym = pseudonym;
+//       newUserData.profession = profession;
+//       newUserData.min_pay = min_pay;
+//       newUserData.timezone = timezone;
+//       newUserData.languages = languages;
+//       newUserData.skills = skills;
+//     }
+
+//     const newUser = await Model.create(newUserData);
+
+//     // Generate JWT token
+//     const token = generateToken(newUser._id, role);
+
+//     res.status(201).json({
+//       message:
+//         "User registered successfully, visit the login and login with your registered details",
+//       token,
+//       user: {
+//         id: newUser._id,
+//         role: newUser.role,
+//         email: newUser.email,
+//         wallet_address: newUser.wallet_address,
+//         isVerified: newUser.isVerified,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// Register with Email and Password
+export const registerWithEmail = async (req, res) => {
   const {
     role,
-    wallet_address,
     email,
     password,
     fullname,
@@ -92,44 +185,26 @@ export const registerUser = async (req, res) => {
   try {
     if (!role)
       return res.status(400).json({ message: "User role is required." });
-    const Model = getUserModel(role);
-
-    // let existingUser = await Model.findOne({
-    //   $or: [{ email }, { wallet_address }],
-    // });
-    // if (existingUser)
-    //   return res.status(400).json({ message: "User already exists" });
-
-    let existingUser;
-
-    if (wallet_address) {
-      existingUser = await Model.findOne({ wallet_address });
-    }
-
-    if (!existingUser && email) {
-      existingUser = await Model.findOne({ email });
-    }
-
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    if (wallet_address && (email || password)) {
+    if (!email || !password) {
       return res
         .status(400)
-        .json({ message: "Use either email/password or wallet, not both." });
+        .json({ message: "Email and password are required." });
     }
 
-    // Validate registration method
-    if (!wallet_address && (!email || !password)) {
-      return res.status(400).json({ message: "Invalid registration method" });
+    const Model = getUserModel(role);
+
+    // Check if email already exists
+    const existingUser = await Model.findOne({ email });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
     }
 
-    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const otp = crypto.randomInt(100000, 999999); // Generate OTP
 
     const newUserData = {
-      wallet_address,
       email,
       password: hashedPassword,
       fullname: fullname || name,
@@ -155,14 +230,12 @@ export const registerUser = async (req, res) => {
     const token = generateToken(newUser._id, role);
 
     res.status(201).json({
-      message:
-        "User registered successfully, visit the login and login with your registered details",
+      message: "User registered successfully. Please verify your email.",
       token,
       user: {
         id: newUser._id,
         role: newUser.role,
         email: newUser.email,
-        wallet_address: newUser.wallet_address,
         isVerified: newUser.isVerified,
       },
     });
@@ -171,10 +244,75 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// Request OTP (send OTP email)
-// export const requestOTP = async (req, res) => {
-//   return res.send("OTP endpoint hit");
-// };
+// Register with Wallet Address
+export const registerWithWallet = async (req, res) => {
+  const {
+    role,
+    wallet_address,
+    fullname,
+    name,
+    about,
+    pseudonym,
+    profession,
+    min_pay,
+    timezone,
+    languages,
+    skills,
+  } = req.body;
+
+  try {
+    if (!role)
+      return res.status(400).json({ message: "User role is required." });
+    if (!wallet_address) {
+      return res.status(400).json({ message: "Wallet address is required." });
+    }
+
+    const Model = getUserModel(role);
+
+    // Check if wallet already exists
+    const existingUser = await Model.findOne({ wallet_address });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this wallet already exists" });
+    }
+
+    const newUserData = {
+      wallet_address,
+      fullname: fullname || name,
+      about,
+      isVerified: true, // Wallet users are typically verified by their wallet connection
+    };
+
+    // Add talent-specific fields
+    if (role === "talent") {
+      newUserData.pseudonym = pseudonym;
+      newUserData.profession = profession;
+      newUserData.min_pay = min_pay;
+      newUserData.timezone = timezone;
+      newUserData.languages = languages;
+      newUserData.skills = skills;
+    }
+
+    const newUser = await Model.create(newUserData);
+
+    // Generate JWT token
+    const token = generateToken(newUser._id, role);
+
+    res.status(201).json({
+      message: "User registered successfully with wallet.",
+      token,
+      user: {
+        id: newUser._id,
+        role: newUser.role,
+        wallet_address: newUser.wallet_address,
+        isVerified: newUser.isVerified,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const requestOTP = async (req, res) => {
   const { role, email } = req.body;
@@ -218,34 +356,6 @@ export const requestOTP = async (req, res) => {
   }
 };
 
-// export const verifyOTP = async (req, res) => {
-//   const { role, email, otp } = req.body;
-
-//   try {
-//     const Model = getUserModel(role);
-//     const user = await Model.findOne({ email });
-
-//     if (!user) return res.status(400).json({ message: "User not found" });
-
-//     if (!user.otp || user.otpExpiresAt < new Date()) {
-//       return res.status(400).json({ message: "OTP has expired" });
-//     }
-
-//     if (user.otp !== Number(otp)) {
-//       return res.status(400).json({ message: "Invalid OTP" });
-//     }
-
-//     user.isVerified = true;
-//     user.otp = null;
-//     user.otpExpiresAt = null;
-//     await user.save();
-
-//     return res.status(200).json({ message: "OTP verified successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 export const verifyOTP = async (req, res) => {
   const { role, email, otp } = req.body;
 
@@ -282,114 +392,6 @@ export const verifyOTP = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// Login user (without OTP verification requirement)
-
-// export const loginUser = async (req, res) => {
-//   const { role, email, wallet_address, password } = req.body;
-
-//   try {
-//     const Model = getUserModel(role);
-
-//     let user = null;
-
-//     // Determine login method (either email & password or wallet_address)
-//     if (email && password) {
-//       user = await Model.findOne({ email });
-//       if (!user) {
-//         return res.status(400).json({ message: "User not found" });
-//       }
-
-//       if (!user.password) {
-//         return res
-//           .status(400)
-//           .json({ message: "Password not set for this account" });
-//       }
-
-//       const isMatch = await bcrypt.compare(password, user.password);
-//       if (!isMatch) {
-//         return res.status(400).json({ message: "Invalid password" });
-//       }
-//     } else if (wallet_address) {
-//       user = await Model.findOne({ wallet_address });
-//       if (!user) {
-//         return res.status(400).json({ message: "User not found" });
-//       }
-//     } else {
-//       return res.status(400).json({ message: "Invalid login credentials" });
-//     }
-
-//     // Generate JWT token
-//     const token = generateToken(user._id, role);
-
-//     res.status(200).json({
-//       message: "Login successful",
-//       token,
-//       user: {
-//         id: user._id,
-//         email: user.email || null,
-//         wallet_address: user.wallet_address || null,
-//         isVerified: user.isVerified,
-//       },
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// export const loginUser = async (req, res) => {
-//   const { email, wallet_address, password } = req.body;
-
-//   try {
-//     let user;
-
-//     if (wallet_address) {
-//       // Login using only the wallet address
-//       user = await User.findOne({ wallet_address });
-
-//       if (!user) {
-//         return res.status(400).json({ message: "User not found" });
-//       }
-//     } else if (email && password) {
-//       // Login using email & password
-//       user = await User.findOne({ email });
-
-//       if (!user) {
-//         return res.status(400).json({ message: "User not found" });
-//       }
-
-//       if (!user.password) {
-//         return res
-//           .status(400)
-//           .json({ message: "Password not set for this account" });
-//       }
-
-//       const isMatch = await bcrypt.compare(password, user.password);
-//       if (!isMatch) {
-//         return res.status(400).json({ message: "Invalid password" });
-//       }
-//     } else {
-//       return res.status(400).json({ message: "Invalid login credentials" });
-//     }
-
-//     // Generate JWT token
-//     const token = generateToken(user._id, user.role);
-
-//     res.status(200).json({
-//       message: "Login successful",
-//       token,
-//       user: {
-//         id: user._id,
-//         email: user.email || null,
-//         wallet_address: user.wallet_address || null,
-//         role: user.role,
-//         isVerified: user.isVerified,
-//       },
-//     });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 export const loginUser = async (req, res) => {
   const { email, wallet_address, password } = req.body;

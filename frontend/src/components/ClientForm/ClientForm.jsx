@@ -18,19 +18,6 @@ const ClientForm = () => {
   const handleGotoHome = () => {
     navigate("/");
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   let newErrors = {};
-  //   if (!name.trim()) newErrors.name = "Full Name is required.";
-  //   if (!work.trim()) newErrors.work = "Please describe what you do.";
-
-  //   setErrors(newErrors);
-
-  //   // if (Object.keys(newErrors).length === 0) {
-  //   //   navigate("/client");
-  //   // }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,40 +25,47 @@ const ClientForm = () => {
     try {
       setLoading(true);
       // Retrieve stored data from localStorage
-      const userRole = localStorage.getItem("Persona" || "client");
-      const userWallet_address = localStorage.getItem("walletAddress" || "");
-      const userPassword = localStorage.getItem("password" || "");
-      const userEmail = localStorage.getItem("email" || "");
+      const userRole = localStorage.getItem("Persona") || "client";
+      const userPassword = localStorage.getItem("password") || "";
+      const userEmail = localStorage.getItem("email") || "";
+      const userWallet_address = localStorage.getItem("userAddress") || "";
+      const detectWallet =
+        location.state?.detectWallet === true ||
+        localStorage.getItem("detectWallet") === "true";
 
-      // Merge localStorage data with form data
+      const isWalletUser = !!userWallet_address;
+
       const payload = {
-        role: userRole, // Assuming the role is always 'client'
-        password: userPassword,
+        role: userRole,
+
         fullname: fullname_,
+
         about: about_,
-        wallet_address: userWallet_address,
-        ...(userWallet_address
+        ...(detectWallet
           ? {
+              wallet_address: userWallet_address,
+
               email: "",
               password: "",
             }
           : {
               email: userEmail,
+
               password: userPassword,
+
+              wallet_address: "",
             }),
-        // wallet_address: userWallet_address,
       };
 
-      // Send POST request
-      const response = await axios.post(
-        // "http://localhost:4000/api/auth/register",
-        `${apiUrl}/api/auth/register`,
+      const endpoint = detectWallet
+        ? `${apiUrl}/api/auth/register-wallet`
+        : `${apiUrl}/api/auth/register-email`;
 
-        // "https://blockgigs-bt8d.onrender.com/api/auth/register",
-        payload
-      );
+      const response = await axios.post(endpoint, payload);
 
       alert(response.data.message);
+
+      // alert(response.data.message);
       console.log("login to continue");
       console.log(response.data.message);
 

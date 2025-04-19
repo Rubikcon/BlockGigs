@@ -11,6 +11,7 @@ const Persona = () => {
   const location = useLocation();
   const {
     account,
+    detectWallet,
     //  signature, balance
   } = location.state || {};
   // Handle selection for the user
@@ -27,6 +28,7 @@ const Persona = () => {
         state: {
           account,
           selectedPersona,
+          detectWallet,
           // signature,
           // balance,
         },

@@ -288,6 +288,7 @@ const Signin = () => {
               <div className="relative flex items-center mt-[-1.8rem]">
                 <input
                   type="password"
+                  id="password"
                   placeholder="Enter password"
                   required
                   aria-required="true"
