@@ -3,6 +3,7 @@ import DB from "./config/DB.js";
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 // import otpRoutes from "./routes/otpRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import dotenv from "dotenv";
@@ -26,6 +27,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/job", jobRoutes);
 app.use("/api/protected", protectedRoutes);
 // app.use("/api/otp", otpRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/clients", clientRoutes);
 
 // Start server
