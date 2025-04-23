@@ -10,6 +10,8 @@ const clientSchema = new mongoose.Schema(
     password: { type: String },
     otp: { type: Number, index: true }, // Store OTP, index for fast search
     otpExpiresAt: { type: Date }, // OTP expiration time
+    markedForDeletion: { type: Boolean, default: false },
+    deletionTime: { type: Date },
     isVerified: { type: Boolean, default: false }, // Verification status
   },
   { timestamps: true } // Adds createdAt and updatedAt automatically

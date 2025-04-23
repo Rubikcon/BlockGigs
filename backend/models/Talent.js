@@ -14,6 +14,8 @@ const talentSchema = new mongoose.Schema(
     password: { type: String },
     wallet_address: { type: String, unique: true, sparse: true },
     otp: { type: Number, index: true }, // Indexed for fast lookups
+    markedForDeletion: { type: Boolean, default: false },
+    deletionTime: { type: Date },
     otpExpiresAt: { type: Date, index: true },
     isVerified: { type: Boolean, default: false },
   },
