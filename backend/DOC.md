@@ -1,6 +1,3 @@
-Here's a complete **End-to-End API Flow Documentation** in Markdown format, covering the entire user lifecycle from signup to account deletion:
-
-````markdown
 # Complete User Lifecycle API Documentation
 
 ## Base URL
@@ -40,7 +37,6 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
   "profession": "Illustrator"
 }
 ```
-````
 
 **Response** (`201 Created`):
 
@@ -60,7 +56,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 2. Verify Email (OTP)
 
-**Endpoint**: `POST /api/auth/verify-otp`  
+**Endpoint**: `POST /api/auth/verify-otp`
 **Request**:
 
 ```json
@@ -82,7 +78,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 3. Login
 
-**Endpoint**: `POST /api/auth/login`  
+**Endpoint**: `POST /api/auth/login`
 **Request**:
 
 ```json
@@ -112,7 +108,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 4. Get Profile
 
-**Endpoint**: `GET /api/users/talent/65a1b2c3d4e5f6g7h8i9j0k`  
+**Endpoint**: `GET /api/users/talent/65a1b2c3d4e5f6g7h8i9j0k`
 **Response** (`200 OK`):
 
 ```json
@@ -131,7 +127,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 5. Update Profile
 
-**Endpoint**: `PUT /api/users/talent/65a1b2c3d4e5f6g7h8i9j0k`  
+**Endpoint**: `PUT /api/users/talent/65a1b2c3d4e5f6g7h8i9j0k`
 **Request**:
 
 ```json
@@ -159,7 +155,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 6. Request Deletion
 
-**Endpoint**: `POST /api/users/delete/talent/65a1b2c3d4e5f6g7h8i9j0k`  
+**Endpoint**: `POST /api/users/delete/talent/65a1b2c3d4e5f6g7h8i9j0k`
 **Request**:
 
 ```json
@@ -181,7 +177,7 @@ Here's a complete **End-to-End API Flow Documentation** in Markdown format, cove
 
 ### 7. Cancel Deletion (Optional)
 
-**Endpoint**: `POST /api/users/cancel-delete/talent/65a1b2c3d4e5f6g7h8i9j0k`  
+**Endpoint**: `POST /api/users/cancel-delete/talent/65a1b2c3d4e5f6g7h8i9j0k`
 **Response** (`200 OK`):
 
 ```json
