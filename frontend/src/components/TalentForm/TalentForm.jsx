@@ -115,7 +115,7 @@ const TalentForm = () => {
         skills: skills || [],
         wallet_address: userWalletAddress,
         // languages: setlanguages.map((lang) => lang.label),
-        // skills: Array.isArray(skills) ? skills : [skills],
+        skills: Array.isArray(skills) ? skills : [skills],
         ...(userWalletAddress
           ? {
               wallet_address: userWalletAddress,
