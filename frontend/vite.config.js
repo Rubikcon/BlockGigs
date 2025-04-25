@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [tailwindcss(), react()],
   optimizeDeps: {
-    include: [],
+    include: ["eventemitter3"],
     exclude: ["ox", "@web3-onboard/walletconnect"],
     // Force Vite to include these in optimization
     esbuildOptions: {
