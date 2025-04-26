@@ -12,6 +12,12 @@ const JobSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true },
   milestone: { type: Number, required: true },
   milestones: [MilestoneSchema],
+  status: {
+    type: String,
+    enum: ["open", "in_progress", "completed"],
+    default: "open",
+  },
+
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",

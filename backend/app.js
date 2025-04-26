@@ -24,7 +24,7 @@ DB();
 
 // Calling the routes
 app.use("/api/auth", authRoutes);
-app.use("/api/job", jobRoutes);
+app.use("/api", jobRoutes);
 app.use("/api/protected", protectedRoutes);
 // app.use("/api/otp", otpRoutes);
 app.use("/api/user", userRoutes);

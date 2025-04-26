@@ -1,21 +1,32 @@
+// routes/jobRoutes.js
 import express from "express";
 import {
   createJob,
+  assignFreelancer,
   getJob,
   getAllJobs,
   completeJob,
   applyForJob,
 } from "../controllers/jobController.js";
-import { authenticate } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// router.post("/create", authenticate, createJob); // Only clients can create jobs
-router.post("/create", createJob)
-router.get("/available", getAllJobs); // public: Get all avialble jobs
-router.get("/:jobId", getJob); // Anyone can retrieve job details
-router.put("/:jobId/complete", authenticate, completeJob);
+// Create a new job
+router.post("/jobs", createJob);
+
+// Get all jobs
+router.get("/jobs", getAllJobs);
+
+// Get a specific job
+router.get("/jobs/:jobId", getJob);
+
+// Assign a freelancer to a job
+router.put("/jobs/:jobId/assign", assignFreelancer);
+
+// Apply for a job
 router.post("/jobs/:jobId/apply", applyForJob);
 
-// Talent completes a job
+// Complete a job
+router.put("/jobs/:jobId/complete", completeJob);
+
 export default router;
