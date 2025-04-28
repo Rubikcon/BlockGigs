@@ -1,14 +1,13 @@
-// import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import arrow from "../assets/arrow-back.png";
-import search from "../assets/search.svg";
-import bell2 from "../assets/bell.png";
-import down from "../assets/down.png";
-import dp from "../assets/Ellipse.png";
-import crypto from "../assets/crypto.png";
-import bat from "../assets/bat.png";
-import frame from "../assets/frame.svg";
-import JobModal from "../components/modals/JobModal";
+import arrow from "../../assets/arrow-back.png";
+import search from "../../assets/search.svg";
+import bell2 from "../../assets/bell.png";
+import down from "../../assets/down.png";
+import dp from "../../assets/Ellipse.png";
+import crypto from "../../assets/crypto.png";
+import bat from "../../assets/bat.png";
+import frame from "../../assets/frame.svg";
+// import JobModal from "../../modals/JobModal";
 import { useState } from "react";
 
 const jobs = [
@@ -61,7 +60,8 @@ const jobs = [
     milestone: 3,
   },
 ];
-function Job() {
+
+function ClientJob() {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
@@ -228,9 +228,9 @@ function Job() {
           </div>
         </div>
       </div>
-      <JobModal visible={apply} item={state} onClose={() => setApply(false)} />
+      {/* <JobModal visible={apply} item={state} onClose={() => setApply(false)} /> */}
     </div>
   );
 }
 
-export default Job;
+export default ClientJob;

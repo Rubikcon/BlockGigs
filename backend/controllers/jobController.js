@@ -53,7 +53,10 @@ export const createJob = async (req, res) => {
     res.status(201).json({ message: "Job created successfully", job });
   } catch (error) {
     console.error("Error Creating Job:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.json({
+      status: 501,
+      message: "Internal Server Error"
+    });
   }
 };
 

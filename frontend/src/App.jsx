@@ -2,15 +2,15 @@
 
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/UI/dashboard";
-import Chat from "./components/UI/chat";
-import Discover from "./components/UI/discover";
-import Gigs from "./components/UI/gigs";
-import Offer from "./components/UI/offer";
-import Setting from "./components/UI/setting";
-import Wallet from "./components/UI/wallet";
-import LandingPage from "./components/UI/landingpage";
-import Profile from "./Util/Profile";
+import Dashboard from "./components/TalentUI/dashboard";
+import Chat from "./components/TalentUI/chat";
+import Discover from "./components/TalentUI/discover";
+import Gigs from "./components/TalentUI/gigs";
+import Offer from "./components/TalentUI/offer";
+import Setting from "./components/TalentUI/setting";
+import Wallet from "./components/TalentUI/wallet";
+import LandingPage from "./components/TalentUI/landingpage";
+import Profile from "./components/TalentUI/Profile";
 import MainLayout from "./MainLayout";
 import BrowseTalentPage from "./components/BrowseTalent/BrowseTalentPage";
 import LeaderBoardPage from "./components/LeaderBoard/LeaderBoardPage";
@@ -26,10 +26,11 @@ import TalentForm from "./components/TalentForm/TalentForm";
 import ClientForm from "./components/ClientForm/ClientForm";
 import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
-import ClientDashboard from "./components/UI/ClientDashboard";
+import ClientDashboard from "./components/ClientUI/ClientDashboard";
+import ClientGig from "./components/ClientUI/clientGig";
 // import ClientDashboard from "./Pages/ClientDashboard";
 import ClientLayout from "./ClientLayout";
-import Job from "./Util/job";
+import Job from "./components/TalentUI/job";
 import Password from "./components/Password/password";
 
 // import WalletConnect from "./components/ConnectWallet/ConnectWallet";
@@ -38,10 +39,17 @@ import Password from "./components/Password/password";
 //        Testing Purpose       //
 // ##############################//
 
-import Home from "./components/SmartContractTestComponents/pages/Home";
+// import Home from "./components/SmartContractTestComponents/pages/Home";
 // import Home from "./components/SmartContractTestComponents/pages/Home";
 import ButtonComponent from "../src/components/button";
 import { Buffer } from "buffer";
+import ClientChat from "./components/ClientUI/ClientChat";
+import ClientJob from "./components/ClientUI/ClientJob";
+import ClientOffer from "./components/ClientUI/ClientOffer";
+import ClientProfile from "./components/ClientUI/ClientProfile";
+import ClientSetting from "./components/ClientUI/ClientSetting";
+import ClientWallet from "./components/ClientUI/ClientWallet";
+import ClientDiscover from "./components/ClientUI/ClientDiscover";
 
 window.Buffer = Buffer;
 
@@ -76,6 +84,14 @@ const App = () => {
         {/*  Navigation on for the dashboard*/}
         <Route path="client" element={<ClientLayout />}>
           <Route path="/client/dashboard" element={<ClientDashboard />} />
+          <Route path="/client/chat" element={<ClientChat />} />
+          <Route path="/client/discover" element={<ClientDiscover />} />
+          <Route path="/client/gig" element={<ClientGig />} />
+          <Route path="/client/job" element={<ClientJob />} />
+          <Route path="/client/offer" element={<ClientOffer />} />
+          <Route path="/client/profile" element={<ClientProfile />} />
+          <Route path="/client/setting" element={<ClientSetting />} />
+          <Route path="/client/wallet" element={<ClientWallet />} />
         </Route>
 
         {/* Routes for Talents dashboard */}
