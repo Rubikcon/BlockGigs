@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import metamask from "../../assets/metamask.png";
 import celo from "../../assets/celo.png";
 import wallet from "../../assets/wallet.png";
-import stellar from "../../assets/wallet.png"; // Add your Stellar logo image here
+import stellar from "../../assets/stellar_black.png"; // Add your Stellar logo image here
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 import kit from "../../utils/stellarWallet"; // Import the Stellar Wallet Kit
@@ -172,24 +172,24 @@ const Signup = () => {
       setWalletError("Stellar Wallet Kit not initialized!");
       return;
     }
-  
+
     localStorage.setItem("walletClicked", "true");
     localStorage.setItem("detectWallet", "true");
-  
+
     setDetectWallet(true);
-  
+
     try {
       setLoading(true);
-  
+
       await kit.openModal({
         onWalletSelected: async (option) => {
           await kit.setWallet(option.id);
           const { address } = await kit.getAddress();
-  
+
           localStorage.setItem("userAddress", address);
-  
+
           console.log("Stellar Wallet connected successfully:", address);
-  
+
           navigate("/Persona", {
             replace: true,
             state: {
@@ -200,11 +200,14 @@ const Signup = () => {
         },
         onClosed: (err) => {
           if (err) {
-            setWalletError(err.message || "Please install a Stellar wallet extension (e.g., Freighter).");
+            setWalletError(
+              err.message ||
+                "Please install a Stellar wallet extension (e.g., Freighter)."
+            );
           }
         },
-        modalTitle: 'Connect Stellar Wallet',
-        notAvailableText: 'This wallet is not installed',
+        modalTitle: "Connect Stellar Wallet",
+        notAvailableText: "This wallet is not installed",
       });
     } catch (error) {
       console.error("Stellar Wallet error:", error);
@@ -213,8 +216,6 @@ const Signup = () => {
       setLoading(false);
     }
   };
-
-  
 
   return (
     <div className="w-full h-screen bg-[url(/src/assets/bg.png)] bg-cover bg-center bg-no-repeat items-center">
@@ -332,17 +333,17 @@ const Signup = () => {
               </span>
             </button>
             <button
-  onClick={handleStellarLogin}
-  disabled={loading}
-  className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
-    loading ? "opacity-50" : ""
-  }`}
->
-  <img src={stellar} alt="stellar logo" />
-  <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
-    {loading ? "Connecting..." : "Connect Stellar Wallet"}
-  </span>
-</button>
+              onClick={handleStellarLogin}
+              disabled={loading}
+              className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
+                loading ? "opacity-50" : ""
+              }`}
+            >
+              <img src={stellar} alt="stellar logo" className="h-8" />
+              <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
+                {loading ? "Connecting..." : "Connect Stellar Wallet"}
+              </span>
+            </button>
             {/* Error display */}
             {/* {walletError && (
               <div className="text-red-500 text-sm mt-2 text-center">

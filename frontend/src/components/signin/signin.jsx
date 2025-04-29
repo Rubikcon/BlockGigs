@@ -5,6 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import metamask from "../../assets/metamask.png";
 import celo from "../../assets/celo.png";
 import wallet from "../../assets/wallet.png";
+import stellar from "../../assets/stellar_black.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -85,67 +86,6 @@ const Signin = () => {
     }
   };
 
-  // const connectMetamask = async () => {
-  //   try {
-  //     if (!window.ethereum) {
-  //       alert("Metamask not detected. Please install Metamask.");
-  //       return;
-  //     }
-
-  //     // Request wallet connection
-  //     const accounts = await window.ethereum.request({
-  //       method: "eth_requestAccounts",
-  //     });
-
-  //     const walletAddress = accounts[0]; // Get wallet address
-  //     console.log("Wallet Address:", walletAddress);
-
-  //     localStorage.setItem("walletAddress", walletAddress); // Store wallet address
-
-  //     // Create the correct payload format
-  //     // const payload = { wallet_address: walletAddress };
-  //     const payload = { wallet_address: walletAddress.trim() };
-
-  //     console.log("Payload Sent:", payload);
-
-  //     // API Call to login using wallet address
-  //     const response = await axios.post(
-  //       "http://localhost:4000/api/auth/login",
-  //       // JSON.stringify(payload),
-  //       "0x03a33E8A69f1A5b61178f70BC5c8E674aB571334",
-  //       // Convert to a raw JSON string
-  //       {
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     );
-
-  //     console.log("Response Data:", response.data);
-
-  //     const { token, user } = response.data;
-
-  //     if (!user || !user.role) {
-  //       setError("Role not found. Please contact support.");
-  //       return;
-  //     }
-
-  //     // Store token & role
-  //     localStorage.setItem("token", token);
-  //     localStorage.setItem("userRole", user.role);
-
-  //     // Redirect user based on role
-  //     const roleRoutes = {
-  //       client: "/client/dashboard",
-  //       talent: "/talent/dashboard",
-  //       admin: "/admin/dashboard",
-  //     };
-
-  //     navigate(roleRoutes[user.role] || "/");
-  //   } catch (err) {
-  //     console.error("Wallet login error:", err);
-  //     setError(err.response?.data?.message || "Wallet login failed");
-  //   }
-  // };
-
   const connectMetamask = async () => {
     try {
       if (!window.ethereum) {
@@ -173,6 +113,56 @@ const Signin = () => {
     } catch (err) {
       setError(err);
       console.error("MetaMask Connection Error:", err);
+    }
+  };
+
+  const handleStellarLogin = async () => {
+    if (!kit) {
+      setWalletError("Stellar Wallet Kit not initialized!");
+      return;
+    }
+
+    localStorage.setItem("walletClicked", "true");
+    localStorage.setItem("detectWallet", "true");
+
+    setDetectWallet(true);
+
+    try {
+      setLoading(true);
+
+      await kit.openModal({
+        onWalletSelected: async (option) => {
+          await kit.setWallet(option.id);
+          const { address } = await kit.getAddress();
+
+          localStorage.setItem("userAddress", address);
+
+          console.log("Stellar Wallet connected successfully:", address);
+
+          navigate("/Persona", {
+            replace: true,
+            state: {
+              account: address,
+              detectWallet,
+            },
+          });
+        },
+        onClosed: (err) => {
+          if (err) {
+            setWalletError(
+              err.message ||
+                "Please install a Stellar wallet extension (e.g., Freighter)."
+            );
+          }
+        },
+        modalTitle: "Connect Stellar Wallet",
+        notAvailableText: "This wallet is not installed",
+      });
+    } catch (error) {
+      console.error("Stellar Wallet error:", error);
+      setWalletError(error.message || "Failed to connect Stellar wallet");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -365,6 +355,19 @@ const Signin = () => {
                   </span>
                 </>
               )}
+            </button>
+
+            <button
+              // onClick={handleStellarLogin}
+              disabled={loading}
+              className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
+                loading ? "opacity-50" : ""
+              }`}
+            >
+              <img src={stellar} alt="stellar logo" className="h-8" />
+              <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
+                {loading ? "Connecting..." : "Connect Stellar Wallet"}
+              </span>
             </button>
 
             <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
