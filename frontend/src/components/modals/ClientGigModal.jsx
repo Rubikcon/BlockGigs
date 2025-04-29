@@ -13,6 +13,7 @@ import ClientSuccessModal from "./ClientSuccessModal";
 
 function ClientGigModal({ visible, onClose }) {
   const [post, setPost] = useState("form");
+  const [disable, setDisable] = useState(true);
   const [gig, setGig] = useState({
     title: "",
     totalPrice: "",
@@ -84,8 +85,17 @@ function ClientGigModal({ visible, onClose }) {
     });
   };
 
+  const confirmationHandler = () => {
+    console.log(gig, "gigs for saving here");
+    if (!gig.detail || !gig.title || !gig.totalPrice) {
+      alert("Please enter the required detail of the job");
+      return;
+    }
+    setPost("confirmation");
+  };
+
   const onCloseConfirmHandler = () => {
-    setPost(1);
+    setPost("form");
     onClose();
     setGig({
       title: "",
@@ -100,69 +110,6 @@ function ClientGigModal({ visible, onClose }) {
 
   console.log(post, "post");
 
-  // const renderMilestones = () => {
-  //   const milestones = [];
-  //   for (let i = 0; i < gig.milestone; i++) {
-  //     milestones.push(
-  //       <div key={i} className="grid grid-cols-4 gap-2 mb-4">
-  //         <p className="col-span-1 text-[14px]">#{i + 1} Milestone</p>
-  //         <div className="col-span-3">
-  //           <p className="text-[14px]">description</p>
-  //           <input
-  //             placeholder={`Milestones ${i + 1} involves...`}
-  //             className="w-full border border-gray-400 focus:outline-none rounded text-[14px] py-2 pl-2"
-  //             type="text"
-  //             value={gig.milestones[i]?.description || ""}
-  //             onChange={(e) =>
-  //               onMilestoneChangeHandler(i, "description", e.target.value)
-  //             }
-  //           />
-  //         </div>
-  //         <div className="col-start-2 grid grid-cols-2 col-span-3 gap-2">
-  //           <div className="col-span-1">
-  //             <p>Deadline</p>
-  //             <div className="flex border border-gray-400 rounded pl-2 py-1">
-  //               <input
-  //                 type="date"
-  //                 className="focus:outline-none py-1 text-[14px] w-full"
-  //                 value={gig.milestones[i]?.deadline || ""}
-  //                 onChange={(e) =>
-  //                   onMilestoneChangeHandler(i, "deadline", e.target.value)
-  //                 }
-  //               />
-  //             </div>
-  //           </div>
-  //           <div className="col-span-1">
-  //             <p>#{i + 1} totalPrice</p>
-  //             <div className="grid grid-cols-4 border border-gray-400 rounded">
-  //               <div className="flex gap-1 items-center border-r border-gray-400 col-span-2 px-2 py-2.5">
-  //                 <img
-  //                   src={crypto}
-  //                   alt="Currency icon"
-  //                   className="w-3 h-3 md:w-4 md:h-4"
-  //                 />
-  //                 <p className="text-[#2f66f6] text-[12px] md:text-[14px]">
-  //                   Usdc
-  //                 </p>
-  //               </div>
-  //               <input
-  //                 placeholder="0.00"
-  //                 type="number"
-  //                 className="col-span-2 focus:outline-none pl-2 text-[12px]"
-  //                 value={gig.milestones[i]?.amount || ""}
-  //                 onChange={(e) =>
-  //                   onMilestoneChangeHandler(i, "amount", e.target.value)
-  //                 }
-  //               />
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  //   return milestones;
-  // };
-
   return (
     <ModalBacckDrop>
       {" "}
@@ -171,8 +118,9 @@ function ClientGigModal({ visible, onClose }) {
           gig={gig}
           onChange={onChangeHandler}
           onMilestoneChange={onMilestoneChangeHandler}
-          onSubmit={() => setPost("confirmation")}
+          onSubmit={confirmationHandler}
           onClose={onClose}
+          disable={disable}
         />
       )}
       {post === "confirmation" && (
@@ -181,8 +129,12 @@ function ClientGigModal({ visible, onClose }) {
           onCloseConfirm={onCloseConfirmHandler}
         />
       )}
-      {post === "success" && <ClientSuccessModal onClose={onClose} />}
-      {post === "error" && <ClientFailureModal onClose={onClose} />}
+      {post === "success" && (
+        <ClientSuccessModal onClose={onCloseConfirmHandler} />
+      )}
+      {post === "error" && (
+        <ClientFailureModal onClose={onCloseConfirmHandler} />
+      )}
     </ModalBacckDrop>
   );
 }

@@ -1,4 +1,4 @@
-// import React from 'react'
+import { useState } from "react";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import down from "../../assets/down.png";
@@ -9,6 +9,7 @@ import bag from "../../assets/bag.png";
 import cancel from "../../assets/cancel.png";
 import clock from "../../assets/clock.png";
 import file from "../../assets/file.png";
+import ClientGigModal from "../modals/ClientGigModal";
 import crypto from "../../assets/crypto.png";
 
 const gigs = [
@@ -118,6 +119,7 @@ const gigs = [
   },
 ];
 function clientGig() {
+  const [openGig, setOpenGig] = useState(false);
   return (
     <div>
       <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
@@ -132,7 +134,10 @@ function clientGig() {
                   className="w-full flex"
                 />
               </div>
-              <button className="bg-[#2f66f6] px-2 text-white rounded-[8px] cursor-pointer">
+              <button
+                className="bg-[#2f66f6] px-2 text-white rounded-[8px] cursor-pointer"
+                onClick={() => setOpenGig(true)}
+              >
                 Post New gig
               </button>
             </div>
@@ -207,6 +212,7 @@ function clientGig() {
           </div>
         </div>
       </div>
+      <ClientGigModal visible={openGig} onClose={() => setOpenGig(false)} />
     </div>
   );
 }
