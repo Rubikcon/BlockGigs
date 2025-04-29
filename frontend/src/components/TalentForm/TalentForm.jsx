@@ -7,15 +7,17 @@ import axios from "axios";
 
 const TalentForm = () => {
   const navigate = useNavigate();
-  const [languages, setLanguages] = useState([]);
-  const [fullname, setFullname] = useState("");
-  const [workname, setWorkname] = useState("");
-  const [profession, setProfession] = useState("");
-  const [min_pay, setMin_pay] = useState("");
-  const [timezone, setTimezone] = useState("");
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [about, setAbout] = useState("");
-  const [skills, setSkills] = useState([]);
+  // At the top of your component, keep only:
+  const [formData, setFormData] = useState({
+    fullname: "",
+    workname: "",
+    profession: "",
+    min_pay: "",
+    timezone: "",
+    about: "",
+    skills: ["", "", ""],
+    languages: [],
+  });
 
   const handleAddSkill = () => {
     setFormData((prev) => ({
@@ -33,19 +35,8 @@ const TalentForm = () => {
     }));
   };
 
-  const [formData, setFormData] = useState({
-    fullname: "",
-    workname: "",
-    profession: "",
-    min_pay: "",
-    timezone: "",
-    about: "",
-    skills: [],
-  });
   const [loading, setLoading] = useState(false);
-
   const apiUrl = import.meta.env.VITE_API_URL;
-
   const userData = [];
 
   const handleInputChange = (e) => {
@@ -65,13 +56,13 @@ const TalentForm = () => {
     }));
   };
 
-  const handleLanguagesChange = (e) => {
-    const options = Array.from(e.target.selectedOptions);
+  // const handleLanguagesChange = (e) => {
+  //   const options = Array.from(e.target.selectedOptions);
 
-    const values = options.map((opt) => opt.value).filter((v) => v !== "");
+  //   const values = options.map((opt) => opt.value).filter((v) => v !== "");
 
-    setSelectedLanguages(values);
-  };
+  //   setSelectedLanguages(values);
+  // };
 
   const handleGotoHome = () => {
     navigate("/");
@@ -83,6 +74,11 @@ const TalentForm = () => {
 
     try {
       setLoading(true);
+
+      // Get Auth data
+      const walletAddress = localStorage.getItem("userAddress");
+      const email = localStorage.getItem("email");
+      const password = localStorage.getItem("password");
 
       const detectWallet =
         location.state?.detectWallet === true ||
@@ -102,35 +98,24 @@ const TalentForm = () => {
         throw new Error("Please connect wallet or provide email/password");
       }
 
+      // Prepare payload according to your Mongoose model
       const payload = {
-        role: userRole || "talent",
-        password: userPassword,
-        fullname,
-        work_name: workname,
-        about: about,
-        min_pay,
-        timezone: timezone,
-        languages: selectedLanguages.map((lang) => lang.value),
-        // languages: selectedLanguages || [],
-        skills: skills || [],
-        wallet_address: userWalletAddress,
-        // languages: setlanguages.map((lang) => lang.label),
-        skills: Array.isArray(skills) ? skills : [skills],
-        ...(userWalletAddress
-          ? {
-              wallet_address: userWalletAddress,
-              email: "",
-              password: "",
-            }
-          : {
-              wallet_address: "",
-              email: userEmail,
-              password: userPassword,
-            }),
+        fullname: formData.fullname,
+        work_name: formData.workname,
+        profession: formData.profession,
+        min_pay: formData.min_pay,
+        time_zone: formData.timezone, // Note the underscore to match model
+        about: formData.about,
+        languages: formData.languages.map((lang) => lang.value),
+        skills: formData.skills.filter((skill) => skill.trim() !== ""),
+        role: localStorage.getItem("Persona") || "talent",
+        ...(isWalletUser
+          ? { wallet_address: walletAddress }
+          : { email, password }),
       };
-      console.log("Submitting payload", payload);
 
-      const endpoint = detectWallet
+      // Determine endpoint
+      const endpoint = isWalletUser
         ? `${apiUrl}/api/auth/register-wallet`
         : `${apiUrl}/api/auth/register-email`;
 
@@ -146,12 +131,16 @@ const TalentForm = () => {
       alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
-      localStorage.setItem("walletClicked", "false");
-      localStorage.setItem("detectWallet", "false");
+      // clear flags
+      // In your finally block, use removeItem instead of setItem to "false"
+      localStorage.removeItem("walletClicked");
+      localStorage.removeItem("detectWallet");
+      // localStorage.setItem("walletClicked", "false");
+      // localStorage.setItem("detectWallet", "false");
     }
   };
 
-  const hangleChange = (code) => {
+  const handleChange = (code) => {
     setSelectedLanguages(
       (prev) =>
         prev.includes(code)
@@ -276,9 +265,9 @@ const TalentForm = () => {
                     type="text"
                     id="name"
                     name="fullname"
-                    // value={formData.fullname}
-                    // onChange={handleInputChange}
-                    onChange={(e) => setFullname(e.target.value)}
+                    value={formData.fullname}
+                    onChange={handleInputChange}
+                    // onChange={(e) => setFullname(e.target.value)}
                     placeholder="Anita Baker"
                     required
                     aria-required="true"
@@ -298,25 +287,25 @@ const TalentForm = () => {
                     id="work"
                     placeholder="Designhandz"
                     required
-                    // value={formData.workname}
-                    // onChange={handleInputChange}
-                    onChange={(e) => setWorkname(e.target.value)}
+                    value={formData.workname}
+                    onChange={handleInputChange}
+                    // onChange={(e) => setWorkname(e.target.value)}
                     aria-required="true"
                   />
                 </div>
                 <div className="flex flex-col">
                   <label
                     className="text-sm font-medium text-gray-800"
-                    htmlFor="profile"
+                    htmlFor="profession"
                   >
-                    What you do?
+                    Profession?
                   </label>
                   <input
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
-                    id="profile"
-                    // value={formData.about}
-                    onChange={(e) => setAbout(e.target.value)}
+                    id="profession"
+                    // value={formData.profession}
+                    onChange={handleInputChange}
                     placeholder="Product Designer"
                     required
                     aria-required="true"
@@ -336,9 +325,9 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="pay"
-                    // value={formData.min_pay}
+                    value={formData.min_pay}
                     placeholder="$10/hr"
-                    onChange={(e) => setMin_pay(e.target.value)}
+                    onChange={handleInputChange}
                     required
                     aria-required="true"
                   />
@@ -353,8 +342,9 @@ const TalentForm = () => {
 
                   <select
                     id="timezone"
-                    value={timezone}
-                    onChange={(e) => setTimezone(e.target.value)}
+                    name="timezone"
+                    value={formData.timezone}
+                    onChange={handleInputChange}
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="" disabled>
@@ -374,9 +364,17 @@ const TalentForm = () => {
                     <Select
                       options={programmingLanguages}
                       isMulti
+                      value={formData.languages}
+                      onChange={(selected) =>
+                        setFormData({ ...formData, languages: selected })
+                      }
+                    />
+                    {/* <Select
+                      options={programmingLanguages}
+                      isMulti
                       value={selectedLanguages}
                       onChange={setSelectedLanguages}
-                    />
+                    /> */}
                   </label>
                 </div>
               </div>
@@ -392,11 +390,12 @@ const TalentForm = () => {
                   <textarea
                     className="w-[200px] lg:w-[432px] h-[96px] rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     id="work-profile"
+                    value={formData.about}
+                    onChange={(e) =>
+                      setFormData({ ...formData, about: e.target.value })
+                    }
                     placeholder="A well profession..."
                     required
-                    onChange={(e) =>
-                      setSkills([e.target.value, skills[1], skills[2]])
-                    }
                     aria-required="true"
                   ></textarea>
                 </div>
@@ -408,31 +407,47 @@ const TalentForm = () => {
                     Main skills you possess
                   </label>
 
-                  <input
-                    className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
-                    type="text"
-                    id="skills"
-                    placeholder="Skill No 1"
-                  />
                   <div className="flex flex-col md:flex-row gap-4 mt-2">
+                    {/* Skills inputs */}
+                    <input
+                      className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
+                      type="text"
+                      placeholder="Skill No 1"
+                      value={formData.skills[0] || ""}
+                      onChange={(e) => {
+                        const newSkills = [...formData.skills];
+                        newSkills[0] = e.target.value;
+                        setFormData({ ...formData, skills: newSkills });
+                      }}
+                      required
+                      aria-required="true"
+                    />
+
                     <input
                       className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                       type="text"
                       placeholder="Skill No 2"
+                      value={formData.skills[1] || ""}
+                      onChange={(e) => {
+                        const newSkills = [...formData.skills];
+                        newSkills[1] = e.target.value;
+                        setFormData({ ...formData, skills: newSkills });
+                      }}
                       required
-                      onChange={(e) =>
-                        setSkills([skills[0], e.target.value, skills[2]])
-                      }
                       aria-required="true"
                     />
+
                     <input
                       className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                       type="text"
                       placeholder="Skill No 3"
+                      value={formData.skills[2] || ""}
+                      onChange={(e) => {
+                        const newSkills = [...formData.skills];
+                        newSkills[2] = e.target.value;
+                        setFormData({ ...formData, skills: newSkills });
+                      }}
                       required
-                      onChange={(e) =>
-                        setSkills([skills[0], skills[1], e.target.value])
-                      }
                       aria-required="true"
                     />
                   </div>

@@ -4,6 +4,7 @@ const talentSchema = new mongoose.Schema(
   {
     fullname: { type: String, required: true },
     work_name: { type: String },
+    profession: { type: String },
     role: { type: String, default: "talent" },
     min_pay: { type: Number },
     time_zone: { type: String },
