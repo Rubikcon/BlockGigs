@@ -1,4 +1,4 @@
-// import React from 'react'
+import { useState } from "react";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
 import down from "../../assets/down.png";
@@ -9,12 +9,13 @@ import bag from "../../assets/bag.png";
 import cancel from "../../assets/cancel.png";
 import clock from "../../assets/clock.png";
 import file from "../../assets/file.png";
+import ClientGigModal from "../modals/ClientGigModal";
 import crypto from "../../assets/crypto.png";
 
 const gigs = [
   {
     title: "dApp Web Designer for New P..",
-    client: "Gracia Alex",
+    talent: "Gracia Alex",
     amount: 2600,
     image: crypto,
     date: "1/11/24",
@@ -22,7 +23,7 @@ const gigs = [
   },
   {
     title: "NFT Marketplace Website Desi..",
-    client: "Global Venture",
+    talent: "Global Venture",
     amount: 3800,
     image: crypto,
     date: "1/11/24",
@@ -30,7 +31,7 @@ const gigs = [
   },
   {
     title: "Blockchain Explorer Interface",
-    client: "Andres Simon",
+    talent: "Andres Simon",
     amount: 1800,
     image: vector,
     date: "1/11/24",
@@ -38,7 +39,7 @@ const gigs = [
   },
   {
     title: "Virtual Land Website Design M..",
-    client: "Noveau Laun",
+    talent: "Noveau Laun",
     amount: 2500,
     image: crypto,
     date: "1/11/24",
@@ -46,7 +47,7 @@ const gigs = [
   },
   {
     title: "Website redesign for Crypto E..",
-    client: "Wrenzy Corps.",
+    talent: "Wrenzy Corps.",
     amount: 1000,
     image: logo,
     date: "1/11/24",
@@ -54,7 +55,7 @@ const gigs = [
   },
   {
     title: "NFT Minting Platform User Int..",
-    client: "Celestial Dys.",
+    talent: "Celestial Dys.",
     amount: 2000,
     image: logo,
     date: "1/11/24",
@@ -62,7 +63,7 @@ const gigs = [
   },
   {
     title: "Virtual Reality Gaming Experie..",
-    client: "Nova Teach Sco..",
+    talent: "Nova Teach Sco..",
     amount: 5000,
     image: vector,
     date: "1/11/24",
@@ -70,7 +71,7 @@ const gigs = [
   },
   {
     title: "Design of Blockchain-Based S..",
-    client: "Quantum Les",
+    talent: "Quantum Les",
     amount: 3200,
     image: crypto,
     date: "1/11/24",
@@ -78,7 +79,7 @@ const gigs = [
   },
   {
     title: "logo Design for a New NFT Col..",
-    client: "Honeygrace I..",
+    talent: "Honeygrace I..",
     amount: 700,
     image: vector,
     date: "1/11/24",
@@ -86,7 +87,7 @@ const gigs = [
   },
   {
     title: "dApp Web Designer for New P..",
-    client: "Oludare Silivia",
+    talent: "Oludare Silivia",
     amount: 1900,
     image: crypto,
     date: "1/11/24",
@@ -94,7 +95,7 @@ const gigs = [
   },
   {
     title: "3D Avatars for a Metaverse Co..",
-    client: "David Chen",
+    talent: "David Chen",
     amount: 1200,
     image: logo,
     date: "1/11/24",
@@ -102,7 +103,7 @@ const gigs = [
   },
   {
     title: "Crypto Wallet Mobile App",
-    client: "Emily Carter",
+    talent: "Emily Carter",
     amount: 3500,
     image: crypto,
     date: "1/11/24",
@@ -110,7 +111,7 @@ const gigs = [
   },
   {
     title: "Design for a Crypto Trading P..",
-    client: "Javiar Rodig",
+    talent: "Javiar Rodig",
     amount: 1600,
     image: vector,
     date: "1/11/24",
@@ -118,6 +119,7 @@ const gigs = [
   },
 ];
 function clientGig() {
+  const [openGig, setOpenGig] = useState(false);
   return (
     <div>
       <div className="bg-gray-100 w-[84.85vw] h-[100vh] grid grid-rows-12 px-6 pb-4 gap-2">
@@ -132,7 +134,10 @@ function clientGig() {
                   className="w-full flex"
                 />
               </div>
-              <button className="bg-[#2f66f6] px-2 text-white rounded-[8px]">
+              <button
+                className="bg-[#2f66f6] px-2 text-white rounded-[8px] cursor-pointer"
+                onClick={() => setOpenGig(true)}
+              >
                 Post New gig
               </button>
             </div>
@@ -186,7 +191,7 @@ function clientGig() {
         <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
           <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2">
             <span className="text-blue-500">Title</span>
-            <span className="text-blue-500 ml-20">Client</span>
+            <span className="text-blue-500 ml-40">Talent</span>
             <span className="text-blue-500 ">Amount</span>
             <span className="text-blue-500">Date</span>
             <span className="text-blue-500">Job Information</span>
@@ -196,7 +201,7 @@ function clientGig() {
               <div key={index} className="flex justify-between px-4 pt-4">
                 <div className="font-bold text-[14px]">{item.title}</div>
                 <div className="text-[14px]">{item.talent}</div>
-                <div className="flex text-[14px] -ml-10">
+                <div className="flex text-[14px] ">
                   <img src={crypto} alt="" className="w-4 h-4 mr-1 mt-1" />
                   {item.amount}$
                 </div>
@@ -207,6 +212,7 @@ function clientGig() {
           </div>
         </div>
       </div>
+      <ClientGigModal visible={openGig} onClose={() => setOpenGig(false)} />
     </div>
   );
 }

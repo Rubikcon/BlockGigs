@@ -5,7 +5,7 @@ import dp from "../../assets/Ellipse.png";
 import icon from "../../assets/icon.png";
 import crypto from "../../assets/crypto.png";
 import app from "../../assets/app.png";
-import frame from "../../assets/frame.svg";
+// import frame from "../../assets/frame.svg";
 import down from "../../assets/down.png";
 import bell2 from "../../assets/bell.png";
 import empty from "../../assets/empty.png";
@@ -13,12 +13,13 @@ import send from "../../assets/send.png";
 import { Link } from "react-router-dom";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import OfferModal from "../modals/OfferModal";
+import ClientOfferModal from "../modals/ClientOfferModal";
 import ClientGigModal from "../modals/ClientGigModal";
-import AcceptOffer from "../modals/AcceptOffer";
+import ClientAcceptOffer from "../modals/ClientAcceptOffer";
 import back from "../../assets/arrow-back.png";
 import bat from "../../assets/bat.png";
-import MilestoneModal from "../modals/MilestoneModal";
+import locate from "../../assets/locate.png";
+import ClientMilestoneModal from "../modals/ClientMilestoneModal";
 
 const jobs = [
   {
@@ -99,7 +100,7 @@ const jobs = [
 
 const offer = [
   {
-    title: "Product Designer at Crolz",
+    title: "Product Designer at Crolsssssssz",
     name: "Crolz Tech",
     officer: "Andrea Simon",
     duration: "2 days ago",
@@ -110,7 +111,7 @@ const offer = [
       "We are seeking a creative and detail-oriented Product Designer intern to join the CryptoKittes team. In this role, you will collaborate with our design and development teams to help create engaging and.",
     milestone: [
       {
-        title: "Milestone 1",
+        title: "Milestone 111111",
         amt: 200,
         job: "Branding/Designing of logo for web design",
       },
@@ -197,112 +198,40 @@ const activity = [
 
 const recommend = [
   {
-    title: "Product Designer for a DEFI Product",
-    duration: "Posted 2hr ago",
-    image: dp,
-    name: "Jacod",
-    experience: "worked with 10 talents",
-    description:
-      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms...",
-    price: "1000/3 milestones",
-    image2: frame,
-    amt: 1000,
-    detail:
-      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
-    milestone: [
-      {
-        title: "Milestone 1",
-        amt: 200,
-        job: "Branding/Designing of logo for web design",
-      },
-      {
-        title: "Milestone 2",
-        amt: 300,
-        job: "First set of design with the main features",
-      },
-      {
-        title: "Milestone 3",
-        amt: 500,
-        job: "Full web design to be passed on to the Developer",
-      },
-      {
-        title: "Milestone 4",
-        amt: 1000,
-        job: "Saas website design gig completed",
-      },
-    ],
+    title: "Glory Design",
+    review: 5,
+    icon: dp,
+    icon2: locate,
+    time: "UTC +1",
+    price: "$10/hr",
+    skill: ["UI/UX Design", "Graphics Design", "Web Design"],
   },
   {
-    title: "Wed3 Content Creator for a Decentrilized Exchange",
-    duration: "Posted 15hr ago",
-    image: dp,
-    name: "Chisam",
-    experience: "worked with 2 talents",
-    description:
-      "Create engaging and informative content about Web3, blockchain technology, NFTs, DAOs, and the metaverse. This can include blog post, articles...",
-    price: "700/1 milestones",
-    image2: frame,
-    amt: 3400,
-    detail:
-      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
-    milestone: [
-      {
-        title: "Milestone 1",
-        amt: 200,
-        job: "Branding/Designing of logo for web design",
-      },
-      {
-        title: "Milestone 2",
-        amt: 300,
-        job: "First set of design with the main features",
-      },
-      {
-        title: "Milestone 3",
-        amt: 500,
-        job: "Full web design to be passed on to the Developer",
-      },
-      {
-        title: "Milestone 4",
-        amt: 1000,
-        job: "Saas website design gig completed",
-      },
-    ],
+    title: "Dev god",
+    review: 5,
+    icon: dp,
+    icon2: locate,
+    time: "UTC +1",
+    price: "$10/hr",
+    skill: ["UI/UX Design", "Graphics Design", "Web Design"],
   },
   {
-    title: "Technical Writer for an E-commerce Brand",
-    duration: "Posted 2hr ago",
-    image: dp,
-    name: "Jacod",
-    experience: "worked with 10 talents",
-    description:
-      "Explain complex technical concept in a clear and concise way Create documentation tutorials and blog posts, making them accessible...",
-    price: "1000/3 milestones",
-    image2: frame,
-    amt: 2000,
-    detail:
-      "Design  and develop user friendly interfaces for Web3 applications such as NFT marketplaces, decentralized exchanges and metaverse platforms, they will collaborate with our design and development teams to help create engaging and intuitive user experience for our blockchain-based collectibles game. Your work will involve designing new UI components, optimizing user flows and contributing to the overall visual aesthetics of the platform. This is an exciting opportunity to work in the web3 space and gain hands-on experience in product design for a well-establish blockchain project.",
-    milestone: [
-      {
-        title: "Milestone 1",
-        amt: 200,
-        job: "Branding/Designing of logo for web design",
-      },
-      {
-        title: "Milestone 2",
-        amt: 300,
-        job: "First set of design with the main features",
-      },
-      {
-        title: "Milestone 3",
-        amt: 500,
-        job: "Full web design to be passed on to the Developer",
-      },
-      {
-        title: "Milestone 4",
-        amt: 1000,
-        job: "Saas website design gig completed",
-      },
-    ],
+    title: "Glory Design",
+    review: 5,
+    icon: dp,
+    icon2: locate,
+    time: "UTC +1",
+    price: "$10/hr",
+    skill: ["UI/UX Design", "Graphics Design", "Web Design"],
+  },
+  {
+    title: "Glory Design",
+    review: 5,
+    icon: dp,
+    icon2: locate,
+    time: "UTC +1",
+    price: "$10/hr",
+    skill: ["UI/UX Design", "Graphics Design", "Web Design"],
   },
 ];
 
@@ -362,9 +291,9 @@ const ClientDashboard = () => {
     setJob(value);
   };
 
-  const jobDetail = (item) => {
-    navigate("/job", { state: item });
-  };
+  // const jobDetail = (item) => {
+  //   navigate("/job", { state: item });
+  // };
 
   const milestoneHandler = (item) => {
     setOpenMilestone(true);
@@ -397,33 +326,35 @@ const ClientDashboard = () => {
   const renderRecommend = recommend.slice(0, 3).map((item, index) => (
     <div
       key={index}
-      className=" bg-white rounded-[10px] mb-2 py-2 px-4 shadow shadow-gray-200"
+      className=" bg-white rounded-[10px] mb-2 py-6 px-4 shadow shadow-gray-200"
     >
-      <div className="flex justify-between">
-        <div>
-          <div className="font-bold text-[12px] md:text-[16px]">
-            {item.title}
-          </div>
-          <div className="flex">
-            <div className="text-[12px] text-gray-400">{item.duration} | </div>
-            <div className="flex ml-2">
-              <img src={item.image} alt="" className="h-[20px] w-[20px]" />
-              <div className="text-[12px] ml-1 text-gray-400">
-                {item.experience}
-              </div>
+      <div className="flex justify-between items-center">
+        <div className="flex gap-2">
+          <img src={dp} alt="" className="w-12 h-12" />
+          <div className="space-y-1">
+            <div className="flex gap-2">
+              <span className="text-[12px]">{item.title}</span>
+              <span className="text-[12px]">Review({item.review})</span>
+            </div>
+            <div className="flex gap-2">
+              <img src={locate} alt="" className="w-4 h-4" />
+              <span className="text-[12px]">{item.time}</span>
+              <span className="text-[12px]">{item.price}</span>
+            </div>
+            <div className="flex space-x-4">
+              {item.skill.map((t, i) => (
+                <div
+                  key={i}
+                  className="text-[14px] bg-[#e7eef1] text-blue-700 px-2 rounded-[7px]"
+                >
+                  <span>{t}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <img src={item.image2} alt="" className="w-4 h-4 md:w-6 md:h-6" />
-      </div>
-      <div className="text-[12px] mb-3 w-[70%]">{item.description}</div>
-      <div className="flex justify-between">
-        <div className="text-blue-600 text-[12px] mb-2">${item.price}</div>
-        <button
-          className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[10px] md:text-[11.38px] w-[70px] md:w-[104px] h-[31px] mb-2 cursor-pointer"
-          onClick={() => jobDetail(item)}
-        >
-          See Details
+        <button className="bg-[#2f66f6] rounded-[5px] h-8 px-4 text-white text-[14px]">
+          View Profile
         </button>
       </div>
     </div>
@@ -762,18 +693,18 @@ const ClientDashboard = () => {
         )}
       </div>
 
-      <OfferModal
+      <ClientOfferModal
         visible={offerModal}
         item={OfferDetail}
         onClose={myOfferCloseHnadler}
         accept={acceptHandler}
       />
-      <AcceptOffer
+      <ClientAcceptOffer
         visible={acceptOfferModal}
         item={OfferDetail}
         onClose={acceptCloseHAndler}
       />
-      <MilestoneModal
+      <ClientMilestoneModal
         visible={openMilestone}
         onClose={() => setOpenMilestone(false)}
         item={detail}

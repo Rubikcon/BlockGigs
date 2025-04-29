@@ -5,7 +5,7 @@ import down from "../../assets/down.png";
 import empty from "../../assets/empty.png";
 import dp from "../../assets/Ellipse.png";
 
-function MilestoneModal({ visible, onClose, item }) {
+function ClientMilestoneModal({ visible, onClose, item }) {
   const [comment, setComment] = useState("");
   const [http, setHttp] = useState("");
   const [todo, setTodo] = useState([]);
@@ -121,4 +121,4 @@ function MilestoneModal({ visible, onClose, item }) {
   );
 }
 
-export default MilestoneModal;
+export default ClientMilestoneModal;

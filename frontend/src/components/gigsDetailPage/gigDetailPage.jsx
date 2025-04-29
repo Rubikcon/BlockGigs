@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-import React from "react";
+// import React from "react";
 import Detail from "./Details";
 import Footer from "../footer";
 

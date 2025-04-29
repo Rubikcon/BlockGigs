@@ -280,122 +280,144 @@ function ClientSidebar() {
           </div>
         </NavLink>
       </div>
-      <div className="flex col-span-7 md:row-span-7 justify-between md:grid md:justify-center">
-        <div>
-          {" "}
-          <NavLink to="/talent/dashboard">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec]  md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={element} alt="" className="h-4 w-4 hidden md:block" />
-                <span>Dashboard</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to={"/talent/discover"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full  text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={chart} alt="" className="h-4 w-4 hidden md:block" />
-                <span>Discover</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to={"/talent/gigs"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={cube} alt="" className="h-4 w-4 hidden md:block" />
-                <span>My gigs</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          {" "}
-          <NavLink to={"/talent/offer"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={folder} alt="" className="h-4 w-4 hidden md:block" />
-                <span>Offer & Application</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          {" "}
-          <NavLink to={"/talent/chat"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={message} alt="" className="h-4 w-4 hidden md:block" />
-                <span>Chat</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to={"/talent/wallet"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={wallet} alt="" className="h-4 w-4 hidden md:block" />
-                <span>Wallet</span>
-              </div>
-            )}
-          </NavLink>
-        </div>
-        <div>
-          {" "}
-          <NavLink to={"/talent/setting"} className="cursor-pointer">
-            {({ isActive }) => (
-              <div
-                className={`flex-1 space-x-2 my-2 px-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
-                  isActive
-                    ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
-                    : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
-                }`}
-              >
-                <img src={setting} alt="" className="h-4 w-4 hidden md:grid" />
-                <span>Setting</span>
-              </div>
-            )}
-          </NavLink>
+      <div className="flex col-span-7 md:row-span-7 justify-between md:grid md:justify-center gap-40">
+        <div className="grid gap-2">
+          <div>
+            {" "}
+            <NavLink to="/client/dashboard">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec]  md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img
+                    src={element}
+                    alt=""
+                    className="h-4 w-4 hidden md:block"
+                  />
+                  <span>Dashboard</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to={"/client/discover"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full  text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img src={chart} alt="" className="h-4 w-4 hidden md:block" />
+                  <span>Discover</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to={"/client/gig"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img src={cube} alt="" className="h-4 w-4 hidden md:block" />
+                  <span>My gigs</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            {" "}
+            <NavLink to={"/client/offer"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img
+                    src={folder}
+                    alt=""
+                    className="h-4 w-4 hidden md:block"
+                  />
+                  <span>Offer & Application</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            {" "}
+            <NavLink to={"/client/chat"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img
+                    src={message}
+                    alt=""
+                    className="h-4 w-4 hidden md:block"
+                  />
+                  <span>Chat</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to={"/client/wallet"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img
+                    src={wallet}
+                    alt=""
+                    className="h-4 w-4 hidden md:block"
+                  />
+                  <span>Wallet</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
+          <div>
+            {" "}
+            <NavLink to={"/client/setting"} className="cursor-pointer">
+              {({ isActive }) => (
+                <div
+                  className={`flex space-x-4 my-2 px-3 py-2 items-center h-12 w-full text-[10px] sm:text-[12px] md:text-[15px] cursor-pointer ${
+                    isActive
+                      ? "md:text-[#242d44] font-bold border-b border-[#a7d3ec] md:bg-[#a7d3ec] rounded-2xl"
+                      : "text-white hover:bg-[#a7d3ec] hover:text-[#242d44] hover:rounded-2xl"
+                  }`}
+                >
+                  <img
+                    src={setting}
+                    alt=""
+                    className="h-4 w-4 hidden md:grid"
+                  />
+                  <span>Setting</span>
+                </div>
+              )}
+            </NavLink>
+          </div>
         </div>
         <div className="">
           <NavLink to={""}>
