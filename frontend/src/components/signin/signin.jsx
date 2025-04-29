@@ -8,6 +8,7 @@ import wallet from "../../assets/wallet.png";
 import stellar from "../../assets/stellar_black.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import kit from "../../utils/stellarWallet"; // Import the Stellar Wallet Kit
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Signin = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate(); //for page navigation
+  const [detectWallet, setDetectWallet] = useState(false);
 
   const handleGotoHome = () => {
     navigate("/");
@@ -138,14 +140,8 @@ const Signin = () => {
           localStorage.setItem("userAddress", address);
 
           console.log("Stellar Wallet connected successfully:", address);
-
-          navigate("/Persona", {
-            replace: true,
-            state: {
-              account: address,
-              detectWallet,
-            },
-          });
+          // call the testWallet Login with address
+          testWalletLogin(address);
         },
         onClosed: (err) => {
           if (err) {
@@ -358,7 +354,7 @@ const Signin = () => {
             </button>
 
             <button
-              // onClick={handleStellarLogin}
+              onClick={handleStellarLogin}
               disabled={loading}
               className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
                 loading ? "opacity-50" : ""
