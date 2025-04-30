@@ -304,7 +304,8 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="profession"
-                    // value={formData.profession}
+                    name="profession"
+                    value={formData.profession}
                     onChange={handleInputChange}
                     placeholder="Product Designer"
                     required
@@ -325,6 +326,7 @@ const TalentForm = () => {
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
                     type="text"
                     id="pay"
+                    name="min_pay"
                     value={formData.min_pay}
                     placeholder="$10/hr"
                     onChange={handleInputChange}
