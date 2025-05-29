@@ -9,6 +9,7 @@ import stellar from "../../assets/stellar_black.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import kit from "../../utils/stellarWallet"; // Import the Stellar Wallet Kit
+import { Toaster, toast } from "react-hot-toast";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -34,13 +35,14 @@ const Signin = () => {
     setError("");
 
     if (!email) {
-      alert("Enter email address to continue!");
+      toast.error("Enter email address to continue!");
+      // alert("Enter email address to continue!");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address!");
+      toast.error("Please enter a valid email");
       return;
     }
 
@@ -91,7 +93,8 @@ const Signin = () => {
   const connectMetamask = async () => {
     try {
       if (!window.ethereum) {
-        alert("Metamask not detected. Please install Metamask.");
+        toast.error("Metamask not detected. Please install Metamask.");
+        // alert("Metamask not detected. Please install Metamask.");
         return;
       }
 
@@ -395,6 +398,7 @@ const Signin = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 };

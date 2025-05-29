@@ -9,9 +9,9 @@ import stellar from "../../assets/stellar_black.png"; // Add your Stellar logo i
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 import kit from "../../utils/stellarWallet"; // Import the Stellar Wallet Kit
+import { Toaster, toast } from "react-hot-toast";
 
 // import ConnectWallet from "../ConnectWallet/ConnectWallet";
-
 // Import the connectButton from the tsconfiguration
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
@@ -62,14 +62,16 @@ const Signup = () => {
 
     //Checking if the email field is empty
     if (!email) {
-      alert("Enter email address to continue!");
+      toast.error("Enter email address to continue!");
+      // alert("Enter email address to continue!");
       return;
     }
     //Checking if the email address is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      alert("Please put a valid email address!");
+      toast.error("Please put a valid email address !");
+      // alert("Please put a valid email address!");
       return;
     }
     localStorage.setItem("email", email);
@@ -92,6 +94,7 @@ const Signup = () => {
   const connectMetamask = async () => {
     if (!window.ethereum) {
       setWalletError("MetaMask is not installed!");
+      toast.error("MetaMask is not installed");
       return;
     }
 
@@ -392,6 +395,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 };

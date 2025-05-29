@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import Select from "react-select";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const TalentForm = () => {
   const navigate = useNavigate();
@@ -121,14 +122,16 @@ const TalentForm = () => {
 
       const response = await axios.post(endpoint, payload);
 
-      alert(response.data.message);
+      // alert(response.data.message);
+      toast.success(response.data.message);
       console.log("login to continue");
-      console.log(response.data.message);
+      // console.log(response.data.message);
 
       navigate("/signin");
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
+      // alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
       // clear flags

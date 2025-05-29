@@ -32,6 +32,7 @@ import ClientGig from "./components/ClientUI/clientGig";
 import ClientLayout from "./ClientLayout";
 import Job from "./components/TalentUI/job";
 import Password from "./components/Password/password";
+import { Toaster } from "react-hot-toast";
 
 // import WalletConnect from "./components/ConnectWallet/ConnectWallet";
 
@@ -111,6 +112,7 @@ const App = () => {
         {/* <Route path="/smart" element={<Home />} /> */}
         <Route path="/button" element={<ButtonComponent />} />
       </Routes>
+      <Toaster position="top-right" />
     </Router>
   );
 };

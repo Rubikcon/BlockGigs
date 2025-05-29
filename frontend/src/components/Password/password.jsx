@@ -7,6 +7,7 @@ import metamask from "../../assets/metamask.png";
 // import wallet from "../../assets/wallet.png";
 import { Link } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
+import { Toaster, toast } from "react-hot-toast";
 
 // import ConnectWallet from "../ConnectWallet/ConnectWallet";
 
@@ -33,12 +34,14 @@ const Password = () => {
     setWalletAccount(account);
 
     console.log("Wallet connected:", account);
+    toast.success("Wallet Connected");
   };
 
   const handleError = (error) => {
     setWalletError(error);
 
     console.log("Wallet connection failed:", error);
+    toast.error("Wallet connection failed");
   };
 
   // Add loading state to UI
@@ -59,7 +62,10 @@ const Password = () => {
 
     //Checking if the email field is empty
     if (!password) {
-      alert("Enter password to continue!");
+      // alert("Enter password to continue!");
+      toast.error("Enter Password to Continue", {
+        duration: 10000,
+      });
       return;
     }
 
@@ -67,7 +73,10 @@ const Password = () => {
     // email = localStorage.getItem("email");
 
     //If email is valid, form can be sumbitted
-    alert("Continue to select Persona");
+    // alert("Continue to select Persona");
+    toast.success("Continue to Select User", {
+      duration: 5000,
+    });
 
     // Navigate to verification page and pass the email as state
     navigate("/Persona", { state: { password, detectWallet } });
@@ -189,6 +198,7 @@ const Password = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 };

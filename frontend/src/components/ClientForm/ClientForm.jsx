@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/3dcube.png";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ClientForm = () => {
   const navigate = useNavigate();
@@ -63,15 +64,17 @@ const ClientForm = () => {
 
       const response = await axios.post(endpoint, payload);
 
-      alert(response.data.message);
-
+      // alert(response.data.message);
+      // toast.success(response.data.message);
+      toast.success("Proceed to login");
       // alert(response.data.message);
       console.log("login to continue");
-      console.log(response.data.message);
+      // console.log(response.data.message);
 
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      toast.error(response?.data?.message || "Registration failed");
+      // alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
     }
