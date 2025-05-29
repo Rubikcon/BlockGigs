@@ -59,10 +59,15 @@ const Signin = () => {
         loginData
       );
       console.log(apiUrl);
+      toast.success("Login Successful");
       console.log("Response Data:", response.data);
+      
       // Debugging
       const { token, user } = response.data;
       if (!user || !user.role) {
+        toast.error("Role not found. Please conteact support", {
+          duration: 50000,
+        });
         setError("Role not found. Please contact support.");
 
         return;

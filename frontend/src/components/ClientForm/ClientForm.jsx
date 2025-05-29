@@ -73,7 +73,7 @@ const ClientForm = () => {
 
       navigate("/signin"); // Redirect after successful registration
     } catch (error) {
-      toast.error(response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
       // alert(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);

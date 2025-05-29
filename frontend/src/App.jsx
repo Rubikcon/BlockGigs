@@ -82,6 +82,8 @@ const App = () => {
         {/*************Client*****************/}
         <Route path="job" element={<ClientDashboard />} />
 
+        <Route path="/profile" element={<Profile />} />
+
         {/*  Navigation on for the dashboard*/}
         <Route path="client" element={<ClientLayout />}>
           <Route path="/client/dashboard" element={<ClientDashboard />} />
@@ -90,7 +92,6 @@ const App = () => {
           <Route path="/client/gig" element={<ClientGig />} />
           <Route path="/client/job" element={<ClientJob />} />
           <Route path="/client/offer" element={<ClientOffer />} />
-          <Route path="/client/profile" element={<ClientProfile />} />
           <Route path="/client/setting" element={<ClientSetting />} />
           <Route path="/client/wallet" element={<ClientWallet />} />
         </Route>
