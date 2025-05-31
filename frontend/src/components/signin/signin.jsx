@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import kit from "../../utils/stellarWallet"; // Import the Stellar Wallet Kit
 import { Toaster, toast } from "react-hot-toast";
+// import { json } from "stream/consumers";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -59,13 +60,16 @@ const Signin = () => {
         loginData
       );
       console.log(apiUrl);
-      toast.success("Login Successful");
+
       console.log("Response Data:", response.data);
-      
+
+      // store
+      // localStorage.setItem("userData", json.stringify(response.data));
+
       // Debugging
       const { token, user } = response.data;
       if (!user || !user.role) {
-        toast.error("Role not found. Please conteact support", {
+        toast.error("Role not found. Please contact support", {
           duration: 50000,
         });
         setError("Role not found. Please contact support.");
@@ -78,6 +82,7 @@ const Signin = () => {
       localStorage.setItem("token", token);
 
       localStorage.setItem("userRole", user.role);
+      toast.success("Login Successful");
 
       // Redirect based on role
 
@@ -87,8 +92,12 @@ const Signin = () => {
         admin: "/admin/dashboard",
       };
 
+      // store the users info locally
+      // localStorage.setItem("userData", response.data);
+
       navigate(roleRoutes[user.role] || "/");
     } catch (err) {
+      toast.error(err.response?.data?.message || "Login failed");
       setError(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);

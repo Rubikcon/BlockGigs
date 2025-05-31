@@ -252,41 +252,45 @@ export const loginUser = async (req, res) => {
   const { email, wallet_address, password } = req.body;
 
   try {
-    let user;
+    let userTalent = null;
+    let userClient = null;
+    let user = null;
 
     if (wallet_address) {
-      // Login using only the wallet address
-      user =
-        (await Talent.findOne({ wallet_address })) ||
-        (await Client.findOne({ wallet_address }));
+      userTalent = await Talent.findOne({ wallet_address });
+      userClient = await Client.findOne({ wallet_address });
 
-      if (!user) {
-        return res.status(400).json({ message: "User not found" });
-      }
-    } else if (email && password) {
-      // Login using email & password
-      user =
-        (await Talent.findOne({ email })) || (await Client.findOne({ email }));
-
-      if (!user) {
-        return res.status(400).json({ message: "User not found" });
-      }
-
-      if (!user.password) {
+      if (!userTalent && !userClient) {
         return res
           .status(400)
-          .json({ message: "Password not set for this account" });
+          .json({ message: "No user found with this address" });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
+      user = userTalent || userClient;
+    } else if (email && password) {
+      userTalent = await Talent.findOne({ email });
+      userClient = await Client.findOne({ email });
+
+      if (!userTalent && !userClient) {
+        return res
+          .status(400)
+          .json({ message: "No user found with this email" });
+      }
+
+      const isMatchTalent =
+        userTalent && (await bcrypt.compare(password, userTalent.password));
+      const isMatchClient =
+        userClient && (await bcrypt.compare(password, userClient.password));
+
+      if (!isMatchTalent && !isMatchClient) {
         return res.status(400).json({ message: "Invalid password" });
       }
+
+      user = isMatchTalent ? userTalent : userClient;
     } else {
       return res.status(400).json({ message: "Invalid login credentials" });
     }
 
-    // Generate JWT token
     const token = generateToken(user._id, user.role);
 
     res.status(200).json({
