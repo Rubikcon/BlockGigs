@@ -61,10 +61,11 @@ const Signin = () => {
       );
       console.log(apiUrl);
 
-      console.log("Response Data:", response.data);
+      console.log("Response Data:", response.data.user);
 
       // store
       // localStorage.setItem("userData", json.stringify(response.data));
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
 
       // Debugging
       const { token, user } = response.data;
