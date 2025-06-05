@@ -23,6 +23,9 @@ import off from "../../assets/off.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// retrives the data from the localStorage to the frontend
+const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+// console.log(userData.fullname);
 const experience = [
   {
     title: "Senior UI/UX Designer",
@@ -97,7 +100,8 @@ function Profile() {
                 </div>
                 <div className="">
                   <p className="-m-2 text-[12px] md:text-[16px]">
-                    Glory Dseign
+                    {/* Glory Dseign */}
+                    {userData?.fullname || "User Name"}
                   </p>
                   <span className="text-[8px] md:text-[10px] top-1 m-0">
                     Product Designer

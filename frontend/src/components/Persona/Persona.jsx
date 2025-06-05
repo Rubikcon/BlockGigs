@@ -33,6 +33,7 @@ const Persona = () => {
           // balance,
         },
       }); // Dynamically navigate to the selected page
+      console.log({ account, selectedPersona, detectWallet });
     }
   };
 

@@ -126,7 +126,7 @@ const TalentForm = () => {
       toast.success(response.data.message);
       console.log("login to continue");
       // console.log(response.data.message);
-
+      console.log(response.data);
       navigate("/signin");
     } catch (error) {
       console.error(error);

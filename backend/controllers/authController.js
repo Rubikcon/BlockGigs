@@ -85,7 +85,7 @@ export const registerWithEmail = async (req, res) => {
     const token = generateToken(newUser._id, role);
 
     res.status(201).json({
-      message: "User registered successfully. Please verify your email.",
+      message: "User registered successfully. Proceed to login.",
       token,
       user: {
         id: newUser._id,
@@ -293,19 +293,21 @@ export const loginUser = async (req, res) => {
 
     const token = generateToken(user._id, user.role);
 
+    // convert user doc to plain object and remove password
+
+    const userData = user.toObject();
+
+    delete userData.password;
+
     res.status(200).json({
       message: "Login successful",
       token,
-      user: {
-        id: user._id,
-        email: user.email || null,
-        wallet_address: user.wallet_address || null,
-        role: user.role,
-        isVerified: user.isVerified,
-        fullname: user.fullname,
-      },
+
+      user: userData,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
