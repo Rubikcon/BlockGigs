@@ -20,11 +20,10 @@ import bulb from "../../assets/bulb.png";
 import icon2 from "../../assets/icon2.png";
 import amico from "../../assets/amico.png";
 import off from "../../assets/off.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// retrives the data from the localStorage to the frontend
-const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+// const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 // console.log(userData.fullname);
 const experience = [
   {
@@ -56,6 +55,17 @@ const experience = [
 function Profile() {
   const navigate = useNavigate();
   const [available, setAvailable] = useState(true);
+  const [user, setUser] = useState({});
+
+  // retrives the data from the localStorage to the frontend
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("userData") || "{}");
+    console.log(
+      "Data logged immediately after retrieved",
+      JSON.parse(localStorage.getItem("userData"))
+    );
+    setUser(storedUser);
+  }, []);
 
   return (
     <div className="bg-gray-100 w-[100%] h-[100%] grid grid-rows-12 px-4 gap-2">
@@ -101,10 +111,11 @@ function Profile() {
                 <div className="">
                   <p className="-m-2 text-[12px] md:text-[16px]">
                     {/* Glory Dseign */}
-                    {userData?.fullname || "User Name"}
+                    {user.fullname || "Username"}
+                    {/* {userData?.fullname || "User Name"} */}
                   </p>
                   <span className="text-[8px] md:text-[10px] top-1 m-0">
-                    Product Designer
+                    {user.profession || "Profession"}
                   </span>
                 </div>
                 <img src={down} alt="" className="w-8 h-8 hidden md:block" />
@@ -121,18 +132,18 @@ function Profile() {
                 <img src={dp} alt="" className="md:w-22 md:h-22 w-10 h-10" />
                 <div className="md:grid md:gap-3">
                   <span className="text-[12px] md:text-[16px]">
-                    Glory Design
+                    {user.fullname || "Username"}
                   </span>
                   <div className="flex md:gap-2">
                     <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
-                      UI/UX Design
+                      {user.profession || "UI/UX Design"}
                     </span>
-                    <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
+                    {/* <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
                       Graphic Design
                     </span>
                     <span className="text-[#1d4ed8] text-[8px] md:text-[12px] bg-[#e7eef1] md:px-1 rounded-[10px]">
                       Web Design
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               </div>
@@ -176,11 +187,8 @@ function Profile() {
                     About
                   </p>
                 </div>
-                <span className="text-gray-600 text-[12px] md:text-[16px] ">
-                  Product Designer passionate about crafting intuitive and
-                  user-centered experiences. I thrive on solving complex design
-                  challenges and creating impactful solution that meet both user
-                  needs and business goals. Proficient in Figma, user research.
+                <span className="text-gray-600 text-[12px] p-2 md:text-[16px] ">
+                  {user.about || "About Me"}
                 </span>
               </div>
               <div className="bg-white col-span-1">
@@ -224,7 +232,7 @@ function Profile() {
                   </div>
                   <div>
                     <p>Pay/Range</p>
-                    <span className="mt-2 flex">$10/hr</span>
+                    <span className="mt-2 flex">$ {user.min_pay} /hr</span>
                   </div>
                 </div>
                 <div className="flex ml-16 mt-4 gap-6 text-[10px] md:text-[14px]">
@@ -233,6 +241,23 @@ function Profile() {
                     <p>English</p>
                     <p>German</p>
                     <p>Spanish</p>
+                  </div>
+                </div>
+                <div className="flex ml-16 mt-4 gap-6 text-[10px] md:text-[14px]">
+                  <p className="border-1 p-1 rounded-md">Skills</p>
+                  <div className="flex gap-2">
+                    <p className="border-1 p-1 rounded-md">
+                      {" "}
+                      {user.skills[0] || "skill 1 "}
+                    </p>
+                    <p className="border-1 p-1 rounded-md">
+                      {" "}
+                      {user.skills[1] || "skill 2 "}
+                    </p>
+                    <p className="border-1 p-1 rounded-md">
+                      {" "}
+                      {user.skills[2] || "skill 3 "}
+                    </p>
                   </div>
                 </div>
               </div>

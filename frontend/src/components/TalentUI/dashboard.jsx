@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
@@ -314,6 +314,18 @@ function Dashboard() {
   const [job, setJob] = useState("");
   const navigate = useNavigate();
 
+  const [user, setUser] = useState({});
+
+  // retrives the data from the localStorage to the frontend
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("userData") || "{}");
+    console.log(
+      "Data logged immediately after retrieved",
+      JSON.parse(localStorage.getItem("userData"))
+    );
+    setUser(storedUser);
+  }, []);
+
   const myOfferHandler = (value) => {
     setMyOfferDetail(value);
     setOfferModal(true);
@@ -476,10 +488,10 @@ function Dashboard() {
                         </div>
                         <div className="">
                           <p className="-m-2 text-[12px] md:text-[15px]">
-                            Glory Design
+                            {user.fullname || "Username"}
                           </p>
                           <span className="text-[6px] md:text-[10px] top-1 m-0">
-                            Product Designer
+                            {user.profession || "Profession"}
                           </span>
                         </div>
                         <img
