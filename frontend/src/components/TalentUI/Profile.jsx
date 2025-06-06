@@ -76,7 +76,19 @@ function Profile() {
               src={arrow}
               alt=""
               className="w-7 h-5 mt-1 cursor-pointer"
-              onClick={() => navigate("/TalentDashboard")}
+              onClick={() => {
+                const roleRoutes = {
+                  client: "/client/dashboard",
+                  talent: "/talent/dashboard",
+                  admin: "/admin/dashboard",
+                };
+
+                // store the users info locally
+                // localStorage.setItem("userData", response.data);
+
+                navigate(roleRoutes[user.role] || "/");
+              }}
+              // navigate("/TalentDashboard")}
             />
             <span className="text-[12px] md:text-[16px]">
               Profile Information
@@ -245,20 +257,20 @@ function Profile() {
                 </div>
                 <div className="flex ml-16 mt-4 gap-6 text-[10px] md:text-[14px]">
                   <p className="border-1 p-1 rounded-md">Skills</p>
-                  <div className="flex gap-2">
+                  {/* <div className="flex gap-2">
                     <p className="border-1 p-1 rounded-md">
                       {" "}
-                      {user.skills[0] || "skill 1 "}
+                      {user?.skills[0] || "skill 1 "}
                     </p>
                     <p className="border-1 p-1 rounded-md">
                       {" "}
-                      {user.skills[1] || "skill 2 "}
+                      {user?.skills[1] || "skill 2 "}
                     </p>
                     <p className="border-1 p-1 rounded-md">
                       {" "}
-                      {user.skills[2] || "skill 3 "}
+                      {user?.skills[2] || "skill 3 "}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
