@@ -1,11 +1,21 @@
 // import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/sidebar";
+import DashboardMobileNav from "./components/DashboardMobileNav";
 
 function MainLayout() {
   return (
     <div className="grid grid-flow-row md:flex">
-      <Sidebar />
+      {/* Sidebar - Hidden on small screens, visible on medium and up */}
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
+
+      {/* DashboardMobileNav - Visible on small screens, hidden on medium and up */}
+      <div className="block md:hidden my-5">
+        <DashboardMobileNav />
+      </div>
+
       <div className="grid grid-flow-row md:flex-1">
         <Outlet />
       </div>

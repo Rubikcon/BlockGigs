@@ -42,9 +42,11 @@ export default function Navigation() {
           ? "/talent/dashboard"
           : "/signin", // Redirect to login/signup if not signed in
     },
-    { name: "Gigs", href: "/gigs-page" },
-    { name: "Browse Talents", href: "/browse-talent" },
-    { name: "Leaderboard", href: "/leader-board" },
+    { name: "My Gigs", href: "/gigs-page" },
+    { name: "Offers & Application", href: "/browse-talent" },
+    { name: "Chat", href: "/leader-board" },
+    { name: "Wallet", href: "/leader-board" },
+    { name: "Setting", href: "/leader-board" },
   ];
 
   const handleLinkClick = () => {
@@ -119,7 +121,7 @@ export default function Navigation() {
                 <Link
                   to={link.href}
                   onClick={handleLinkClick}
-                  className="text-white hover:text-white mx-3 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
+                  className="text-white hover:text-white mx-2 text-lg hover:border-b-2 pb-1 hover:border-b-white transition cursor-pointer"
                 >
                   {link.name}
                 </Link>
@@ -174,7 +176,7 @@ export default function Navigation() {
 
               <ul className="flex flex-col items-center justify-center space-y-6 w-full">
                 {links.map((link) => (
-                  <li key={link.name} className="py-5 w-full text-center">
+                  <li key={link.name} className="py-3 w-full text-center">
                     <Link
                       to={link.href}
                       onClick={() => setIsMenuOpen(false)}
