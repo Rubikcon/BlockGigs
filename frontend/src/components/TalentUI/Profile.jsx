@@ -70,7 +70,7 @@ function Profile() {
   return (
     <div className="bg-gray-100 w-[100%] h-[100%] grid grid-rows-12 px-4 gap-2">
       <div className="row-span-1 grid items-center px-2 mt-2">
-        <div className="grid grid-cols-3 gap-1 w-full">
+        <div className="grid grid-cols-3 gap-1 w-full py-5">
           <div className="flex gap-2">
             <img
               src={arrow}
@@ -278,7 +278,7 @@ function Profile() {
           <div className="row-span-14 bg-white grid grid-rows-14">
             <div className="w-full border-b-2 border-gray-400 row-span-1 grid grid-flow-col justify-center items-center gap-4 text-[12px] md:text-[14px]">
               <span>Works/Exprience</span>
-              <span>Review (5)</span>
+              <span>Review </span>
             </div>
             <div className="row-span-13 mt-2">
               {experience.map((item, i) => (

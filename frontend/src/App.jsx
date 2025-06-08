@@ -52,6 +52,8 @@ import ClientSetting from "./components/ClientUI/ClientSetting";
 import ClientWallet from "./components/ClientUI/ClientWallet";
 import ClientDiscover from "./components/ClientUI/ClientDiscover";
 
+// import protected route
+import ProtectedRoute from "./components/ProtectedRoute";
 window.Buffer = Buffer;
 
 const App = () => {
@@ -86,7 +88,14 @@ const App = () => {
 
         {/*  Navigation on for the dashboard*/}
         <Route path="client" element={<ClientLayout />}>
-          <Route path="/client/dashboard" element={<ClientDashboard />} />
+          <Route
+            path="/client/dashboard"
+            element={
+              <ProtectedRoute>
+                <ClientDashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/client/chat" element={<ClientChat />} />
           <Route path="/client/discover" element={<ClientDiscover />} />
           <Route path="/client/gig" element={<ClientGig />} />
@@ -98,7 +107,14 @@ const App = () => {
 
         {/* Routes for Talents dashboard */}
         <Route path="talent" element={<MainLayout />}>
-          <Route path="/talent/dashboard" element={<Dashboard />} />
+          <Route
+            path="/talent/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/talent/chat" element={<Chat />} />
           <Route path="/talent/discover" element={<Discover />} />
           <Route path="/talent/gigs" element={<Gigs />} />

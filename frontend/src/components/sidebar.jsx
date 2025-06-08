@@ -9,10 +9,18 @@ import wallet from "../assets/wallet.png";
 import setting from "../assets/setting-2.png";
 import logout from "../assets/logout.png";
 import { NavLink, useMatch } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const profile = useMatch("/profile");
   const job = useMatch("/job");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    navigate("/signin");
+  };
   return (
     <div className="flex-1 grid grid-cols-8 md:grid-cols-1 md:grid-row-9 bg-[#0A0f29] h-[20vh] md:min-h-screen md:h-auto min-w-screen md:min-w-[15vw] text-white items-center md:justify-center px-4">
       <div className="col-span-8 md:grid md:row-span-1 md:justify-center">
@@ -145,7 +153,7 @@ function Sidebar() {
             )}
           </NavLink>
         </div>
-        <div className="">
+        <div className="" onClick={handleLogout}>
           <NavLink to={"/signin"}>
             <img
               src={logout}
