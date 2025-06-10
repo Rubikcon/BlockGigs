@@ -370,7 +370,7 @@ const ClientDashboard = () => {
         {job === "" ? (
           <div>
             <div className="row-span-1 grid items-center px-2 mt-2">
-              <div className="grid grid-cols-3 gap-1 w-full">
+              <div className="grid grid-cols-3 gap-1 p-4 w-full">
                 <div className="col-span-1">
                   <span className="flex gap-1 text-[12px] sm:text-[12px] md:text-[15px]">
                     Welcome <p className=" hidden md:block">back, Let's</p>
@@ -494,7 +494,7 @@ const ClientDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[66.56%] row-span-1 mt-2">
+            <div className="w-[66.56%] row-span-1 p-5 mt-2">
               <div className="flex w-full justify-between gap-4 pr-6">
                 <p className="text-[12px] md:text-[16px]">Recommended Jobs</p>
                 <Link className="text-[12px] md:text-[16px]">View All</Link>

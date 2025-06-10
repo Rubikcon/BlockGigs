@@ -315,18 +315,6 @@ function Dashboard() {
   const [job, setJob] = useState("");
   const navigate = useNavigate();
 
-  // const [user, setUser] = useState({});
-
-  // // retrives the data from the localStorage to the frontend
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem("userData") || "{}");
-  //   console.log(
-  //     "Data logged immediately after retrieved",
-  //     JSON.parse(localStorage.getItem("userData"))
-  //   );
-  //   setUser(storedUser);
-  // }, []);
-
   const myOfferHandler = (value) => {
     setMyOfferDetail(value);
     setOfferModal(true);

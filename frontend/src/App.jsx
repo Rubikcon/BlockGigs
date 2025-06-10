@@ -84,7 +84,14 @@ const App = () => {
         {/*************Client*****************/}
         <Route path="job" element={<ClientDashboard />} />
 
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
         {/*  Navigation on for the dashboard*/}
         <Route path="client" element={<ClientLayout />}>

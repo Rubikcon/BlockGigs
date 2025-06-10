@@ -16,6 +16,7 @@ export default function Navigation() {
   const modalRef = useRef();
   const navigate = useNavigate();
   const [role, setRole] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // ===================================
 
@@ -24,9 +25,21 @@ export default function Navigation() {
     // Retrieve role from localStorage
   };
 
+  const handleGotoHome = () => {
+    navigate("/");
+  };
+
   useEffect(() => {
     setRole(getUserRole());
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+
+  //   setIsLoggedIn(!!token);
+  // }, []);
 
   // ===================================
 
@@ -49,12 +62,41 @@ export default function Navigation() {
     { name: "Setting", href: "/leader-board" },
   ];
 
+  // handleClick = () => {
+  //   if (isLoggedIn) {
+  //     // Log the user out
+
+  //     localStorage.removeItem("token");
+
+  //     setIsLoggedIn(false);
+
+  //     navigate("/signin");
+  //   } else {
+  //     // Take them to sign in or get started page
+
+  //     navigate("/signin");
+  //   }
+  // };
+
   const handleLinkClick = () => {
     setIsLoading(true);
   };
 
   const handleGetStarted = () => {
-    navigate("/signup");
+    if (isLoggedIn) {
+      // Log the user out
+
+      localStorage.removeItem("token");
+
+      setIsLoggedIn(false);
+
+      navigate("/signin");
+    } else {
+      // Take them to sign in or get started page
+
+      navigate("/signin");
+    }
+    // navigate("/signup");
     // navigate to an external link
     // window.location.href = "https://blockgigs.netlify.app/";
   };
@@ -105,7 +147,7 @@ export default function Navigation() {
 
       <nav className="bg-[#7979793D] max-w-[90%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[90%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg ">
         <div className="flex justify-between items-center px-6 py-1 max-w-screen-xl mx-auto">
-          <div className="cursor-pointer">
+          <div className="cursor-pointer " onClick={handleGotoHome}>
             <img
               src="/images/BlockGigs.png"
               alt="BlockGigs logo"
@@ -187,11 +229,23 @@ export default function Navigation() {
                   </li>
                 ))}
                 <div className="mt-10">
-                  <button
+                  {/* <button
                     onClick={handleGetStarted}
                     className="bg-white hover:font-bold text-black px-7 py-3 rounded-md cursor-pointer"
                   >
                     Get Started
+                  </button> */}
+                  <button
+                    onClick={handleGetStarted}
+                    className={`
+px-7 py-3 rounded-md cursor-pointer transition-all duration-300 ${
+                      isLoggedIn
+                        ? " bg-red-500 text-white hover:bg-red-600"
+                        : "bg-white text-black hover:font-bold"
+                    }`}
+                  >
+                    {" "}
+                    {isLoggedIn ? "Logout" : "Get Started"}
                   </button>
                 </div>
               </ul>

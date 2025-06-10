@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
+
 import { FaBarsStaggered } from "react-icons/fa6";
 import {
   FaTimes,
@@ -14,18 +15,23 @@ export default function Navigation() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const modalRef = useRef();
-  const navigate = useNavigate();
   const [role, setRole] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   // ===================================
 
   const getUserRole = () => {
     return localStorage.getItem("userRole");
+
     // Retrieve role from localStorage
   };
 
   useEffect(() => {
     setRole(getUserRole());
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   // ===================================
@@ -52,7 +58,19 @@ export default function Navigation() {
   };
 
   const handleGetStarted = () => {
-    navigate("/signup");
+    if (isLoggedIn) {
+      // Log the user out
+
+      localStorage.removeItem("token");
+
+      setIsLoggedIn(false);
+
+      navigate("/signin");
+    } else {
+      // Take them to sign in or get started page
+
+      navigate("/signin");
+    }
     // navigate to an external link
     // window.location.href = "https://blockgigs.netlify.app/";
   };
@@ -126,11 +144,23 @@ export default function Navigation() {
               </li>
             ))}
             <div className="ml-5">
-              <button
+              {/* <button
                 onClick={handleGetStarted}
                 className="bg-white text-md !important text-black py-2 px-5 rounded-md cursor-pointer"
               >
                 Get Started
+              </button> */}
+              <button
+                onClick={handleGetStarted}
+                className={`
+px-5 py-2 rounded-md cursor-pointer transition-all duration-300 ${
+                  isLoggedIn
+                    ? " bg-red-500 text-white hover:bg-red-600"
+                    : "bg-white text-black hover:font-bold"
+                }`}
+              >
+                {" "}
+                {isLoggedIn ? "Logout" : "Get Started"}
               </button>
             </div>
           </ul>
@@ -185,11 +215,21 @@ export default function Navigation() {
                   </li>
                 ))}
                 <div className="mt-10">
-                  <button
+                  {/* <button
                     onClick={handleGetStarted}
                     className="bg-white hover:font-bold text-black px-7 py-3 rounded-md cursor-pointer"
                   >
                     Get Started
+                  </button> */}
+                  <button
+                    onClick={handleGetStarted}
+                    className={`px-7 py-3 rounded-md cursor-pointer transition-all duration-300 ${
+                      isLoggedIn
+                        ? "bg-red-500 text-white hover:bg-red-600 "
+                        : " bg-white text-black hover:font-bold"
+                    }`}
+                  >
+                    {isLoggedIn ? "Logout" : "Get Started"}
                   </button>
                 </div>
               </ul>

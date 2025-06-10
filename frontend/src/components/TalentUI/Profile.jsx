@@ -71,11 +71,11 @@ function Profile() {
     <div className="bg-gray-100 w-[100%] h-[100%] grid grid-rows-12 px-4 gap-2">
       <div className="row-span-1 grid items-center px-2 mt-2">
         <div className="grid grid-cols-3 gap-1 w-full py-5">
-          <div className="flex gap-2">
+          <div className="flex gap-2 ">
             <img
               src={arrow}
               alt=""
-              className="w-7 h-5 mt-1 cursor-pointer"
+              className="w-8 h-5 border rounded-md cursor-pointer"
               onClick={() => {
                 const roleRoutes = {
                   client: "/client/dashboard",
@@ -203,7 +203,7 @@ function Profile() {
                   {user.about || "About Me"}
                 </span>
               </div>
-              <div className="bg-white col-span-1">
+              <div className="bg-white col-span-1 md:-ml-15">
                 <div className="flex gap-2 mt-6 ml-15">
                   <img
                     src={page}
@@ -257,20 +257,24 @@ function Profile() {
                 </div>
                 <div className="flex ml-16 mt-4 gap-6 text-[10px] md:text-[14px]">
                   <p className="border-1 p-1 rounded-md">Skills</p>
-                  {/* <div className="flex gap-2">
-                    <p className="border-1 p-1 rounded-md">
-                      {" "}
-                      {user?.skills[0] || "skill 1 "}
-                    </p>
-                    <p className="border-1 p-1 rounded-md">
-                      {" "}
-                      {user?.skills[1] || "skill 2 "}
-                    </p>
-                    <p className="border-1 p-1 rounded-md">
-                      {" "}
-                      {user?.skills[2] || "skill 3 "}
-                    </p>
-                  </div> */}
+                  <div className="flex gap-2 flex-wrap">
+                    {user?.skills && user.skills.length > 0 ? (
+                      user.skills.map((skill, index) => (
+                        <p
+                          key={index}
+                          className="border border-gray-300 p-1 rounded-md text-sm text-gray-700"
+                        >
+                          {skill}
+                        </p>
+                      ))
+                    ) : (
+                      <>
+                        <p className="border p-1 rounded-md">Skill 1</p>
+                        <p className="border p-1 rounded-md">Skill 2</p>
+                        <p className="border p-1 rounded-md">Skill 3</p>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -316,13 +320,14 @@ function Profile() {
             </div>
           </div>
         </div>
+
         <div className="grid grid-rows-15 cols-span-1 gap-4">
-          <div className="row-span-8 bg-[#e3f1ff] md:p-2 md:py-4 rounded-[10px]">
+          <div className="row-span-8 bg-[#e3f1ff] mt-5  p-6 md:p-2 md:py-4 rounded-[10px]">
             <div className="flex w-[100%] text-[12px] md:text-[16px]">
               Constructive tips to{" "}
               <div className="px-1">
-                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-210 rotate-z-45"></div>
-                <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-190 rotate-z-45"></div>
+                {/* <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-210 rotate-z-45"></div> */}
+                {/* <div className="absolute border-[1px] border-[#fbbf24] rounded-[50%] md:w-[58.58px] md:h-[32.28px] w-[29.29px] h-[16.14px] md:-ml-[0.7rem] rotate-x-190 rotate-z-45"></div> */}
                 <span className="text-[#fbbf24] relative">Boost</span>
               </div>{" "}
               your profile for hiring chances
