@@ -20,6 +20,7 @@ import back from "../../assets/arrow-back.png";
 import bat from "../../assets/bat.png";
 import locate from "../../assets/locate.png";
 import ClientMilestoneModal from "../modals/ClientMilestoneModal";
+import ProfileCard from "../TalentUI/ProfileCard";
 
 const jobs = [
   {
@@ -414,20 +415,7 @@ const ClientDashboard = () => {
                           className="h-6 w-6 hidden md:block"
                         />
                       </div>
-                      <div className="">
-                        <p className="-m-2 text-[12px] md:text-[15px]">
-                          Glory Design
-                        </p>
-                        <span className="text-[6px] md:text-[10px] top-1 m-0">
-                          Product Designer
-                        </span>
-                      </div>
-                      <img
-                        src={down}
-                        alt=""
-                        className=" md:block w-[14px] h-[14px] md:w-8 md:h-8 cursor-pointer"
-                        onClick={openProfile}
-                      />
+                      <ProfileCard />
                     </div>
                   </div>
                 </div>
