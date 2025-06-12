@@ -9,10 +9,12 @@ import {
   applyForJob,
 } from "../controllers/jobController.js";
 
+import { authenticate } from "../middleware/authMiddleware.js";
+
 const router = express.Router();
 
 // Create a new job
-router.post("/jobs", createJob);
+router.post("/jobs", authenticate, createJob);
 
 // Get all jobs
 router.get("/jobs", getAllJobs);

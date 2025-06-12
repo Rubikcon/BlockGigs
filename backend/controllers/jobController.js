@@ -6,6 +6,20 @@ export const createJob = async (req, res) => {
   try {
     const { title, detail, totalPrice, milestone, milestones } = req.body;
 
+    // Check if user is authenticated
+    if (!req.user) {
+      return res.status(401).json({
+        message: "Authentication required",
+      });
+    }
+
+    // Check if the authenticated user is a client
+    if (req.user.role !== "client") {
+      return res.status(403).json({
+        message: "Only clients can create jobs",
+      });
+    }
+
     // Validate required fields
     if (!title || !detail || !totalPrice || milestone === undefined) {
       return res.status(400).json({
@@ -14,27 +28,85 @@ export const createJob = async (req, res) => {
       });
     }
 
-    // Create new job document
+    // Optional: Validate milestones array if provided
+    if (milestones && Array.isArray(milestones)) {
+      // Check if milestone count matches the milestones array length
+      if (milestones.length !== milestone) {
+        return res.status(400).json({
+          message: `Milestone count (${milestone}) should match the number of milestones provided (${milestones.length})`,
+        });
+      }
+
+      // Validate each milestone has required fields
+      for (let i = 0; i < milestones.length; i++) {
+        const ms = milestones[i];
+        if (!ms.deadline || !ms.amount || !ms.description) {
+          return res.status(400).json({
+            message: `Milestone ${
+              i + 1
+            } is missing required fields (deadline, amount, description)`,
+          });
+        }
+      }
+    }
+
+    // Create new job document with client ID
     const job = new Job({
       title,
       detail,
       totalPrice,
       milestone,
       milestones,
-      // client: req.user._id, // Assuming req.user is set by authentication middleware
+      client: req.user.id, // Attach the client's ID to the job
     });
 
     await job.save();
 
-    res.status(201).json({ message: "Job created successfully", job });
+    res.status(201).json({
+      message: "Job created successfully",
+      job,
+    });
   } catch (error) {
     console.error("Error Creating Job:", error);
-    res.json({
-      status: 501,
-      message: "Internal Server Error"
+    res.status(500).json({
+      message: "Internal Server Error",
     });
   }
 };
+
+// export const createJob = async (req, res) => {
+//   try {
+//     const { title, detail, totalPrice, milestone, milestones } = req.body;
+
+//     // Validate required fields
+//     if (!title || !detail || !totalPrice || milestone === undefined) {
+//       return res.status(400).json({
+//         message:
+//           "All fields (title, detail, totalPrice, milestone) are required",
+//       });
+//     }
+
+//     // Create new job document
+//     const job = new Job({
+//       title,
+//       detail,
+//       totalPrice,
+//       milestone,
+//       milestones,
+//       // client: req.user._id, // Assuming req.user is set by authentication middleware
+//     });
+
+//     await job.save();
+
+//     res.status(201).json({ message: "Job created successfully", job });
+//   } catch (error) {
+//     console.error("Error Creating Job:", error);
+//     res.json({
+//       status: 501,
+//       message: "Internal Server Error"
+//     });
+//   }
+// };
 
 // Assign a freelancer to a job
 export const assignFreelancer = async (req, res) => {

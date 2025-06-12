@@ -145,7 +145,7 @@ export default function Navigation() {
         </div>
       )}
 
-      <nav className="bg-[#7979793D] max-w-[90%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[90%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg ">
+      <nav className="bg-[#7979793D] max-w-[98%] py-[0.5rem] md:py-[1rem] backdrop-blur-md w-[98%] m-auto text-black sticky top-20 z-50 border-b shadow-lg border rounded-lg ">
         <div className="flex justify-between items-center px-6 py-1 max-w-screen-xl mx-auto">
           <div className="cursor-pointer " onClick={handleGotoHome}>
             <img

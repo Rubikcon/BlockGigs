@@ -28,7 +28,6 @@ import GigsPage from "./components/gigsPage/GigsPage";
 import GigDetailPage from "./components/gigsDetailPage/gigDetailPage";
 import ClientDashboard from "./components/ClientUI/ClientDashboard";
 import ClientGig from "./components/ClientUI/clientGig";
-// import ClientDashboard from "./Pages/ClientDashboard";
 import ClientLayout from "./ClientLayout";
 import Job from "./components/TalentUI/job";
 import Password from "./components/Password/password";
@@ -82,7 +81,7 @@ const App = () => {
         <Route path="/browse-talent" element={<BrowseTalentPage />} />
 
         {/*************Client*****************/}
-        <Route path="job" element={<ClientDashboard />} />
+        {/* <Route path="job" element={<ClientDashboard />} /> */}
 
         <Route
           path="/profile"
