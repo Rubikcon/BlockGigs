@@ -12,8 +12,8 @@ function MainLayout() {
       </div>
 
       {/* DashboardMobileNav - Visible on small screens, hidden on medium and up */}
-      {/* <div className="block md:hidden my-5"> */}
-      <div className="block md:hidden sticky top-0 z-50 bg-white shadow-sm">
+
+      <div className="block md:hidden fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <DashboardMobileNav />
       </div>
 
