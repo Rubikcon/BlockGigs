@@ -3,17 +3,19 @@ import PropTypes from "prop-types";
 import crypto from "../../assets/crypto.png";
 import down from "../../assets/down.png";
 import { postApi } from "../../helpers";
-
 import close from "../../assets/close.png";
 import ModalBacckDrop from "./ModalBacckDrop";
 import FormModal from "./FormModal";
 import ConfirmationModal from "./ConfirmationModal";
 import ClientFailureModal from "./ClientFailureModal";
 import ClientSuccessModal from "./ClientSuccessModal";
+import { jobService } from "../../services/jobService";
 
 function ClientGigModal({ visible, onClose }) {
   const [post, setPost] = useState("form");
   const [disable, setDisable] = useState(true);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
   const [gig, setGig] = useState({
     title: "",
     totalPrice: "",
@@ -60,39 +62,28 @@ function ClientGigModal({ visible, onClose }) {
     });
   };
 
-  const submitGigHandler = () => {
+  const submitGigHandler = async () => {
     console.log(gig, "gig");
-
-    postApi(
-      "job/create",
-      gig,
-      (res) => {
-        setPost("success"), console.log(res, "Post saved successfully");
-      },
-      (e) => {
-        setPost("error"),
-          console.log(e, "Error made while trying to save post");
-      }
-    );
-    setGig({
-      title: "",
-      totalPrice: "",
-      detail: "",
-      milestone: 1,
-      milestones: [{ description: "", deadline: "", amount: 0 }],
-      talent: null,
-      accepted: false,
-    });
-  };
-
-  const confirmationHandler = () => {
-    console.log(gig, "gigs for saving here");
-    if (!gig.detail || !gig.title || !gig.totalPrice) {
-      alert("Please enter the required detail of the job");
-      return;
+    try {
+      // setIsLoading(true);
+      const result = await jobService.createJob(gig);
+      setSuccess("Job created successfully!");
+      // Reset form or close modal
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to create job");
+      // } finally {
+      // setIsLoading(false);
     }
-    setPost("confirmation");
   };
+
+  // const confirmationHandler = () => {
+  //   console.log(gig, "gigs for saving here");
+  //   if (!gig.detail || !gig.title || !gig.totalPrice) {
+  //     alert("Please enter the required detail of the job");
+  //     return;
+  //   }
+  //   setPost("confirmation");
+  // };
 
   const onCloseConfirmHandler = () => {
     setPost("form");
@@ -118,15 +109,9 @@ function ClientGigModal({ visible, onClose }) {
           gig={gig}
           onChange={onChangeHandler}
           onMilestoneChange={onMilestoneChangeHandler}
-          onSubmit={confirmationHandler}
+          onSubmit={submitGigHandler}
           onClose={onClose}
           disable={disable}
-        />
-      )}
-      {post === "confirmation" && (
-        <ConfirmationModal
-          onSubmit={submitGigHandler}
-          onCloseConfirm={onCloseConfirmHandler}
         />
       )}
       {post === "success" && (

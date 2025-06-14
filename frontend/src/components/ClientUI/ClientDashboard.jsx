@@ -404,17 +404,7 @@ const ClientDashboard = () => {
                 </div>
                 <div className="flex-1 col-span-1 grid justify-center">
                   <div className="flex gap-2">
-                    <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center cursor-pointer hidden">
-                      <img src={bell2} alt="" className="h-4 w-4" />
-                    </div>
                     <div className="flex gap-4">
-                      <div>
-                        <img
-                          src={dp}
-                          alt=""
-                          className="h-6 w-6 hidden md:block"
-                        />
-                      </div>
                       <ProfileCard />
                     </div>
                   </div>

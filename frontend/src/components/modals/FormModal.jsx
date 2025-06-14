@@ -1,5 +1,7 @@
 import down from "../../assets/down.png";
 import crypto from "../../assets/crypto.png";
+import axios from "axios";
+
 
 function FormModal({
   gig,
@@ -9,6 +11,8 @@ function FormModal({
   onClose,
   disable,
 }) {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const renderMilestones = () => {
     return Array.from({ length: gig.milestone }).map((_, i) => (
       <div key={i} className="grid grid-cols-4 gap-2 mb-4">
