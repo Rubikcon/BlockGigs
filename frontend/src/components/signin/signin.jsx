@@ -18,8 +18,13 @@ const Signin = () => {
   const [addr, setAddr] = useState("");
   const [balance, setBalance] = useState("");
   const [wallet, setWallet] = useState("");
-  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [stellarWalletError, SetStellarWalletError] = useState("");
+  const [metamaskError, setMetamaskError] = useState("");
+
   const [loading, setLoading] = useState(false);
+  const [metamaskLoading, setMetamaskLoading] = useState(false);
+  const [stellarLoading, setStellarLoading] = useState(false);
   const [signature, setSignature] = useState("");
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -33,7 +38,7 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    setError("");
+    setEmailError("");
 
     if (!email) {
       toast.error("Enter email address to continue!");
@@ -47,7 +52,7 @@ const Signin = () => {
       return;
     }
 
-    setError(""); // Clear previous errors
+    setEmailError(""); // Clear previous errors
 
     const loginData = { email, password };
 
@@ -73,7 +78,7 @@ const Signin = () => {
         toast.error("Role not found. Please contact support", {
           duration: 50000,
         });
-        setError("Role not found. Please contact support.");
+        setEmailError("Role not found. Please contact support.");
 
         return;
       }
@@ -99,7 +104,7 @@ const Signin = () => {
       navigate(roleRoutes[user.role] || "/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
-      setError(err.response?.data?.message || "Login failed");
+      setEmailError(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -122,6 +127,7 @@ const Signin = () => {
       console.log("Wallet Address:", walletAddress);
 
       if (!walletAddress) {
+        setMetamaskError("Failed to retrieve wallet address.");
         console.error("Failed to retrieve wallet address.");
         return;
       }
@@ -131,7 +137,7 @@ const Signin = () => {
       // Call the testWalletLogin function with the retrieved wallet address
       testWalletLogin(walletAddress);
     } catch (err) {
-      setError(err);
+      setMetamaskError(err);
       console.error("MetaMask Connection Error:", err);
     }
   };
@@ -148,7 +154,7 @@ const Signin = () => {
     setDetectWallet(true);
 
     try {
-      setLoading(true);
+      setStellarLoading(true);
 
       await kit.openModal({
         onWalletSelected: async (option) => {
@@ -176,7 +182,7 @@ const Signin = () => {
       console.error("Stellar Wallet error:", error);
       setWalletError(error.message || "Failed to connect Stellar wallet");
     } finally {
-      setLoading(false);
+      setStellarLoading(false);
     }
   };
 
@@ -225,7 +231,7 @@ const Signin = () => {
 
       window.location.href = roleRoutes[user.role] || "/";
     } catch (err) {
-      setError(err);
+      setMetamaskError(err);
       console.error("API Login Error:", err);
     }
   };
@@ -356,7 +362,7 @@ const Signin = () => {
               disabled={loading}
               className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? (
+              {metamaskLoading ? (
                 <>
                   <span className="animate-spin rounded-full border-2 border-white border-t-transparent h-5 w-5"></span>
                   Loading...
@@ -375,16 +381,24 @@ const Signin = () => {
               onClick={handleStellarLogin}
               disabled={loading}
               className={`flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ${
-                loading ? "opacity-50" : ""
+                stellarLoading ? "opacity-50" : ""
               }`}
             >
               <img src={stellar} alt="stellar logo" className="h-8" />
               <span className="font-montserrat font-medium text-[14px] leading-6 text-[#272954]">
-                {loading ? "Connecting..." : "Connect Stellar Wallet"}
+                {stellarLoading ? "Connecting..." : "Connect Stellar Wallet"}
               </span>
             </button>
 
-            <div>{error && <p style={{ color: "red" }}>{error}</p>}</div>
+            <div className="mt-10">
+              {emailError ||
+                metamaskError ||
+                (stellarWalletError && (
+                  <p className="text-red-900" style={{ color: "red" }}>
+                    {emailError && metamaskError && stellarWalletError}
+                  </p>
+                ))}
+            </div>
 
             {/* <button className="flex items-center cursor-pointer w-[250px] lg:w-[350px] h-[56px] px-[24px] py-[16px] gap-[16px] rounded-[16px] border border-[#E8E8E8] bg-[#FAFAFA] ">
               <img src={celo} alt="celo logo" />
