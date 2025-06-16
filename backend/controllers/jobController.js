@@ -165,6 +165,20 @@ export const getJob = async (req, res) => {
   }
 };
 
+// controllers/JobController.js
+
+// get all jobs by created by a specific client
+export const getJobsByClient = async (req, res) => {
+  const { clientId } = req.params;
+  try {
+    const jobs = await Job.find({ client: clientId });
+    res.status(200).json(jobs);
+  } catch (err) {
+    console.error("error fetching jobs:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // controllers/jobController.js
 
 // Get all jobs with pagination, filtering, and sorting

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
@@ -23,6 +23,8 @@ import ClientMilestoneModal from "../modals/ClientMilestoneModal";
 import ProfileCard from "../TalentUI/ProfileCard";
 
 // import the API services
+import { jobService } from "../../services/jobService";
+import axios from "axios";
 const jobs = [
   {
     title: "Saas Website design",
@@ -97,8 +99,6 @@ const jobs = [
     ],
   },
 ];
-
-// const offer = [];
 
 const offer = [
   {
@@ -236,6 +236,7 @@ const recommend = [
     skill: ["UI/UX Design", "Graphics Design", "Web Design"],
   },
 ];
+// const apiUrl = import.meta.env.VITE_API_URL;
 
 const ClientDashboard = () => {
   const [OfferDetail, setMyOfferDetail] = useState({});
@@ -245,7 +246,23 @@ const ClientDashboard = () => {
   const [detail, setDetail] = useState(null);
   const [job, setJob] = useState("");
   const [openGig, setOpenGig] = useState(false);
+  const [clientJobs, setClientJobs] = useState([]);
   const navigate = useNavigate();
+
+  const fetchJobsByclient = async () => {
+    try {
+      const clientId = localStorage.getItem("clientId");
+      const fetchedData = await jobService.getJobsbyClient(clientId);
+      setClientJobs(fetchedData);
+      console.log(fetchedData);
+    } catch (err) {
+      console.error(err.message || "Error Fetching Jobs");
+    }
+  };
+
+  useEffect(() => {
+    fetchJobsByclient();
+  }, []);
 
   const myOfferHandler = (value) => {
     setMyOfferDetail(value);
@@ -292,10 +309,6 @@ const ClientDashboard = () => {
   const displayJob = (value) => {
     setJob(value);
   };
-
-  // const jobDetail = (item) => {
-  //   navigate("/job", { state: item });
-  // };
 
   const milestoneHandler = (item) => {
     setOpenMilestone(true);
@@ -425,7 +438,9 @@ const ClientDashboard = () => {
               <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
                   <div className="flex mb-8">
-                    <p className="text-[12px] md:text-[16px]">My Offers</p>
+                    <p className="text-[12px] md:text-[16px]">
+                      All Jobs Created
+                    </p>
                     <Link className="text-[12px] md:text-[16px] ml-auto">
                       View All
                     </Link>
@@ -443,7 +458,8 @@ const ClientDashboard = () => {
                       </div>
                     </div>
                   ) : (
-                    offer.slice(0, 2).map((item, index) => (
+                    // offer.slice(0, 2).map((item, index) => (
+                    clientJobs.slice(0, 2).map((item, index) => (
                       <div
                         key={index}
                         className="w-full border-[0.5px] border-blue-300 cursor-pointer rounded-[10px] h-[40%] flex item-center justify-between items-center px-4 py-2 my-2"
@@ -451,7 +467,7 @@ const ClientDashboard = () => {
                       >
                         <div>
                           <div className="text-[12px] md:text-[16px]">
-                            {item.title}
+                            {item.title}| <span>$ {item.totalPrice}</span>
                           </div>
                           <div className="flex gap-2">
                             <img
@@ -460,7 +476,7 @@ const ClientDashboard = () => {
                               className="h-3 w-3 md:h-4 md:w-4"
                             />
                             <span className="text-[8px] md:text-[12px]">
-                              {item.name} | {item.duration}
+                              {item.detail} | {item.duration}
                             </span>
                           </div>
                         </div>
@@ -475,7 +491,9 @@ const ClientDashboard = () => {
             </div>
             <div className="w-[66.56%] row-span-1 p-5 mt-2">
               <div className="flex w-full justify-between gap-4 pr-6">
-                <p className="text-[12px] md:text-[16px]">Recommended Jobs</p>
+                <p className="text-[12px] md:text-[16px]">
+                  Recommended Profiles
+                </p>
                 <Link className="text-[12px] md:text-[16px]">View All</Link>
               </div>
             </div>

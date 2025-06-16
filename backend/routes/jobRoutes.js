@@ -7,6 +7,7 @@ import {
   getAllJobs,
   completeJob,
   applyForJob,
+  getJobsByClient,
 } from "../controllers/jobController.js";
 
 import { authenticate } from "../middleware/authMiddleware.js";
@@ -18,6 +19,9 @@ router.post("/jobs", authenticate, createJob);
 
 // Get all jobs
 router.get("/jobs", getAllJobs);
+
+// get all jobs created by a client
+router.get("/jobs/:clientId", getJobsByClient);
 
 // Get a specific job
 router.get("/jobs/:jobId", getJob);

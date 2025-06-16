@@ -75,9 +75,9 @@ export const jobService = {
   },
 
   // Get jobs by client ID
-  getClientJobs: async () => {
+  getJobsbyClient: async (clientId) => {
     try {
-      const response = await api.get("/jobs/client");
+      const response = await api.get(`/api/jobs/${clientId}`);
       return response.data;
     } catch (error) {
       throw error;
@@ -87,7 +87,7 @@ export const jobService = {
   // Get single job by ID
   getJobById: async (jobId) => {
     try {
-      const response = await api.get(`/jobs/${jobId}`);
+      const response = await api.get(`/api/jobs/${jobId}`);
       return response.data;
     } catch (error) {
       throw error;

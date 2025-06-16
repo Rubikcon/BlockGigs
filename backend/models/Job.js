@@ -34,6 +34,10 @@ const JobSchema = new mongoose.Schema({
       ref: "Talent",
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Job = mongoose.model("Job", JobSchema);
