@@ -1,49 +1,64 @@
 import Navigation from "../navigation";
-import { useNavigate } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
+import JoinSection from "../gigsPage/JoinSection";
+
 const Hero = () => {
-  const navigate = useNavigate();
-
-  const handleGetStarted = () => {
-    navigate("/signup");
-    // for the waitlist for now
-    // window.location.href = "https://blockgigs.netlify.app/";
-  };
   return (
-    <section
-      className="relative h-screen min-h-[500px] bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: 'url("/images/hero_banner.png")',
-      }}
-    >
-      <div className="pt-6">
-        <Navigation />
-      </div>
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
-
-      {/* Content */}
-      <div className="relative -mt-20 flex flex-col items-center justify-center mx-auto w-[90%] h-full p-4 text-center">
-        <h1 className="text-white text-2xl md:text-3xl lg:text-6xl xl:text-8xl font-bold">
-          Tech Gigs Made Simple
-        </h1>
-        <h1 className="text-white text-2xl md:text-3xl lg:text-6xl font-bold md:mt-5 mt-10">
-          Payment Made Easy
-        </h1>
-        <small className="text-white text-sm md:text-sm lg:text-md mt-4 md:w-md w-[90%] mt-10">
-          Blockgigs bridges African tech talents with global clients, ensuring
-          secure, bias-free hiring and transparent blockchain payment.
-        </small>
-
-        <div className="mt-20 md:mt-20">
-          <button
-            onClick={handleGetStarted}
-            className="px-8 b py-2 bg-white text-black rounded-md cursor-pointer"
-          >
-            Join Blockgigs Now
-          </button>
+    <div className="h-screen flex flex-col ">
+      {/* Hero Section (80% height) */}
+      <section
+        className="relative h-[100%] min-h-[500px] bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("/images/hero_banner.png")',
+        }}
+      >
+        <div className="pt-6">
+          <Navigation />
         </div>
-      </div>
-    </section>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D153600] to-[#070C1AB2]"></div>
+
+        {/* Content */}
+        <div className="relative flex flex-col items-center justify-center w-full h-full p-4 text-center">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+            Bringing Great
+          </h1>
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+            Work to You
+          </h1>
+          <small className="text-white text-sm sm:text-base md:text-lg mt-4 max-w-xl">
+            Blockgigs bridges African tech talents with global clients, ensuring
+            secure, bias-free hiring and transparent blockchain payment.
+          </small>
+
+          {/* Search Bar */}
+          <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mt-10">
+            <div className="relative flex items-center">
+              <IoSearch className="text-gray-400 absolute left-3 text-xl" />
+              <input
+                type="text"
+                placeholder="Product Design"
+                className="w-full py-3 pl-10 pr-4 bg-white border rounded-lg text-black outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Buttons Section (Responsive Grid) */}
+          <div className="text-white w-[90%] max-w-4xl grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4 py-4 mx-auto mt-8">
+            {["All Gigs", "Development", "Design", "Contents"].map(
+              (label, index) => (
+                <button
+                  key={index}
+                  className="p-2 px-6 text-sm sm:text-base rounded-md backdrop-blur-md bg-[#7979793D] transition duration-300 hover:bg-[#79797980]"
+                >
+                  {label}
+                </button>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

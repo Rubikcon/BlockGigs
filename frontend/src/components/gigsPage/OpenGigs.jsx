@@ -24,7 +24,6 @@ const OpenGigs = () => {
     fetchJobs();
   });
 
-  
   return (
     <div>
       <div className="flex flex-wrap justify-between w-[90%] mx-auto my-5 text-md md:text-xl lg:text-3xl ">
