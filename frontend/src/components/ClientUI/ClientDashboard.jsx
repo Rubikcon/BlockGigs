@@ -22,6 +22,7 @@ import locate from "../../assets/locate.png";
 import ClientMilestoneModal from "../modals/ClientMilestoneModal";
 import ProfileCard from "../TalentUI/ProfileCard";
 
+// import the API services
 const jobs = [
   {
     title: "Saas Website design",

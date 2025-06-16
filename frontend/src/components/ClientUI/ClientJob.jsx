@@ -10,6 +10,9 @@ import frame from "../../assets/frame.svg";
 // import JobModal from "../../modals/JobModal";
 import { useState } from "react";
 
+// import the job api
+import { jobService } from "../../services/jobService";
+
 const jobs = [
   {
     title: "Product Designer for a Crypto..",
@@ -66,6 +69,10 @@ function ClientJob() {
   const location = useLocation();
   const { state } = location;
   const [apply, setApply] = useState(false);
+
+  // const returnedAllJobs = jobService.getAllJobs;
+  console.log("All the jobs created:");
+  //  returnedAllJobs);
 
   return (
     <div className="bg-gray-100  w-full h-full grid grid-rows-12 px-4 gap-2">
