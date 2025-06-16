@@ -57,6 +57,10 @@ export default function Navigation() {
     setIsLoading(true);
   };
 
+  const handleGotoHome = () => {
+    navigate("/");
+  };
+
   const handleGetStarted = () => {
     if (isLoggedIn) {
       // Log the user out
@@ -128,6 +132,7 @@ export default function Navigation() {
               width={120}
               height={120}
               className="h-10 object-contain"
+              onClick={handleGotoHome}
             />
           </div>
 

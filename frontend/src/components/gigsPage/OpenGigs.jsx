@@ -1,29 +1,30 @@
 import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
-
-const gigs = [
-  {
-    id: 1,
-    title: "Product Design Intern",
-    postedTime: "6 hours ago",
-    // imageUrl: "./images/role_img.png",
-  },
-  {
-    id: 2,
-    title: "Frontend Developer",
-    postedTime: "1 day ago",
-    // imageUrl: "./images/role_img.png",
-  },
-  {
-    id: 3,
-    title: "Blockchain Engineer",
-    postedTime: "3 days ago",
-    // imageUrl: "./images/role_img.png",
-  },
-];
+import { jobService } from "../../services/jobService";
+import { useState, useEffect } from "react";
 
 const OpenGigs = () => {
+  const [gigs, setGigs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(true);
+
+  const fetchJobs = async () => {
+    try {
+      const returnedData = await jobService.getAllJobs();
+      setGigs(returnedData.jobs);
+
+      setIsLoading(false);
+    } catch (err) {
+      setError(err.message || "Error fetching jobs");
+    }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  });
+
+  
   return (
     <div>
       <div className="flex flex-wrap justify-between w-[90%] mx-auto my-5 text-md md:text-xl lg:text-3xl ">
@@ -46,6 +47,7 @@ const OpenGigs = () => {
             className="flex flex-row items-center border mx-auto border-gray-200 p-4 rounded-lg shadow-md w-[90%]  mx-auto"
           >
             {/* Left - Image */}
+            {/* {console.log(gigs)} */}
             <div className="flex-shrink-0">
               <img
                 src={gig.imageUrl}
