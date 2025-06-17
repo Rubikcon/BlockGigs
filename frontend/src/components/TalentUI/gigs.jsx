@@ -8,6 +8,7 @@ import cancel from "../../assets/cancel.png";
 import clock from "../../assets/clock.png";
 import file from "../../assets/file.png";
 import crypto from "../../assets/crypto.png";
+import { jobService } from "../../services/jobService";
 
 const gigs = [
   {

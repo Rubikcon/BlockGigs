@@ -93,4 +93,26 @@ export const jobService = {
       throw error;
     }
   },
+
+  // Apply for a job
+  applyForJob: async (jobId, applicantId) => {
+    try {
+      const response = await api.put(`/api/jobs/apply/${jobId}`, {
+        applicantId,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // Get jobs a user has applied to
+  getAppliedJobsByUser: async (userId) => {
+    try {
+      const response = await api.get(`/api/jobs/${userId}/applied-jobs`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

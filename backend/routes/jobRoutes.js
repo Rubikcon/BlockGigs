@@ -8,6 +8,7 @@ import {
   completeJob,
   applyForJob,
   getJobsByClient,
+  getUserAppliedJobs,
 } from "../controllers/jobController.js";
 
 import { authenticate } from "../middleware/authMiddleware.js";
@@ -30,9 +31,13 @@ router.get("/jobs/:jobId", getJob);
 router.put("/jobs/:jobId/assign", assignFreelancer);
 
 // Apply for a job
-router.post("/jobs/:jobId/apply", applyForJob);
+// router.post("/jobs/:jobId/apply", applyForJob);
+router.put("/jobs/apply/:jobId", applyForJob);
 
 // Complete a job
 router.put("/jobs/:jobId/complete", completeJob);
+
+// routes/jobRoutes.js or userRoutes.js
+router.get("/jobs/:userId/applied-jobs", getUserAppliedJobs);
 
 export default router;

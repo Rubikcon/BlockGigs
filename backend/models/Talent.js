@@ -18,6 +18,14 @@ const talentSchema = new mongoose.Schema(
     markedForDeletion: { type: Boolean, default: false },
     deletionTime: { type: Date },
     otpExpiresAt: { type: Date, index: true },
+    // other fields...
+
+    jobsApplied: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+    ],
     isVerified: { type: Boolean, default: false },
   },
   { timestamps: true } // Adds createdAt & updatedAt fields automatically

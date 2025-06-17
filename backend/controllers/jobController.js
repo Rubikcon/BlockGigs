@@ -1,5 +1,6 @@
 // controllers/jobController.js
 import Job from "../models/Job.js";
+import Talent from "../models/Talent.js";
 
 // Create a new job
 export const createJob = async (req, res) => {
@@ -332,11 +333,33 @@ export const applyForJob = async (req, res) => {
     job.applicants.push(applicantId);
     await job.save();
 
+    // ✅ Add job to user's jobsApplied
+
+    const user = await Talent.findById(applicantId);
+    if (!user.jobsApplied.includes(jobId)) {
+      user.jobsApplied.push(jobId);
+      await user.save();
+    }
+
     res
       .status(200)
       .json({ message: "Application submitted successfully", job });
   } catch (error) {
     console.error("Error Applying for Job:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getUserAppliedJobs = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await Talent.findById(userId).populate("jobsApplied");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json(user.jobsApplied);
+  } catch (error) {
+    console.error("Error fetching applied jobs:", error);
     res.status(500).json({ message: error.message });
   }
 };

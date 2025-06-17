@@ -73,8 +73,8 @@ const Signin = () => {
       localStorage.setItem("userData", JSON.stringify(response.data.user));
 
       // save the client id so as to use it to get the users info from backend
-      const clientId = response.data.user._id;
-      localStorage.setItem("clientId", clientId);
+      const userId = response.data.user._id;
+      localStorage.setItem("userId", userId);
       // Debugging
       const { token, user } = response.data;
       if (!user || !user.role) {
@@ -136,8 +136,8 @@ const Signin = () => {
       }
 
       localStorage.setItem("walletAddress", walletAddress); // Store wallet
-      const clientId = response.data.user._id;
-      localStorage.setItem("clientId", clientId);
+      const userId = response.data.user._id;
+      localStorage.setItem("userId", userId);
       // Call the testWalletLogin function with the retrieved wallet address
       testWalletLogin(walletAddress);
     } catch (err) {
@@ -166,8 +166,8 @@ const Signin = () => {
           const { address } = await kit.getAddress();
 
           localStorage.setItem("userAddress", address);
-          const clientId = response.data.user._id;
-          localStorage.setItem("clientId", clientId);
+          const userId = response.data.user._id;
+          localStorage.setItem("userId", userId);
           console.log("Stellar Wallet connected successfully:", address);
           // call the testWallet Login with address
           testWalletLogin(address);

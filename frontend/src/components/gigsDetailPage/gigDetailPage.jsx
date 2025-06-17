@@ -16,7 +16,8 @@ const GigDetailPage = () => {
         const gigFound = response.jobs.find((job) => job._id === id);
         setGig(gigFound);
 
-        console.log(gigFound);
+        // console.log(gigFound._id);
+        localStorage.setItem("gigId", gigFound._id);
       } catch (err) {
         console.error("Failed to fetch gig", err);
       }

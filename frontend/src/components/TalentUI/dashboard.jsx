@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { useNavigate } from "react-router-dom";
 import search from "../../assets/search.svg";
 import dp from "../../assets/Ellipse.png";
@@ -19,6 +19,8 @@ import bat from "../../assets/bat.png";
 import MilestoneModal from "../modals/MilestoneModal";
 import EmptyStateCard from "../emptyStateCard";
 import ProfileCard from "./ProfileCard";
+import { jobService } from "../../services/jobService";
+import timeAgo from "../../utils/TimeTracker";
 
 const jobs = [
   {
@@ -313,6 +315,7 @@ function Dashboard() {
   const [openMilestone, setOpenMilestone] = useState(false);
   const [detail, setDetail] = useState(null);
   const [job, setJob] = useState("");
+  const [apppliedJobs, setApppliedJobs] = useState([]);
   const navigate = useNavigate();
 
   const myOfferHandler = (value) => {
@@ -332,6 +335,18 @@ function Dashboard() {
   const acceptCloseHAndler = () => {
     setAcceptOfferModal(false);
   };
+
+  const FetchAppliedJobs = async () => {
+    const userId = localStorage.getItem("userId");
+    const fetchedData = await jobService.getAppliedJobsByUser(userId);
+    console.log(fetchedData);
+    setApppliedJobs(fetchedData);
+  };
+
+  // always get the users applied jobs when the page reloads
+  useEffect(() => {
+    FetchAppliedJobs();
+  }, []);
 
   const renderActivity =
     activity.length === 0 ? (
@@ -393,7 +408,7 @@ function Dashboard() {
     ))
     .splice(0, 2);
 
-  const renderRecommend = recommend.slice(0, 3).map((item, index) => (
+  const AppliedJobs = apppliedJobs.map((item, index) => (
     <div
       key={index}
       className=" bg-white rounded-[10px] mb-2 py-2 px-4 shadow shadow-gray-200"
@@ -404,7 +419,9 @@ function Dashboard() {
             {item.title}
           </div>
           <div className="flex">
-            <div className="text-[12px] text-gray-400">{item.duration} | </div>
+            <div className="text-[12px] text-gray-400">
+              {timeAgo(item.createdAt)} |{" "}
+            </div>
             <div className="flex ml-2">
               <img src={item.image} alt="" className="h-[20px] w-[20px]" />
               <div className="text-[12px] ml-1 text-gray-400">
@@ -415,9 +432,11 @@ function Dashboard() {
         </div>
         <img src={item.image2} alt="" className="w-4 h-4 md:w-6 md:h-6" />
       </div>
-      <div className="text-[12px] mb-3 w-[70%]">{item.description}</div>
+      <div className="text-[12px] mb-3 w-[70%]">{item.detail}</div>
       <div className="flex justify-between">
-        <div className="text-blue-600 text-[12px] mb-2">${item.price}</div>
+        <div className="text-blue-600 text-[12px] mb-2">
+          $ {item.totalPrice} | {item.milestones.length} Milestone(s)
+        </div>
         <button
           className="bg-[#2f66f6] rounded-[0.3rem] text-white text-[10px] md:text-[11.38px] w-[70px] md:w-[104px] h-[31px] mb-2 cursor-pointer"
           onClick={() => jobDetail(item)}
@@ -543,19 +562,15 @@ function Dashboard() {
               <div className="md:grid md:grid-cols-3 row-span-5 gap-4">
                 <div className="col-span-2 bg-white rounded-[10px] border-">
                   <div className="flex w-full justify-between gap-4 pt-4 px-4">
-                    <p className="text-[12px] md:text-[16px]">
-                      Recommended Jobs
-                    </p>
+                    <p className="text-[12px] md:text-[16px]">Applied Jobs</p>
                     <Link className="text-[12px] md:text-[16px]">View All</Link>
                   </div>
 
-                  {job ? (
-                    { renderRecommend }
-                  ) : (
-                    <>
-                      <EmptyStateCard />
-                    </>
-                  )}
+                  {/* {job ? ( */}
+                  {AppliedJobs}
+                  {/* ) : ( */}
+                  <>{/* <EmptyStateCard /> */}</>
+                  {/* )} */}
                 </div>
 
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">
