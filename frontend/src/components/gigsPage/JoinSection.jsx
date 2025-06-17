@@ -1,9 +1,43 @@
+import { useState } from "react";
+
 const JoinSection = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleGetStarted = () => {
+    if (isLoggedIn) {
+      // Log the user out
+
+      localStorage.removeItem("token");
+
+      setIsLoggedIn(false);
+
+      navigate("/signin");
+    } else {
+      // Take them to sign in or get started page
+
+      navigate("/signin");
+    }
+    // navigate("/signup");
+    // navigate to an external link
+    // window.location.href = "https://blockgigs.netlify.app/";
+  };
+
   return (
     <section className="flex mt-10 md:w-[90%] w-full md:mx-auto mx-2 items-center p-1 md:gap-4 gap-4 ">
       <div>
-        <button className="bg-[#2F66F6] text-white rounded-md text:sm md:text-md px-2 py-2 md:px-12 md:py-2">
+        {/* <button className="bg-[#2F66F6] text-white rounded-md text:sm md:text-md px-2 py-2 md:px-12 md:py-2">
           Sign Up
+        </button> */}
+
+        <button
+          onClick={handleGetStarted}
+          className={`
+px-7 py-3 rounded-md cursor-pointer transition-all duration-300 ${
+            isLoggedIn
+              ? " bg-red-500 text-white hover:bg-red-600"
+              : "bg-white text-black hover:font-bold"
+          }`}
+        >
+          {isLoggedIn ? "Logout" : "Get Started"}
         </button>
       </div>
 

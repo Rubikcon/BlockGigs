@@ -114,7 +114,6 @@ function clientGig() {
           </div>
           <div>
             {/* <pre>{JSON.stringify(jobs, null, 2)}</pre> */}
-            {/* <pre>{console.log(jobs)}</pre> */}
             {jobs.map((item, index) => (
               <div key={index} className="flex justify-between px-4 pt-4 ">
                 <div className="font-bold text-[14px] max-w-[200px]">

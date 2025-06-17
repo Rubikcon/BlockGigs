@@ -61,7 +61,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/gigs-page" element={<GigsPage />} />
-        <Route path="/gig-detail" element={<GigDetailPage />} />
         <Route path="/leader-board" element={<LeaderBoardPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
@@ -74,6 +73,7 @@ const App = () => {
         <Route path="/password" element={<Password />} />
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
+        <Route path="/gig-detail/:id" element={<GigDetailPage />} />
 
         {/* --------------- ConnectWallet integration ------------------- */}
         {/* <Route path="/ClientForm" element={<ClientForm />} /> */}

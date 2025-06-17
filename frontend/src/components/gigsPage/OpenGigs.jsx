@@ -13,6 +13,7 @@ const OpenGigs = () => {
     try {
       const returnedData = await jobService.getAllJobs();
       setGigs(returnedData.jobs);
+      console.log(returnedData.jobs);
 
       setIsLoading(false);
     } catch (err) {
@@ -65,7 +66,7 @@ const OpenGigs = () => {
                 </small>
                 <div className="mt-1">
                   <Link
-                    to={"/gig-detail"}
+                    to={`/gig-detail/${gig._id}`}
                     className="text-blue-600 text-xs md:text-sm font-semibold"
                   >
                     View Job Details

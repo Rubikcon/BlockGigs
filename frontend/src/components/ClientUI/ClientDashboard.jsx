@@ -323,7 +323,7 @@ const ClientDashboard = () => {
         onClick={() => displayJob(item)}
       >
         <div>
-          <h3 className="text-[12px] md:text-[16px]">{item.title}</h3>
+          <h3 className="text-[12px] md:text-[16px]">{item.title} </h3>
           <div className="flex gap-2">
             <img src={item.image} alt="" className="h-3 w-3 md:h-4 md:w-4 " />
             <p className="text-[8px] md:text-[12px]">
@@ -433,7 +433,7 @@ const ClientDashboard = () => {
                     View All
                   </Link>
                 </div>
-                <div className="px-4 py-2">{RenderJob}</div>
+                <div className="px-4 py-2"> {RenderJob}</div>
               </div>
               <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
@@ -441,7 +441,10 @@ const ClientDashboard = () => {
                     <p className="text-[12px] md:text-[16px]">
                       All Jobs Created
                     </p>
-                    <Link className="text-[12px] md:text-[16px] ml-auto">
+                    <Link
+                      to={"/client/gig"}
+                      className="text-[12px] md:text-[16px] ml-auto"
+                    >
                       View All
                     </Link>
                   </div>
@@ -632,7 +635,10 @@ const ClientDashboard = () => {
                       key={index}
                       className="flex gap-2 space-y-1 md:space-y-2"
                     >
-                      <div className="text-[8px] md:text-[12px]">{d.title}</div>
+                      <div className="text-[8px] md:text-[12px]">
+                        {" "}
+                        {d.title}
+                      </div>
                       <span className="text-[8px] md:text-[12px]">–</span>
                       <img src={d.image} alt="" className="w-3 h-3 mt-1" />
                       <span className="text-[8px] md:text-[12px]">
