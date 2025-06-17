@@ -25,7 +25,7 @@ function clientGig() {
     try {
       const returnedData = await jobService.getAllJobs();
       setJobs(returnedData.jobs);
-
+      console.log(returnedData.jobs);
       setIsLoading(false);
     } catch (err) {
       setError(err.message || "Error fetching jobs");
@@ -109,28 +109,36 @@ function clientGig() {
             <span className="text-blue-500">Title</span>
             <span className="text-blue-500 ml-40">Status</span>
             <span className="text-blue-500 ">Amount</span>
-            <span className="text-blue-500">Date</span>
+            <span className="text-blue-500">Created On</span>
             <span className="text-blue-500">Job Information</span>
           </div>
           <div>
             {/* <pre>{JSON.stringify(jobs, null, 2)}</pre> */}
             {/* <pre>{console.log(jobs)}</pre> */}
             {jobs.map((item, index) => (
-              <div key={index} className="flex justify-between px-4 pt-4">
-                <div className="font-bold text-[14px]">{item.title}</div>
-                <div className="text-[14px]">{item.status}</div>
-                <div className="flex text-[14px] ">
-                  <img src={crypto} alt="" className="w-4 h-4 mr-1 mt-1" />${" "}
+              <div key={index} className="flex justify-between px-4 pt-4 ">
+                <div className="font-bold text-[14px] max-w-[200px]">
+                  {item.title}
+                </div>
+                <div className="text-[14px] -ml-9">{item.status}</div>
+                <div className="flex text-[14px] -ml-22">
+                  <img src={crypto} alt="" className="w-4 h-4 mr-1 mt-1 " />$
                   {item.totalPrice}
                 </div>
-                <div className="text-[14px]">{item.date}</div>
+                <div className="text-[14px] -ml-22">
+                  {item.createdAt.slice(0, -14)}
+                </div>
                 <span className="text-blue-500 text-[14px]">{item.info}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
-      <ClientGigModal visible={openGig} onClose={() => setOpenGig(false)} />
+      <ClientGigModal
+        visible={openGig}
+        onSubmit={() => setOpenGig(false)}
+        onClose={() => setOpenGig(false)}
+      />
     </div>
   );
 }

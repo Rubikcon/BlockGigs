@@ -11,7 +11,7 @@ import ClientFailureModal from "./ClientFailureModal";
 import ClientSuccessModal from "./ClientSuccessModal";
 import { jobService } from "../../services/jobService";
 
-function ClientGigModal({ visible, onClose }) {
+function ClientGigModal({ visible, onClose, onSubmit }) {
   const [post, setPost] = useState("form");
   const [disable, setDisable] = useState(true);
   const [success, setSuccess] = useState("");
@@ -67,12 +67,18 @@ function ClientGigModal({ visible, onClose }) {
     try {
       // setIsLoading(true);
       const result = await jobService.createJob(gig);
+      setPost("success");
       setSuccess("Job created successfully!");
-      // Reset form or close modal
+      // Wait a couple seconds then close
+
+      setTimeout(() => {
+        onCloseConfirmHandler();
+      }, 2000);
     } catch (error) {
       setError(error.response?.data?.message || "Failed to create job");
-      // } finally {
-      // setIsLoading(false);
+      setPost("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -127,5 +133,6 @@ function ClientGigModal({ visible, onClose }) {
 ClientGigModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  // onsubmit: PropTypes.func.isRequired,
 };
 export default ClientGigModal;
