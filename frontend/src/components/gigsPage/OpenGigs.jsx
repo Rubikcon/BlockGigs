@@ -4,7 +4,7 @@ import Pagination from "./Pagination";
 import { jobService } from "../../services/jobService";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import timeAgo from "../../utils/TimeTracker";
 const OpenGigs = () => {
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -74,7 +74,7 @@ const OpenGigs = () => {
                 <h2 className="text-sm md:text-base font-bold">{gig.title}</h2>
                 <small className="text-xs md:text-sm text-gray-600 flex items-center gap-1">
                   <CiClock2 />
-                  {gig.postedTime}
+                  {timeAgo(gig.createdAt)}
                 </small>
                 <div className="mt-1">
                   <Link

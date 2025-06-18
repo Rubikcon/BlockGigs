@@ -357,6 +357,7 @@ function Offer() {
                   {apppliedJobs.map((item, index) => (
                     <div key={index} className="flex justify-between px-4 pt-4">
                       <div className="font-bold text-[14px]">{item.title}</div>
+                      {/* <div className="text-[14px]">{item.client}</div> */}
                       <div className={`flex text-[14px] -ml-10 ${item.color}`}>
                         {item.status}
                       </div>
