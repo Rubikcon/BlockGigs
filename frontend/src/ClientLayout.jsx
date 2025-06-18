@@ -16,7 +16,7 @@ function ClientLayout() {
         <DashboardMobileNav />
       </div>
 
-      <div className="grid grid-flow-row md:flex-1 mt-20">
+      <div className="grid mt-20 md:mt-0 grid-flow-row md:flex-1 mt-20">
         <Outlet />
       </div>
     </div>
