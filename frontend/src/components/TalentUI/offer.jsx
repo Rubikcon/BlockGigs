@@ -5,13 +5,13 @@ import down from "../../assets/down.png";
 import bell2 from "../../assets/bell.png";
 import bag3 from "../../assets/bag3.png";
 import bag2 from "../../assets/bag2.svg";
-// import { NavLink, useNavigate } from "react-router-dom";
-// import cancel from "../../assets/cancel.png";
-// import clock from "../../assets/clock.png";
-// import file from "../../assets/file.png";
-// import crypto from "../../assets/crypto.png";
-import { useState } from "react";
 
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import EmptyStateCard from "../emptyStateCard";
+import { jobService } from "../../services/jobService";
+import timeAgo from "../../utils/TimeTracker";
+const job = [];
 const offer = [
   {
     title: "Saas website design",
@@ -212,6 +212,20 @@ const application = [
 
 function Offer() {
   const [active, setActive] = useState(1);
+  const [apppliedJobs, setApppliedJobs] = useState([]);
+
+  const FetchAppliedJobs = async () => {
+    const userId = localStorage.getItem("userId");
+    const fetchedData = await jobService.getAppliedJobsByUser(userId);
+    console.log(fetchedData);
+    setApppliedJobs(fetchedData);
+  };
+
+  // always get the users applied jobs when the page reloads
+  useEffect(() => {
+    FetchAppliedJobs();
+  }, []);
+
   // const navigate = useNavigate();
   return (
     <div>
@@ -347,23 +361,36 @@ function Offer() {
           <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
             <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2">
               <span className="text-gray-400">Title</span>
-              <span className="text-gray-400 ml-20">Client</span>
+              {/* <span className="text-gray-400 ml-20">Client</span> */}
               <span className="text-gray-400 ">Status</span>
               <span className="text-gray-400">Date Posted</span>
               <span className="text-gray-400">Job Information</span>
             </div>
             <div>
-              {application.map((item, index) => (
-                <div key={index} className="flex justify-between px-4 pt-4">
-                  <div className="font-bold text-[14px]">{item.title}</div>
-                  <div className="text-[14px]">{item.client}</div>
-                  <div className={`flex text-[14px] -ml-10 ${item.color}`}>
-                    {item.status}
-                  </div>
-                  <div className="text-[14px]">{item.date}</div>
-                  <span className="text-blue-500 text-[14px]">{item.info}</span>
-                </div>
-              ))}
+              {job ? (
+                <>
+                  {apppliedJobs.map((item, index) => (
+                    <div key={index} className="flex justify-between px-4 pt-4">
+                      <div className="font-bold text-[14px]">{item.title}</div>
+                      {/* <div className="text-[14px]">{item.client}</div> */}
+                      <div className={`flex text-[14px] -ml-10 ${item.color}`}>
+                        {item.status}
+                      </div>
+                      <div className="text-[14px]">
+                        {timeAgo(item.createdAt)}
+                      </div>
+                      <span className="text-blue-500 text-[14px]">
+                        <Link to={`/gig-detail/${item._id}`}>View Details</Link>
+                      </span>
+                    </div>
+                  ))}
+                  {/* <div className="px-4 py-2">{RenderJob}</div> */}
+                </>
+              ) : (
+                <>
+                  <EmptyStateCard />
+                </>
+              )}
             </div>
           </div>
         )}

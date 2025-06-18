@@ -123,12 +123,47 @@ const App = () => {
           />
           <Route path="/talent/chat" element={<Chat />} />
           <Route path="/talent/discover" element={<Discover />} />
-          <Route path="/talent/gigs" element={<Gigs />} />
+          <Route
+            path="/talent/gigs"
+            element={
+              <ProtectedRoute>
+                <Gigs />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/talent/job" element={<Job />} />
-          <Route path="/talent/profile" element={<Profile />} />
-          <Route path="/talent/offer" element={<Offer />} />
-          <Route path="/talent/setting" element={<Setting />} />
-          <Route path="/talent/wallet" element={<Wallet />} />
+          <Route
+            path="/talent/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/talent/offer"
+            element={
+              <ProtectedRoute>
+                <Offer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/talent/setting"
+            element={
+              <ProtectedRoute>
+                <Setting />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/talent/wallet"
+            element={
+              <ProtectedRoute>
+                <Wallet />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* Testing purpose for smart contract integration */}

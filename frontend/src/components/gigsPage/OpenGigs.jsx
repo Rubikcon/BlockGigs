@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import { jobService } from "../../services/jobService";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const OpenGigs = () => {
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [appliedJobIds, setAppliedJobIds] = useState([]);
   const [error, setError] = useState(true);
+  const navigate = useNavigate();
 
   const fetchJobs = async () => {
     try {
@@ -23,6 +26,15 @@ const OpenGigs = () => {
 
   useEffect(() => {
     fetchJobs();
+
+    // get appplied jobs
+    const fetchAppliedJobs = async () => {
+      const userId = localStorage.getItem("userId");
+      const appliedJobs = await jobService.getAppliedJobsByUser(userId);
+      setAppliedJobIds(appliedJobs.map((job) => job._id));
+    };
+
+    fetchAppliedJobs();
   });
 
   return (
@@ -76,9 +88,23 @@ const OpenGigs = () => {
 
               {/* Button - Positioned at the end */}
               <div className="ml-auto">
-                <button className="text-white bg-[#2F66F6] px-4 py-2 md:px-6 md:py-2 rounded-md cursor-pointer text-xs md:text-sm">
-                  Apply
-                </button>
+                {appliedJobIds.includes(gig._id) ? (
+                  <button
+                    disabled
+                    className="bg-gray-400 text-white px-4 py-2 rounded"
+                  >
+                    Applied
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      navigate(`/gig-detail/${gig._id}`);
+                    }}
+                    className="text-white bg-[#2F66F6] px-4 py-2 md:px-6 md:py-2 rounded-md cursor-pointer text-xs md:text-sm"
+                  >
+                    Apply
+                  </button>
+                )}
               </div>
             </div>
           </div>
