@@ -316,6 +316,8 @@ function Dashboard() {
   const [detail, setDetail] = useState(null);
   const [job, setJob] = useState("");
   const [apppliedJobs, setApppliedJobs] = useState([]);
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const myOfferHandler = (value) => {
@@ -337,10 +339,15 @@ function Dashboard() {
   };
 
   const FetchAppliedJobs = async () => {
-    const userId = localStorage.getItem("userId");
-    const fetchedData = await jobService.getAppliedJobsByUser(userId);
-    console.log(fetchedData);
-    setApppliedJobs(fetchedData);
+    try {
+      const userId = localStorage.getItem("userId");
+      const fetchedData = await jobService.getAppliedJobsByUser(userId);
+      console.log(fetchedData);
+      setApppliedJobs(fetchedData);
+    } catch (err) {
+      setError(err.message || "Error fetching applied jobs");
+      console.log(err.message || "Error fetching applied jobs");
+    }
   };
 
   // always get the users applied jobs when the page reloads
@@ -377,7 +384,7 @@ function Dashboard() {
   };
 
   const jobDetail = (item) => {
-    navigate("/job", { state: item });
+    navigate(`/gig-detail/${item._id}`);
   };
 
   const milestoneHandler = (item) => {
@@ -566,11 +573,7 @@ function Dashboard() {
                     <Link className="text-[12px] md:text-[16px]">View All</Link>
                   </div>
 
-                  {/* {job ? ( */}
                   {AppliedJobs}
-                  {/* ) : ( */}
-                  <>{/* <EmptyStateCard /> */}</>
-                  {/* )} */}
                 </div>
 
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">

@@ -15,10 +15,9 @@ function MainLayout() {
 
       <div className="block md:hidden fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <DashboardMobileNav />
-        
       </div>
 
-      <div className="grid grid-flow-row md:flex-1">
+      <div className="grid mt-20 md:mt-0 grid-flow-row md:flex-1">
         <Outlet />
       </div>
     </div>

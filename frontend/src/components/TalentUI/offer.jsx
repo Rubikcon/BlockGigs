@@ -11,7 +11,8 @@ import { Link } from "react-router-dom";
 import EmptyStateCard from "../emptyStateCard";
 import { jobService } from "../../services/jobService";
 import timeAgo from "../../utils/TimeTracker";
-const job = [];
+import ProfileCard from "./ProfileCard";
+
 const offer = [
   {
     title: "Saas website design",
@@ -254,23 +255,7 @@ function Offer() {
             </div>
             <div className="col-span-1 grid justify-center">
               <div className="flex gap-2">
-                <div className="h-6 w-6 rounded-[50%] bg-white md:grid items-center justify-center hidden">
-                  <img src={bell2} alt="" className="h-4 w-4" />
-                </div>
-                <div className="flex md:gap-4">
-                  <div className="hidden md:block">
-                    <img src={dp} alt="" className="h-6 w-6" />
-                  </div>
-                  <div className="">
-                    <p className="-m-2 text-[12px] md:text-[16px]">
-                      Glory Dseign
-                    </p>
-                    <span className="text-[8px] md:text-[10px] top-1 m-0">
-                      Product Designer
-                    </span>
-                  </div>
-                  <img src={down} alt="" className="w-8 h-8" />
-                </div>
+                <ProfileCard />
               </div>
             </div>
           </div>
@@ -367,12 +352,11 @@ function Offer() {
               <span className="text-gray-400">Job Information</span>
             </div>
             <div>
-              {job ? (
+              {apppliedJobs ? (
                 <>
                   {apppliedJobs.map((item, index) => (
                     <div key={index} className="flex justify-between px-4 pt-4">
                       <div className="font-bold text-[14px]">{item.title}</div>
-                      {/* <div className="text-[14px]">{item.client}</div> */}
                       <div className={`flex text-[14px] -ml-10 ${item.color}`}>
                         {item.status}
                       </div>
