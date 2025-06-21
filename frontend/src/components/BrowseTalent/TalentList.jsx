@@ -1,5 +1,9 @@
 import { CiCalendarDate } from "react-icons/ci";
 import Pagination from "./Pagination";
+import { talentService } from "../../services/talentService";
+import { useEffect, useState } from "react";
+import EmptyCard from "../Cards/EmptyCard";
+
 const talents = [
   {
     id: 1,
@@ -58,6 +62,20 @@ const talents = [
 ];
 
 const TalentList = () => {
+  const [talents, setTalents] = useState([]);
+
+  const fetchTalent = async () => {
+    try {
+      let fetchedData = await talentService.getAllTalents();
+      setTalents(fetchedData.data.talents);
+      console.log(fetchedData.data.talents);
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    fetchTalent();
+  }, []);
+
   return (
     <div className="w-[90%] mx-auto py-6 mb-10">
       {/* Filter Buttons */}
@@ -93,55 +111,59 @@ const TalentList = () => {
 
       {/* Talent Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {talents.map((talent) => (
-          <div
-            key={talent.id}
-            className="border border-gray-200 shadow-md rounded-lg p-4 bg-white transition transform hover:scale-105 flex flex-col h-full"
-          >
-            {/* Profile Header */}
-            <div className="flex items-center gap-4">
-              <img
-                src={talent.imageUrl}
-                alt="profile-pic"
-                className="h-16 w-16 rounded-full border-2 border-gray-300"
-              />
-              <h2 className="text-lg font-bold">{talent.name}</h2>
-            </div>
+        {talents.length === 0 ? (
+          <EmptyCard props={"Talents"} />
+        ) : (
+          talents.map((talent) => (
+            <div
+              key={talent.id}
+              className="border border-gray-200 shadow-md rounded-lg p-4 bg-white transition transform hover:scale-105 flex flex-col h-full"
+            >
+              {/* Profile Header */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={talent.imageUrl}
+                  alt="profile-pic"
+                  className="h-16 w-16 rounded-full border-2 border-gray-300"
+                />
+                <h2 className="text-lg font-bold">{talent.name}</h2>
+              </div>
 
-            {/* Description */}
-            <p className="text-gray-600 mt-3 flex-grow">{talent.description}</p>
+              {/* Description */}
+              <p className="text-gray-600 mt-3 flex-grow">{talent.about}</p>
 
-            {/* Skills */}
-            <div className="mt-4">
-              <ul className="flex flex-wrap gap-2">
-                {talent.skills.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full"
-                  >
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {/* Skills */}
+              <div className="mt-4">
+                <ul className="flex flex-wrap gap-2">
+                  {talent.skills.map((skill, index) => (
+                    <li
+                      key={index}
+                      className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Rate & Availability */}
-            <div className="flex justify-between items-center mt-4 mb-5 text-sm">
-              <h2 className="text-blue-600 font-bold">{talent.rate}</h2>
-              <span className="flex items-center gap-1 text-gray-600">
-                <CiCalendarDate />
-                {talent.availability}
-              </span>
-            </div>
+              {/* Rate & Availability */}
+              <div className="flex justify-between items-center mt-4 mb-5 text-sm">
+                <h2 className="text-blue-600 font-bold">{talent.min_pay}</h2>
+                <span className="flex items-center gap-1 text-gray-600">
+                  <CiCalendarDate />
+                  {talent.availability}
+                </span>
+              </div>
 
-            {/* Sticky View Profile Button */}
-            <div className="mt-auto">
-              <button className="bg-[#2F66F6] text-white w-full py-2 px-4 rounded-md cursor-pointer">
-                View Profile
-              </button>
+              {/* Sticky View Profile Button */}
+              <div className="mt-auto">
+                <button className="bg-[#2F66F6] text-white w-full py-2 px-4 rounded-md cursor-pointer">
+                  View Profile
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <div className="mt-10 flex justify-center">

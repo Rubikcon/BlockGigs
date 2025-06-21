@@ -25,6 +25,7 @@ import ProfileCard from "../TalentUI/ProfileCard";
 // import the API services
 import { jobService } from "../../services/jobService";
 import axios from "axios";
+import EmptyCard from "../Cards/EmptyCard";
 const jobs = [
   {
     title: "Saas Website design",
@@ -254,7 +255,10 @@ const ClientDashboard = () => {
       const clientId = localStorage.getItem("clientId");
       const fetchedData = await jobService.getJobsbyClient(clientId);
       setClientJobs(fetchedData);
-      console.log(fetchedData);
+      console.log(
+        "This is the fetched jobs on the client Dashboard",
+        fetchedData
+      );
     } catch (err) {
       console.error(err.message || "Error Fetching Jobs");
     }
@@ -435,7 +439,7 @@ const ClientDashboard = () => {
                 </div>
                 <div className="px-4 py-2"> {RenderJob}</div>
               </div>
-              <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
+                <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
                   <div className="flex mb-8">
                     <p className="text-[12px] md:text-[16px]">
@@ -448,18 +452,20 @@ const ClientDashboard = () => {
                       View All
                     </Link>
                   </div>
-                  {offer.length === 0 ? (
-                    <div className="grid justify-center mt-4">
-                      <img src={empty} alt="" className="h-18 w-18" />
-                      <div className="grid justify-center ">
-                        <p className="text-black text-[12px] md:text-sm mt-4">
-                          No Offers yet
-                        </p>
-                        <p className=" text-[8px] md:text-[10px] -ml-8">
-                          Keep on applying You got THIS!
-                        </p>
-                      </div>
-                    </div>
+                  {clientJobs.length === 0 ? (
+                    // <div className="grid justify-center mt-4">
+                    //   <img src={empty} alt="" className="h-18 w-18" />
+                    //   <div className="grid justify-center ">
+                    //     <p className="text-black text-[12px] md:text-sm mt-4">
+                    //       No Offers yet
+                    //     </p>
+                    //     <p className=" text-[8px] md:text-[10px] -ml-8">
+                    //       Keep on applying You got THIS!
+                    //     </p>
+                    //   </div>
+                    // </div>
+
+                    <EmptyCard props={"Jobs"} />
                   ) : (
                     // offer.slice(0, 2).map((item, index) => (
                     clientJobs.slice(0, 2).map((item, index) => (
