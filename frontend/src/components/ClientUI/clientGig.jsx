@@ -11,7 +11,7 @@ import clock from "../../assets/clock.png";
 import file from "../../assets/file.png";
 import ClientGigModal from "../modals/ClientGigModal";
 import crypto from "../../assets/crypto.png";
-
+import { Link } from "react-router-dom";
 // import the Job API service
 import { jobService } from "../../services/jobService";
 
@@ -104,7 +104,7 @@ function clientGig() {
           All Gigs
           <img src={down} alt="" className="w-8 h-8" />
         </button>
-        <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
+        {/* <div className="row-span-9 bg-white rounded h-[100%] overflow-auto">
           <div className="flex justify-between px-4 py-4 border-b-gray-200 border-b-2">
             <span className="text-blue-500">Title</span>
             <span className="text-blue-500 ml-40">Status</span>
@@ -113,7 +113,6 @@ function clientGig() {
             <span className="text-blue-500">Job Information</span>
           </div>
           <div>
-            {/* <pre>{JSON.stringify(jobs, null, 2)}</pre> */}
             {jobs.map((item, index) => (
               <div key={index} className="flex justify-between px-4 pt-4 ">
                 <div className="font-bold text-[14px] max-w-[200px]">
@@ -127,7 +126,46 @@ function clientGig() {
                 <div className="text-[14px] -ml-22">
                   {item.createdAt.slice(0, -14)}
                 </div>
+
+                <Link to={`/gig-detail/${item._id}`}>View Details</Link>
                 <span className="text-blue-500 text-[14px]">{item.info}</span>
+              </div>
+            ))}
+          </div>
+        </div> */}
+
+        <div className="row-span-9 bg-white rounded h-full overflow-auto">
+          {/* Header Row */}
+          <div className="grid grid-cols-5 gap-4 px-4 py-4 border-b-2 border-b-gray-200 text-blue-500 font-semibold text-sm">
+            <span>Title</span>
+            <span>Status</span>
+            <span>Amount</span>
+            <span>Created On</span>
+            <span>Job Information</span>
+          </div>
+
+          {/* Job Rows */}
+          <div>
+            {jobs.map((item, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-5 gap-4 px-4 py-4 border-b border-gray-100 text-sm items-center"
+              >
+                <div className="font-bold truncate">{item.title}</div>
+                <div>{item.status}</div>
+                <div className="flex items-center">
+                  <img src={crypto} alt="" className="w-4 h-4 mr-1" />$
+                  {item.totalPrice}
+                </div>
+                <div>{item.createdAt.slice(0, -14)}</div>
+                <div>
+                  <Link
+                    to={`/gig-detail/${item._id}`}
+                    className="text-blue-600 underline hover:text-blue-800 transition"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
