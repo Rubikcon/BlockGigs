@@ -50,6 +50,7 @@ import ClientProfile from "./components/ClientUI/ClientProfile";
 import ClientSetting from "./components/ClientUI/ClientSetting";
 import ClientWallet from "./components/ClientUI/ClientWallet";
 import ClientDiscover from "./components/ClientUI/ClientDiscover";
+import TalentProfileViewOnly from "./components/Cards/TalentCardViewonly";
 
 // import protected route
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="/TalentForm" element={<TalentForm />} />
         <Route path="/ClientForm" element={<ClientForm />} />
         <Route path="/gig-detail/:id" element={<GigDetailPage />} />
+        <Route path="/talent-detail/:id" element={<TalentProfileViewOnly />} />
 
         {/* --------------- ConnectWallet integration ------------------- */}
         {/* <Route path="/ClientForm" element={<ClientForm />} /> */}
@@ -102,6 +104,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+
           <Route path="/client/chat" element={<ClientChat />} />
           <Route path="/client/discover" element={<ClientDiscover />} />
           <Route path="/client/gig" element={<ClientGig />} />

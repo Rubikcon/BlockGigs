@@ -6,6 +6,7 @@ import jobRoutes from "./routes/jobRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 // import otpRoutes from "./routes/otpRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
+import talentRoutes from "./routes/talentRoutes.js";
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -27,8 +28,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api", jobRoutes);
 app.use("/api/protected", protectedRoutes);
 // app.use("/api/otp", otpRoutes);
+
 app.use("/api/user", userRoutes);
 app.use("/api/clients", clientRoutes);
+app.use("/api/talents", talentRoutes);
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

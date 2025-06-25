@@ -253,6 +253,7 @@ const ClientDashboard = () => {
   const [openGig, setOpenGig] = useState(false);
   const [clientJobs, setClientJobs] = useState([]);
   const [recommendedTalents, setRecommendedTalents] = useState([]);
+
   const navigate = useNavigate();
 
   const fetchJobsByclient = async () => {
@@ -282,6 +283,15 @@ const ClientDashboard = () => {
     fetchJobsByclient();
     fetchRecommendedTalents();
   }, []);
+
+  // handle view profile fuionction
+  const handleViewProfile = async (talentId) => {
+    try {
+      const res = await talentService.getTalentById(talentId);
+    } catch (err) {
+      console.error(err.message || "Error visiting recommended profile");
+    }
+  };
 
   const myOfferHandler = (value) => {
     setMyOfferDetail(value);
@@ -487,7 +497,7 @@ const ClientDashboard = () => {
                             <div className="space-y-1">
                               <div className="flex gap-2">
                                 <span className="text-[12px]">
-                                  {item.fullname}
+                                  {item.work_name}
                                 </span>
                                 <span className="text-[12px]">
                                   Review({item.review})
@@ -500,9 +510,12 @@ const ClientDashboard = () => {
                               </div>
                               <div className="flex gap-2">
                                 <img src={locate} alt="" className="w-4 h-4" />
-                                <span className="text-[12px]">{item.time}</span>
                                 <span className="text-[12px]">
-                                  {item.price}
+                                  {item.time_zone}
+                                </span>
+
+                                <span className="text-[12px]">
+                                  | $ {item.min_pay} / hr
                                 </span>
                               </div>
                               <div className="flex space-x-4">
@@ -517,7 +530,12 @@ const ClientDashboard = () => {
                               </div>
                             </div>
                           </div>
-                          <button className="bg-[#2f66f6] rounded-[5px] h-8 px-4 text-white text-[14px]">
+                          <button
+                            onClick={() => {
+                              window.location.href = `/talent-detail/${item._id}`;
+                            }}
+                            className="bg-[#2f66f6] rounded-[5px] h-8 px-4 text-white text-[14px]"
+                          >
                             View Profile
                           </button>
                         </div>

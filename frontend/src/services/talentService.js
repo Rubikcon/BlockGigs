@@ -45,9 +45,19 @@ export const talentService = {
   getAllTalents: async () => {
     try {
       const response = api.get("/api/user");
-      return response
+      return response;
     } catch (err) {
-        throw err;
+      throw err;
+    }
+  },
+
+  // get talent by id
+  getTalentById: async (role, id) => {
+    try {
+      const response = api.get(`/api/user/${role}/${id}`);
+      return response;
+    } catch (err) {
+      throw err;
     }
   },
 };

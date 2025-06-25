@@ -1,4 +1,4 @@
-import Talent from "../models/Talent"; // Ensure correct path
+import Talent from "../models/Talent.js"; // Ensure correct path
 
 // Create a new talent
 // export const createTalent = async (req, res) => {
