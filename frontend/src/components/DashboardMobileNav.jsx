@@ -87,6 +87,7 @@ export default function Navigation() {
       // Log the user out
 
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
 
       setIsLoggedIn(false);
 

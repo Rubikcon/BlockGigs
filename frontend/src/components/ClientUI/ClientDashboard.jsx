@@ -24,6 +24,10 @@ import ProfileCard from "../TalentUI/ProfileCard";
 
 // import the API services
 import { jobService } from "../../services/jobService";
+
+// import the talent API to get recommended talents
+import { talentService } from "../../services/talentService";
+
 import axios from "axios";
 import EmptyCard from "../Cards/EmptyCard";
 const jobs = [
@@ -248,24 +252,35 @@ const ClientDashboard = () => {
   const [job, setJob] = useState("");
   const [openGig, setOpenGig] = useState(false);
   const [clientJobs, setClientJobs] = useState([]);
+  const [recommendedTalents, setRecommendedTalents] = useState([]);
   const navigate = useNavigate();
 
   const fetchJobsByclient = async () => {
     try {
-      const clientId = localStorage.getItem("clientId");
+      const clientId = localStorage.getItem("userId");
       const fetchedData = await jobService.getJobsbyClient(clientId);
       setClientJobs(fetchedData);
-      console.log(
-        "This is the fetched jobs on the client Dashboard",
-        fetchedData
-      );
     } catch (err) {
       console.error(err.message || "Error Fetching Jobs");
     }
   };
 
+  // FETCH THE ENTIRE TALENT CREATED BY THE ALL CLIENT
+  const fetchRecommendedTalents = async () => {
+    try {
+      const fetchedData = await talentService.getAllTalents();
+      setRecommendedTalents(fetchedData.data.talents);
+      console.log(fetchedData.data.talents);
+    } catch (err) {
+      console.error(err.message || "Error fetching recommended profiles");
+    }
+  };
+
+  // END OF FETCHING ALL JOBS
+
   useEffect(() => {
     fetchJobsByclient();
+    fetchRecommendedTalents();
   }, []);
 
   const myOfferHandler = (value) => {
@@ -342,47 +357,6 @@ const ClientDashboard = () => {
     ))
     .splice(0, 2);
 
-  const renderRecommend = recommend.slice(0, 3).map((item, index) => (
-    <div
-      key={index}
-      className=" bg-white rounded-[10px] mb-2 py-6 px-4 shadow shadow-gray-200"
-    >
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2">
-          <img src={dp} alt="" className="w-12 h-12" />
-          <div className="space-y-1">
-            <div className="flex gap-2">
-              <span className="text-[12px]">{item.title}</span>
-              <span className="text-[12px]">Review({item.review})</span>
-            </div>
-            <div className="flex gap-2">
-              <img src={locate} alt="" className="w-4 h-4" />
-              <span className="text-[12px]">{item.time}</span>
-              <span className="text-[12px]">{item.price}</span>
-            </div>
-            <div className="flex space-x-4">
-              {item.skill.map((t, i) => (
-                <div
-                  key={i}
-                  className="text-[14px] bg-[#e7eef1] text-blue-700 px-2 rounded-[7px]"
-                >
-                  <span>{t}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <button className="bg-[#2f66f6] rounded-[5px] h-8 px-4 text-white text-[14px]">
-          View Profile
-        </button>
-      </div>
-    </div>
-  ));
-
-  const openProfile = () => {
-    navigate("/profile");
-  };
-
   return (
     <div className=" mb-4">
       <div className="bg-gray-100 w-screen md:w-[83.85vw] h-[20vh] md:h-[100vh] grid grid-rows-12 px-4 gap-2 ">
@@ -439,7 +413,7 @@ const ClientDashboard = () => {
                 </div>
                 <div className="px-4 py-2"> {RenderJob}</div>
               </div>
-                <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
+              <div className="bg-white shadow-2xl shadow-gray-400 col-span-2 rounded-[0.6rem] p-4">
                 <div className="">
                   <div className="flex mb-8">
                     <p className="text-[12px] md:text-[16px]">
@@ -452,19 +426,7 @@ const ClientDashboard = () => {
                       View All
                     </Link>
                   </div>
-                  {clientJobs.length === 0 ? (
-                    // <div className="grid justify-center mt-4">
-                    //   <img src={empty} alt="" className="h-18 w-18" />
-                    //   <div className="grid justify-center ">
-                    //     <p className="text-black text-[12px] md:text-sm mt-4">
-                    //       No Offers yet
-                    //     </p>
-                    //     <p className=" text-[8px] md:text-[10px] -ml-8">
-                    //       Keep on applying You got THIS!
-                    //     </p>
-                    //   </div>
-                    // </div>
-
+                  {!clientJobs && clientJobs.length == 0 ? (
                     <EmptyCard props={"Jobs"} />
                   ) : (
                     // offer.slice(0, 2).map((item, index) => (
@@ -508,7 +470,61 @@ const ClientDashboard = () => {
             </div>
             <div className="grid row-span-7 pr-4 pb-4">
               <div className="md:grid md:grid-cols-3 row-span-5 gap-4">
-                <div className="col-span-2">{renderRecommend}</div>
+                <div className="col-span-2">
+                  {/* Render the recommended profiles */}
+
+                  {!recommendedTalents || recommendedTalents.length == 0 ? (
+                    <EmptyCard props={"Jobs"} />
+                  ) : (
+                    recommendedTalents.slice(0, 3).map((item, index) => (
+                      <div
+                        key={index}
+                        className=" bg-white rounded-[10px] mb-2 py-6 px-4 shadow shadow-gray-200"
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="flex gap-2">
+                            <img src={dp} alt="" className="w-12 h-12" />
+                            <div className="space-y-1">
+                              <div className="flex gap-2">
+                                <span className="text-[12px]">
+                                  {item.fullname}
+                                </span>
+                                <span className="text-[12px]">
+                                  Review({item.review})
+                                </span>
+                              </div>
+                              <div>
+                                <span className="text-[12px] font-bold">
+                                  {item.email}
+                                </span>
+                              </div>
+                              <div className="flex gap-2">
+                                <img src={locate} alt="" className="w-4 h-4" />
+                                <span className="text-[12px]">{item.time}</span>
+                                <span className="text-[12px]">
+                                  {item.price}
+                                </span>
+                              </div>
+                              <div className="flex space-x-4">
+                                {item.skills.map((t, i) => (
+                                  <div
+                                    key={i}
+                                    className="text-[14px] bg-[#e7eef1] text-blue-700 px-2 rounded-[7px]"
+                                  >
+                                    <span>{t}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          <button className="bg-[#2f66f6] rounded-[5px] h-8 px-4 text-white text-[14px]">
+                            View Profile
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">
                   <div className="flex justify-between">
                     <p>Activity</p>

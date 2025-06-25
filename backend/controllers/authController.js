@@ -26,13 +26,14 @@ export const registerWithEmail = async (req, res) => {
     role,
     email,
     password,
+    work_name,
     fullname,
     name,
     about,
     pseudonym,
     profession,
     min_pay,
-    timezone,
+    time_zone,
     languages,
     skills,
   } = req.body;
@@ -63,9 +64,10 @@ export const registerWithEmail = async (req, res) => {
       email,
       password: hashedPassword,
       fullname: fullname || name,
+      work_name,
       about,
       otp,
-      timezone,
+      time_zone,
       otpExpiresAt: new Date(Date.now() + 15 * 60 * 1000),
       isVerified: false,
     };
@@ -75,7 +77,7 @@ export const registerWithEmail = async (req, res) => {
       newUserData.pseudonym = pseudonym;
       newUserData.profession = profession;
       newUserData.min_pay = min_pay;
-      newUserData.timezone = timezone;
+      newUserData.time_zone = time_zone;
       newUserData.languages = languages;
       newUserData.skills = skills;
     }
@@ -106,12 +108,13 @@ export const registerWithWallet = async (req, res) => {
     role,
     wallet_address,
     fullname,
+    work_name,
     name,
     about,
     pseudonym,
     profession,
     min_pay,
-    timezone,
+    time_zone,
     languages,
     skills,
   } = req.body;
@@ -136,6 +139,8 @@ export const registerWithWallet = async (req, res) => {
     const newUserData = {
       wallet_address,
       fullname: fullname || name,
+      work_name,
+      time_zone,
       about,
       isVerified: true, // Wallet users are typically verified by their wallet connection
     };
@@ -145,8 +150,9 @@ export const registerWithWallet = async (req, res) => {
       newUserData.pseudonym = pseudonym;
       newUserData.profession = profession;
       newUserData.min_pay = min_pay;
-      newUserData.timezone = timezone;
+      newUserData.time_zone = time_zone;
       newUserData.languages = languages;
+      newUserData.work_name = work_name;
       newUserData.skills = skills;
     }
 

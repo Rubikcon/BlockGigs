@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  createTalent,
+  // createTalent,
   getTalents,
   getTalentById,
   updateTalent,
@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.post("/", createTalent); // Create a new talent
+// router.post("/", createTalent); // Create a new talent
 router.get("/", getTalents); // Get all talents
 router.get("/:id", getTalentById); // Get a single talent by ID
 router.put("/:id", updateTalent); // Update a talent

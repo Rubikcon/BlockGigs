@@ -148,7 +148,9 @@ const TalentList = () => {
 
               {/* Rate & Availability */}
               <div className="flex justify-between items-center mt-4 mb-5 text-sm">
-                <h2 className="text-blue-600 font-bold">{talent.min_pay}</h2>
+                <h2 className="text-blue-600 font-bold">
+                  $ {talent.min_pay}/hr
+                </h2>
                 <span className="flex items-center gap-1 text-gray-600">
                   <CiCalendarDate />
                   {talent.availability}

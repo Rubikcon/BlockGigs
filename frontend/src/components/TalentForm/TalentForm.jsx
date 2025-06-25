@@ -72,6 +72,7 @@ const TalentForm = () => {
   const handleSubmit = async (e) => {
     console.log("Submitting...");
     e.preventDefault();
+    console.log(formData);
 
     try {
       setLoading(true);
