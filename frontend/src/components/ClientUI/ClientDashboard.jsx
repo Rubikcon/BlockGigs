@@ -500,12 +500,12 @@ const ClientDashboard = () => {
                                   {item.work_name}
                                 </span>
                                 <span className="text-[12px]">
-                                  Review({item.review})
+                                  {/* Review({item.review}) */}
                                 </span>
                               </div>
                               <div>
                                 <span className="text-[12px] font-bold">
-                                  {item.email}
+                                  {item.profession}
                                 </span>
                               </div>
                               <div className="flex gap-2">

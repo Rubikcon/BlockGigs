@@ -89,16 +89,7 @@ function TalentProfileViewOnly() {
               alt=""
               className="w-8 h-5 border rounded-md cursor-pointer"
               onClick={() => {
-                const roleRoutes = {
-                  client: "/client/dashboard",
-                  talent: "/talent/dashboard",
-                  admin: "/admin/dashboard",
-                };
-
-                // store the users info locally
-                // localStorage.setItem("userData", response.data);
-
-                navigate(roleRoutes[user.role] || "/");
+                navigate("/client/dashboard");
               }}
               // navigate("/TalentDashboard")}
             />
