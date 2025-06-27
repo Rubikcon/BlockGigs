@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Hero from "./Hero";
 import Detail from "./Details";
 import Footer from "../footer";
+import ApplicantsCard from "../Cards/ApplicantsCard";
 import { jobService } from "../../services/jobService"; // Adjust path as needed
 
 const GigDetailPage = () => {

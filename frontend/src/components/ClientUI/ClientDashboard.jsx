@@ -431,7 +431,7 @@ const ClientDashboard = () => {
                     </p>
                     <Link
                       to={"/client/gig"}
-                      className="text-[12px] md:text-[16px] ml-auto"
+                      className="text-[12px] text-blue-800 md:text-[16px] ml-auto"
                     >
                       View All
                     </Link>
@@ -443,8 +443,8 @@ const ClientDashboard = () => {
                     clientJobs.slice(0, 2).map((item, index) => (
                       <div
                         key={index}
-                        className="w-full border-[0.5px] border-blue-300 cursor-pointer rounded-[10px] h-[40%] flex item-center justify-between items-center px-4 py-2 my-2"
-                        onClick={() => myOfferHandler(item)}
+                        className="w-full border-[0.5px] border-blue-300  rounded-[10px] h-[40%] flex item-center justify-between items-center px-4 py-2 my-2"
+                        // onClick={() => myOfferHandler(item)}
                       >
                         <div>
                           <div className="text-[12px] md:text-[16px]">

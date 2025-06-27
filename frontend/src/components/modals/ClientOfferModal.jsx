@@ -6,24 +6,24 @@ import crypto from "../../assets/crypto.png";
 import bat from "../../assets/bat.png";
 // import dp from "../../assets/Ellipse.png";
 
-// const milestone = [
-//   {
-//     title: "Milestone 1",
-//     amt: 200,
-//     job: "Branding/Designing of logo for web design",
-//   },
-//   {
-//     title: "Milestone 2",
-//     amt: 300,
-//     job: "First set of design with the main features",
-//   },
-//   {
-//     title: "Milestone 3",
-//     amt: 500,
-//     job: "Full web design to be passed on to Developer",
-//   },
-// ];
-function ClientOfferModal({ visible, onClose, item, accept }) {
+const item = [
+  {
+    title: "Milestone 1",
+    amt: 200,
+    job: "Branding/Designing of logo for web design",
+  },
+  {
+    title: "Milestone 2",
+    amt: 300,
+    job: "First set of design with the main features",
+  },
+  {
+    title: "Milestone 3",
+    amt: 500,
+    job: "Full web design to be passed on to Developer",
+  },
+];
+function ClientOfferModal({ visible, onClose, accept }) {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
@@ -41,7 +41,6 @@ function ClientOfferModal({ visible, onClose, item, accept }) {
           <div>
             <p className="text-[15px] font-bold text-gray-400">{item.title}</p>
             <div className="flex">
-              {/* <img src={dp} alt="" className="w-4 h-4" /> */}
               <div className="flex w-full text-gray-400 gap-1">
                 <span className="text-[13px]">{item.officer}</span>
                 <span className="-mt-1">•</span>
