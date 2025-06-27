@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 const Hero = ({ gig }) => {
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
+  const [role, setRole] = useState("" || "talent");
   const [appliedJobIds, setAppliedJobIds] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
+  const currentUserRole = localStorage.getItem("userRole");
   const handleApply = async () => {
     setLoading(true);
     const applicantId = localStorage.getItem("userId");
@@ -43,6 +44,8 @@ const Hero = ({ gig }) => {
 
   // get the applied jobs
   useEffect(() => {
+    setRole(currentUserRole);
+
     const fetchAppliedJobs = async () => {
       const userId = localStorage.getItem("userId");
       const appliedJobs = await jobService.getAppliedJobsByUser(userId);
@@ -95,22 +98,24 @@ const Hero = ({ gig }) => {
               </div>
               <small>Rate: ${gig.totalPrice} USD per hour</small>
             </div>
+
             <div className="py-2">
-              {appliedJobIds.includes(gig._id) ? (
-                <button
-                  disabled
-                  className="bg-gray-400 text-white px-4 py-2 rounded"
-                >
-                  Applied
-                </button>
-              ) : (
-                <button
-                  onClick={handleApply}
-                  className="bg-blue-600 text-white px-4 py-2 rounded"
-                >
-                  Apply
-                </button>
-              )}
+              {role === "talent" &&
+                (appliedJobIds.includes(gig._id) ? (
+                  <button
+                    disabled
+                    className="bg-gray-400 text-white px-4 py-2 rounded"
+                  >
+                    Applied
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleApply}
+                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                  >
+                    Apply
+                  </button>
+                ))}
             </div>
           </div>
         </div>
