@@ -2,52 +2,7 @@ import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jobService } from "../../services/jobService";
-
-// Dummy Applicants Data
-// const dummyApplicants = [
-//   {
-//     id: 1,
-//     name: "Jane Doe",
-//     role: "Frontend Developer",
-//     appliedTime: "2 hours ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-//   {
-//     id: 2,
-//     name: "John Smith",
-//     role: "Blockchain Engineer",
-//     appliedTime: "1 day ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-//   {
-//     id: 3,
-//     name: "Alice Johnson",
-//     role: "UI/UX Designer",
-//     appliedTime: "3 days ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-//   {
-//     id: 4,
-//     name: "Michael Brown",
-//     role: "Product Manager",
-//     appliedTime: "5 days ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-//   {
-//     id: 5,
-//     name: "Sara Lee",
-//     role: "Backend Developer",
-//     appliedTime: "1 week ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-//   {
-//     id: 6,
-//     name: "Tunde Jacobs",
-//     role: "Smart Contract Auditor",
-//     appliedTime: "2 weeks ago",
-//     imageUrl: "./images/user_avatar.png",
-//   },
-// ];
+import { Toaster, toast } from "react-hot-toast";
 
 // Pagination settings
 const ITEMS_PER_PAGE = 3;
@@ -55,15 +10,35 @@ const ITEMS_PER_PAGE = 3;
 const ApplicantsCard = ({ gigId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [applicants, setApplicants] = useState([]);
+  const [responseMessage, setResponseMessage] = "";
+
+  // get gig id from props
+  const returnedJobId = gigId;
 
   const totalPages = Math.ceil(applicants.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const handleApproveGigs = async (passedTalentId) => {
+    let returnedTalentId = passedTalentId;
+
+    try {
+      const response = await jobService.clientApprovesJob(
+        returnedJobId,
+        returnedTalentId
+      );
+      console.log(response);
+      toast.success(responseMessage, {
+        duration: 30000,
+      });
+    } catch (err) {
+      console.error(err.message || "Error approving applications");
+    }
+  };
+
   const paginatedApplicants = applicants.slice(
     startIndex,
     startIndex + ITEMS_PER_PAGE
   );
-
-  const returnedJobId = gigId;
 
   const handleFetchApplicants = async () => {
     try {
@@ -140,7 +115,10 @@ const ApplicantsCard = ({ gigId }) => {
 
               {/* Approve / Reject Buttons */}
               <div className="ml-auto space-x-2 flex flex-col md:flex-row items-start md:items-center">
-                <button className="cursor-pointer text-white bg-green-900 px-3 py-1 rounded-md text-xs md:text-sm">
+                <button
+                  onClick={() => handleApproveGigs(applicant.id)}
+                  className="cursor-pointer text-white bg-green-900 px-3 py-1 rounded-md text-xs md:text-sm"
+                >
                   Approve
                 </button>
                 <button className="cursor-pointer text-white bg-red-500 px-3 py-1 rounded-md text-xs md:text-sm">

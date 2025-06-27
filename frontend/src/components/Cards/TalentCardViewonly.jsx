@@ -87,13 +87,12 @@ function TalentProfileViewOnly() {
             <img
               src={arrow}
               alt=""
-              className="w-8 h-5 border rounded-md cursor-pointer"
+              className="w-12 h-12 border rounded-md cursor-pointer"
               onClick={() => {
-                navigate("/client/dashboard");
+                navigate(-1);
               }}
-              // navigate("/TalentDashboard")}
             />
-            <span className="text-[12px] md:text-[16px]">
+            <span className="text-[12px] mt-2 md:text-[16px]">
               Profile Information
             </span>
           </div>

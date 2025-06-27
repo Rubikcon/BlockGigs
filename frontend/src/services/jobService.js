@@ -121,9 +121,9 @@ export const jobService = {
   // ============================
 
   // Client approves job applied by a talent
-  clientApprovesJob: async (jobId) => {
+  clientApprovesJob: async (jobId, talentId) => {
     try {
-      const response = await api.put(`/api/${jobId}/approve`);
+      const response = await api.put(`/api/${jobId}/approve`, { talentId });
       return response.data;
     } catch (err) {
       throw err;
