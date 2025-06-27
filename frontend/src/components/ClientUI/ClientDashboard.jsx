@@ -484,7 +484,7 @@ const ClientDashboard = () => {
                   {/* Render the recommended profiles */}
 
                   {!recommendedTalents || recommendedTalents.length == 0 ? (
-                    <EmptyCard props={"Jobs"} />
+                    <EmptyCard props={"Profiles"} />
                   ) : (
                     recommendedTalents.slice(0, 3).map((item, index) => (
                       <div

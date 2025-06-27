@@ -510,7 +510,7 @@ function Dashboard() {
                   </>
                 ) : (
                   <>
-                    <EmptyStateCard />
+                    <EmptyStateCard props={"No jobs yet"} />
                   </>
                 )}
               </div>
@@ -552,7 +552,7 @@ function Dashboard() {
                     ))
                   ) : (
                     <>
-                      <EmptyStateCard />
+                      <EmptyStateCard props={"No Offers yet"} />
                     </>
                   )}
                 </div>
@@ -573,7 +573,11 @@ function Dashboard() {
                     <Link className="text-[12px] md:text-[16px]">View All</Link>
                   </div>
 
-                  {AppliedJobs}
+                  {!apppliedJobs && apppliedJobs == 0 ? (
+                    <EmptyStateCard props={"No Applied Jobs"} />
+                  ) : (
+                    AppliedJobs
+                  )}
                 </div>
 
                 <div className="col-span-1 bg-white rounded-[10px] py-2 px-4 h-[93.5%]">
@@ -587,7 +591,7 @@ function Dashboard() {
                     { renderActivity }
                   ) : (
                     <>
-                      <EmptyStateCard />
+                      <EmptyStateCard props={"No Activity Yet"} />
                     </>
                   )}
                 </div>

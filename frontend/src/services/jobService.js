@@ -115,4 +115,70 @@ export const jobService = {
       throw error;
     }
   },
+
+  // ============================
+  // ADVANCED FUNCTIONS SETUP
+  // ============================
+
+  // Client approves job applied by a talent
+  clientApprovesJob: async (jobId) => {
+    try {
+      const response = await api.put(`/api/${jobId}/approve`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  // Client rejects jobs applied by a talent
+  clientRejectsJob: async (jobId) => {
+    try {
+      const response = await api.put(`/api/${jobId}/reject`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  // talent submits job completion
+  submitJobCompletion: async () => {
+    try {
+      const response = await api.put(`/api/${jobId}/submit-completion`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  // client accept job done by talent and close job
+
+  acceptCompletionAndCloseJob: async (jobId) => {
+    try {
+      const response = await api.put(`/api/${jobId}/accept-completion`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  // let talent gets applied jobs that are still waiting approval
+
+  getJobsAwaitingApproval: async () => {
+    try {
+      const response = await api.get("/api/client/awaiting-approval");
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  // get client jobs stats
+  getClientJobStats: async () => {
+    try {
+      const response = await api.get("/api/client/stats");
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
 };

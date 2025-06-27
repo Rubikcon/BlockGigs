@@ -67,3 +67,17 @@ export const authenticate = async (req, res, next) => {
     return res.status(500).json({ message: "Server error in authentication" });
   }
 };
+
+export const requireClient = (req, res, next) => {
+  if (req.user.role !== "client") {
+    return res.status(403).json({ message: "Client access required" });
+  }
+  next();
+};
+
+export const requireTalent = (req, res, next) => {
+  if (req.user.role !== "talent") {
+    return res.status(403).json({ message: "Talent access required" });
+  }
+  next();
+};
