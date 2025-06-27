@@ -17,6 +17,7 @@ import {
   acceptCompletionAndCloseJob,
   getJobsAwaitingApproval,
   getClientJobStats,
+  getApplicantsForAJob,
 } from "../controllers/jobController.js";
 
 import {
@@ -79,6 +80,9 @@ router.put(
 // PUT /api/jobs/:jobId/accept-completion
 // Body: { rating: 5, feedback: "Great work!" }
 // Description: Client accepts completed work and closes the job
+
+// Job Applicants Management Routes
+router.get("/:jobId/applicants", getApplicantsForAJob);
 
 // Client Management Routes
 router.get("/client/awaiting-approval", authenticate, getJobsAwaitingApproval);

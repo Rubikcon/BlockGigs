@@ -8,7 +8,7 @@ const Detail = ({ gig }) => {
   useEffect(() => {
     setRole(storedRole || "");
     console.log(storedRole);
-  }, []);
+  }, [gig]);
 
   console.log(storedRole);
   return (
@@ -37,13 +37,12 @@ const Detail = ({ gig }) => {
       </section>
 
       <section className="flex-1 min-w-[300px] items-center">
-        {role === "client" ? <ApplicantsCard /> : <RelatedGigs />}
+        {role === "client" ? (
+          <ApplicantsCard gigId={gig._id} />
+        ) : (
+          <RelatedGigs />
+        )}
       </section>
-
-      {/* <section className="flex-1 min-w-[300px] items-center ">
-        <RelatedGigs />
-        <ApplicantsCard />
-      </section> */}
     </div>
   );
 };

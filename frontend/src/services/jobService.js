@@ -162,7 +162,6 @@ export const jobService = {
   },
 
   // let talent gets applied jobs that are still waiting approval
-
   getJobsAwaitingApproval: async () => {
     try {
       const response = await api.get("/api/client/awaiting-approval");
@@ -176,6 +175,15 @@ export const jobService = {
   getClientJobStats: async () => {
     try {
       const response = await api.get("/api/client/stats");
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  getApplicantsForAJob: async (jobId) => {
+    try {
+      const response = await api.get(`/api/${jobId}/applicants`);
       return response.data;
     } catch (err) {
       throw err;

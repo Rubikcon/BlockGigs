@@ -1,58 +1,60 @@
 import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { jobService } from "../../services/jobService";
 
 // Dummy Applicants Data
-const applicants = [
-  {
-    id: 1,
-    name: "Jane Doe",
-    role: "Frontend Developer",
-    appliedTime: "2 hours ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-  {
-    id: 2,
-    name: "John Smith",
-    role: "Blockchain Engineer",
-    appliedTime: "1 day ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-  {
-    id: 3,
-    name: "Alice Johnson",
-    role: "UI/UX Designer",
-    appliedTime: "3 days ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-  {
-    id: 4,
-    name: "Michael Brown",
-    role: "Product Manager",
-    appliedTime: "5 days ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-  {
-    id: 5,
-    name: "Sara Lee",
-    role: "Backend Developer",
-    appliedTime: "1 week ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-  {
-    id: 6,
-    name: "Tunde Jacobs",
-    role: "Smart Contract Auditor",
-    appliedTime: "2 weeks ago",
-    imageUrl: "./images/user_avatar.png",
-  },
-];
+// const dummyApplicants = [
+//   {
+//     id: 1,
+//     name: "Jane Doe",
+//     role: "Frontend Developer",
+//     appliedTime: "2 hours ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+//   {
+//     id: 2,
+//     name: "John Smith",
+//     role: "Blockchain Engineer",
+//     appliedTime: "1 day ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+//   {
+//     id: 3,
+//     name: "Alice Johnson",
+//     role: "UI/UX Designer",
+//     appliedTime: "3 days ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+//   {
+//     id: 4,
+//     name: "Michael Brown",
+//     role: "Product Manager",
+//     appliedTime: "5 days ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+//   {
+//     id: 5,
+//     name: "Sara Lee",
+//     role: "Backend Developer",
+//     appliedTime: "1 week ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+//   {
+//     id: 6,
+//     name: "Tunde Jacobs",
+//     role: "Smart Contract Auditor",
+//     appliedTime: "2 weeks ago",
+//     imageUrl: "./images/user_avatar.png",
+//   },
+// ];
 
 // Pagination settings
 const ITEMS_PER_PAGE = 3;
 
-const ApplicantsCard = () => {
+const ApplicantsCard = ({ gigId }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [applicants, setApplicants] = useState([]);
 
   const totalPages = Math.ceil(applicants.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -61,11 +63,39 @@ const ApplicantsCard = () => {
     startIndex + ITEMS_PER_PAGE
   );
 
+  const returnedJobId = gigId;
+
+  const handleFetchApplicants = async () => {
+    try {
+      const response = await jobService.getApplicantsForAJob(returnedJobId);
+
+      const transformed = response.applicants.map((talent) => ({
+        id: talent._id,
+        name: talent.fullname,
+        role: "Unknown Role",
+        // change this if you have the field
+
+        appliedTime: "Just now",
+        // placeholder for now
+
+        imageUrl: "/images/user_avatar.png",
+      }));
+
+      setApplicants(transformed);
+    } catch (err) {
+      console.log(err.message || "Error fetching applicants for this job");
+    }
+  };
+
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
+
+  useEffect(() => {
+    handleFetchApplicants();
+  }, []);
 
   return (
     <div>
@@ -100,7 +130,7 @@ const ApplicantsCard = () => {
                 </small>
                 <div className="mt-1">
                   <Link
-                    to="#"
+                    to={`/talent-detail/${applicant.id}`}
                     className="text-blue-600 text-xs md:text-sm font-semibold"
                   >
                     View Profile

@@ -323,6 +323,31 @@ export const getUserAppliedJobs = async (req, res) => {
 // Enhanced Job Controller with new functions
 // ==========================================
 
+// Get applicants that applied for a job
+export const getApplicantsForAJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+
+    // Find the job and populate applicants
+    const job = await Job.findById(jobId)
+      .populate("client", "fullname email")
+      .populate("talent", "fullname email")
+      .populate("applicants", "fullname email"); // ✅ populate applicants here
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    res.status(200).json({
+      message: "Applicants retrieved successfully",
+      applicants: job.applicants, // return only the applicants
+    });
+  } catch (error) {
+    console.error("Error fetching applicants:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 // Approve a talent's job application
 export const approveJobApplication = async (req, res) => {
   try {
