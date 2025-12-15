@@ -222,7 +222,7 @@ export const verifyOTP = async (req, res) => {
   const { role, email, otp } = req.body;
 
   try {
-    // const Model = getUserModel(role);
+    const Model = getUserModel(role);
     const user = await Model.findOne({ email });
 
     if (!user) return res.status(400).json({ message: "User not found" });

@@ -10,6 +10,9 @@ const TalentForm = () => {
   const navigate = useNavigate();
   // At the top of your component, keep only:
   const [formData, setFormData] = useState({
+    role: "talent",        // required by backend
+    email: "",             // required
+    password: "",
     fullname: "",
     workname: "",
     profession: "",
@@ -40,13 +43,32 @@ const TalentForm = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const userData = [];
 
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+
+  if (name === "min_pay") {
+    // Strip out non-numeric characters
+    const numericValue = value.replace(/[^0-9.]/g, "");
+    setFormData((prev) => ({
+      ...prev,
+      [name]: numericValue,
+    }));
+  } else {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }
+};
+
 
   const handleSkillsChange = (index, value) => {
     const newSkills = [...formData.skills];
@@ -318,7 +340,7 @@ const TalentForm = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> 
                 <div className="flex flex-col">
                   <label
                     className="text-sm font-medium text-gray-800"
@@ -328,14 +350,15 @@ const TalentForm = () => {
                   </label>
                   <input
                     className="w-full h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-blue-400"
-                    type="text"
+                    type="number"
                     id="pay"
                     name="min_pay"
                     value={formData.min_pay}
-                    placeholder="$10/hr"
+                    placeholder="100"
                     onChange={handleInputChange}
                     required
                     aria-required="true"
+                    min="0"
                   />
                 </div>
                 <div className="flex flex-col">
